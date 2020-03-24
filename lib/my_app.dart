@@ -40,7 +40,7 @@ Future<void> myMain() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // @nhancv 12/27/2019: Start store
-  await DefaultStore.instance.init();
+  await DefaultStore.instance.init(databaseName: "nft_database.db");
 //  await DefaultStore.instance.logout();
 //  BullMQ.instance.start();
 
