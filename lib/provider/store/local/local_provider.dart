@@ -58,7 +58,7 @@ class LocalProvider {
         }
       },
       onDowngrade: onDatabaseDowngradeDelete,
-      version: 2,
+      version: 1,
     );
   }
 }
