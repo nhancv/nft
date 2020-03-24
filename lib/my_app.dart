@@ -37,6 +37,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 Future<void> myMain() async {
   // @nhancv 2019-10-24: Start services later
   WidgetsFlutterBinding.ensureInitialized();
+
+//  // @nhancv 12/27/2019: Start store
+//  await DefaultStore.instance.init();
+//  await DefaultStore.instance.logout();
+//  BullMQ.instance.start();
+
   // @nhancv 10/23/2019: Init bflutter caching
   await BCache.instance.init();
   // @nhancv 10/23/2019: Run Application
