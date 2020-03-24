@@ -19,11 +19,8 @@ class LocalProvider {
   /// @nhancv 10/7/2019: Database instance
   Database database;
 
-  /// @nhancv 12/24/2019: Properties
-  final String databaseName = "pos_database.db";
-
   /// @nhancv 10/7/2019: Init database connection
-  Future<Database> init() async {
+  Future<Database> init({String databaseName}) async {
     if (database != null && database.isOpen) {
       database.close();
     }

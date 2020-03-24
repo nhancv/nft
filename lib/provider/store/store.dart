@@ -50,8 +50,8 @@ class DefaultStore implements Store {
   Database database;
 
   @override
-  Future<void> init() async {
-    database = await LocalProvider.instance.init();
+  Future<void> init({String databaseName = "database.db"}) async {
+    database = await LocalProvider.instance.init(databaseName: databaseName);
     debugPrint('Database version ${await database.getVersion()}');
   }
 
