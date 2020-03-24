@@ -23,6 +23,6 @@
  */
 
 class AppConstant {
-  static const bCacheAuthInfoKey = 'auth_info';
+//  static const bDemoKey = 'any_key';
 
 }
