@@ -42,8 +42,8 @@ flutter_icons:
   ios: true # can specify file name here e.g. "My-Launcher-Icon"
   image_path_android: "assets/base/icons/app_icon.png"
   image_path_ios: "assets/base/icons/app_icon.png"
-  adaptive_icon_background: "assets/base/icons/app_icon.png" # only available for Android 8.0 devices and above
-  adaptive_icon_foreground: "assets/base/icons/app_icon.png" # only available for Android 8.0 devices and above
+  adaptive_icon_background: "assets/base/icons/app_icon_adaptive.png" # only available for Android 8.0 devices and above
+  adaptive_icon_foreground: "assets/base/icons/app_icon_adaptive.png" # only available for Android 8.0 devices and above
 # To Generate icon
 #  flutter pub get
 #  flutter pub run flutter_launcher_icons:main
