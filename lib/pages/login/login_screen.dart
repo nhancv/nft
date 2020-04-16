@@ -131,6 +131,12 @@ class LoginScreen extends StatelessWidget {
           textAlignVertical: TextAlignVertical.center,
           textAlign: TextAlign.left,
           textInputAction: TextInputAction.next,
+
+          maxLines: 5,
+          minLines: 1,
+          style: TextStyle(
+            height: 2
+          ),
           decoration: InputDecoration(
             isDense: true,
             filled: true,
@@ -138,6 +144,7 @@ class LoginScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(32.0),
               borderSide: BorderSide.none,
             ),
+            contentPadding: EdgeInsets.all(2),
             hintText: "username",
             fillColor: Colors.grey[50],
           ),
