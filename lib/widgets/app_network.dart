@@ -1,3 +1,4 @@
+
 /*
  * MIT License
  *
@@ -22,38 +23,40 @@
  * SOFTWARE.
  */
 
-import 'package:nft/pages/search/search_screen.dart';
-import 'package:nft/utils/app_asset.dart';
-import 'package:nft/utils/pair.dart';
-import 'package:nft/widgets/screen_widget.dart';
-import 'package:nft/widgets/sns_appbar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nft/provider/networking.dart';
 
-class NormalScreen extends StatelessWidget {
+class AppNetwork extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScreenWidget(
-      body: Column(children: <Widget>[
-        SnSIconAppBar(
-          left: Pair(AppImages.icSearch, () {
-            Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => SearchScreen()));
-          }),
-          center: 'Home',
-          right: Pair(AppImages.icNoti, () {
-            Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => SearchScreen()));
-          }),
-        ),
-        Expanded(
-          child: _body(),
-        ),
-      ]),
+    return StreamBuilder(
+      stream: Networking().networkStatus.stream,
+      builder: (context, snapshot) {
+        return snapshot.hasData &&
+                (snapshot.data as ConnectivityStatus) ==
+                    ConnectivityStatus.Offline
+            ? Container(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: EdgeInsets.only(top: 5),
+                  padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(241, 41, 92, 1),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20.0),
+                    ),
+                  ),
+                  child: Text(
+                    'No network',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                        fontFamily: 'SF-Pro-Text-Bold'),
+                  ),
+                ),
+              )
+            : SizedBox();
+      },
     );
-  }
-
-  Widget _body() {
-    return Container();
   }
 }

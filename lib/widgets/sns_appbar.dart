@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import 'package:bflutter/libs/pair.dart';
 import 'package:flutter/material.dart';
+import 'package:nft/utils/pair.dart';
 
 import '../utils/app_asset.dart';
 import 'divider_line.dart';

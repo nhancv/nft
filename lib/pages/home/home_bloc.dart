@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-import 'package:bflutter/bflutter.dart';
 import 'package:nft/models/remote/user_detail.dart';
+import 'package:nft/provider/lite_bloc.dart';
 import 'package:nft/provider/store/remote/detail_api.dart';
 import 'package:rxdart/rxdart.dart';
 
 /// Implement logic for Home screen
 class HomeBloc {
-  final getUserInfo = Bloc<String, UserDetail>();
+  final getUserInfo = LiteBloc<String, UserDetail>();
 
   final detailApi = DetailApi();
 

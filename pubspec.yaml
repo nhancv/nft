@@ -11,10 +11,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  bflutter:
-    git:
-      url: git://github.com/beesightsoft/bflutter
-
+  rxdart: 0.22.6
+  sqflite: 1.1.8
+  path: ^1.6.4
+  uuid: ^2.0.4
+  flutter_spinkit: ^4.1.2+1
+  connectivity: ^0.4.8+2
   cached_network_image: ^2.0.0-rc.1
   dio: ^3.0.9
   appcenter:

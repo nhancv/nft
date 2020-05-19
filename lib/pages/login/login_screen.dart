@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-import 'package:bflutter/bflutter.dart';
-import 'package:bflutter/widgets/app_network.dart';
 import 'package:nft/pages/login/login_bloc.dart';
 import 'package:nft/provider/i18n/app_localizations.dart';
+import 'package:nft/provider/main_bloc.dart';
+import 'package:nft/widgets/app_network.dart';
 import 'package:nft/widgets/bapp_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

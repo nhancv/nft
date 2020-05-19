@@ -24,23 +24,22 @@
 
 import 'dart:math';
 
-import 'package:bflutter/bflutter.dart';
-import 'package:bflutter/provider/app_bloc.dart';
-import 'package:bflutter/provider/main_bloc.dart';
-import 'package:bflutter/provider/networking.dart';
 import 'package:nft/models/remote/log_in_request.dart';
 import 'package:nft/models/remote/log_in_response.dart';
 import 'package:nft/pages/home/home_screen.dart';
+import 'package:nft/provider/lite_bloc.dart';
+import 'package:nft/provider/main_bloc.dart';
+import 'package:nft/provider/networking.dart';
 import 'package:nft/provider/store/remote/auth_api.dart';
 import 'package:nft/provider/store/store.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LoginBloc with AppBloc {
-  final usernameInput = Bloc<String, bool>();
-  final passwordInput = Bloc<String, bool>();
-  final validInput = BlocDefault<bool>();
-  final loginTrigger = BlocDefault<bool>();
+class LoginBloc {
+  final usernameInput = LiteBloc<String, bool>();
+  final passwordInput = LiteBloc<String, bool>();
+  final validInput = LiteBlocDefault<bool>();
+  final loginTrigger = LiteBlocDefault<bool>();
 
   final authApi = AuthApi();
   final mainBloc = MainBloc.instance;

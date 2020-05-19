@@ -24,16 +24,15 @@
 
 import 'dart:ui' as ui;
 
-import 'package:bflutter/bflutter.dart';
-import 'package:bflutter/libs/bcache.dart';
-import 'package:bflutter/provider/main_bloc.dart';
-import 'package:bflutter/widgets/app_loading.dart';
-import 'package:nft/pages/base/normal_screen.dart';
 import 'package:nft/pages/login/login_screen.dart';
+import 'package:nft/provider/bcache.dart';
 import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nft/provider/store/store.dart';
+
+import 'provider/main_bloc.dart';
+import 'widgets/app_loading.dart';
 
 Future<void> myMain() async {
   // @nhancv 2019-10-24: Start services later

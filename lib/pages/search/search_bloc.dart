@@ -24,17 +24,17 @@
 
 import 'dart:convert';
 
-import 'package:bflutter/bflutter.dart';
-import 'package:bflutter/libs/bcache.dart';
 import 'package:nft/models/remote/net_cache.dart';
 import 'package:nft/models/remote/user.dart';
+import 'package:nft/provider/bcache.dart';
+import 'package:nft/provider/lite_bloc.dart';
 import 'package:nft/provider/store/remote/search_api.dart';
 import 'package:rxdart/rxdart.dart';
 
 /// Implement logic for Search screen
 class SearchBloc {
-  final loading = BlocDefault<bool>();
-  final searchUser = Bloc<String, NetCache<List<User>>>();
+  final loading = LiteBlocDefault<bool>();
+  final searchUser = LiteBloc<String, NetCache<List<User>>>();
 
   final searchApi = SearchApi();
 

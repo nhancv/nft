@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import 'package:bflutter/bflutter.dart';
 import 'package:nft/models/remote/user_detail.dart';
+import 'package:nft/provider/lite_bloc.dart';
 import 'package:nft/provider/store/remote/detail_api.dart';
 import 'package:rxdart/rxdart.dart';
 
 /// Implement logic for Detail screen
 class DetailBloc {
-  final loading = BlocDefault<bool>();
-  final getUserInfo = Bloc<String, UserDetail>();
+  final loading = LiteBlocDefault<bool>();
+  final getUserInfo = LiteBloc<String, UserDetail>();
 
   final detailApi = DetailApi();
 

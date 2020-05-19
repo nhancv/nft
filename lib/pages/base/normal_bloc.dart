@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 
-import 'package:bflutter/bflutter.dart';
 
-class NormalBloc extends AppBloc {
+class NormalBloc {
   NormalBloc() {
     initLogic();
   }
