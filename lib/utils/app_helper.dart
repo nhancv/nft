@@ -22,13 +22,10 @@
  * SOFTWARE.
  */
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class AppHelper {
-
   static void showPopup(Widget child, BuildContext context,
       {Function onAction}) {
     showDialog(
@@ -52,18 +49,5 @@ class AppHelper {
       error = 'Your email format is invalid. Please check again';
     }
     return error;
-  }
-
-  ///@TanNguyen 2020-03-10: check internet connection
-  static Future<bool> internetConnectionChecking() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        return true;
-      }
-    } on SocketException catch (_) {
-      return false;
-    }
-    return false;
   }
 }

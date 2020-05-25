@@ -42,8 +42,5 @@ class AppVideos {
 }
 
 class AppFonts {
-  static const String SFProText = 'SFProText';
-  static const String AvenirNextLTProRegular = 'AvenirNextLTPro-Regular';
-  static const String AvenirNextLTProDemi = 'AvenirNextLTPro-Demi';
-  static const String AvenirNextLTProBold = 'AvenirNextLTPro-Bold';
+  static const String roboto = 'Roboto';
 }

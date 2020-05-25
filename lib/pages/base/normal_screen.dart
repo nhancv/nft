@@ -22,30 +22,15 @@
  * SOFTWARE.
  */
 
-import 'package:nft/pages/search/search_screen.dart';
-import 'package:nft/utils/app_asset.dart';
-import 'package:nft/utils/pair.dart';
-import 'package:nft/widgets/screen_widget.dart';
-import 'package:nft/widgets/sns_appbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nft/widgets/screen_widget.dart';
 
 class NormalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenWidget(
       body: Column(children: <Widget>[
-        SnSIconAppBar(
-          left: Pair(AppImages.icSearch, () {
-            Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => SearchScreen()));
-          }),
-          center: 'Home',
-          right: Pair(AppImages.icNoti, () {
-            Navigator.push(context,
-                CupertinoPageRoute(builder: (context) => SearchScreen()));
-          }),
-        ),
         Expanded(
           child: _body(),
         ),

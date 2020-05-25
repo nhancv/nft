@@ -24,28 +24,31 @@
 
 import 'dart:ui' as ui;
 
-import 'package:nft/pages/login/login_screen.dart';
-import 'package:nft/provider/bcache.dart';
-import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:nft/provider/store/store.dart';
+import 'package:get_it/get_it.dart';
+import 'package:nft/pages/home/home_screen.dart';
+import 'package:nft/provider/i18n/app_localizations.dart';
+import 'package:nft/provider/local_storage.dart';
+import 'package:nft/utils/app_asset.dart';
+import 'package:nft/widgets/appbar_padding.dart';
 
-import 'provider/main_bloc.dart';
-import 'widgets/app_loading.dart';
+final getIt = GetIt.instance;
+
+void diSetup() {
+  getIt.registerSingleton<LocalStorage>(LocalStorage());
+}
 
 Future<void> myMain() async {
-  // @nhancv 2019-10-24: Start services later
+  // Start services later
   WidgetsFlutterBinding.ensureInitialized();
 
-  // @nhancv 12/27/2019: Start store
-  await DefaultStore.instance.init(databaseName: "nft_database.db");
-//  await DefaultStore.instance.logout();
-//  BullMQ.instance.start();
+  // Get it setup
+  diSetup();
 
-  // @nhancv 10/23/2019: Init bflutter caching
-  await BCache.instance.init();
-  // @nhancv 10/23/2019: Run Application
+  // Run Application
   runApp(MyApp());
 }
 
@@ -55,24 +58,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final mainBloc = MainBloc.instance;
-
   @override
   Widget build(BuildContext context) {
-    /**
-     * App flow:
-     * - First, login
-     * - Second, navigate to Home with auto fetch github info
-     * - Then, navigate Search screen
-     * - Last, navigate to Detail screen
-     */
-    return StreamBuilder(
-        stream: mainBloc.localeBloc.stream,
-        builder: (context, snapshot) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LocaleBloc>(
+          create: (BuildContext context) => LocaleBloc(),
+        ),
+      ],
+      child: BlocBuilder<LocaleBloc, Locale>(
+        builder: (context, locale) {
           return MaterialApp(
-            locale: (snapshot.hasData
-                ? snapshot.data
-                : Locale(ui.window.locale?.languageCode ?? ' en')),
+            locale: locale,
             supportedLocales: [
               const Locale('en'),
               const Locale('vi'),
@@ -84,39 +81,41 @@ class _MyAppState extends State<MyApp> {
             ],
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
+                primarySwatch: Colors.blue, fontFamily: AppFonts.roboto),
             home: AppContent(),
           );
-        });
+        },
+      ),
+    );
+  }
+}
+
+class LocaleBloc extends Bloc<Locale, Locale> {
+  @override
+  get initialState => Locale(ui.window.locale?.languageCode ?? ' en');
+
+  @override
+  Stream<Locale> mapEventToState(Locale event) async* {
+    yield event;
   }
 }
 
 class AppContent extends StatelessWidget {
-  final mainBloc = MainBloc.instance;
-
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Stack(
-        children: <Widget>[
-          LoginScreen(),
-//          HomeScreen(),
-          StreamBuilder(
-            stream: mainBloc.appLoading.stream,
-            builder: (context, snapshot) =>
-                snapshot.hasData && snapshot.data ? AppLoading() : SizedBox(),
-          ),
-        ],
+      body: AnnotatedRegion(
+        value: SystemUiOverlayStyle.dark,
+        child: AppBarPadding(
+          child: HomeScreen(),
+        ),
       ),
     );
   }
 
-  // @nhancv 10/25/2019: After widget initialized.
-  void onAfterBuild(BuildContext context) {
-    mainBloc.initContext(context);
-  }
+  // After widget initialized.
+  void onAfterBuild(BuildContext context) {}
 }

@@ -3,7 +3,7 @@ description: NFT App
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.3.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -12,25 +12,15 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.2
   rxdart: 0.22.6
-  sqflite: 1.1.8
   path: ^1.6.4
   uuid: ^2.0.4
   flutter_spinkit: ^4.1.2+1
   connectivity: ^0.4.8+2
-  cached_network_image: ^2.0.0-rc.1
   dio: ^3.0.9
-  appcenter:
-    git:
-      url: git://github.com/nhancv/flutter_plugin_appcenter.git
-      path: src/appcenter
-  appcenter_crashes:
-    git:
-      url: git://github.com/nhancv/flutter_plugin_appcenter.git
-      path: src/appcenter_crashes
-  appcenter_analytics:
-    git:
-      url: git://github.com/nhancv/flutter_plugin_appcenter.git
-      path: src/appcenter_analytics
+  intl: ^0.16.1
+  get_it: ^4.0.2
+  flutter_bloc: ^4.0.0
+  shared_preferences: ^0.5.7+3
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.3
@@ -59,24 +49,16 @@ flutter:
     - assets/app/fonts/
 
   fonts:
-    - family: SFProText
+    - family: Roboto
       fonts:
-        - asset: assets/base/fonts/SFProText-Light.ttf
+        - asset: assets/base/fonts/Roboto/Roboto-Thin.ttf
+          weight: 200
+        - asset: assets/base/fonts/Roboto/Roboto-Light.ttf
           weight: 300
-        - asset: assets/base/fonts/SFProText-Regular.ttf
-          weight: 400
-        - asset: assets/base/fonts/SFProText-Medium.ttf
+        - asset: assets/base/fonts/Roboto/Roboto-Regular.ttf
+        - asset: assets/base/fonts/Roboto/Roboto-Medium.ttf
           weight: 500
-        - asset: assets/base/fonts/SFProText-Semibold.ttf
-          weight: 600
-        - asset: assets/base/fonts/SFProText-Bold.ttf
+        - asset: assets/base/fonts/Roboto/Roboto-Bold.ttf
           weight: 700
-    - family: AvenirNextLTPro-Regular
-      fonts:
-        - asset: assets/base/fonts/AvenirNextLTPro-Regular.otf
-    - family: AvenirNextLTPro-Demi
-      fonts:
-        - asset: assets/base/fonts/AvenirNextLTPro-Demi.otf
-    - family: AvenirNextLTPro-Bold
-      fonts:
-        - asset: assets/base/fonts/AvenirNextLTPro-Bold.otf
+        - asset: assets/base/fonts/Roboto/Roboto-Black.ttf
+          weight: 800

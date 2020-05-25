@@ -22,14 +22,11 @@
  * SOFTWARE.
  */
 
-import 'dart:convert';
-
-import 'package:nft/models/remote/user_detail.dart';
-import 'package:nft/pages/home/home_bloc.dart';
-import 'package:nft/pages/search/search_screen.dart';
-import 'package:nft/widgets/bapp_bar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nft/my_app.dart';
+import 'package:nft/provider/i18n/app_localizations.dart';
+import 'package:nft/widgets/screen_widget.dart';
 
 /// Home screen
 /// Auto get github user info
@@ -37,86 +34,33 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BAppBar(text: "Home screen"),
-      body: _HomeInfo(),
+    return ScreenWidget(
+      body: Column(children: <Widget>[
+        Expanded(
+          child: _body(context),
+        ),
+      ]),
     );
   }
-}
 
-class _HomeInfo extends StatefulWidget {
-  @override
-  __HomeInfoState createState() => __HomeInfoState();
-}
-
-class __HomeInfoState extends State<_HomeInfo> {
-  var bloc = HomeBloc();
-
-  @override
-  void initState() {
-    super.initState();
-    _onResume();
-  }
-
-  @override
-  void dispose() {
-    bloc.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            StreamBuilder(
-              stream: bloc.getUserInfo.stream,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                }
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                UserDetail user = snapshot.data;
-                return Column(
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage:
-                          CachedNetworkImageProvider(user.avatarUrl),
-                      radius: 50.0,
-                    ),
-                    Text(json.encode(snapshot.data))
-                  ],
-                );
-              },
-            ),
-            RaisedButton(
-              child: Text('Search Screen'),
-              onPressed: () {
-                _navigateAndDisplaySelection(context);
-              },
-            ),
-          ],
-        ),
+  Widget _body(context) {
+    return Container(
+      child: Column(
+        children: [
+          Text(AppLocalizations.of(context).translate('title')),
+          FlatButton(
+            child: Text('press me'),
+            onPressed: () {
+              final currentLocale = AppLocalizations.of(context).locale;
+              if (currentLocale == Locale('en')) {
+                BlocProvider.of<LocaleBloc>(context).add(Locale('vi'));
+              } else {
+                BlocProvider.of<LocaleBloc>(context).add(Locale('en'));
+              }
+            },
+          )
+        ],
       ),
     );
-  }
-
-  _navigateAndDisplaySelection(BuildContext context) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SearchScreen()),
-    );
-
-    // on Resume
-    _onResume();
-  }
-
-  _onResume() {
-    bloc.getHomeInfo();
   }
 }
