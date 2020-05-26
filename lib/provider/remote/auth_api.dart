@@ -22,24 +22,32 @@
  * SOFTWARE.
  */
 
-/// User detail model: https://flutter.dev/docs/development/data-and-backend/json
-class UserDetail {
-  final String login;
-  final String avatarUrl;
-  final String name;
-  final String location;
+import 'dart:convert';
 
-  UserDetail(this.login, this.avatarUrl, this.name, this.location);
+import 'package:dio/dio.dart';
 
-  factory UserDetail.fromJson(Map<String, dynamic> json) {
-    return UserDetail(json['login'] as String, json['avatar_url'] as String,
-        json['name'] as String, json['location'] as String);
+import 'api.dart';
+
+class AuthApi extends Api {
+  /// Login
+  Future<Response> signIn() async {
+    final header = await getHeader();
+    return wrapE(() => dio.post("https://nhancv.free.beeceptor.com/login",
+        options: Options(headers: header),
+        data: json.encode({
+          "username": "username",
+          "password": "password",
+        })));
   }
 
-  Map<String, dynamic> toJson() => {
-        'login': login,
-        'avatarUrl': avatarUrl,
-        'name': name,
-        'location': location
-      };
+  /// Login With Error
+  Future<Response> signInWithError() async {
+    final header = await getHeader();
+    return wrapE(() => dio.post("https://nhancv.free.beeceptor.com/login-err",
+        options: Options(headers: header),
+        data: json.encode({
+          "username": "username",
+          "password": "password",
+        })));
+  }
 }
