@@ -1,7 +1,3 @@
-/*
- * Developed by Nhan Cao on 10/28/19 11:06 AM.
- * Last modified 10/28/19 8:35 AM.
- */
 
 /*
 Error
@@ -39,7 +35,7 @@ class ErrorResponse extends BaseResponse {
     return null;
   }
 
-  // @nhancv 3/24/20: How to use
+  // How to use
   // if (error is DioError && error.type == DioErrorType.RESPONSE) {
   //    final res = error.response;
   //    final errorObject = ErrorResponse(res.data);
