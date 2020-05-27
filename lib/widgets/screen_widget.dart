@@ -4,11 +4,12 @@ import 'package:flutter/services.dart';
 
 class ScreenWidget extends StatelessWidget {
   final Widget body;
+  final Color backgroundColor;
   final Widget bottomNavigationBar;
   final Function() unFocus;
 
   const ScreenWidget(
-      {Key key, this.body, this.bottomNavigationBar, this.unFocus})
+      {Key key, this.body, this.backgroundColor, this.bottomNavigationBar, this.unFocus})
       : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class ScreenWidget extends StatelessWidget {
     return GestureDetector(
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
-        backgroundColor: Colors.transparent,
+        backgroundColor: backgroundColor ?? Colors.transparent,
         bottomNavigationBar: bottomNavigationBar,
         body: Container(
             width: MediaQuery.of(context).size.width,
