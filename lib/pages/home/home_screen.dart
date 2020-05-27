@@ -5,9 +5,6 @@ import 'package:nft/my_app.dart';
 import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:nft/widgets/screen_widget.dart';
 
-/// Home screen
-/// Auto get github user info
-
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
