@@ -18,7 +18,7 @@ class ScreenWidget extends StatelessWidget {
       child: GestureDetector(
         child: Scaffold(
           resizeToAvoidBottomPadding: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           bottomNavigationBar: bottomNavigationBar,
           body: Container(
               width: MediaQuery.of(context).size.width,
