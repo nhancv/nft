@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nft/my_app.dart';
@@ -10,14 +9,26 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenWidget(
       body: Column(children: <Widget>[
+        HomeScreenHeader(),
         Expanded(
-          child: _body(context),
+          child: HomeScreenBody(),
         ),
+        HomeScreenFooter()
       ]),
     );
   }
+}
 
-  Widget _body(context) {
+class HomeScreenHeader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+class HomeScreenBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
@@ -36,5 +47,12 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class HomeScreenFooter extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
