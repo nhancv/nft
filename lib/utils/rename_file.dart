@@ -1,8 +1,7 @@
-
 import 'dart:async';
 import 'dart:io';
 
-/// Setup PATH point to: flutter\bin\cache\dart-sdk\bin
+/// Setup PATH point to: flutter/bin/cache/dart-sdk/bin
 /// * Run:
 /// * dart rename_file.dart
 
@@ -20,7 +19,8 @@ Future<List<FileSystemEntity>> dirContents(Directory dir) {
 // Convert abcXyz.png = to abc_xyz.png
 // From: addNew.png
 // => add_new.png
-void renameFile(List<FileSystemEntity> fileList) {
+Future<void> renameFile(Directory directory) async {
+  List<FileSystemEntity> fileList = await dirContents(directory);
   fileList.forEach((f) {
     // Parse with template abcXyz.png
     RegExp pattern = RegExp(r'[a-z]{0,}[A-Z].{0,}.png');
@@ -34,8 +34,35 @@ void renameFile(List<FileSystemEntity> fileList) {
   });
 }
 
+// Move abc@2x.png = to 2.0x/abc.png
+Future<void> moveFile(Directory directory) async {
+  List<FileSystemEntity> fileList = await dirContents(directory);
+  fileList.forEach((f) {
+    // Parse with template abc@2x.png
+    RegExp pattern = RegExp(r'[A-z]{0,}@[2-3]x.png');
+    String fileName = pattern.stringMatch(f.path);
+    if (fileName != null) {
+      String newName = fileName.splitMapJoin(pattern,
+          onMatch: (m) {
+            RegExp suffixPattern = RegExp(r'@[2-3]x');
+            String suffixType = suffixPattern.stringMatch(fileName);
+            String name =
+                '${(suffixType == '@2x' ? '2.0x' : '3.0x')}/${fileName.replaceFirst(suffixType, "")}';
+            return name;
+          },
+          onNonMatch: (n) => n);
+      String newFilePath = f.path.replaceAll(pattern, newName);
+      f.renameSync(newFilePath);
+    }
+  });
+}
+
 void main() async {
-  List<FileSystemEntity> fileList =
-      await dirContents(Directory('../../assets/images/'));
-  renameFile(fileList);
+  List<Directory> fileLists = [
+    Directory('../../assets/app/icons/')
+  ];
+  fileLists.forEach((directory) async {
+    await renameFile(directory);
+    await moveFile(directory);
+  });
 }
