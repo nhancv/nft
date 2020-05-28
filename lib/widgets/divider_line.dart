@@ -12,7 +12,7 @@ class DividerLine extends StatelessWidget {
     return Container(
       width: width ?? MediaQuery.of(context).size.width,
       height: height ?? 0.5,
-      color: Color.fromRGBO(226, 226, 226, 1),
+      color: Color(0xFF979797),
     );
   }
 }
