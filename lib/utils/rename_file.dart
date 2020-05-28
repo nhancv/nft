@@ -39,7 +39,7 @@ Future<void> moveFile(Directory directory) async {
   List<FileSystemEntity> fileList = await dirContents(directory);
   fileList.forEach((f) {
     // Parse with template abc@2x.png
-    RegExp pattern = RegExp(r'[A-z]{0,}@[2-3]x.png');
+    RegExp pattern = RegExp(r'[A-z,0-9]{0,}@[2-3]x.png');
     String fileName = pattern.stringMatch(f.path);
     if (fileName != null) {
       String newName = fileName.splitMapJoin(pattern,

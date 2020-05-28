@@ -21,6 +21,7 @@ class RippleEffect extends StatelessWidget {
     return Container(
       width: width,
       height: height,
+      color: Colors.transparent,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
