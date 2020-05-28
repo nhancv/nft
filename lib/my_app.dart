@@ -10,6 +10,7 @@ import 'package:nft/pages/home/home_screen.dart';
 import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:nft/provider/local_storage.dart';
 import 'package:nft/utils/app_asset.dart';
+import 'package:nft/utils/app_constant.dart';
 import 'package:nft/widgets/appbar_padding.dart';
 
 final getIt = GetIt.instance;
@@ -59,7 +60,14 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 primarySwatch: Colors.blue, fontFamily: AppFonts.roboto),
-            home: AppContent(),
+            initialRoute: '/',
+            onGenerateRoute: (RouteSettings settings) {
+              switch (settings.name) {
+//                case AppConstant.anotherRouteName:
+//                  return FadeRoute(page: AppContent(screen: AnotherScreen()));
+              }
+              return FadeRoute(page: AppContent(screen: HomeScreen()));
+            },
           );
         },
       ),
@@ -78,6 +86,11 @@ class LocaleBloc extends Bloc<Locale, Locale> {
 }
 
 class AppContent extends StatelessWidget {
+
+  final Widget screen;
+
+  const AppContent({Key key, @required this.screen}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
@@ -87,7 +100,7 @@ class AppContent extends StatelessWidget {
       body: AnnotatedRegion(
         value: SystemUiOverlayStyle.dark,
         child: AppBarPadding(
-          child: HomeScreen(),
+          child: screen,
         ),
       ),
     );
@@ -95,4 +108,20 @@ class AppContent extends StatelessWidget {
 
   // After widget initialized.
   void onAfterBuild(BuildContext context) {}
+}
+
+
+class FadeRoute<T> extends MaterialPageRoute<T> {
+  FadeRoute({ Widget page, RouteSettings settings })
+      : super(builder: (_) => page, settings: settings);
+
+  @override
+  Widget buildTransitions(BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child) {
+    // Fades between routes. (If you don't want any animation,
+    // just return child.)
+    return new FadeTransition(opacity: animation, child: child);
+  }
 }
