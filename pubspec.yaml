@@ -21,6 +21,7 @@ dependencies:
   get_it: ^4.0.2
   flutter_bloc: ^4.0.0
   shared_preferences: ^0.5.7+3
+  socket_io_client: ^0.9.9
 
 dev_dependencies:
   flutter_launcher_icons: ^0.7.3

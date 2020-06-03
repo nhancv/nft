@@ -1,4 +1,3 @@
-
 /*
 Error
 {
@@ -23,37 +22,40 @@ Successful
 
 import 'base_response.dart';
 
-class LoginResponse extends BaseResponse {
-  String tokenType;
-  int expiresIn;
-  String accessToken;
-  String refreshToken;
+class Credential {
+  final String tokenType;
+  final int expiresIn;
+  final String accessToken;
+  final String refreshToken;
 
-  LoginResponse(Map<String, dynamic> fullJson) : super(fullJson) {
-    tokenType= fullJson["token_type"];
-    expiresIn= fullJson["expires_in"];
-    accessToken= fullJson["access_token"];
-    refreshToken= fullJson["refresh_token"];
-  }
+  Credential(
+      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken});
 
-  @override
-  Map<String, dynamic> toJson() {
-    return {
-      "token_type": tokenType,
-      "expires_in": expiresIn,
-      "access_token": accessToken,
-      "refresh_token": refreshToken,
-      ... super.toJson()
-    };
-  }
+  factory Credential.fromJson(Map<String, dynamic> json) => Credential(
+        tokenType: json["token_type"],
+        expiresIn: json["expires_in"],
+        accessToken: json["access_token"],
+        refreshToken: json["refresh_token"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "tokenType": tokenType,
+        "expiresIn": expiresIn,
+        "accessToken": accessToken,
+        "refreshToken": refreshToken,
+      };
+}
+
+class LoginResponse extends BaseResponse<Credential> {
+  LoginResponse(Map<String, dynamic> fullJson) : super(fullJson);
 
   @override
   Map<String, dynamic> dataToJson(data) {
-    return null;
+    return data.toJson();
   }
 
   @override
-  jsonToData(Map<String, dynamic> fullJson) {
-    return null;
+  jsonToData(Map<String, dynamic> dataJson) {
+    return Credential.fromJson(dataJson);
   }
 }
