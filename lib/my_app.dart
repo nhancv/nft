@@ -101,7 +101,7 @@ class AppContent extends StatelessWidget {
   Widget build(BuildContext context) {// Set the fit size (fill in the screen size of the device in the design)
     // https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
     // Size of iPhone 8: 375 × 667 (points) - 750 × 1334 (pixels) (2x)
-    ScreenUtil.init(context, width: 750, height: 1796, allowFontScaling: false);
+    ScreenUtil.init(context, width: 375, height: 667, allowFontScaling: false);
     WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
 
     return Scaffold(
