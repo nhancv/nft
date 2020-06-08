@@ -42,12 +42,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-
-    // Set the fit size (fill in the screen size of the device in the design)
-    // https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
-    // Size of iPhone 8: 375 × 667 (points) - 750 × 1334 (pixels)
-    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -119,7 +113,12 @@ class AppContent extends StatelessWidget {
   }
 
   // After widget initialized.
-  void onAfterBuild(BuildContext context) {}
+  void onAfterBuild(BuildContext context) {
+    // Set the fit size (fill in the screen size of the device in the design)
+    // https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
+    // Size of iPhone 8: 375 × 667 (points) - 750 × 1334 (pixels)
+    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
+  }
 }
 
 class FadeRoute<T> extends MaterialPageRoute<T> {
