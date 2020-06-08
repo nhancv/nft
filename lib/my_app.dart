@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nft/pages/home/home_bloc.dart';
 import 'package:nft/pages/home/home_screen.dart';
@@ -41,6 +42,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+
+    // Set the fit size (fill in the screen size of the device in the design)
+    // https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
+    // Size of iPhone 8: 375 × 667 (points) - 750 × 1334 (pixels)
+    ScreenUtil.init(context, width: 750, height: 1334, allowFontScaling: false);
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
