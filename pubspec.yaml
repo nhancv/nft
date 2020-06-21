@@ -11,13 +11,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  rxdart: 0.22.6
-  path: ^1.6.4
-  uuid: ^2.0.4
   flutter_spinkit: ^4.1.2+1
-  connectivity: ^0.4.8+2
   dio: ^3.0.9
-  intl: ^0.16.1
   get_it: ^4.0.2
   flutter_bloc: ^4.0.0
   shared_preferences: ^0.5.7+3
