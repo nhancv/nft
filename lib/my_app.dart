@@ -30,6 +30,9 @@ Future<void> myMain() async {
   // Get it setup
   diSetup();
 
+  // Force portrait mode
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   // Run Application
   runApp(MyApp());
 }
