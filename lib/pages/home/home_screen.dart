@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nft/my_app.dart';
-import 'package:nft/pages/home/home_bloc.dart';
+import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:nft/widgets/screen_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -39,23 +39,22 @@ class HomeScreenBody extends StatelessWidget {
             onPressed: () {
               final currentLocale = AppLocalizations.of(context).locale;
               if (currentLocale == Locale('en')) {
-                BlocProvider.of<LocaleBloc>(context).add(Locale('vi'));
+                context.read<LocaleProvider>().updateLocale(Locale('vi'));
               } else {
-                BlocProvider.of<LocaleBloc>(context).add(Locale('en'));
+                context.read<LocaleProvider>().updateLocale(Locale('en'));
               }
             },
           ),
           FlatButton(
             child: Text('call api'),
             onPressed: () {
-              BlocProvider.of<HomeBloc>(context).add(true);
+              context.read<HomeProvider>().login();
             },
           ),
-          BlocBuilder<HomeBloc, String>(
-            builder: (BuildContext context, String loginResponse) {
-              return Text(loginResponse, textAlign: TextAlign.center,);
-            },
-          )
+          Text(
+            '${context.watch<HomeProvider>().response}',
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

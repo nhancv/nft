@@ -2,33 +2,20 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get_it/get_it.dart';
-import 'package:nft/pages/home/home_bloc.dart';
+import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/home/home_screen.dart';
 import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:nft/provider/local_storage.dart';
 import 'package:nft/provider/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/widgets/appbar_padding.dart';
-
-final getIt = GetIt.instance;
-
-void diSetup() {
-  getIt.registerSingleton<LocalStorage>(LocalStorage());
-  //usage:
-  //GetIt.I<LocalStorage>();
-  getIt.registerSingleton<AuthApi>(AuthApi());
-}
+import 'package:provider/provider.dart';
 
 Future<void> myMain() async {
   // Start services later
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Get it setup
-  diSetup();
 
   // Force portrait mode
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -45,19 +32,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiProvider(
       providers: [
-        BlocProvider(
-          create: (BuildContext context) => LocaleBloc(),
-        ),
-        BlocProvider(
-          create: (BuildContext context) => HomeBloc(),
-        )
+        Provider(create: (_) => AuthApi()),
+        Provider(create: (_) => LocalStorage()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(
+            create: (context) =>
+                HomeProvider(Provider.of<AuthApi>(context, listen: false))),
       ],
-      child: BlocBuilder<LocaleBloc, Locale>(
-        builder: (context, locale) {
+      child: Consumer<LocaleProvider>(
+        builder: (context, value, child) {
           return MaterialApp(
-            locale: locale,
+            locale: value.locale,
             supportedLocales: [
               const Locale('en'),
               const Locale('vi'),
@@ -85,13 +72,12 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class LocaleBloc extends Bloc<Locale, Locale> {
-  @override
-  get initialState => Locale(ui.window.locale?.languageCode ?? ' en');
+class LocaleProvider with ChangeNotifier {
+  Locale locale = Locale(ui.window.locale?.languageCode ?? ' en');
 
-  @override
-  Stream<Locale> mapEventToState(Locale event) async* {
-    yield event;
+  void updateLocale(Locale locale) {
+    this.locale = locale;
+    notifyListeners();
   }
 }
 
@@ -101,7 +87,8 @@ class AppContent extends StatelessWidget {
   const AppContent({Key key, @required this.screen}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {// Set the fit size (fill in the screen size of the device in the design)
+  Widget build(BuildContext context) {
+    // Set the fit size (fill in the screen size of the device in the design)
     // https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
     // Size of iPhone 8: 375 × 667 (points) - 750 × 1334 (pixels) (2x)
     ScreenUtil.init(context, width: 375, height: 667, allowFontScaling: false);
