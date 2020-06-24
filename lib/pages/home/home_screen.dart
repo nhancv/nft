@@ -37,7 +37,7 @@ class HomeScreenBody extends StatelessWidget {
           Text(S.of(context).hello),
           FlatButton(
             child: Text('press me'),
-            onPressed: () async {
+            onPressed: () {
               final currentLocale = Intl.getCurrentLocale();
               if (currentLocale == 'en') {
                 context.read<LocaleProvider>().updateLocale(Locale('vi'));
