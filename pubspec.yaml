@@ -18,6 +18,11 @@ dependencies:
   flutter_screenutil: ^1.1.0
   provider: ^4.1.3
 
+  # localization
+  intl: ^0.16.0
+  intl_translation: ^0.17.9
+
+
 dev_dependencies:
   flutter_launcher_icons: ^0.7.3
   flutter_test:
@@ -58,3 +63,5 @@ flutter:
           weight: 700
         - asset: assets/base/fonts/Roboto/Roboto-Black.ttf
           weight: 800
+flutter_intl:
+  enabled: true

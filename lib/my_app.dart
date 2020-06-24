@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/home/home_screen.dart';
 import 'package:nft/provider/i18n/app_localizations.dart';
@@ -45,13 +46,11 @@ class _MyAppState extends State<MyApp> {
         builder: (context, value, child) {
           return MaterialApp(
             locale: value.locale,
-            supportedLocales: [
-              const Locale('en'),
-              const Locale('vi'),
-            ],
+            supportedLocales: S.delegate.supportedLocales,
             localizationsDelegates: [
-              AppLocalizations.delegate,
+              S.delegate,
               GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
             ],
             debugShowCheckedModeBanner: false,
@@ -75,7 +74,7 @@ class _MyAppState extends State<MyApp> {
 class LocaleProvider with ChangeNotifier {
   Locale locale = Locale(ui.window.locale?.languageCode ?? ' en');
 
-  void updateLocale(Locale locale) {
+  Future<void> updateLocale(Locale locale) async {
     this.locale = locale;
     notifyListeners();
   }

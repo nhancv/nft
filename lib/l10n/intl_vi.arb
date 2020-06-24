@@ -1,0 +1,10 @@
+{
+  "@@locale": "vi",
+  "@@last_modified": "2020-06-24T17:29:13.024977",
+  "hello": "xin chào",
+  "@hello": {
+    "description": "Xin chào ai đó",
+    "type": "text",
+    "placeholders": {}
+  }
+}

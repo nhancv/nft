@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:nft/generated/l10n.dart';
 import 'package:nft/my_app.dart';
 import 'package:nft/pages/home/home_provider.dart';
-import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -33,12 +34,12 @@ class HomeScreenBody extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Text(AppLocalizations.of(context).translate('title')),
+          Text(S.of(context).hello),
           FlatButton(
             child: Text('press me'),
-            onPressed: () {
-              final currentLocale = AppLocalizations.of(context).locale;
-              if (currentLocale == Locale('en')) {
+            onPressed: () async {
+              final currentLocale = Intl.getCurrentLocale();
+              if (currentLocale == 'en') {
                 context.read<LocaleProvider>().updateLocale(Locale('vi'));
               } else {
                 context.read<LocaleProvider>().updateLocale(Locale('en'));
