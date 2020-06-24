@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/home/home_screen.dart';
-import 'package:nft/provider/i18n/app_localizations.dart';
 import 'package:nft/provider/local_storage.dart';
 import 'package:nft/provider/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
