@@ -22,13 +22,24 @@ class ScreenBody extends StatelessWidget {
         builder: (context) {
           return Scaffold(
             body: Center(
-              child: Text('${context.watch<CounterProvider>().count}'),
+              child: Text(
+                '${context.watch<CounterProvider>().count}',
+                // Provide a Key to this specific Text widget. This allows
+                // identifing the widget from inside the test suite,
+                // and reading the text.
+                key: Key('counter'),
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
             floatingActionButton: FloatingActionButton(
+              // Provide a Key to this button. This allows finding this
+              // specific button inside the test suite, and tapping it.
+              key: Key('increment'),
               child: Icon(Icons.add),
               onPressed: () {
                 context.read<CounterProvider>().increase();
               },
+              tooltip: 'Increment',
             ),
           );
         },
