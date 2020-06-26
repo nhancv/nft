@@ -57,8 +57,7 @@ class HomeScreenBody extends StatelessWidget {
           ),
           Consumer<HomeProvider>(
             builder: (_, value, child) {
-              print('value ${value.response}');
-              if (value.response != null) {
+              if (value.response != null && value.response.isNotEmpty) {
                 AppLoadingProvider.hide(context);
               }
               return Text(
