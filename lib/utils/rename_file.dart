@@ -58,9 +58,7 @@ Future<void> moveFile(Directory directory) async {
 }
 
 void main() async {
-  List<Directory> fileLists = [
-    Directory('../../assets/app/icons/')
-  ];
+  List<Directory> fileLists = [Directory('../../assets/app/icons/')];
   fileLists.forEach((directory) async {
     await renameFile(directory);
     await moveFile(directory);

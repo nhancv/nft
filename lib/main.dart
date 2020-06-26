@@ -1,4 +1,3 @@
-
 import 'package:nft/my_app.dart';
 import 'package:nft/services/global.dart' as global;
 

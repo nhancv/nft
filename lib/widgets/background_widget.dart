@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class BackgroundWidget extends StatelessWidget {
@@ -11,8 +10,7 @@ class BackgroundWidget extends StatelessWidget {
     return SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: background
-    );
+        child: background);
   }
 }
 
@@ -41,7 +39,7 @@ class ColorBackgroundWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BackgroundWidget(
       background: Container(
-      color: color,
+        color: color,
       ),
     );
   }

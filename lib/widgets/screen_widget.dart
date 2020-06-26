@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ScreenWidget extends StatelessWidget {
@@ -8,7 +7,11 @@ class ScreenWidget extends StatelessWidget {
   final Function() unFocus;
 
   const ScreenWidget(
-      {Key key, this.body, this.backgroundColor, this.bottomNavigationBar, this.unFocus})
+      {Key key,
+      this.body,
+      this.backgroundColor,
+      this.bottomNavigationBar,
+      this.unFocus})
       : super(key: key);
 
   @override

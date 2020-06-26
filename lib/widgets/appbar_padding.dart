@@ -1,5 +1,5 @@
-import 'package:nft/widgets/screen_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:nft/widgets/screen_widget.dart';
 
 class AppBarPadding extends StatelessWidget {
   final Widget background;

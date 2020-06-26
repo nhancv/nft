@@ -1,4 +1,3 @@
-
 class AppImages {
   static const icBack = 'assets/base/icons/ic_back.png';
   static const icAdd = 'assets/base/icons/ic_add.png';
@@ -12,11 +11,9 @@ class AppImages {
   static const icWarning = 'assets/base/icons/ic_warning.png';
   static const icEmpty = 'assets/base/icons/ic_empty.png';
   static const icAppIcon = 'assets/base/icons/app_icon.png';
-
 }
 
-class AppVideos {
-}
+class AppVideos {}
 
 class AppFonts {
   static const String roboto = 'Roboto';

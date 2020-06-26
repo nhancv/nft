@@ -1,10 +1,9 @@
-
 import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import '../global.dart';
 
+import '../global.dart';
 
 class Api {
   // Get base url by env

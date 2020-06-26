@@ -1,4 +1,3 @@
-
 /// Login in request form data
 class LogInRequest {
   final String username;

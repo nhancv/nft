@@ -3,7 +3,6 @@ import 'package:nft/models/remote/log_in_response.dart';
 import 'package:nft/services/remote/auth_api.dart';
 
 class HomeProvider with ChangeNotifier {
-
   final AuthApi api;
 
   HomeProvider(this.api);
