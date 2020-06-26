@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
               AppConstant.rootRoute: (context) =>
                   AppContent(screen: HomeScreen()),
               AppConstant.counterScreenRoute: (context) =>
-                  AppContent(screen: CounterScreen()),
+                  AppContent(screen: CounterScreen(argument: ModalRoute.of(context)?.settings?.arguments)),
             },
           );
         },

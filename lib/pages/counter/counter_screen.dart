@@ -5,11 +5,33 @@ import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
 class CounterScreen extends StatelessWidget {
+
+  final String argument;
+
+  const CounterScreen({Key key, this.argument}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenWidget(
-      body: ScreenBody(),
+      body: Column(children: <Widget>[
+        ScreenHeader(title: argument),
+        Expanded(
+          child: ScreenBody(),
+        ),
+      ]),
     );
+  }
+}
+
+class ScreenHeader extends StatelessWidget {
+
+  final String title;
+
+  const ScreenHeader({Key key, @required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(title);
   }
 }
 

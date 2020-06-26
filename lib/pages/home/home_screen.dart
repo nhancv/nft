@@ -70,7 +70,7 @@ class HomeScreenBody extends StatelessWidget {
             key: Key(AppConstant.counterScreenRoute),
             child: Text('Counter Screen'),
             onPressed: () {
-              Navigator.pushNamed(context, AppConstant.counterScreenRoute);
+              Navigator.pushNamed(context, AppConstant.counterScreenRoute, arguments: 'Argument from Home');
             },
           )
         ],
