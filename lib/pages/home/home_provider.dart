@@ -9,7 +9,7 @@ class HomeProvider with ChangeNotifier {
 
   String response = "";
 
-  void login() async {
+  Future<void> login() async {
     final result = await api.signIn().timeout(Duration(seconds: 30));
 //    final result = await api.signInWithError().timeout(Duration(seconds: 30));
     final loginResponse = LoginResponse(result.data);

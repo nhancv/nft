@@ -50,16 +50,14 @@ class HomeScreenBody extends StatelessWidget {
           ),
           FlatButton(
             child: Text('call api'),
-            onPressed: () {
+            onPressed: () async {
               AppLoadingProvider.show(context);
-              context.read<HomeProvider>().login();
+              await context.read<HomeProvider>().login();
+              AppLoadingProvider.hide(context);
             },
           ),
           Consumer<HomeProvider>(
             builder: (_, value, child) {
-              if (value.response != null && value.response.isNotEmpty) {
-                AppLoadingProvider.hide(context);
-              }
               return Text(
                 '${value.response}',
                 textAlign: TextAlign.center,

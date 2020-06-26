@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(
             create: (context) =>
-                HomeProvider(Provider.of<AuthApi>(context, listen: false))),
+                HomeProvider(context.read<AuthApi>())),
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, value, child) {
