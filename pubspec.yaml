@@ -1,6 +1,6 @@
 name: nft
 description: NFT App
-version: 1.0.0+1
+version: 1.0.1+26032020
 
 environment:
   sdk: ">=2.6.0 <3.0.0"

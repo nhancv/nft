@@ -5,11 +5,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft/generated/l10n.dart';
+import 'package:nft/pages/counter/counter_screen.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/home/home_screen.dart';
-import 'package:nft/provider/local_storage.dart';
-import 'package:nft/provider/remote/auth_api.dart';
+import 'package:nft/services/app_loading.dart';
+import 'package:nft/services/local_storage.dart';
+import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
+import 'package:nft/utils/app_constant.dart';
 import 'package:nft/widgets/appbar_padding.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +39,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         Provider(create: (_) => AuthApi()),
         Provider(create: (_) => LocalStorage()),
+        Provider(create: (_) => AppLoadingProvider()),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(
             create: (context) =>
@@ -54,18 +58,29 @@ class _MyAppState extends State<MyApp> {
             ],
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-                primarySwatch: Colors.blue, fontFamily: AppFonts.roboto),
+                primarySwatch: Colors.blue,
+                fontFamily: AppFonts.roboto,
+                pageTransitionsTheme: buildPageTransitionsTheme()),
             initialRoute: '/',
-            onGenerateRoute: (RouteSettings settings) {
-              switch (settings.name) {
-//                case AppConstant.anotherRouteName:
-//                  return FadeRoute(page: AppContent(screen: AnotherScreen()));
-              }
-              return FadeRoute(page: AppContent(screen: HomeScreen()));
+            routes: <String, WidgetBuilder>{
+              AppConstant.rootRoute: (context) =>
+                  AppContent(screen: HomeScreen()),
+              AppConstant.counterScreenRoute: (context) =>
+                  AppContent(screen: CounterScreen()),
             },
           );
         },
       ),
+    );
+  }
+
+  // Custom page transitions theme
+  PageTransitionsTheme buildPageTransitionsTheme() {
+    return PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: OpenUpwardsPageTransitionsBuilder(),
+      },
     );
   }
 }
@@ -93,6 +108,7 @@ class AppContent extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
 
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.transparent,
       body: AnnotatedRegion(
         value: SystemUiOverlayStyle.dark,
@@ -105,17 +121,4 @@ class AppContent extends StatelessWidget {
 
   // After widget initialized.
   void onAfterBuild(BuildContext context) {}
-}
-
-class FadeRoute<T> extends MaterialPageRoute<T> {
-  FadeRoute({Widget page, RouteSettings settings})
-      : super(builder: (_) => page, settings: settings);
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    // Fades between routes. (If you don't want any animation,
-    // just return child.)
-    return new FadeTransition(opacity: animation, child: child);
-  }
 }

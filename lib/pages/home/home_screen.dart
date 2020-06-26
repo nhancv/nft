@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/my_app.dart';
 import 'package:nft/pages/home/home_provider.dart';
+import 'package:nft/services/app_loading.dart';
+import 'package:nft/utils/app_constant.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -49,13 +51,28 @@ class HomeScreenBody extends StatelessWidget {
           FlatButton(
             child: Text('call api'),
             onPressed: () {
+              AppLoadingProvider.show(context);
               context.read<HomeProvider>().login();
             },
           ),
-          Text(
-            '${context.watch<HomeProvider>().response}',
-            textAlign: TextAlign.center,
+          Consumer<HomeProvider>(
+            builder: (_, value, child) {
+              print('value ${value.response}');
+              if (value.response != null) {
+                AppLoadingProvider.hide(context);
+              }
+              return Text(
+                '${value.response}',
+                textAlign: TextAlign.center,
+              );
+            },
           ),
+          RaisedButton(
+            child: Text('Counter Screen'),
+            onPressed: () {
+              Navigator.pushNamed(context, AppConstant.counterScreenRoute);
+            },
+          )
         ],
       ),
     );
