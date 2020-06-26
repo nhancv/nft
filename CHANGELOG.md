@@ -1,3 +1,7 @@
+## [1.0.3+2003261754] - June 26, 2020.
+
+* Integration test
+
 ## [1.0.1+26032020] - June 26, 2020.
 
 * Custom route theme
