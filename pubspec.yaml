@@ -1,6 +1,7 @@
 name: nft
 description: NFT App
 version: 1.0.1+26032020
+homepage: https://github.com/nhancv/nft
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
