@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
                 primarySwatch: Colors.blue,
                 fontFamily: AppFonts.roboto,
                 pageTransitionsTheme: buildPageTransitionsTheme()),
-            initialRoute: '/',
+            initialRoute: AppConstant.rootRoute,
             routes: <String, WidgetBuilder>{
               AppConstant.rootRoute: (context) =>
                   AppContent(screen: HomeScreen()),

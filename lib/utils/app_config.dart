@@ -12,13 +12,13 @@ class Env {
   }
 }
 
-/// Global env
-class Global {
-  Global._private();
+/// Config env
+class Config {
+  Config._private();
 
-  static final Global instance = Global._private();
+  static final Config instance = Config._private();
 
-  factory Global({Env environment}) {
+  factory Config({Env environment}) {
     if (environment != null) {
       instance.env = environment;
     }

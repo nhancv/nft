@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-import '../global.dart';
+import '../../utils/app_config.dart';
 
 class Api {
   // Get base url by env
-  final String apiBaseUrl = Global.instance.env.apiBaseUrl;
+  final String apiBaseUrl = Config.instance.env.apiBaseUrl;
   final Dio dio = new Dio();
 
   Api() {
