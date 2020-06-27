@@ -33,10 +33,10 @@ S.load(Locale('vi'));
 ```
 Widget build(BuildContext context) {
     return Column(children: [
-        new Text(
+        Text(
             S.of(context).pageHomeConfirm,
         ),
-        new Text(
+        Text(
             S.current.pageHomeConfirm,// If you don't have `context` to pass
         ),
     ]);
