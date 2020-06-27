@@ -15,7 +15,6 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   dio: ^3.0.9
   shared_preferences: ^0.5.7+3
-  socket_io_client: ^0.9.9
   flutter_screenutil: ^1.1.0
   provider: ^4.1.3
 
