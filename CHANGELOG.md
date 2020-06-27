@@ -1,3 +1,7 @@
+## [1.0.6+2003271407] - June 27, 2020.
+
+* Remove socket io sample
+
 ## [1.0.5+2003261932] - June 26, 2020.
 
 * Refactor app config
