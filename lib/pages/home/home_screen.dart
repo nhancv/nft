@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:nft/generated/l10n.dart';
-import 'package:nft/my_app.dart';
-import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/home/slideup_widget.dart';
-import 'package:nft/services/app_loading.dart';
-import 'package:nft/utils/app_constant.dart';
 import 'package:nft/widgets/screen_widget.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -31,64 +24,85 @@ class HomeScreenHeader extends StatelessWidget {
   }
 }
 
-class HomeScreenBody extends StatelessWidget {
+class HomeScreenBody extends StatefulWidget {
+  @override
+  _HomeScreenBodyState createState() => _HomeScreenBodyState();
+}
+
+class _HomeScreenBodyState extends State<HomeScreenBody>
+    with SingleTickerProviderStateMixin {
   SlideUpController slideUpController = SlideUpController();
+
+  AnimationController _controller;
+  Animation<Offset> _offsetAnimation;
+  Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 350),
+      vsync: this,
+    );
+    _offsetAnimation = Tween<Offset>(
+      begin: const Offset(0, 1),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.decelerate,
+    ))
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.forward) {
+          // Start animation at begin
+          slideUpController.toggle();
+        } else if (status == AnimationStatus.dismissed) {
+          // To hide widget, we need complete animation first
+          slideUpController.toggle();
+        }
+      });
+    _fadeAnimation = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.decelerate,
+    ));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        Container(
-          child: Column(
-            children: [
-              Text(S.of(context).hello),
-              FlatButton(
-                child: Text('press me'),
-                onPressed: () {
-                  final currentLocale = Intl.getCurrentLocale();
-                  if (currentLocale == 'en') {
-                    context.read<LocaleProvider>().updateLocale(Locale('vi'));
-                  } else {
-                    context.read<LocaleProvider>().updateLocale(Locale('en'));
-                  }
-                },
-              ),
-              FlatButton(
-                child: Text('call api'),
-                onPressed: () async {
-                  AppLoadingProvider.show(context);
-                  await context.read<HomeProvider>().login();
-                  AppLoadingProvider.hide(context);
-                },
-              ),
-              Consumer<HomeProvider>(
-                builder: (_, value, child) {
-                  return Text(
-                    '${value.response}',
-                    textAlign: TextAlign.center,
-                  );
-                },
-              ),
-              RaisedButton(
-                key: Key(AppConstant.counterScreenRoute),
-                child: Text('Counter Screen'),
-                onPressed: () {
-                  Navigator.pushNamed(context, AppConstant.counterScreenRoute,
-                      arguments: 'Argument from Home');
-                },
-              ),
-              RaisedButton(
-                child: Text('Slide up widget'),
-                onPressed: () {
-                  slideUpController.toggle();
-                },
-              )
-            ],
+        FadeTransition(
+          opacity: _fadeAnimation,
+          child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: Colors.grey,
+            child: RaisedButton(
+              child: Text('Slide up widget'),
+              onPressed: () {
+                if (_controller.isDismissed) {
+                  _controller.forward();
+                } else {
+                  _controller.reverse();
+                }
+              },
+            ),
           ),
         ),
-        SlideUpWidget(
-          controller: slideUpController,
+        SlideTransition(
+          position: _offsetAnimation,
+          child: SlideUpWidget(
+            controller: slideUpController,
+          ),
         )
       ],
     );
