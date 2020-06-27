@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nft/generated/l10n.dart';
@@ -70,7 +71,14 @@ class HomeScreenBody extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(context, AppConstant.counterScreenRoute, arguments: 'Argument from Home');
             },
-          )
+          ),
+          FlatButton(
+              child: const Text('Crash'),
+              onPressed: () {
+                // Use Crashlytics to throw an error. Use this for
+                // confirmation that errors are being correctly reported.
+                Crashlytics.instance.crash();
+              }),
         ],
       ),
     );
