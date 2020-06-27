@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "258383946296",
+    "firebase_url": "https://nft-firebase-31de9.firebaseio.com",
+    "project_id": "nft-firebase-31de9",
+    "storage_bucket": "nft-firebase-31de9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258383946296:android:9ba13a716d58a9a66f7ccd",
+        "android_client_info": {
+          "package_name": "com.app.nft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258383946296-vg5n98bpgm9onohj6gllsuahdoji64t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0v8rxuDJoedlYM1PCeuY0EOvJ0W2cDYE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258383946296-vg5n98bpgm9onohj6gllsuahdoji64t9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "258383946296-2942tkrbif2c7resijg0g38lbmt1ob16.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.nft"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
