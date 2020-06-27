@@ -30,7 +30,7 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
-  flutter_launcher_icons: ^0.7.3
+  flutter_launcher_icons: ^0.7.5
 
 flutter_icons:
   image_path: "assets/base/icons/app_icon.png"

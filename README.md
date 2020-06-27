@@ -49,3 +49,50 @@ Widget build(BuildContext context) {
 - Search and Replace All `NFT App` to new App display name
 - Search and Replace All `com.app.nft` to new App bundle id
 - Update directory folder path name of Android (`android/app/src/main/kotlin/`) same with new App bundle id
+
+## Structure
+```
+lib
+  |-generated                     ---> auto genrated by flutter_intl
+  |-I10n                          ---> auto genrated by flutter_intl
+    |-intl_en.arb                 ---> define your translation here
+  |-models                        ---> places of object models
+  |-pages                         ---> define all pages/screens of application
+    |-home                        ---> we should organize as app module (eg: home, about, ...) rather then platform module (eg: activity, dialog, ...)
+      |-home_provider.dart
+      |-home_screen.dart
+  |-services                      ---> define app services (database service, network service)
+    |-remote
+      |-api.dart
+      |-auth_api.dart
+    |-app_loading.dart
+    |-local_storage.dart
+    |-logging.dart
+  |-utils                         ---> app utils
+    |-app_asset.dart
+    |-app_color.dart
+    |-app_config.dart
+    |-app_constant.dart
+    |-app_helper.dart
+    |-app_style.dart
+  |-widgets                       ---> app widgets
+  |-main.dart                     ---> each main.dart file point to each env of app. Ex: default main.dart for dev env, create new main_prod.dart for prod env
+  |-my_app.dart                   ---> application bootstrap
+test                              ---> widget/unit testing
+test_driver                       ---> integration testing
+```
+
+## Versioning
+```
+version: 1.0.6+2003271407
+---
+Version name: 1.0.6
+Version code: 2003271407
+```
+
+Version name: major.minor.build/patch
+Version code: yymmddHHMM
+
+* Remember to increase bold the version name and code also.
+
+https://medium.com/p/2dd558f8b524
