@@ -1,5 +1,7 @@
 import 'dart:ui' as ui;
 
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -33,6 +35,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  static FirebaseAnalyticsObserver observer = FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -68,6 +73,7 @@ class _MyAppState extends State<MyApp> {
               AppConstant.counterScreenRoute: (context) =>
                   AppContent(screen: CounterScreen(argument: ModalRoute.of(context)?.settings?.arguments)),
             },
+            navigatorObservers: <NavigatorObserver>[observer],
           );
         },
       ),
