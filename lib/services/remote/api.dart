@@ -8,7 +8,7 @@ import '../../utils/app_config.dart';
 class Api {
   // Get base url by env
   final String apiBaseUrl = Config.instance.env.apiBaseUrl;
-  final Dio dio = new Dio();
+  final Dio dio = Dio();
 
   Api() {
     if (!kReleaseMode) {
@@ -41,7 +41,7 @@ class Api {
         final response = error.response;
         errorMessage =
             'Code ${response.statusCode} - ${response.statusMessage} ${response.data != null ? '\n' : ''} ${response.data}';
-        throw new DioError(
+        throw DioError(
             request: error.request,
             response: error.response,
             type: error.type,
