@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   final bool isDark;
-  final headerBgColor;
-  final backgroundColor;
+  final Color headerBgColor;
+  final Color backgroundColor;
 
   const AppTheme({
     @required this.isDark,
