@@ -13,6 +13,7 @@ import 'package:nft/services/local_storage.dart';
 import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
+import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/appbar_padding.dart';
 import 'package:provider/provider.dart';
 
@@ -41,14 +42,15 @@ class _MyAppState extends State<MyApp> {
         Provider(create: (_) => LocalStorage()),
         Provider(create: (_) => AppLoadingProvider()),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => AppThemeProvider()),
         ChangeNotifierProvider(
             create: (context) =>
                 HomeProvider(context.read<AuthApi>())),
       ],
-      child: Consumer<LocaleProvider>(
-        builder: (context, value, child) {
+      child: Consumer2<LocaleProvider, AppThemeProvider>(
+        builder: (context, localeProvider, appThemeProvider, child) {
           return MaterialApp(
-            locale: value.locale,
+            locale: localeProvider.locale,
             supportedLocales: S.delegate.supportedLocales,
             localizationsDelegates: [
               S.delegate,
