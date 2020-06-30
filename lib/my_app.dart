@@ -44,8 +44,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
         ChangeNotifierProvider(create: (_) => AppThemeProvider()),
         ChangeNotifierProvider(
-            create: (context) =>
-                HomeProvider(context.read<AuthApi>())),
+            create: (context) => HomeProvider(context.read<AuthApi>())),
       ],
       child: Consumer2<LocaleProvider, AppThemeProvider>(
         builder: (context, localeProvider, appThemeProvider, child) {
@@ -65,10 +64,12 @@ class _MyAppState extends State<MyApp> {
                 pageTransitionsTheme: buildPageTransitionsTheme()),
             initialRoute: AppConstant.rootRoute,
             routes: <String, WidgetBuilder>{
-              AppConstant.rootRoute: (context) =>
-                  AppContent(screen: HomeScreen()),
-              AppConstant.counterScreenRoute: (context) =>
-                  AppContent(screen: CounterScreen(argument: ModalRoute.of(context)?.settings?.arguments)),
+              AppConstant.rootRoute: (context) => AppContent(
+                  theme: appThemeProvider.theme, screen: HomeScreen()),
+              AppConstant.counterScreenRoute: (context) => AppContent(
+                  theme: appThemeProvider.theme,
+                  screen: CounterScreen(
+                      argument: ModalRoute.of(context)?.settings?.arguments)),
             },
           );
         },
@@ -97,9 +98,11 @@ class LocaleProvider with ChangeNotifier {
 }
 
 class AppContent extends StatelessWidget {
+  final AppTheme theme;
   final Widget screen;
 
-  const AppContent({Key key, @required this.screen}) : super(key: key);
+  const AppContent({Key key, @required this.screen, @required this.theme})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +118,7 @@ class AppContent extends StatelessWidget {
       body: AnnotatedRegion(
         value: SystemUiOverlayStyle.dark,
         child: AppBarPadding(
+          backgroundColor: theme.headerBgColor,
           child: screen,
         ),
       ),
