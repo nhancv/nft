@@ -116,10 +116,15 @@ class AppContent extends StatelessWidget {
       appBar: AppBar(),
       backgroundColor: Colors.transparent,
       body: AnnotatedRegion(
-        value: SystemUiOverlayStyle.dark,
+        value: theme.isDark
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark,
         child: AppBarPadding(
           backgroundColor: theme.headerBgColor,
-          child: screen,
+          child: SafeArea(
+            bottom: false,
+            child: screen,
+          ),
         ),
       ),
     );
