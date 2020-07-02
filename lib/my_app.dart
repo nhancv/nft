@@ -46,8 +46,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
             create: (context) => HomeProvider(context.read<AuthApi>())),
       ],
-      child: Consumer2<LocaleProvider, AppThemeProvider>(
-        builder: (context, localeProvider, appThemeProvider, child) {
+      child: Consumer<LocaleProvider>(
+        builder: (context, localeProvider, child) {
           return MaterialApp(
             locale: localeProvider.locale,
             supportedLocales: S.delegate.supportedLocales,
@@ -64,10 +64,8 @@ class _MyAppState extends State<MyApp> {
                 pageTransitionsTheme: buildPageTransitionsTheme()),
             initialRoute: AppConstant.rootRoute,
             routes: <String, WidgetBuilder>{
-              AppConstant.rootRoute: (context) => AppContent(
-                  theme: appThemeProvider.theme, screen: HomeScreen()),
+              AppConstant.rootRoute: (context) => AppContent(screen: HomeScreen()),
               AppConstant.counterScreenRoute: (context) => AppContent(
-                  theme: appThemeProvider.theme,
                   screen: CounterScreen(
                       argument: ModalRoute.of(context)?.settings?.arguments)),
             },
@@ -98,10 +96,9 @@ class LocaleProvider with ChangeNotifier {
 }
 
 class AppContent extends StatelessWidget {
-  final AppTheme theme;
   final Widget screen;
 
-  const AppContent({Key key, @required this.screen, @required this.theme})
+  const AppContent({Key key, @required this.screen})
       : super(key: key);
 
   @override
@@ -112,6 +109,7 @@ class AppContent extends StatelessWidget {
     ScreenUtil.init(context, width: 375, height: 667, allowFontScaling: false);
     WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
 
+    final AppTheme theme = context.theme();
     return Scaffold(
       appBar: AppBar(),
       backgroundColor: Colors.transparent,
@@ -120,7 +118,7 @@ class AppContent extends StatelessWidget {
             ? SystemUiOverlayStyle.light
             : SystemUiOverlayStyle.dark,
         child: AppBarPadding(
-          backgroundColor: theme.headerBgColor,
+          backgroundColor: theme.backgroundColor,
           child: SafeArea(
             bottom: false,
             child: screen,
