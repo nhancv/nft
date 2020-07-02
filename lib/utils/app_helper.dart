@@ -14,16 +14,4 @@ class AppHelper {
         });
   }
 
-  static String emailValidate(String email) {
-    String error = '';
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = RegExp(pattern);
-    if (email.isEmpty || email == '' || email == null) {
-      error = 'Email is required.';
-    } else if (!regex.hasMatch(email)) {
-      error = 'Your email format is invalid. Please check again';
-    }
-    return error;
-  }
 }

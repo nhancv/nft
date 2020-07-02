@@ -1,3 +1,7 @@
+## [1.0.8+2007022006] - June 27, 2020.
+
+* App theme
+
 ## [1.0.6+2003271407] - June 27, 2020.
 
 * Remove socket io sample
