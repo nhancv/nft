@@ -9,7 +9,7 @@ import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenWidget(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/widgets/screen_widget.dart';
 
-class NormalScreen extends StatelessWidget {
+class NormalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenWidget(

@@ -5,9 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft/generated/l10n.dart';
-import 'package:nft/pages/counter/counter_screen.dart';
+import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
-import 'package:nft/pages/home/home_screen.dart';
+import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/local_storage.dart';
 import 'package:nft/services/remote/auth_api.dart';
@@ -64,9 +64,9 @@ class _MyAppState extends State<MyApp> {
                 pageTransitionsTheme: buildPageTransitionsTheme()),
             initialRoute: AppConstant.rootRoute,
             routes: <String, WidgetBuilder>{
-              AppConstant.rootRoute: (context) => AppContent(screen: HomeScreen()),
+              AppConstant.rootRoute: (context) => AppContent(screen: HomePage()),
               AppConstant.counterScreenRoute: (context) => AppContent(
-                  screen: CounterScreen(
+                  screen: CounterPage(
                       argument: ModalRoute.of(context)?.settings?.arguments)),
             },
           );

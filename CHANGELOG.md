@@ -1,3 +1,7 @@
+## [1.0.9+2007032006] - July 3, 2020.
+
+* Update convention screen - page
+
 ## [1.0.8+2007022006] - June 27, 2020.
 
 * App theme

@@ -4,11 +4,11 @@ import 'package:nft/pages/counter/counter_provider.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
-class CounterScreen extends StatelessWidget {
+class CounterPage extends StatelessWidget {
 
   final String argument;
 
-  const CounterScreen({Key key, this.argument}) : super(key: key);
+  const CounterPage({Key key, this.argument}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
