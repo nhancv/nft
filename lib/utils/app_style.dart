@@ -1,8 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
 TextStyle boldTextStyle(double size, Color color, {double height}) => TextStyle(
+  fontSize: size,
+  fontWeight: FontWeight.bold,
+  color: color,
+  height: height,
+);
+
+TextStyle semiBoldTextStyle(double size, Color color, {double height}) =>
+    TextStyle(
       fontSize: size,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w600,
       color: color,
       height: height,
     );
