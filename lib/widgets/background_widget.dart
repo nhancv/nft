@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class BackgroundWidget extends StatelessWidget {
-  final Widget background;
-
   const BackgroundWidget({Key key, this.background}) : super(key: key);
+
+  final Widget background;
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,9 @@ class BackgroundWidget extends StatelessWidget {
 }
 
 class ImageBackgroundWidget extends StatelessWidget {
-  final String imageAsset;
-
   const ImageBackgroundWidget({Key key, this.imageAsset}) : super(key: key);
+
+  final String imageAsset;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,9 @@ class ImageBackgroundWidget extends StatelessWidget {
 }
 
 class ColorBackgroundWidget extends StatelessWidget {
-  final Color color;
-
   const ColorBackgroundWidget({Key key, this.color}) : super(key: key);
+
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +46,19 @@ class ColorBackgroundWidget extends StatelessWidget {
 }
 
 class GradientBackgroundWidget extends StatelessWidget {
+  const GradientBackgroundWidget({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BackgroundWidget(
       background: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              const Color.fromARGB(255, 52, 44, 36),
-              const Color.fromARGB(255, 0, 0, 0)
+            colors: <Color>[
+              Color.fromARGB(255, 52, 44, 36),
+              Color.fromARGB(255, 0, 0, 0)
             ],
             tileMode: TileMode.repeated,
           ),

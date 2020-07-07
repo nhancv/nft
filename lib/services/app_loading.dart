@@ -17,9 +17,9 @@ import 'package:provider/provider.dart';
 /// AppLoadingProvider.hide(context);
 ///
 class AppLoadingProvider {
-  BuildContext _dialogContext;
-
   AppLoadingProvider();
+
+  BuildContext _dialogContext;
 
   static void show(BuildContext context) {
     context.read<AppLoadingProvider>().showLoading(context);
@@ -33,14 +33,14 @@ class AppLoadingProvider {
     hideLoading();
     await showDialog(
       context: context,
-      builder: (dialogContext) {
+      builder: (BuildContext dialogContext) {
         _dialogContext = dialogContext;
         return Material(
           type: MaterialType.transparency,
           child: Center(
             child: Container(
-              child: SpinKitDoubleBounce(color: Colors.white),
               alignment: Alignment.center,
+              child: const SpinKitDoubleBounce(color: Colors.white),
             ),
           ),
         );

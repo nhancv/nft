@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AppTheme {
-  final bool isDark;
-  final Color backgroundColor;
-  final Color headerBgColor;
-
   const AppTheme({
     @required this.isDark,
     @required this.backgroundColor,
@@ -24,10 +20,14 @@ class AppTheme {
     this.backgroundColor = Colors.white,
     this.headerBgColor = const Color(0xFFF8F7F7),
   });
+
+  final bool isDark;
+  final Color backgroundColor;
+  final Color headerBgColor;
 }
 
 class AppThemeProvider with ChangeNotifier {
-  AppTheme theme = AppTheme.light();
+  AppTheme theme = const AppTheme.light();
 
   void updateAppTheme(AppTheme appTheme) {
     theme = appTheme;
@@ -37,6 +37,6 @@ class AppThemeProvider with ChangeNotifier {
 
 extension AppThemeExt on BuildContext {
   AppTheme theme() {
-    return this.watch<AppThemeProvider>().theme;
+    return watch<AppThemeProvider>().theme;
   }
 }

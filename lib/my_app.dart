@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/base/content_page.dart';
 import 'package:nft/pages/counter/counter_page.dart';
@@ -16,7 +15,6 @@ import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_theme.dart';
-import 'package:nft/widgets/appbar_padding.dart';
 import 'package:provider/provider.dart';
 
 Future<void> myMain() async {
@@ -24,13 +22,16 @@ Future<void> myMain() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Force portrait mode
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[DeviceOrientation.portraitUp]);
 
   // Run Application
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -39,20 +40,25 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
+      // ignore: always_specify_types
       providers: [
-        Provider(create: (_) => AuthApi()),
-        Provider(create: (_) => LocalStorage()),
-        Provider(create: (_) => AppLoadingProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider()),
-        ChangeNotifierProvider(create: (_) => AppThemeProvider()),
-        ChangeNotifierProvider(
-            create: (context) => HomeProvider(context.read<AuthApi>())),
+        Provider<AuthApi>(create: (_) => AuthApi()),
+        Provider<LocalStorage>(create: (_) => LocalStorage()),
+        Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
+        ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider<AppThemeProvider>(
+            create: (_) => AppThemeProvider()),
+        ChangeNotifierProvider<HomeProvider>(
+            create: (BuildContext context) =>
+                HomeProvider(context.read<AuthApi>())),
       ],
       child: Consumer<LocaleProvider>(
-        builder: (context, localeProvider, child) {
+        builder: (BuildContext context, LocaleProvider localeProvider,
+            Widget child) {
           return MaterialApp(
             locale: localeProvider.locale,
             supportedLocales: S.delegate.supportedLocales,
+            // ignore: always_specify_types, prefer_const_literals_to_create_immutables
             localizationsDelegates: [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -68,17 +74,18 @@ class _MyAppState extends State<MyApp> {
             onGenerateRoute: (RouteSettings settings) {
               switch (settings.name) {
                 case AppConstant.rootPageRoute:
-                  return MaterialPageRoute(
-                      builder: (_) => ContentPage(body: HomePage()));
+                  return MaterialPageRoute<dynamic>(
+                      builder: (_) => const ContentPage(body: HomePage()));
                 case AppConstant.tutorialPageRoute:
                   return TutorialPage();
                 case AppConstant.counterPageRoute:
-                  return MaterialPageRoute(
+                  return MaterialPageRoute<dynamic>(
                       builder: (_) => ContentPage(
-                          body: CounterPage(argument: settings.arguments)));
+                          body: CounterPage(
+                              argument: settings.arguments as String)));
                 default:
-                  return MaterialPageRoute(
-                      builder: (_) => ContentPage(body: HomePage()));
+                  return MaterialPageRoute<dynamic>(
+                      builder: (_) => const ContentPage(body: HomePage()));
               }
             },
           );
@@ -89,7 +96,7 @@ class _MyAppState extends State<MyApp> {
 
   // Custom page transitions theme
   PageTransitionsTheme buildPageTransitionsTheme() {
-    return PageTransitionsTheme(
+    return const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
         TargetPlatform.iOS: OpenUpwardsPageTransitionsBuilder(),

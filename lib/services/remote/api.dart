@@ -6,39 +6,42 @@ import 'package:flutter/foundation.dart';
 import '../../utils/app_config.dart';
 
 class Api {
+  Api() {
+    if (!kReleaseMode) {
+      dio.interceptors.add(LogInterceptor());
+    }
+  }
+
   // Get base url by env
   final String apiBaseUrl = Config.instance.env.apiBaseUrl;
   final Dio dio = Dio();
 
-  Api() {
-    if (!kReleaseMode) {
-      dio.interceptors.add(LogInterceptor(responseBody: false));
-    }
-  }
-
   // Get header
   Future<Map<String, String>> getHeader() async {
-    Map<String, String> header = {'content-type': 'application/json'};
+    // ignore: always_specify_types
+    final Map<String, String> header = {'content-type': 'application/json'};
     return header;
   }
 
   // Get header
   Future<Map<String, String>> getAuthHeader() async {
-    Map<String, String> header = await getHeader();
+    final Map<String, String> header = await getHeader();
 
-    header.addAll({"CUSTOM-HEADER-KEY": "CUSTOM-HEADER-KEY"});
+    // ignore: always_specify_types
+    header.addAll({'CUSTOM-HEADER-KEY': 'CUSTOM-HEADER-KEY'});
 
     return header;
   }
 
   // Wrap Dio Exception
-  Future<Response<dynamic>> wrapE(Function() dioApi) async {
+  Future<Response<dynamic>> wrapE(
+      Future<Response<dynamic>> Function() dioApi) async {
     try {
-      return await dioApi();
+      return dioApi();
     } catch (error) {
-      var errorMessage = error.toString();
+      String errorMessage = error.toString();
       if (error is DioError && error.type == DioErrorType.RESPONSE) {
-        final response = error.response;
+        final Response<dynamic> response = error.response;
         errorMessage =
             'Code ${response.statusCode} - ${response.statusMessage} ${response.data != null ? '\n' : ''} ${response.data}';
         throw DioError(
@@ -47,7 +50,7 @@ class Api {
             type: error.type,
             error: errorMessage);
       }
-      throw error;
+      rethrow;
     }
   }
 }

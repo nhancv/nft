@@ -5,9 +5,9 @@ import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatelessWidget {
-  final String argument;
-
   const CounterPage({Key key, this.argument}) : super(key: key);
+
+  final String argument;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CounterPage extends StatelessWidget {
       body: Column(children: <Widget>[
         AppBar(),
         ScreenHeader(title: argument),
-        Expanded(
+        const Expanded(
           child: ScreenBody(),
         ),
       ]),
@@ -24,9 +24,9 @@ class CounterPage extends StatelessWidget {
 }
 
 class ScreenHeader extends StatelessWidget {
-  final String title;
+  const ScreenHeader({@required this.title, Key key}) : super(key: key);
 
-  const ScreenHeader({Key key, @required this.title}) : super(key: key);
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +35,14 @@ class ScreenHeader extends StatelessWidget {
 }
 
 class ScreenBody extends StatelessWidget {
+  const ScreenBody({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider<CounterProvider>(
       create: (_) => CounterProvider(),
       child: Builder(
-        builder: (context) {
+        builder: (BuildContext context) {
           return Scaffold(
             body: Center(
               child: Text(
@@ -48,19 +50,19 @@ class ScreenBody extends StatelessWidget {
                 // Provide a Key to this specific Text widget. This allows
                 // identifing the widget from inside the test suite,
                 // and reading the text.
-                key: Key('counter'),
+                key: const Key('counter'),
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
             floatingActionButton: FloatingActionButton(
               // Provide a Key to this button. This allows finding this
               // specific button inside the test suite, and tapping it.
-              key: Key('increment'),
-              child: Icon(Icons.add),
+              key: const Key('increment'),
               onPressed: () {
                 context.read<CounterProvider>().increase();
               },
               tooltip: 'Increment',
+              child: const Icon(Icons.add),
             ),
           );
         },

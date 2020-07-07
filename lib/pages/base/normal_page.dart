@@ -3,21 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:nft/widgets/screen_widget.dart';
 
 class NormalPage extends StatelessWidget {
+  const NormalPage({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenWidget(
-      body: Column(children: <Widget>[
-        ScreenHeader(),
-        Expanded(
-          child: ScreenBody(),
-        ),
-        ScreenFooter()
-      ]),
+      body: Column(
+        children: const <Widget>[
+          ScreenHeader(),
+          Expanded(
+            child: ScreenBody(),
+          ),
+          ScreenFooter()
+        ],
+      ),
     );
   }
 }
 
 class ScreenHeader extends StatelessWidget {
+  const ScreenHeader({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container();
@@ -25,6 +31,8 @@ class ScreenHeader extends StatelessWidget {
 }
 
 class ScreenBody extends StatelessWidget {
+  const ScreenBody({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container();
@@ -32,6 +40,8 @@ class ScreenBody extends StatelessWidget {
 }
 
 class ScreenFooter extends StatelessWidget {
+  const ScreenFooter({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container();

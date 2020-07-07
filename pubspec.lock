@@ -262,6 +262,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.22"
+  lint:
+    dependency: "direct dev"
+    description:
+      name: lint
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0"
   logging:
     dependency: transitive
     description:
@@ -583,5 +590,5 @@ packages:
     source: hosted
     version: "2.1.15"
 sdks:
-  dart: ">=2.7.0 <3.0.0"
+  dart: ">=2.8.0-dev.16.0 <3.0.0"
   flutter: ">=1.16.0 <2.0.0"

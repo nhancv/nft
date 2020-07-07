@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppAlertDialog extends StatelessWidget {
-  final title;
-  final message;
-
-  const AppAlertDialog({Key key, this.title = "Alert", this.message})
+  const AppAlertDialog({Key key, this.title = 'Alert', this.message})
       : super(key: key);
+
+  final String title;
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class AppAlertDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );
@@ -26,16 +26,18 @@ class AppAlertDialog extends StatelessWidget {
 }
 
 class AppConfirmDialog extends StatelessWidget {
-  final title;
-  final message;
+  const AppConfirmDialog({
+    Key key,
+    this.title = 'Confirm',
+    this.message,
+    this.onNoPressed,
+    this.onYesPressed,
+  }) : super(key: key);
+
+  final String title;
+  final String message;
   final VoidCallback onNoPressed;
   final VoidCallback onYesPressed;
-
-  AppConfirmDialog(
-      {this.title = "Confirm",
-      this.message,
-      this.onNoPressed,
-      this.onYesPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +50,13 @@ class AppConfirmDialog extends StatelessWidget {
                 Navigator.pop(context);
                 if (onNoPressed != null) onNoPressed();
               },
-              child: Text('No')),
+              child: const Text('No')),
           FlatButton(
             onPressed: () {
               Navigator.pop(context);
               if (onYesPressed != null) onYesPressed();
             },
-            child: Text('Yes'),
+            child: const Text('Yes'),
           )
         ]);
   }

@@ -23,26 +23,27 @@ Successful
 import 'base_response.dart';
 
 class Credential {
+  Credential(
+      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken});
+
+  factory Credential.fromJson(Map<String, dynamic> json) => Credential(
+        tokenType: json['token_type'] as String,
+        expiresIn: json['expires_in'] as int,
+        accessToken: json['access_token'] as String,
+        refreshToken: json['refresh_token'] as String,
+      );
+
   final String tokenType;
   final int expiresIn;
   final String accessToken;
   final String refreshToken;
 
-  Credential(
-      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken});
-
-  factory Credential.fromJson(Map<String, dynamic> json) => Credential(
-        tokenType: json["token_type"],
-        expiresIn: json["expires_in"],
-        accessToken: json["access_token"],
-        refreshToken: json["refresh_token"],
-      );
-
+  // ignore: always_specify_types
   Map<String, dynamic> toJson() => {
-        "tokenType": tokenType,
-        "expiresIn": expiresIn,
-        "accessToken": accessToken,
-        "refreshToken": refreshToken,
+        'tokenType': tokenType,
+        'expiresIn': expiresIn,
+        'accessToken': accessToken,
+        'refreshToken': refreshToken,
       };
 }
 
@@ -50,12 +51,12 @@ class LoginResponse extends BaseResponse<Credential> {
   LoginResponse(Map<String, dynamic> fullJson) : super(fullJson);
 
   @override
-  Map<String, dynamic> dataToJson(data) {
+  Map<String, dynamic> dataToJson(Credential data) {
     return data.toJson();
   }
 
   @override
-  jsonToData(Map<String, dynamic> dataJson) {
+  Credential jsonToData(Map<String, dynamic> dataJson) {
     return Credential.fromJson(dataJson);
   }
 }

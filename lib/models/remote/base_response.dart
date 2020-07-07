@@ -16,12 +16,12 @@ Error
 import 'dart:core';
 
 abstract class BaseResponse<T> {
-  T data;
-  BaseError error;
-
   BaseResponse(Map<String, dynamic> fullJson) {
     parsing(fullJson);
   }
+
+  T data;
+  BaseError error;
 
   /// Abstract json to data
   T jsonToData(Map<String, dynamic> dataJson);
@@ -30,39 +30,43 @@ abstract class BaseResponse<T> {
   dynamic dataToJson(T data);
 
   /// Parsing data to object
-  parsing(Map<String, dynamic> fullJson) {
+  dynamic parsing(Map<String, dynamic> fullJson) {
     if (fullJson != null) {
-      data = fullJson["data"] != null ? jsonToData(fullJson["data"]) : null;
-      error = fullJson["error"] != null
-          ? BaseError.fromJson(fullJson["error"])
+      data = fullJson['data'] != null
+          ? jsonToData(fullJson['data'] as Map<String, dynamic>)
+          : null;
+      error = fullJson['error'] != null
+          ? BaseError.fromJson(fullJson['error'] as Map<String, dynamic>)
           : null;
     }
   }
 
   /// Data to json
+  // ignore: always_specify_types
   Map<String, dynamic> toJson() => {
-        "data": data != null ? dataToJson(data) : null,
-        "error": error?.toJson(),
+        'data': data != null ? dataToJson(data) : null,
+        'error': error?.toJson(),
       };
 }
 
 class BaseError {
-  int code;
-  String message;
-
   BaseError({
     this.code,
     this.message,
   });
 
   factory BaseError.fromJson(Map<String, dynamic> json) => BaseError(
-        code: json["code"],
-        message: json["message"],
+        code: json['code'] as int,
+        message: json['message'] as String,
       );
 
+  int code;
+  String message;
+
+  // ignore: always_specify_types
   Map<String, dynamic> toJson() => {
-        "code": code,
-        "message": message,
+        'code': code,
+        'message': message,
       };
 }
 

@@ -5,7 +5,7 @@ import 'package:nft/pages/base/content_page.dart';
 
 class TutorialPage extends ModalRoute<void> {
   @override
-  Duration get transitionDuration => Duration(milliseconds: 250);
+  Duration get transitionDuration => const Duration(milliseconds: 250);
 
   @override
   bool get opaque => false;
@@ -41,13 +41,13 @@ class TutorialPage extends ModalRoute<void> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(
+            const Text(
               'This is a nice overlay',
               style: TextStyle(color: Colors.white, fontSize: 30.0),
             ),
             RaisedButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Dismiss'),
+              child: const Text('Dismiss'),
             )
           ],
         ),

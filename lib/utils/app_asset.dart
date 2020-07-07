@@ -1,8 +1,8 @@
 class AppImages {
-  static const icAdd = 'assets/base/icons/ic_add.png';
-  static const icWarning = 'assets/base/icons/ic_warning.png';
-  static const icEmpty = 'assets/base/icons/ic_empty.png';
-  static const icAppIcon = 'assets/base/icons/app_icon.png';
+  static const String icAdd = 'assets/base/icons/ic_add.png';
+  static const String icWarning = 'assets/base/icons/ic_warning.png';
+  static const String icEmpty = 'assets/base/icons/ic_empty.png';
+  static const String icAppIcon = 'assets/base/icons/app_icon.png';
 }
 
 class AppVideos {}
