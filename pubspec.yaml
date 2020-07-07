@@ -29,7 +29,7 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
-  lint: ^1.0.0
+  lint: ^1.2.0
   flutter_launcher_icons: ^0.7.5
 
 flutter_icons:
