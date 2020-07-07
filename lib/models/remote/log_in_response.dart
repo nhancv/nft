@@ -38,8 +38,7 @@ class Credential {
   final String accessToken;
   final String refreshToken;
 
-  // ignore: always_specify_types
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'tokenType': tokenType,
         'expiresIn': expiresIn,
         'accessToken': accessToken,

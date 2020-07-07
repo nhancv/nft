@@ -1,5 +1,4 @@
-// ignore: implementation_imports
-import 'package:dio/src/response.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/models/remote/log_in_response.dart';
 import 'package:nft/services/remote/auth_api.dart';

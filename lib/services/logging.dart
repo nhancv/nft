@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 
 class Logging {
   static void log(dynamic data) {
-    // ignore: avoid_print
-    if (!kReleaseMode) print(data);
+    if (!kReleaseMode) {
+      // ignore: avoid_print
+      print(data);
+    }
   }
 }

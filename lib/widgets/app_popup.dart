@@ -48,13 +48,17 @@ class AppConfirmDialog extends StatelessWidget {
           FlatButton(
               onPressed: () {
                 Navigator.pop(context);
-                if (onNoPressed != null) onNoPressed();
+                if (onNoPressed != null) {
+                  onNoPressed();
+                }
               },
               child: const Text('No')),
           FlatButton(
             onPressed: () {
               Navigator.pop(context);
-              if (onYesPressed != null) onYesPressed();
+              if (onYesPressed != null) {
+                onYesPressed();
+              }
             },
             child: const Text('Yes'),
           )

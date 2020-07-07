@@ -31,7 +31,7 @@ class AppLoadingProvider {
 
   Future<void> showLoading(BuildContext context) async {
     hideLoading();
-    await showDialog(
+    await showDialog<dynamic>(
       context: context,
       builder: (BuildContext dialogContext) {
         _dialogContext = dialogContext;

@@ -18,8 +18,9 @@ class Api {
 
   // Get header
   Future<Map<String, String>> getHeader() async {
-    // ignore: always_specify_types
-    final Map<String, String> header = {'content-type': 'application/json'};
+    final Map<String, String> header = <String, String>{
+      'content-type': 'application/json'
+    };
     return header;
   }
 
@@ -27,8 +28,7 @@ class Api {
   Future<Map<String, String>> getAuthHeader() async {
     final Map<String, String> header = await getHeader();
 
-    // ignore: always_specify_types
-    header.addAll({'CUSTOM-HEADER-KEY': 'CUSTOM-HEADER-KEY'});
+    header.addAll(<String, String>{'CUSTOM-HEADER-KEY': 'CUSTOM-HEADER-KEY'});
 
     return header;
   }

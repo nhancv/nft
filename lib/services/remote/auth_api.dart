@@ -8,10 +8,9 @@ class AuthApi extends Api {
   /// Login
   Future<Response<dynamic>> signIn() async {
     final Map<String, String> header = await getHeader();
-    return wrapE(() => dio.post('https://nhancv.free.beeceptor.com/login',
+    return wrapE(() => dio.post<dynamic>('https://nhancv.free.beeceptor.com/login',
         options: Options(headers: header),
-        // ignore: always_specify_types
-        data: json.encode({
+        data: json.encode(<String, String>{
           'username': 'username',
           'password': 'password',
         })));
@@ -20,10 +19,9 @@ class AuthApi extends Api {
   /// Login With Error
   Future<Response<dynamic>> signInWithError() async {
     final Map<String, String> header = await getHeader();
-    return wrapE(() => dio.post('https://nhancv.free.beeceptor.com/login-err',
+    return wrapE(() => dio.post<dynamic>('https://nhancv.free.beeceptor.com/login-err',
         options: Options(headers: header),
-        // ignore: always_specify_types
-        data: json.encode({
+        data: json.encode(<String, String>{
           'username': 'username',
           'password': 'password',
         })));

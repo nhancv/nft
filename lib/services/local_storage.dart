@@ -8,15 +8,14 @@ class SampleInfo {
   factory SampleInfo.fromJson(Map<String, dynamic> json) => SampleInfo(
       title: json['title'] as String,
       breadCrumb: List<String>.from(
-          (json['breadCrumb'] as Iterable<String>).map((String x) => x)));
+          (json['breadCrumb'] as Iterable<String>).map<String>((String x) => x)));
 
   final String title;
   final List<String> breadCrumb;
 
-  // ignore: always_specify_types
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'title': title,
-        'breadCrumb': List<dynamic>.from(breadCrumb.map((String x) => x)),
+        'breadCrumb': List<dynamic>.from(breadCrumb.map<String>((String x) => x)),
       };
 }
 

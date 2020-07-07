@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 class AppHelper {
   static void showPopup(Widget child, BuildContext context,
       {Function onAction}) {
-    showDialog(
+    showDialog<dynamic>(
         context: context,
         // barrierDismissible: false,
         builder: (BuildContext context) {

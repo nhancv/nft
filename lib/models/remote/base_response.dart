@@ -42,8 +42,7 @@ abstract class BaseResponse<T> {
   }
 
   /// Data to json
-  // ignore: always_specify_types
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'data': data != null ? dataToJson(data) : null,
         'error': error?.toJson(),
       };
@@ -63,8 +62,7 @@ class BaseError {
   int code;
   String message;
 
-  // ignore: always_specify_types
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'code': code,
         'message': message,
       };

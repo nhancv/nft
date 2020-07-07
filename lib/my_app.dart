@@ -16,6 +16,7 @@ import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 Future<void> myMain() async {
   // Start services later
@@ -40,8 +41,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      // ignore: always_specify_types
-      providers: [
+      providers: <SingleChildWidget>[
         Provider<AuthApi>(create: (_) => AuthApi()),
         Provider<LocalStorage>(create: (_) => LocalStorage()),
         Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
@@ -58,8 +58,7 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
             locale: localeProvider.locale,
             supportedLocales: S.delegate.supportedLocales,
-            // ignore: always_specify_types, prefer_const_literals_to_create_immutables
-            localizationsDelegates: [
+            localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
               S.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
