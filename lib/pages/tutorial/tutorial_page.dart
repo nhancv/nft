@@ -62,10 +62,13 @@ class TutorialPage extends ModalRoute<void> {
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
     // You can add your own animations for the overlay content
-    return FadeTransition(
-      opacity: animation,
-      child: ScaleTransition(
-        scale: animation,
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: const Offset(0.0, 1.0),
+        end: Offset.zero,
+      ).animate(animation),
+      child: FadeTransition(
+        opacity: animation,
         child: child,
       ),
     );
