@@ -5,7 +5,6 @@ import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatelessWidget {
-
   final String argument;
 
   const CounterPage({Key key, this.argument}) : super(key: key);
@@ -24,7 +23,6 @@ class CounterPage extends StatelessWidget {
 }
 
 class ScreenHeader extends StatelessWidget {
-
   final String title;
 
   const ScreenHeader({Key key, @required this.title}) : super(key: key);

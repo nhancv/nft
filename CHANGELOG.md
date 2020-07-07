@@ -1,3 +1,10 @@
+## [1.0.10+2007070932] - July 7, 2020.
+
+* Reformat
+* Update Lato fonts
+* Change route approach
+* Add overlay route example
+
 ## [1.0.9+2007032006] - July 3, 2020.
 
 * Update convention screen - page

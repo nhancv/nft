@@ -1,4 +1,5 @@
 class AppConstant {
-  static const rootRoute = '/';
-  static const counterScreenRoute = '/counter_screen';
+  static const rootPageRoute = '/';
+  static const tutorialPageRoute = '/tutorial';
+  static const counterPageRoute = '/counter_screen';
 }

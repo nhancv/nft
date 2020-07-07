@@ -5,7 +5,6 @@ import 'package:nft/my_app.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/utils/app_constant.dart';
-import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -66,10 +65,17 @@ class HomeScreenBody extends StatelessWidget {
             },
           ),
           RaisedButton(
-            key: Key(AppConstant.counterScreenRoute),
+            key: Key(AppConstant.counterPageRoute),
             child: Text('Counter Screen'),
             onPressed: () {
-              Navigator.pushNamed(context, AppConstant.counterScreenRoute, arguments: 'Argument from Home');
+              Navigator.pushNamed(context, AppConstant.counterPageRoute,
+                  arguments: 'Argument from Home');
+            },
+          ),
+          RaisedButton(
+            child: Text('Open tutorial overlay page'),
+            onPressed: () {
+              Navigator.pushNamed(context, AppConstant.tutorialPageRoute);
             },
           )
         ],

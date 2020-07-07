@@ -17,7 +17,7 @@ void main() {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
       // Navigator to Counter Screen
-      driver.tap(find.byValueKey(AppConstant.counterScreenRoute));
+      driver.tap(find.byValueKey(AppConstant.counterPageRoute));
     });
 
     // Close the connection to the driver after the tests have completed.

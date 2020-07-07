@@ -6,8 +6,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/counter/counter_page.dart';
-import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/home/home_page.dart';
+import 'package:nft/pages/home/home_provider.dart';
+import 'package:nft/pages/tutorial/tutorial_page.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/local_storage.dart';
 import 'package:nft/services/remote/auth_api.dart';
@@ -62,12 +63,22 @@ class _MyAppState extends State<MyApp> {
                 primarySwatch: Colors.blue,
                 fontFamily: AppFonts.roboto,
                 pageTransitionsTheme: buildPageTransitionsTheme()),
-            initialRoute: AppConstant.rootRoute,
-            routes: <String, WidgetBuilder>{
-              AppConstant.rootRoute: (context) => AppContent(screen: HomePage()),
-              AppConstant.counterScreenRoute: (context) => AppContent(
-                  screen: CounterPage(
-                      argument: ModalRoute.of(context)?.settings?.arguments)),
+            initialRoute: AppConstant.rootPageRoute,
+            onGenerateRoute: (RouteSettings settings) {
+              switch (settings.name) {
+                case AppConstant.rootPageRoute:
+                  return MaterialPageRoute(
+                      builder: (_) => AppContent(screen: HomePage()));
+                case AppConstant.tutorialPageRoute:
+                  return TutorialPage();
+                case AppConstant.counterPageRoute:
+                  return MaterialPageRoute(
+                      builder: (_) => AppContent(
+                          screen: CounterPage(argument: settings.arguments)));
+                default:
+                  return MaterialPageRoute(
+                      builder: (_) => AppContent(screen: HomePage()));
+              }
             },
           );
         },
@@ -98,8 +109,7 @@ class LocaleProvider with ChangeNotifier {
 class AppContent extends StatelessWidget {
   final Widget screen;
 
-  const AppContent({Key key, @required this.screen})
-      : super(key: key);
+  const AppContent({Key key, @required this.screen}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
