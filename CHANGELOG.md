@@ -1,3 +1,7 @@
+## [1.0.12+2007071750] - July 7, 2020.
+
+* Add lint
+
 ## [1.0.11+2007071232] - July 7, 2020.
 
 * Update app content template
