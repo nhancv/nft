@@ -108,8 +108,9 @@ class LocaleProvider with ChangeNotifier {
 
 class AppContent extends StatelessWidget {
   final Widget body;
+  final Color customAppColor;
 
-  const AppContent({Key key, @required this.body}) : super(key: key);
+  const AppContent({Key key, @required this.body, this.customAppColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +133,7 @@ class AppContent extends StatelessWidget {
               backgroundColor: theme.headerBgColor),
         ),
         body: AppBarPadding(
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: customAppColor ?? theme.backgroundColor,
           child: SafeArea(
             bottom: false,
             child: body,
