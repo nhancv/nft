@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:nft/pages/base/content_page.dart';
 
 class TutorialPage extends ModalRoute<void> {
   @override
@@ -27,33 +28,29 @@ class TutorialPage extends ModalRoute<void> {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) {
-    // This makes sure that text and other content follows the material style
-    return Material(
-      type: MaterialType.transparency,
-      // make sure that the overlay content is not cut off
-      child: SafeArea(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-          child: _buildOverlayContent(context),
-        ),
-      ),
+    return ContentPage(
+      body: _buildOverlayContent(context),
+      customAppColor: Colors.transparent,
     );
   }
 
   Widget _buildOverlayContent(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(
-            'This is a nice overlay',
-            style: TextStyle(color: Colors.white, fontSize: 30.0),
-          ),
-          RaisedButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Dismiss'),
-          )
-        ],
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              'This is a nice overlay',
+              style: TextStyle(color: Colors.white, fontSize: 30.0),
+            ),
+            RaisedButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Dismiss'),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nft/generated/l10n.dart';
+import 'package:nft/pages/base/content_page.dart';
 import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
@@ -68,16 +69,16 @@ class _MyAppState extends State<MyApp> {
               switch (settings.name) {
                 case AppConstant.rootPageRoute:
                   return MaterialPageRoute(
-                      builder: (_) => AppContent(body: HomePage()));
+                      builder: (_) => ContentPage(body: HomePage()));
                 case AppConstant.tutorialPageRoute:
                   return TutorialPage();
                 case AppConstant.counterPageRoute:
                   return MaterialPageRoute(
-                      builder: (_) => AppContent(
+                      builder: (_) => ContentPage(
                           body: CounterPage(argument: settings.arguments)));
                 default:
                   return MaterialPageRoute(
-                      builder: (_) => AppContent(body: HomePage()));
+                      builder: (_) => ContentPage(body: HomePage()));
               }
             },
           );
@@ -104,45 +105,4 @@ class LocaleProvider with ChangeNotifier {
     this.locale = locale;
     notifyListeners();
   }
-}
-
-class AppContent extends StatelessWidget {
-  final Widget body;
-  final Color customAppColor;
-
-  const AppContent({Key key, @required this.body, this.customAppColor}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // Set the fit size (fill in the screen size of the device in the design)
-    // https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
-    // Size of iPhone 8: 375 × 667 (points) - 750 × 1334 (pixels) (2x)
-    ScreenUtil.init(context, width: 375, height: 667, allowFontScaling: false);
-    WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
-
-    final AppTheme theme = context.theme();
-    return Material(
-      type: MaterialType.transparency,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: PreferredSize(
-          preferredSize: Size(0, 0),
-          child: AppBar(
-              elevation: 0,
-              brightness: theme.isDark ? Brightness.dark : Brightness.light,
-              backgroundColor: theme.headerBgColor),
-        ),
-        body: AppBarPadding(
-          backgroundColor: customAppColor ?? theme.backgroundColor,
-          child: SafeArea(
-            bottom: false,
-            child: body,
-          ),
-        ),
-      ),
-    );
-  }
-
-  // After widget initialized.
-  void onAfterBuild(BuildContext context) {}
 }
