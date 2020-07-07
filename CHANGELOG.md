@@ -1,3 +1,7 @@
+## [1.0.13+2007071921] - July 7, 2020.
+
+* Full flutter lint: https://github.com/flutter/flutter/blob/master/analysis_options.yaml
+
 ## [1.0.12+2007071750] - July 7, 2020.
 
 * Add lint
