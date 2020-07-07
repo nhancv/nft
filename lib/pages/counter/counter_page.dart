@@ -13,6 +13,7 @@ class CounterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenWidget(
       body: Column(children: <Widget>[
+        AppBar(),
         ScreenHeader(title: argument),
         Expanded(
           child: ScreenBody(),

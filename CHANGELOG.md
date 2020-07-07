@@ -1,3 +1,7 @@
+## [1.0.11+2007071232] - July 7, 2020.
+
+* Update app content template
+
 ## [1.0.10+2007070932] - July 7, 2020.
 
 * Reformat

@@ -5,20 +5,24 @@ import 'package:provider/provider.dart';
 class AppTheme {
   final bool isDark;
   final Color backgroundColor;
+  final Color headerBgColor;
 
   const AppTheme({
     @required this.isDark,
     @required this.backgroundColor,
+    @required this.headerBgColor,
   });
 
   const AppTheme.dark({
     this.isDark = true,
     this.backgroundColor = Colors.black,
+    this.headerBgColor = const Color(0xFF191819),
   });
 
   const AppTheme.light({
     this.isDark = false,
     this.backgroundColor = Colors.white,
+    this.headerBgColor = const Color(0xFFF8F7F7),
   });
 }
 

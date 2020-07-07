@@ -68,16 +68,16 @@ class _MyAppState extends State<MyApp> {
               switch (settings.name) {
                 case AppConstant.rootPageRoute:
                   return MaterialPageRoute(
-                      builder: (_) => AppContent(screen: HomePage()));
+                      builder: (_) => AppContent(body: HomePage()));
                 case AppConstant.tutorialPageRoute:
                   return TutorialPage();
                 case AppConstant.counterPageRoute:
                   return MaterialPageRoute(
                       builder: (_) => AppContent(
-                          screen: CounterPage(argument: settings.arguments)));
+                          body: CounterPage(argument: settings.arguments)));
                 default:
                   return MaterialPageRoute(
-                      builder: (_) => AppContent(screen: HomePage()));
+                      builder: (_) => AppContent(body: HomePage()));
               }
             },
           );
@@ -107,9 +107,9 @@ class LocaleProvider with ChangeNotifier {
 }
 
 class AppContent extends StatelessWidget {
-  final Widget screen;
+  final Widget body;
 
-  const AppContent({Key key, @required this.screen}) : super(key: key);
+  const AppContent({Key key, @required this.body}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -120,18 +120,22 @@ class AppContent extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
 
     final AppTheme theme = context.theme();
-    return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: Colors.transparent,
-      body: AnnotatedRegion(
-        value: theme.isDark
-            ? SystemUiOverlayStyle.light
-            : SystemUiOverlayStyle.dark,
-        child: AppBarPadding(
+    return Material(
+      type: MaterialType.transparency,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: PreferredSize(
+          preferredSize: Size(0, 0),
+          child: AppBar(
+              elevation: 0,
+              brightness: theme.isDark ? Brightness.dark : Brightness.light,
+              backgroundColor: theme.headerBgColor),
+        ),
+        body: AppBarPadding(
           backgroundColor: theme.backgroundColor,
           child: SafeArea(
             bottom: false,
-            child: screen,
+            child: body,
           ),
         ),
       ),
