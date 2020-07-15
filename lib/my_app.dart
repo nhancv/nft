@@ -27,7 +27,22 @@ Future<void> myMain() async {
       <DeviceOrientation>[DeviceOrientation.portraitUp]);
 
   // Run Application
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: <SingleChildWidget>[
+        Provider<AuthApi>(create: (_) => AuthApi()),
+        Provider<LocalStorage>(create: (_) => LocalStorage()),
+        Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
+        ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider<AppThemeProvider>(
+            create: (_) => AppThemeProvider()),
+        ChangeNotifierProvider<HomeProvider>(
+            create: (BuildContext context) =>
+                HomeProvider(context.read<AuthApi>())),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -40,56 +55,38 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: <SingleChildWidget>[
-        Provider<AuthApi>(create: (_) => AuthApi()),
-        Provider<LocalStorage>(create: (_) => LocalStorage()),
-        Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
-        ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
-        ChangeNotifierProvider<AppThemeProvider>(
-            create: (_) => AppThemeProvider()),
-        ChangeNotifierProvider<HomeProvider>(
-            create: (BuildContext context) =>
-                HomeProvider(context.read<AuthApi>())),
+    final LocaleProvider localeProvider = context.watch<LocaleProvider>();
+    return MaterialApp(
+      locale: localeProvider.locale,
+      supportedLocales: S.delegate.supportedLocales,
+      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
       ],
-      child: Consumer<LocaleProvider>(
-        builder: (BuildContext context, LocaleProvider localeProvider,
-            Widget child) {
-          return MaterialApp(
-            locale: localeProvider.locale,
-            supportedLocales: S.delegate.supportedLocales,
-            localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-                primarySwatch: Colors.blue,
-                fontFamily: AppFonts.roboto,
-                pageTransitionsTheme: buildPageTransitionsTheme()),
-            initialRoute: AppConstant.rootPageRoute,
-            onGenerateRoute: (RouteSettings settings) {
-              switch (settings.name) {
-                case AppConstant.rootPageRoute:
-                  return MaterialPageRoute<dynamic>(
-                      builder: (_) => const ContentPage(body: HomePage()));
-                case AppConstant.tutorialPageRoute:
-                  return TutorialPage();
-                case AppConstant.counterPageRoute:
-                  return MaterialPageRoute<dynamic>(
-                      builder: (_) => ContentPage(
-                          body: CounterPage(
-                              argument: settings.arguments as String)));
-                default:
-                  return MaterialPageRoute<dynamic>(
-                      builder: (_) => const ContentPage(body: HomePage()));
-              }
-            },
-          );
-        },
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          primarySwatch: Colors.blue,
+          fontFamily: AppFonts.roboto,
+          pageTransitionsTheme: buildPageTransitionsTheme()),
+      initialRoute: AppConstant.rootPageRoute,
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case AppConstant.rootPageRoute:
+            return MaterialPageRoute<dynamic>(
+                builder: (_) => const ContentPage(body: HomePage()));
+          case AppConstant.tutorialPageRoute:
+            return TutorialPage();
+          case AppConstant.counterPageRoute:
+            return MaterialPageRoute<dynamic>(
+                builder: (_) => ContentPage(
+                    body: CounterPage(argument: settings.arguments as String)));
+          default:
+            return MaterialPageRoute<dynamic>(
+                builder: (_) => const ContentPage(body: HomePage()));
+        }
+      },
     );
   }
 
