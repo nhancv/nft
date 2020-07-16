@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 
 import 'api.dart';
@@ -10,10 +8,10 @@ class AuthApi extends Api {
     final Map<String, String> header = await getHeader();
     return wrapE(() => dio.post<dynamic>('https://nhancv.free.beeceptor.com/login',
         options: Options(headers: header),
-        data: json.encode(<String, String>{
+        data: <String, String>{
           'username': 'username',
           'password': 'password',
-        })));
+        }));
   }
 
   /// Login With Error
@@ -21,9 +19,9 @@ class AuthApi extends Api {
     final Map<String, String> header = await getHeader();
     return wrapE(() => dio.post<dynamic>('https://nhancv.free.beeceptor.com/login-err',
         options: Options(headers: header),
-        data: json.encode(<String, String>{
+        data: <String, String>{
           'username': 'username',
           'password': 'password',
-        })));
+        }));
   }
 }
