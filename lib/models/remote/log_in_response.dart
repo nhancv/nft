@@ -1,22 +1,21 @@
 /*
 Error
 {
-    "error": true,
-    "data": null,
-    "errors": [
-        {
-            "code": 1029,
-            "message": "User not found!."
-        }
-    ]
+	"data": null,
+	"error": {
+		"code": 1029,
+		"message": "User not found!."
+	}
 }
 
 Successful
 {
-    "token_type": "Bearer",
-    "expires_in": 1295998,
-    "access_token": "nhancv_dep_trai",
-    "refresh_token": "call_nhancv_dep_trai"
+	"data": {
+		"token_type": "Bearer",
+		"expires_in": 1295998,
+		"access_token": "nhancv_dep_trai",
+		"refresh_token": "call_nhancv_dep_trai"
+	}
 }
  */
 
