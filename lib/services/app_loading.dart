@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class AppLoadingProvider {
   AppLoadingProvider();
 
   BuildContext _dialogContext;
+  bool requestClose = false;
 
   static void show(BuildContext context) {
     context.read<AppLoadingProvider>().showLoading(context);
@@ -30,11 +32,16 @@ class AppLoadingProvider {
   }
 
   Future<void> showLoading(BuildContext context) async {
-    hideLoading();
-    await showDialog<dynamic>(
+    hideLoading(isClean: true);
+    showDialog<dynamic>(
       context: context,
       builder: (BuildContext dialogContext) {
         _dialogContext = dialogContext;
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          if (requestClose) {
+            hideLoading();
+          }
+        });
         return Material(
           type: MaterialType.transparency,
           child: Center(
@@ -48,10 +55,13 @@ class AppLoadingProvider {
     );
   }
 
-  void hideLoading() {
+  void hideLoading({bool isClean = false}) {
     if (_dialogContext != null) {
-      Navigator.pop(_dialogContext);
+      if (Navigator.canPop(_dialogContext)) {
+        Navigator.pop(_dialogContext);
+      }
       _dialogContext = null;
     }
+    requestClose = !isClean;
   }
 }
