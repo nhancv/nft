@@ -1,3 +1,7 @@
+## [1.0.15+2007161419] - July 16, 2020.
+
+* Fix wrap error with Dio
+
 ## [1.0.14+2007161019] - July 16, 2020.
 
 * Update dependencies version

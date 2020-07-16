@@ -8,7 +8,7 @@ import '../../utils/app_config.dart';
 class Api {
   Api() {
     if (!kReleaseMode) {
-      dio.interceptors.add(LogInterceptor());
+      dio.interceptors.add(LogInterceptor(responseBody: true));
     }
   }
 
@@ -37,11 +37,14 @@ class Api {
   Future<Response<dynamic>> wrapE(
       Future<Response<dynamic>> Function() dioApi) async {
     try {
-      return dioApi();
+      return await dioApi();
     } catch (error) {
       String errorMessage = error.toString();
       if (error is DioError && error.type == DioErrorType.RESPONSE) {
         final Response<dynamic> response = error.response;
+        /// if you want by pass dio header error code to get response content
+        /// just uncomment line below
+        //return response;
         errorMessage =
             'Code ${response.statusCode} - ${response.statusMessage} ${response.data != null ? '\n' : ''} ${response.data}';
         throw DioError(
