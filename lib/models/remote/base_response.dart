@@ -15,7 +15,7 @@ Error
  */
 import 'dart:core';
 
-abstract class BaseResponse<T> {
+class BaseResponse<T> {
   BaseResponse(Map<String, dynamic> fullJson) {
     parsing(fullJson);
   }
