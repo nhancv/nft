@@ -24,7 +24,7 @@ class Api {
     return header;
   }
 
-  // Get header
+  // Get auth header
   Future<Map<String, String>> getAuthHeader() async {
     final Map<String, String> header = await getHeader();
 
