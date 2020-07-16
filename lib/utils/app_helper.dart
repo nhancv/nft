@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class AppHelper {
-
   /// Show popup
   static void showPopup(Widget child, BuildContext context,
       {Function onAction}) {
@@ -19,20 +18,23 @@ class AppHelper {
 
   /// blocks rotation; sets orientation to: portrait
   static void portraitModeOnly() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ],
+    );
   }
 
   /// Enable rotation
   static void enableRotation() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+    );
   }
-
 }

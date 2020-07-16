@@ -1,3 +1,7 @@
+## [1.0.14+2007161019] - July 16, 2020.
+
+* Update dependencies version
+
 ## [1.0.13+2007071921] - July 7, 2020.
 
 * Full flutter lint: https://github.com/flutter/flutter/blob/master/analysis_options.yaml
