@@ -1,3 +1,7 @@
+## [1.0.16+2007171519] - July 17, 2020.
+
+* Unit test example
+
 ## [1.0.15+2007161419] - July 16, 2020.
 
 * Fix wrap error with Dio

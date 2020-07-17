@@ -1,6 +1,6 @@
 name: nft
 description: NFT App
-version: 1.0.15+2007161419
+version: 1.0.16+2007171519
 homepage: https://github.com/nhancv/nft
 
 environment:
