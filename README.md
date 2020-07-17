@@ -70,11 +70,12 @@ lib
     |-logging.dart
   |-utils                         ---> app utils
     |-app_asset.dart
-    |-app_color.dart
     |-app_config.dart
     |-app_constant.dart
+    |-app_extension.dart
     |-app_helper.dart
     |-app_style.dart
+    |-app_theme.dart
   |-widgets                       ---> app widgets
   |-main.dart                     ---> each main.dart file point to each env of app. Ex: default main.dart for dev env, create new main_prod.dart for prod env
   |-my_app.dart                   ---> application bootstrap
@@ -96,3 +97,13 @@ Version code: yymmddHHMM
 * Remember to increase bold the version name and code also.
 
 https://medium.com/p/2dd558f8b524
+
+## Testing
+- Unit test: https://flutter.dev/docs/cookbook/testing/unit/introduction
+```
+flutter test test/widget_test.dart
+```
+- Integration test: https://flutter.dev/docs/cookbook/testing/integration/introduction
+```
+flutter drive --target=test_driver/app.dart
+```

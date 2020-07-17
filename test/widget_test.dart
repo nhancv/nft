@@ -8,11 +8,23 @@
 import 'package:nft/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:nft/pages/counter/counter_page.dart';
+import 'package:nft/pages/home/home_provider.dart';
+import 'package:nft/utils/app_theme.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 void main() {
+
+  // Testing in flutter gives error MediaQuery.of() called
+  // with a context that does not contain a MediaQuery
+  Widget buildTestableWidget(Widget widget) {
+    return MediaQuery(data: const MediaQueryData(), child: MaterialApp(home: widget));
+  }
+
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(buildTestableWidget(const CounterPage()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

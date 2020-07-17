@@ -14,7 +14,7 @@ class CounterPage extends StatelessWidget {
     return ScreenWidget(
       body: Column(children: <Widget>[
         AppBar(),
-        ScreenHeader(title: argument),
+        ScreenHeader(title: argument ?? ''),
         const Expanded(
           child: ScreenBody(),
         ),
