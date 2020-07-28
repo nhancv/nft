@@ -4,16 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nft/generated/l10n.dart';
-import 'package:nft/pages/base/content_page.dart';
-import 'package:nft/pages/counter/counter_page.dart';
-import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
-import 'package:nft/pages/tutorial/tutorial_page.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/local_storage.dart';
 import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
+import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -70,23 +67,14 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blue,
           fontFamily: AppFonts.roboto,
           pageTransitionsTheme: buildPageTransitionsTheme()),
+      //https://stackoverflow.com/questions/57245175/flutter-dynamic-initial-route
+      //https://github.com/flutter/flutter/issues/12454
+      //home: (AppRoute.generateRoute(
+      //            const RouteSettings(name: AppConstant.rootPageRoute))
+      //        as MaterialPageRoute<dynamic>)
+      //    .builder(context),
       initialRoute: AppConstant.rootPageRoute,
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-          case AppConstant.rootPageRoute:
-            return MaterialPageRoute<dynamic>(
-                builder: (_) => const ContentPage(body: HomePage()));
-          case AppConstant.tutorialPageRoute:
-            return TutorialPage();
-          case AppConstant.counterPageRoute:
-            return MaterialPageRoute<dynamic>(
-                builder: (_) => ContentPage(
-                    body: CounterPage(argument: settings.arguments as String)));
-          default:
-            return MaterialPageRoute<dynamic>(
-                builder: (_) => const ContentPage(body: HomePage()));
-        }
-      },
+      onGenerateRoute: AppRoute.generateRoute,
     );
   }
 
