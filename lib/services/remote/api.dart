@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-
-import '../../utils/app_config.dart';
+import 'package:nft/utils/app_config.dart';
 
 class Api {
   Api() {

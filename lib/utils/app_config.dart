@@ -6,7 +6,7 @@ class Env {
   Env._({@required this.apiBaseUrl});
 
   factory Env.dev() {
-    return Env._(apiBaseUrl: 'https://api.github.com');
+    return Env._(apiBaseUrl: 'https://nhancv.free.beeceptor.com');
   }
 
   final String apiBaseUrl;
