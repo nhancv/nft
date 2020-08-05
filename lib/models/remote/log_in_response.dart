@@ -43,6 +43,11 @@ class Credential {
         'accessToken': accessToken,
         'refreshToken': refreshToken,
       };
+
+  @override
+  String toString() {
+    return 'Credential{tokenType: $tokenType, expiresIn: $expiresIn, accessToken: $accessToken, refreshToken: $refreshToken}';
+  }
 }
 
 class LoginResponse extends BaseResponse<Credential> {
@@ -57,4 +62,5 @@ class LoginResponse extends BaseResponse<Credential> {
   Credential jsonToData(Map<String, dynamic> dataJson) {
     return Credential.fromJson(dataJson);
   }
+
 }

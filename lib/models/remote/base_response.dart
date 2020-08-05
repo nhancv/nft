@@ -50,6 +50,11 @@ class BaseResponse<T> {
         'data': data != null ? dataToJson(data) : null,
         'error': error?.toJson(),
       };
+
+  @override
+  String toString() {
+    return 'BaseResponse{data: $data, error: $error}';
+  }
 }
 
 class BaseError {
@@ -70,6 +75,11 @@ class BaseError {
         'code': code,
         'message': message,
       };
+
+  @override
+  String toString() {
+    return 'BaseError{code: $code, message: $message}';
+  }
 }
 
 // Example
