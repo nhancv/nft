@@ -43,6 +43,12 @@ Widget build(BuildContext context) {
 }
 ```
 
+### Generate intl via cli
+```
+#https://pub.dev/packages/intl_utils
+flutter pub run intl_utils:generate
+```
+
 ## Clone initial setup
 
 - Search and Replace All `nft` to new package id
@@ -74,6 +80,8 @@ lib
     |-app_constant.dart
     |-app_extension.dart
     |-app_helper.dart
+    |-app_log.dart
+    |-app_route.dart
     |-app_style.dart
     |-app_theme.dart
   |-widgets                       ---> app widgets
