@@ -5,7 +5,6 @@ import 'package:nft/my_app.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/utils/app_constant.dart';
-import 'package:nft/utils/app_log.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 

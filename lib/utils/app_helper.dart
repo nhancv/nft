@@ -29,7 +29,7 @@ class AppHelper {
   /// blocks rotation; sets orientation to: landscape
   static Future<void> landscapeModeOnly() {
     return SystemChrome.setPreferredOrientations(
-      [
+      <DeviceOrientation>[
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ],
