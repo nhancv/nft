@@ -17,8 +17,8 @@ class AppHelper {
   }
 
   /// blocks rotation; sets orientation to: portrait
-  static void portraitModeOnly() {
-    SystemChrome.setPreferredOrientations(
+  static Future<void> portraitModeOnly() {
+    return SystemChrome.setPreferredOrientations(
       <DeviceOrientation>[
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
@@ -26,9 +26,19 @@ class AppHelper {
     );
   }
 
+  /// blocks rotation; sets orientation to: landscape
+  static Future<void> landscapeModeOnly() {
+    return SystemChrome.setPreferredOrientations(
+      [
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+    );
+  }
+
   /// Enable rotation
-  static void enableRotation() {
-    SystemChrome.setPreferredOrientations(
+  static Future<void> enableRotation() {
+    return SystemChrome.setPreferredOrientations(
       <DeviceOrientation>[
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
