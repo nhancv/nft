@@ -20,7 +20,7 @@ dependencies:
   # localization
   intl: ^0.16.0
   intl_translation: ^0.17.9
-  firebase_analytics: ^5.0.15
+  firebase_analytics: ^5.0.16
 
 flutter_intl:
   enabled: true
