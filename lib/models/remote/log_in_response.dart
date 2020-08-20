@@ -59,8 +59,8 @@ class LoginResponse extends BaseResponse<Credential> {
   }
 
   @override
-  Credential jsonToData(Map<String, dynamic> dataJson) {
-    return Credential.fromJson(dataJson);
+  Credential jsonToData(dynamic dataJson) {
+    return Credential.fromJson(dataJson as Map<String, dynamic>);
   }
 
 }
