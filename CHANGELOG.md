@@ -1,3 +1,7 @@
+## [1.0.17+2008211542] - August 21, 2020.
+
+* Update Flutter 1.21.0-9.1.pre
+
 ## [1.0.16+2007171519] - July 17, 2020.
 
 * Unit test example
