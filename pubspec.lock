@@ -253,7 +253,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_web_plugins:
-    dependency: transitive
+    dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -382,7 +382,7 @@ packages:
     source: hosted
     version: "0.12.10-nullsafety"
   meta:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: meta
       url: "https://pub.dartlang.org"
@@ -536,7 +536,7 @@ packages:
     source: hosted
     version: "1.0.4"
   shared_preferences_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences_web
       url: "https://pub.dartlang.org"

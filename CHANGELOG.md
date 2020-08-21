@@ -1,3 +1,7 @@
+## [1.0.18+2008211553] - August 21, 2020.
+
+* Publish to pub.dev
+
 ## [1.0.17+2008211542] - August 21, 2020.
 
 * Update Flutter 1.21.0-9.1.pre
