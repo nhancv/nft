@@ -35,6 +35,7 @@ class AppLoadingProvider {
     hideLoading(isClean: true);
     showDialog<dynamic>(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext dialogContext) {
         _dialogContext = dialogContext;
         SchedulerBinding.instance.addPostFrameCallback((_) {
