@@ -13,7 +13,7 @@ class AppRoute {
             settings: settings,
             builder: (_) => const ContentPage(body: HomePage()));
       case AppConstant.tutorialPageRoute:
-        return TutorialPage();
+        return TutorialPage(settings: settings);
       case AppConstant.counterPageRoute:
         return MaterialPageRoute<dynamic>(
             settings: settings,

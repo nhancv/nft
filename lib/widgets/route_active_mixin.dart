@@ -4,18 +4,25 @@ import 'package:nft/utils/app_log.dart';
 
 mixin RouteActiveMixin<T extends StatefulWidget> on State<T>
     implements RouteAware {
-  bool active;
+  bool _subscribed = false;
+  bool active = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    MyApp.routeObserver
-        .subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+    if (!_subscribed) {
+      MyApp.routeObserver
+          .subscribe(this, ModalRoute.of(context));
+      _subscribed = true;
+    }
   }
 
   @override
   void dispose() {
-    MyApp.routeObserver.unsubscribe(this);
+    if (_subscribed) {
+      MyApp.routeObserver.unsubscribe(this);
+      _subscribed = false;
+    }
     super.dispose();
   }
 

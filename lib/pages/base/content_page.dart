@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/appbar_padding.dart';
+import 'package:nft/widgets/route_active_mixin.dart';
 
-class ContentPage extends StatelessWidget {
+class ContentPage extends StatefulWidget {
   const ContentPage({@required this.body, Key key, this.customAppColor})
       : super(key: key);
 
   final Widget body;
   final Color customAppColor;
+
+  @override
+  _ContentPageState createState() => _ContentPageState();
+}
+
+class _ContentPageState extends State<ContentPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +38,15 @@ class ContentPage extends StatelessWidget {
               backgroundColor: theme.headerBgColor),
         ),
         body: AppBarPadding(
-          backgroundColor: customAppColor ?? theme.backgroundColor,
+          backgroundColor: widget.customAppColor ?? theme.backgroundColor,
           child: SafeArea(
             bottom: false,
-            child: body,
+            child: widget.body,
           ),
         ),
       ),
     );
   }
 
-  // After widget initialized.
   void onAfterBuild(BuildContext context) {}
 }

@@ -47,8 +47,8 @@ class MyApp extends StatefulWidget {
 
   static final GlobalKey<NavigatorState> _navigatorKey =
       GlobalKey<NavigatorState>();
-  static final RouteObserver<PageRoute<dynamic>> routeObserver =
-      RouteObserver<PageRoute<dynamic>>();
+  static final RouteObserver<Route<dynamic>> routeObserver =
+      RouteObserver<Route<dynamic>>();
 
   static NavigatorState get navigator => _navigatorKey.currentState;
 
