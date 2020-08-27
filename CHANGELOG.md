@@ -1,3 +1,14 @@
+## [1.0.19+2008271031] - August 27, 2020.
+
+* Update app loading barrierDismissible = false
+* Update to flutter stable channel
+```
+Flutter 1.20.2 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision bbfbf1770c (2 weeks ago) • 2020-08-13 08:33:09 -0700
+Engine • revision 9d5b21729f
+Tools • Dart 2.9.1
+``` 
+
 ## [1.0.18+2008211553] - August 21, 2020.
 
 * Publish to pub.dev

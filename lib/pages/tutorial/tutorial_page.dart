@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nft/pages/base/content_page.dart';
 
 class TutorialPage extends ModalRoute<void> {
@@ -14,7 +15,7 @@ class TutorialPage extends ModalRoute<void> {
   bool get barrierDismissible => false;
 
   @override
-  Color get barrierColor => Colors.black.withOpacity(0.5);
+  Color get barrierColor => Colors.black.withOpacity(0.01);
 
   @override
   String get barrierLabel => null;
@@ -43,7 +44,7 @@ class TutorialPage extends ModalRoute<void> {
           children: <Widget>[
             const Text(
               'This is a nice overlay',
-              style: TextStyle(color: Colors.white, fontSize: 30.0),
+              style: TextStyle(color: Colors.black, fontSize: 30.0),
             ),
             RaisedButton(
               onPressed: () => Navigator.pop(context),
