@@ -10,15 +10,18 @@ class AppRoute {
     switch (settings.name) {
       case AppConstant.rootPageRoute:
         return MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (_) => const ContentPage(body: HomePage()));
       case AppConstant.tutorialPageRoute:
         return TutorialPage();
       case AppConstant.counterPageRoute:
         return MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (_) => ContentPage(
                 body: CounterPage(argument: settings.arguments as String)));
       default:
         return MaterialPageRoute<dynamic>(
+            settings: settings,
             builder: (_) => const ContentPage(body: HomePage()));
     }
   }

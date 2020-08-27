@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:nft/pages/base/content_page.dart';
 
 class TutorialPage extends ModalRoute<void> {

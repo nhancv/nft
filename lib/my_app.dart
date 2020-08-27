@@ -45,6 +45,13 @@ Future<void> myMain() async {
 class MyApp extends StatefulWidget {
   const MyApp({Key key}) : super(key: key);
 
+  static final GlobalKey<NavigatorState> _navigatorKey =
+      GlobalKey<NavigatorState>();
+  static final RouteObserver<PageRoute<dynamic>> routeObserver =
+      RouteObserver<PageRoute<dynamic>>();
+
+  static NavigatorState get navigator => _navigatorKey.currentState;
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -54,6 +61,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final LocaleProvider localeProvider = context.watch<LocaleProvider>();
     return MaterialApp(
+      navigatorKey: MyApp._navigatorKey,
       locale: localeProvider.locale,
       supportedLocales: S.delegate.supportedLocales,
       localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
@@ -75,6 +83,7 @@ class _MyAppState extends State<MyApp> {
       //    .builder(context),
       initialRoute: AppConstant.rootPageRoute,
       onGenerateRoute: AppRoute.generateRoute,
+      navigatorObservers: <NavigatorObserver>[MyApp.routeObserver],
     );
   }
 

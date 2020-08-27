@@ -1,3 +1,9 @@
+## [1.0.19+2008271140] - August 27, 2020.
+
+* Example route active
+* Example app life cycle
+* Global context navigator key
+
 ## [1.0.19+2008271031] - August 27, 2020.
 
 * Update app loading barrierDismissible = false
