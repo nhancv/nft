@@ -21,6 +21,7 @@ class NormalPage extends StatelessWidget {
   }
 }
 
+/// Header widget
 class ScreenHeader extends StatelessWidget {
   const ScreenHeader({Key key}) : super(key: key);
 
@@ -30,6 +31,7 @@ class ScreenHeader extends StatelessWidget {
   }
 }
 
+/// Body widget
 class ScreenBody extends StatelessWidget {
   const ScreenBody({Key key}) : super(key: key);
 
@@ -39,6 +41,7 @@ class ScreenBody extends StatelessWidget {
   }
 }
 
+/// Footer widget
 class ScreenFooter extends StatelessWidget {
   const ScreenFooter({Key key}) : super(key: key);
 

@@ -54,16 +54,16 @@ class ScreenBody extends StatelessWidget {
             body: Center(
               child: Text(
                 '${context.watch<CounterProvider>().count}',
-                // Provide a Key to this specific Text widget. This allows
-                // identifing the widget from inside the test suite,
-                // and reading the text.
+                /// Provide a Key to this specific Text widget. This allows
+                /// identifing the widget from inside the test suite,
+                /// and reading the text.
                 key: const Key('counter'),
                 style: Theme.of(context).textTheme.headline4,
               ),
             ),
             floatingActionButton: FloatingActionButton(
-              // Provide a Key to this button. This allows finding this
-              // specific button inside the test suite, and tapping it.
+              /// Provide a Key to this button. This allows finding this
+              /// specific button inside the test suite, and tapping it.
               key: const Key('increment'),
               onPressed: () {
                 context.read<CounterProvider>().increase();

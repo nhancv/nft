@@ -24,7 +24,7 @@ class LocalStorage {
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  // Header
+  /// Header
   Future<bool> saveHeaderInfo(SampleInfo headerInfo) async {
     final SharedPreferences prefs = await _prefs;
     final String headerInfoJson = jsonEncode(headerInfo.toJson());

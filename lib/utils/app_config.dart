@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 class Env {
   Env._({@required this.apiBaseUrl});
 
+  /// Dev mode
   factory Env.dev() {
     return Env._(apiBaseUrl: 'https://nhancv.free.beeceptor.com');
   }

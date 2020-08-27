@@ -1,3 +1,5 @@
+
+/// For image assets
 class AppImages {
   static const String icAdd = 'assets/base/icons/ic_add.png';
   static const String icWarning = 'assets/base/icons/ic_warning.png';
@@ -5,8 +7,10 @@ class AppImages {
   static const String icAppIcon = 'assets/base/icons/app_icon.png';
 }
 
+/// For video assets
 class AppVideos {}
 
+/// For font assets
 class AppFonts {
   static const String roboto = 'Roboto';
 }

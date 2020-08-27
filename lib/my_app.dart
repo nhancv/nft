@@ -16,14 +16,14 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 Future<void> myMain() async {
-  // Start services later
+  /// Start services later
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Force portrait mode
+  /// Force portrait mode
   await SystemChrome.setPreferredOrientations(
       <DeviceOrientation>[DeviceOrientation.portraitUp]);
 
-  // Run Application
+  /// Run Application
   runApp(
     MultiProvider(
       providers: <SingleChildWidget>[
@@ -60,6 +60,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final LocaleProvider localeProvider = context.watch<LocaleProvider>();
+    final AppTheme appTheme = context.theme();
     return MaterialApp(
       navigatorKey: MyApp._navigatorKey,
       locale: localeProvider.locale,
@@ -72,22 +73,23 @@ class _MyAppState extends State<MyApp> {
       ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: appTheme.backgroundColor,
+          accentColor: appTheme.headerBgColor,
           fontFamily: AppFonts.roboto,
           pageTransitionsTheme: buildPageTransitionsTheme()),
       //https://stackoverflow.com/questions/57245175/flutter-dynamic-initial-route
       //https://github.com/flutter/flutter/issues/12454
       //home: (AppRoute.generateRoute(
-      //            const RouteSettings(name: AppConstant.rootPageRoute))
-      //        as MaterialPageRoute<dynamic>)
-      //    .builder(context),
+      ///            const RouteSettings(name: AppConstant.rootPageRoute))
+      ///        as MaterialPageRoute<dynamic>)
+      ///    .builder(context),
       initialRoute: AppConstant.rootPageRoute,
       onGenerateRoute: AppRoute.generateRoute,
       navigatorObservers: <NavigatorObserver>[MyApp.routeObserver],
     );
   }
 
-  // Custom page transitions theme
+  /// Custom page transitions theme
   PageTransitionsTheme buildPageTransitionsTheme() {
     return const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{

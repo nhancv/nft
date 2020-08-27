@@ -9,16 +9,18 @@ class AppTheme {
     @required this.headerBgColor,
   });
 
+  /// Dart theme
   const AppTheme.dark({
     this.isDark = true,
     this.backgroundColor = Colors.black,
-    this.headerBgColor = const Color(0xFF191819),
+    this.headerBgColor = Colors.black,
   });
 
+  /// Light theme
   const AppTheme.light({
     this.isDark = false,
     this.backgroundColor = Colors.white,
-    this.headerBgColor = const Color(0xFFF8F7F7),
+    this.headerBgColor = Colors.white,
   });
 
   final bool isDark;

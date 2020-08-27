@@ -38,12 +38,14 @@ mixin RouteActiveMixin<T extends StatefulWidget> on State<T>
   @override
   void didPushNext() => onInactive();
 
+  /// Update active flag
   void onActive() {
     active = true;
     logger.d(
         '${runtimeType.toString()} onActive ${ModalRoute.of(context).settings.name}');
   }
 
+  /// Update inactive flag
   void onInactive() {
     active = false;
     logger.d(

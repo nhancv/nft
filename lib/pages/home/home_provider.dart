@@ -11,6 +11,7 @@ class HomeProvider with ChangeNotifier {
 
   String response = '';
 
+  /// Call api login
   Future<void> login() async {
     final Response<dynamic> result =
         await api.signIn().timeout(const Duration(seconds: 30));

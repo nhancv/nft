@@ -11,11 +11,11 @@ class Api {
     }
   }
 
-  // Get base url by env
+  /// Get base url by env
   final String apiBaseUrl = Config.instance.env.apiBaseUrl;
   final Dio dio = Dio();
 
-  // Get header
+  /// Get header
   Future<Map<String, String>> getHeader() async {
     final Map<String, String> header = <String, String>{
       'content-type': 'application/json'
@@ -23,7 +23,7 @@ class Api {
     return header;
   }
 
-  // Get auth header
+  /// Get auth header
   Future<Map<String, String>> getAuthHeader() async {
     final Map<String, String> header = await getHeader();
 
@@ -32,7 +32,7 @@ class Api {
     return header;
   }
 
-  // Wrap Dio Exception
+  /// Wrap Dio Exception
   Future<Response<dynamic>> wrapE(
       Future<Response<dynamic>> Function() dioApi) async {
     try {

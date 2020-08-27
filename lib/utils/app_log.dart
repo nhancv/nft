@@ -1,3 +1,4 @@
 import 'package:logger/logger.dart';
 
-Logger logger = Logger(printer: SimplePrinter());
+/// Use logger to debug, it will not show in release mode
+final Logger logger = Logger(printer: SimplePrinter());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nft/widgets/screen_widget.dart';
 
+/// Widget deal with app bar ios and android
 class AppBarPadding extends StatelessWidget {
   const AppBarPadding({Key key, this.child, this.backgroundColor})
       : super(key: key);

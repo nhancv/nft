@@ -23,14 +23,17 @@ class AppLoadingProvider {
   BuildContext _dialogContext;
   bool requestClose = false;
 
+  /// Show loading dialog shortcut
   static void show(BuildContext context) {
     context.read<AppLoadingProvider>().showLoading(context);
   }
 
+  /// Hide loading dialog shortcut
   static void hide(BuildContext context) {
     context.read<AppLoadingProvider>().hideLoading();
   }
 
+  /// Show loading dialog
   Future<void> showLoading(BuildContext context) async {
     hideLoading(isClean: true);
     showDialog<dynamic>(
@@ -56,6 +59,7 @@ class AppLoadingProvider {
     );
   }
 
+  /// Hide loading dialog
   void hideLoading({bool isClean = false}) {
     if (_dialogContext != null) {
       if (Navigator.canPop(_dialogContext)) {

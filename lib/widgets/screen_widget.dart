@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Widget deal with tab on screen to close keyboard
 class ScreenWidget extends StatelessWidget {
   const ScreenWidget(
       {Key key,

@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    /// Log app life cycle state
     logger.d(state);
   }
 
@@ -69,7 +70,9 @@ class HomeScreenBody extends StatelessWidget {
         Text(S.of(context).hello),
         FlatButton(
           onPressed: () {
+            // Get current locale
             final String currentLocale = Intl.getCurrentLocale();
+            // Change to new locale
             if (currentLocale == 'en') {
               context.read<LocaleProvider>().updateLocale(const Locale('vi'));
             } else {

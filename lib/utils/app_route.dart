@@ -6,6 +6,7 @@ import 'package:nft/pages/tutorial/tutorial_page.dart';
 import 'package:nft/utils/app_constant.dart';
 
 class AppRoute {
+  /// Generate route for app here
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppConstant.rootPageRoute:

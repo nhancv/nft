@@ -36,13 +36,14 @@ class TutorialPage extends ModalRoute<void> {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) {
+    // Return new state full widget to use route active mixin
     return TutorialBody();
   }
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    // You can add your own animations for the overlay content
+    /// You can add your own animations for the overlay content
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(0.0, 1.0),
