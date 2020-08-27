@@ -54,6 +54,7 @@ class ScreenBody extends StatelessWidget {
             body: Center(
               child: Text(
                 '${context.watch<CounterProvider>().count}',
+
                 /// Provide a Key to this specific Text widget. This allows
                 /// identifing the widget from inside the test suite,
                 /// and reading the text.

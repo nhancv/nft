@@ -8,6 +8,7 @@ class AppHelper {
       {Function onAction}) {
     showDialog<dynamic>(
         context: context,
+
         /// barrierDismissible: false,
         builder: (BuildContext context) {
           return Dialog(

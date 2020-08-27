@@ -36,9 +36,7 @@ class BaseResponse<T> {
   /// Parsing data to object
   dynamic parsing(Map<String, dynamic> fullJson) {
     if (fullJson != null) {
-      data = fullJson['data'] != null
-          ? jsonToData(fullJson['data'])
-          : null;
+      data = fullJson['data'] != null ? jsonToData(fullJson['data']) : null;
       error = fullJson['error'] != null
           ? BaseError.fromJson(fullJson['error'] as Map<String, dynamic>)
           : null;

@@ -11,8 +11,7 @@ mixin RouteActiveMixin<T extends StatefulWidget> on State<T>
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!_subscribed) {
-      MyApp.routeObserver
-          .subscribe(this, ModalRoute.of(context));
+      MyApp.routeObserver.subscribe(this, ModalRoute.of(context));
       _subscribed = true;
     }
   }

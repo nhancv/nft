@@ -15,7 +15,6 @@ class ContentPage extends StatefulWidget {
 }
 
 class _ContentPageState extends State<ContentPage> {
-
   @override
   Widget build(BuildContext context) {
     /// Set the fit size (fill in the screen size of the device in the design)

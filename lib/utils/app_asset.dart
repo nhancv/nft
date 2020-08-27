@@ -1,4 +1,3 @@
-
 /// For image assets
 class AppImages {
   static const String icAdd = 'assets/base/icons/ic_add.png';

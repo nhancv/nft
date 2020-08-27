@@ -62,5 +62,4 @@ class LoginResponse extends BaseResponse<Credential> {
   Credential jsonToData(dynamic dataJson) {
     return Credential.fromJson(dataJson as Map<String, dynamic>);
   }
-
 }

@@ -40,6 +40,7 @@ class Api {
     } catch (error) {
       if (error is DioError && error.type == DioErrorType.RESPONSE) {
         final Response<dynamic> response = error.response;
+
         /// if you want by pass dio header error code to get response content
         /// just uncomment line below
         //return response;

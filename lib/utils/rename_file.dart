@@ -12,6 +12,7 @@ Future<List<FileSystemEntity>> dirContents(Directory dir) {
       Completer<List<FileSystemEntity>>();
   final Stream<FileSystemEntity> lister = dir.list();
   lister.listen((FileSystemEntity file) => files.add(file),
+
       /// should also register onError
       onDone: () => completer.complete(files));
   return completer.future;
@@ -22,6 +23,7 @@ Future<List<FileSystemEntity>> dirContents(Directory dir) {
 // => add_new.png
 Future<void> renameFile(Directory directory) async {
   final List<FileSystemEntity> fileList = await dirContents(directory);
+
   /// ignore: avoid_function_literals_in_foreach_calls
   fileList.forEach((FileSystemEntity f) {
     /// Parse with template abcXyz.png
@@ -42,6 +44,7 @@ Future<void> renameFile(Directory directory) async {
 // Move abc@2x.png = to 2.0x/abc.png
 Future<void> moveFile(Directory directory) async {
   final List<FileSystemEntity> fileList = await dirContents(directory);
+
   /// ignore: avoid_function_literals_in_foreach_calls
   fileList.forEach((FileSystemEntity f) {
     /// Parse with template abc@2x.png
@@ -55,6 +58,7 @@ Future<void> moveFile(Directory directory) async {
             final RegExp suffixPattern = RegExp(r'@[2-3]x');
             final String suffixType = suffixPattern.stringMatch(fileName);
             final String name =
+
                 /// ignore: unnecessary_parenthesis
                 '${(suffixType == '@2x' ? '2.0x' : '3.0x')}/${fileName.replaceFirst(suffixType, "")}';
             return name;

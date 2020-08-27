@@ -49,8 +49,7 @@ TextStyle extraLightTextStyle(double size, Color color, {double height}) =>
     );
 
 /// Thin text style - w100
-TextStyle thinTextStyle(double size, Color color, {double height}) =>
-    TextStyle(
+TextStyle thinTextStyle(double size, Color color, {double height}) => TextStyle(
       fontSize: size,
       fontWeight: FontWeight.w100,
       color: color,
