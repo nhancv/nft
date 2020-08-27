@@ -1,3 +1,7 @@
+## [1.0.20+2008271303] - August 27, 2020.
+
+* Update template 
+
 ## [1.0.19+2008271140] - August 27, 2020.
 
 * Example route active

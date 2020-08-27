@@ -1,6 +1,6 @@
 name: nft
 description: NFT App
-version: 1.0.19+2008271140
+version: 1.0.20+2008271303
 homepage: https://github.com/nhancv/nft
 
 environment:
@@ -9,8 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_web_plugins:
-    sdk: flutter
   flutter_localizations:
     sdk: flutter
   meta: ^1.1.8
@@ -18,8 +16,7 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   dio: ^3.0.9
   shared_preferences: ^0.5.8
-  shared_preferences_web: ^0.1.2+7
-  flutter_screenutil: ^2.2.0
+  flutter_screenutil: ^2.3.1
   provider: ^4.3.1
   intl: ^0.16.1
   intl_translation: ^0.17.8

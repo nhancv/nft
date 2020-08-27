@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/appbar_padding.dart';
-import 'package:nft/widgets/route_active_mixin.dart';
 
 class ContentPage extends StatefulWidget {
   const ContentPage({@required this.body, Key key, this.customAppColor})
@@ -22,7 +21,7 @@ class _ContentPageState extends State<ContentPage> {
     // Set the fit size (fill in the screen size of the device in the design)
     // https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
     // Size of iPhone 8: 375 × 667 (points) - 750 × 1334 (pixels) (2x)
-    ScreenUtil.init(width: 375, height: 667);
+    ScreenUtil.init(context, width: 375, height: 667);
     WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context));
 
     final AppTheme theme = context.theme();
