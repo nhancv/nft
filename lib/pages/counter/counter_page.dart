@@ -20,7 +20,9 @@ class _CounterPageState extends State<CounterPage>
   Widget build(BuildContext context) {
     return ScreenWidget(
       body: Column(children: <Widget>[
-        AppBar(),
+        AppBar(
+          title: const Text('Counter Page'),
+        ),
         ScreenHeader(title: widget.argument ?? ''),
         const Expanded(
           child: ScreenBody(),
@@ -51,12 +53,13 @@ class ScreenBody extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) {
           return Scaffold(
+            backgroundColor: Colors.transparent,
             body: Center(
               child: Text(
                 '${context.watch<CounterProvider>().count}',
 
                 /// Provide a Key to this specific Text widget. This allows
-                /// identifing the widget from inside the test suite,
+                /// identifying the widget from inside the test suite,
                 /// and reading the text.
                 key: const Key('counter'),
                 style: Theme.of(context).textTheme.headline4,
