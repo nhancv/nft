@@ -9,17 +9,16 @@ class AppRoute {
   /// Generate route for app here
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppConstant.rootPageRoute:
-        return MaterialPageRoute<dynamic>(
-            settings: settings,
-            builder: (_) => const ContentPage(body: HomePage()));
       case AppConstant.tutorialPageRoute:
         return TutorialPage(settings: settings);
+
       case AppConstant.counterPageRoute:
         return MaterialPageRoute<dynamic>(
             settings: settings,
             builder: (_) => ContentPage(
                 body: CounterPage(argument: settings.arguments as String)));
+
+      case AppConstant.rootPageRoute:
       default:
         return MaterialPageRoute<dynamic>(
             settings: settings,
