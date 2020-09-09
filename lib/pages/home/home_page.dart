@@ -101,9 +101,9 @@ class HomeScreenBody extends StatelessWidget {
           key: const Key(AppConstant.counterPageRoute),
           onPressed: () {
             Navigator.pushNamed(context, AppConstant.counterPageRoute,
-                arguments: 'Argument from Home');
+                arguments: 'From Home ${DateTime.now()}');
           },
-          child: const Text('Counter Screen'),
+          child: const Text('Counter Page'),
         ),
         RaisedButton(
           onPressed: () {
