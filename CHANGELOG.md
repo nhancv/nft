@@ -1,3 +1,7 @@
+## [1.0.26+2009101141] - September 10, 2020.
+
+* Update description
+
 ## [1.0.25+2009101041] - September 10, 2020.
 
 * Update example
