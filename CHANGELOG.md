@@ -1,3 +1,7 @@
+## [1.0.24+2009100941] - September 10, 2020.
+
+* Remove rename_file
+
 ## [1.0.23+2009100841] - September 10, 2020.
 
 * Separate local storage service to new one
