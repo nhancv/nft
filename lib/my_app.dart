@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_loading.dart';
-import 'package:nft/services/local_storage.dart';
 import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
@@ -28,7 +27,6 @@ Future<void> myMain() async {
     MultiProvider(
       providers: <SingleChildWidget>[
         Provider<AuthApi>(create: (_) => AuthApi()),
-        Provider<LocalStorage>(create: (_) => LocalStorage()),
         Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
         ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
         ChangeNotifierProvider<AppThemeProvider>(

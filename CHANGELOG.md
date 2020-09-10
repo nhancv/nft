@@ -1,3 +1,8 @@
+## [1.0.23+2009100841] - September 10, 2020.
+
+* Separate local storage service to new one
+* Add web
+
 ## [1.0.22+2009100041] - September 10, 2020.
 
 * Update test
