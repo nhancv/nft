@@ -6,7 +6,6 @@ import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
-import 'package:nft/widgets/route_active_mixin.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -17,8 +16,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with RouteActiveMixin<HomePage>, WidgetsBindingObserver {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();

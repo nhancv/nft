@@ -2,7 +2,7 @@ import 'package:nft/pages/counter/counter_provider.dart';
 import 'package:test/test.dart';
 
 void main() {
-  /// Test case 1:
+  /// Test case:
   /// - Crease counter value by 1
   /// - Verify that the value is correct with expected value 1
   test('Counter value should be incremented', () {

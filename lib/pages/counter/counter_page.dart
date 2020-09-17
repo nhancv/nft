@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/pages/counter/counter_provider.dart';
-import 'package:nft/widgets/route_active_mixin.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +13,7 @@ class CounterPage extends StatefulWidget {
   _CounterPageState createState() => _CounterPageState();
 }
 
-class _CounterPageState extends State<CounterPage>
-    with RouteActiveMixin<CounterPage> {
+class _CounterPageState extends State<CounterPage> {
   @override
   Widget build(BuildContext context) {
     return ScreenWidget(

@@ -26,6 +26,7 @@ Future<void> myMain() async {
   runApp(
     MultiProvider(
       providers: <SingleChildWidget>[
+        Provider<AppRoute>(create: (_) => AppRoute()),
         Provider<AuthApi>(create: (_) => AuthApi()),
         Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
         ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
@@ -43,13 +44,6 @@ Future<void> myMain() async {
 class MyApp extends StatefulWidget {
   const MyApp({Key key}) : super(key: key);
 
-  static final GlobalKey<NavigatorState> _navigatorKey =
-      GlobalKey<NavigatorState>();
-  static final RouteObserver<Route<dynamic>> routeObserver =
-      RouteObserver<Route<dynamic>>();
-
-  static NavigatorState get navigator => _navigatorKey.currentState;
-
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -57,10 +51,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    // Get providers
+    final AppRoute appRoute = context.watch<AppRoute>();
     final LocaleProvider localeProvider = context.watch<LocaleProvider>();
     final AppTheme appTheme = context.theme();
+    // Build Material app
     return MaterialApp(
-      navigatorKey: MyApp._navigatorKey,
+      navigatorKey: appRoute.navigatorKey,
       locale: localeProvider.locale,
       supportedLocales: S.delegate.supportedLocales,
       localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
@@ -82,8 +79,8 @@ class _MyAppState extends State<MyApp> {
       ///        as MaterialPageRoute<dynamic>)
       ///    .builder(context),
       initialRoute: AppConstant.rootPageRoute,
-      onGenerateRoute: AppRoute.generateRoute,
-      navigatorObservers: <NavigatorObserver>[MyApp.routeObserver],
+      onGenerateRoute: appRoute.generateRoute,
+      navigatorObservers: <NavigatorObserver>[appRoute.routeObserver],
     );
   }
 

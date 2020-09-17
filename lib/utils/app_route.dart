@@ -6,8 +6,15 @@ import 'package:nft/pages/tutorial/tutorial_page.dart';
 import 'package:nft/utils/app_constant.dart';
 
 class AppRoute {
+  /// App global navigator key
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  // App route observer
+  final RouteObserver<Route<dynamic>> routeObserver =
+      RouteObserver<Route<dynamic>>();
+
   /// Generate route for app here
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppConstant.tutorialPageRoute:
         return TutorialPage(settings: settings);

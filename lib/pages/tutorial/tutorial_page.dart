@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:nft/pages/base/content_page.dart';
-import 'package:nft/widgets/route_active_mixin.dart';
 
 class TutorialPage extends ModalRoute<void> {
   TutorialPage({final RouteSettings settings}) : _settings = settings;
@@ -62,8 +61,7 @@ class TutorialBody extends StatefulWidget {
   _TutorialBodyState createState() => _TutorialBodyState();
 }
 
-class _TutorialBodyState extends State<TutorialBody>
-    with RouteActiveMixin<TutorialBody> {
+class _TutorialBodyState extends State<TutorialBody> {
   @override
   Widget build(BuildContext context) {
     return ContentPage(
