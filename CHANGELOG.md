@@ -1,3 +1,7 @@
+## [1.0.27+2009172005] - September 10, 2020.
+
+* Add sample test
+
 ## [1.0.26+2009101141] - September 10, 2020.
 
 * Update description
