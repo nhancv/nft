@@ -80,6 +80,7 @@ class HomeScreenBody extends StatelessWidget {
           child: const Text('press me'),
         ),
         FlatButton(
+          key: const Key('callApiBtnKey'),
           onPressed: () async {
             AppLoadingProvider.show(context);
             await context.read<HomeProvider>().login();

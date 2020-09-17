@@ -33,8 +33,9 @@ Future<void> myMain() async {
         ChangeNotifierProvider<AppThemeProvider>(
             create: (_) => AppThemeProvider()),
         ChangeNotifierProvider<HomeProvider>(
-            create: (BuildContext context) =>
-                HomeProvider(context.read<AuthApi>())),
+          create: (BuildContext context) =>
+              HomeProvider()..api = context.read<AuthApi>(),
+        ),
       ],
       child: const MyApp(),
     ),

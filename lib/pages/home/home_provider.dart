@@ -5,9 +5,7 @@ import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_log.dart';
 
 class HomeProvider with ChangeNotifier {
-  HomeProvider(this.api);
-
-  final AuthApi api;
+  AuthApi api;
 
   String response = '';
 
@@ -15,10 +13,11 @@ class HomeProvider with ChangeNotifier {
   Future<void> login() async {
     final Response<dynamic> result =
         await api.signIn().timeout(const Duration(seconds: 30));
-//    final result = await api.signInWithError().timeout(Duration(seconds: 30));
+    // final Response<dynamic> result =
+    //     await api.signInWithError().timeout(Duration(seconds: 30));
     final LoginResponse loginResponse =
         LoginResponse(result.data as Map<String, dynamic>);
-    logger.d(loginResponse);
+    logger.d(loginResponse.toJson().toString());
     response = loginResponse.toJson().toString();
     notifyListeners();
   }
