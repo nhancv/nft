@@ -124,9 +124,13 @@ flutter build ios -t lib/main_prod.dart
 ## Testing
 - Unit test: https://flutter.dev/docs/cookbook/testing/unit/introduction
 ```
-flutter test test/widget_test.dart
+flutter test
 ```
 - Integration test: https://flutter.dev/docs/cookbook/testing/integration/introduction
 ```
 flutter drive --target=test_driver/app.dart
 ```
+
+## Release
+- Android: https://flutter.dev/docs/deployment/android
+- iOS: https://flutter.dev/docs/deployment/ios
