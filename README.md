@@ -21,7 +21,7 @@ flutter pub run flutter_launcher_icons:main
 - Search and Replace All `NFT App` to new App display name
 - Search and Replace All `com.app.nft` to new App bundle id
 - Update directory folder path name of Android (`android/app/src/main/kotlin/`) same with new App bundle id
-- *Remove `example` folder*
+- **Remove `example` folder**
 
 ## Update localization
 
