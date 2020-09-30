@@ -5,7 +5,9 @@ import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_log.dart';
 
 class HomeProvider with ChangeNotifier {
-  AuthApi api;
+  HomeProvider(this.api);
+
+  final AuthApi api;
 
   String response = '';
 

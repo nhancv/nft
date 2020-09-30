@@ -52,7 +52,7 @@ void main() {
               create: (_) => AppThemeProvider()),
           ChangeNotifierProvider<HomeProvider>(
               create: (BuildContext context) =>
-                  HomeProvider()..api = context.read<AuthApi>()),
+                  HomeProvider(context.read<AuthApi>())),
         ],
         child: Builder(
           builder: (BuildContext context) {
