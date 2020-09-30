@@ -17,8 +17,8 @@ class HomeProvider with ChangeNotifier {
     //     await api.signInWithError().timeout(Duration(seconds: 30));
     final LoginResponse loginResponse =
         LoginResponse(result.data as Map<String, dynamic>);
-    logger.d(loginResponse.toJson().toString());
     response = loginResponse.toJson().toString();
+    logger.d(response);
     notifyListeners();
   }
 }
