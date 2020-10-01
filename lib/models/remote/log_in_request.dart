@@ -1,9 +1,9 @@
 /// Login in request form data
 class LogInRequest {
+  LogInRequest(this.username, this.password);
+
   final String username;
   final String password;
-
-  LogInRequest(this.username, this.password);
 
   @override
   String toString() {
