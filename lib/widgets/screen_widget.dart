@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Widget deal with tab on screen to close keyboard
 class ScreenWidget extends StatelessWidget {
-  final Widget body;
-  final Color backgroundColor;
-  final Widget bottomNavigationBar;
-  final Function() unFocus;
-
   const ScreenWidget(
       {Key key,
       this.body,
@@ -14,9 +10,20 @@ class ScreenWidget extends StatelessWidget {
       this.unFocus})
       : super(key: key);
 
+  final Widget body;
+  final Color backgroundColor;
+  final Widget bottomNavigationBar;
+  final Function() unFocus;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        if (unFocus != null) {
+          unFocus();
+        }
+      },
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: backgroundColor ?? Colors.transparent,
@@ -27,12 +34,6 @@ class ScreenWidget extends StatelessWidget {
             color: Colors.transparent,
             child: body),
       ),
-      onTap: () {
-        FocusScope.of(context).unfocus();
-        if (unFocus != null) {
-          unFocus();
-        }
-      },
     );
   }
 }

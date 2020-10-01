@@ -1,4 +1,6 @@
+/// Store all constant or route name in app
 class AppConstant {
-  static const rootRoute = '/';
-  static const counterScreenRoute = '/counter_screen';
+  static const String rootPageRoute = '/';
+  static const String tutorialPageRoute = '/tutorial';
+  static const String counterPageRoute = '/counter_page';
 }
