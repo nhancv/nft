@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:nft/my_app.dart';
 import 'package:nft/utils/app_config.dart';
 
-void main() async {
-  // Init dev config
+Future<void> main() async {
+  /// Init dev config
   Config(environment: Env.dev());
 
   // Initialize Crash report
