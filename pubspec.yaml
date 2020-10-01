@@ -20,7 +20,9 @@ dependencies:
   intl: ^0.16.1
   intl_translation: ^0.17.10+1
   logger: ^0.9.4
-  firebase_analytics: ^5.0.16
+  # firebase
+  firebase_core: ^0.5.0
+  firebase_analytics: ^6.0.1
 
 flutter_intl:
   enabled: false
