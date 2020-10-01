@@ -1,12 +1,27 @@
 # nft
 Flutter Template
 
+```
+Flutter 1.20.2 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision bbfbf1770c (2 weeks ago) • 2020-08-13 08:33:09 -0700
+Engine • revision 9d5b21729f
+Tools • Dart 2.9.1
+```
+
 ## Update app icon
 
 ```
 flutter pub get
 flutter pub run flutter_launcher_icons:main
 ```
+
+## Clone initial setup
+
+- Search and Replace All `nft` to new package id
+- Search and Replace All `NFT App` to new App display name
+- Search and Replace All `com.app.nft` to new App bundle id
+- Update directory folder path name of Android (`android/app/src/main/kotlin/`) same with new App bundle id
+- **Remove `example` folder**
 
 ## Update localization
 
@@ -43,12 +58,11 @@ Widget build(BuildContext context) {
 }
 ```
 
-## Clone initial setup
-
-- Search and Replace All `nft` to new package id
-- Search and Replace All `NFT App` to new App display name
-- Search and Replace All `com.app.nft` to new App bundle id
-- Update directory folder path name of Android (`android/app/src/main/kotlin/`) same with new App bundle id
+### Generate intl via cli
+```
+#https://pub.dev/packages/intl_utils
+flutter pub run intl_utils:generate
+```
 
 ## Structure
 ```
@@ -66,15 +80,17 @@ lib
       |-api.dart
       |-auth_api.dart
     |-app_loading.dart
-    |-local_storage.dart
     |-logging.dart
   |-utils                         ---> app utils
     |-app_asset.dart
-    |-app_color.dart
     |-app_config.dart
     |-app_constant.dart
+    |-app_extension.dart
     |-app_helper.dart
+    |-app_log.dart
+    |-app_route.dart
     |-app_style.dart
+    |-app_theme.dart
   |-widgets                       ---> app widgets
   |-main.dart                     ---> each main.dart file point to each env of app. Ex: default main.dart for dev env, create new main_prod.dart for prod env
   |-my_app.dart                   ---> application bootstrap
@@ -96,3 +112,25 @@ Version code: yymmddHHMM
 * Remember to increase bold the version name and code also.
 
 https://medium.com/p/2dd558f8b524
+
+## Multi env
+- Create new env factory in app_config.dart.
+- Create new file called main_<env>.dart. Ex: main_prod.dart and config to prod env
+- Build with flutter
+```
+flutter build ios -t lib/main_prod.dart
+```
+
+## Testing
+- Unit test: https://flutter.dev/docs/cookbook/testing/unit/introduction
+```
+flutter test
+```
+- Integration test: https://flutter.dev/docs/cookbook/testing/integration/introduction
+```
+flutter drive --target=test_driver/app.dart
+```
+
+## Release
+- Android: https://flutter.dev/docs/deployment/android
+- iOS: https://flutter.dev/docs/deployment/ios

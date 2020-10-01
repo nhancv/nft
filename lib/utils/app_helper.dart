@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 class AppHelper {
+  /// Show popup
   static void showPopup(Widget child, BuildContext context,
       {Function onAction}) {
-    showDialog(
+    showDialog<dynamic>(
         context: context,
-        // barrierDismissible: false,
+
+        /// barrierDismissible: false,
         builder: (BuildContext context) {
           return Dialog(
             child: child,
@@ -14,16 +17,35 @@ class AppHelper {
         });
   }
 
-  static String emailValidate(String email) {
-    String error = '';
-    Pattern pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regex = new RegExp(pattern);
-    if (email.isEmpty || email == '' || email == null) {
-      error = 'Email is required.';
-    } else if (!regex.hasMatch(email)) {
-      error = 'Your email format is invalid. Please check again';
-    }
-    return error;
+  /// blocks rotation; sets orientation to: portrait
+  static Future<void> portraitModeOnly() {
+    return SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ],
+    );
+  }
+
+  /// blocks rotation; sets orientation to: landscape
+  static Future<void> landscapeModeOnly() {
+    return SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+    );
+  }
+
+  /// Enable rotation
+  static Future<void> enableRotation() {
+    return SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+    );
   }
 }
