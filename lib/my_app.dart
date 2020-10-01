@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -17,8 +18,6 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 Future<void> myMain() async {
-  /// Start services later
-  WidgetsFlutterBinding.ensureInitialized();
 
   /// Force portrait mode
   await SystemChrome.setPreferredOrientations(

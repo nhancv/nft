@@ -113,9 +113,8 @@ class HomeScreenBody extends StatelessWidget {
         ),
         FlatButton(
           onPressed: () {
-            // Use Crashlytics to throw an error. Use this for
-            // confirmation that errors are being correctly reported.
-            Crashlytics.instance.crash();
+            // Forcing a crash
+            FirebaseCrashlytics.instance.crash();
           },
           child: const Text('Crash'),
         ),
