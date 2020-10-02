@@ -29,8 +29,6 @@ flutter pub run flutter_launcher_icons:main
 - VS code: https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl
 
 1. Add other locales:
-
-- Update `CFBundleLocalizations` in `ios/Runner/Info.plist` to add new locale
 - Run `Tools -> Flutter Intl -> Add Locale`
 
 2. Access to the current locale
@@ -115,8 +113,12 @@ https://medium.com/p/2dd558f8b524
 ## Multi env
 - Create new env factory in app_config.dart.
 - Create new file called main_<env>.dart. Ex: main_prod.dart and config to prod env
-- Build with flutter
+- Build with specific env
 ```
+# default as dev
+flutter build ios
+
+# prod
 flutter build ios -t lib/main_prod.dart
 ```
 
@@ -124,6 +126,25 @@ flutter build ios -t lib/main_prod.dart
 - Unit test: https://flutter.dev/docs/cookbook/testing/unit/introduction
 ```
 flutter test
+
+# Test and export coverage information
+# output to coverage/lcov.info
+flutter test --coverage
+
+# Convert to html
+## Install lcov tool to convert lcov.info file to HTML pages
+- Installing in Ubuntu:
+sudo apt-get update -qq -y
+sudo apt-get install lcov -y
+- Installing in Mac:
+brew install lcov
+
+- Gen html files
+genhtml coverage/lcov.info -o coverage/html
+
+# Open in the default browser (mac):
+open coverage/html/index.html
+
 ```
 - Integration test: https://flutter.dev/docs/cookbook/testing/integration/introduction
 ```
