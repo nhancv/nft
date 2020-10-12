@@ -37,24 +37,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenWidget(
-      body: Column(children: const <Widget>[
-        HomeScreenHeader(),
-        Expanded(
-          child: HomeScreenBody(),
-        ),
-        HomeScreenFooter()
-      ]),
+    return const ScreenWidget(
+      body: HomeScreenBody(),
     );
-  }
-}
-
-class HomeScreenHeader extends StatelessWidget {
-  const HomeScreenHeader({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
 
@@ -115,11 +100,3 @@ class HomeScreenBody extends StatelessWidget {
   }
 }
 
-class HomeScreenFooter extends StatelessWidget {
-  const HomeScreenFooter({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
