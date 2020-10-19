@@ -49,6 +49,8 @@ class HomeScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Get provider to trigger function
+    final LocaleProvider localeProvider =
+        Provider.of<LocaleProvider>(context, listen: false);
     final HomeProvider homeProvider =
         Provider.of<HomeProvider>(context, listen: false);
     return Column(
@@ -60,9 +62,9 @@ class HomeScreenBody extends StatelessWidget {
             final String currentLocale = Intl.getCurrentLocale();
             // Change to new locale
             if (currentLocale == 'en') {
-              context.read<LocaleProvider>().updateLocale(const Locale('vi'));
+              localeProvider.updateLocale(const Locale('vi'));
             } else {
-              context.read<LocaleProvider>().updateLocale(const Locale('en'));
+              localeProvider.updateLocale(const Locale('en'));
             }
           },
           child: const Text('press me'),
