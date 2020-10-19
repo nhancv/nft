@@ -68,11 +68,7 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primaryColor: appTheme.backgroundColor,
-          accentColor: appTheme.headerBgColor,
-          fontFamily: AppFonts.roboto,
-          pageTransitionsTheme: buildPageTransitionsTheme()),
+      theme: appTheme.buildThemeData(),
       //https://stackoverflow.com/questions/57245175/flutter-dynamic-initial-route
       //https://github.com/flutter/flutter/issues/12454
       //home: (AppRoute.generateRoute(
