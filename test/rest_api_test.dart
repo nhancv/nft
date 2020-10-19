@@ -62,7 +62,7 @@ void main() {
 
             // Use Mockito to return a successful response when it calls the
             // signIn function
-            when(authApi.signIn()).thenAnswer((_) {
+            when(authApi.logIn()).thenAnswer((_) {
               return Future<Response<dynamic>>.value(
                 Response<dynamic>(
                   data: <String, dynamic>{
@@ -125,7 +125,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify that login function called
-    verify(authApi.signIn());
+    verify(authApi.logIn());
 
     // Verify that result show on screen
     const String res =

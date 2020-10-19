@@ -4,7 +4,7 @@ import 'api.dart';
 
 class AuthApi extends Api {
   /// Login
-  Future<Response<dynamic>> signIn() async {
+  Future<Response<dynamic>> logIn() async {
     final Map<String, String> header = await getHeader();
     return wrapE(() => dio.post<dynamic>('$apiBaseUrl/login',
             options: Options(headers: header),
@@ -15,7 +15,7 @@ class AuthApi extends Api {
   }
 
   /// Login With Error
-  Future<Response<dynamic>> signInWithError() async {
+  Future<Response<dynamic>> logInWithError() async {
     final Map<String, String> header = await getHeader();
     return wrapE(() => dio.post<dynamic>('$apiBaseUrl/login-err',
             options: Options(headers: header),

@@ -23,12 +23,14 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // METHODS
+  // -----------------
   /// Call api login
   Future<void> login() async {
     final Response<dynamic> result =
-    await _api.signIn().timeout(const Duration(seconds: 30));
+    await _api.logIn().timeout(const Duration(seconds: 30));
     // final Response<dynamic> result =
-    //     await api.signInWithError().timeout(Duration(seconds: 30));
+    //     await api.logInWithError().timeout(Duration(seconds: 30));
     final LoginResponse loginResponse =
     LoginResponse(result.data as Map<String, dynamic>);
     response = loginResponse.toJson().toString();
