@@ -48,6 +48,9 @@ class HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get provider to trigger function
+    final HomeProvider homeProvider =
+        Provider.of<HomeProvider>(context, listen: false);
     return Column(
       children: <Widget>[
         Text(S.of(context).hello),
@@ -68,19 +71,23 @@ class HomeScreenBody extends StatelessWidget {
           key: const Key('callApiBtnKey'),
           onPressed: () async {
             AppLoadingProvider.show(context);
-            await context.read<HomeProvider>().login();
+            await homeProvider.login();
             AppLoadingProvider.hide(context);
           },
           child: const Text('call api'),
         ),
-        Consumer<HomeProvider>(
-          builder: (_, HomeProvider value, Widget child) {
+
+        // Example to use selector instead consumer to optimize render performance
+        Selector<HomeProvider, String>(
+          selector: (_, HomeProvider provider) => provider.response,
+          builder: (_, String response, __) {
             return Text(
-              value.response,
+              response,
               textAlign: TextAlign.center,
             );
           },
         ),
+
         RaisedButton(
           key: const Key(AppConstant.counterPageRoute),
           onPressed: () {
