@@ -33,8 +33,8 @@ class Api {
   }
 
   /// Wrap Dio Exception
-  Future<Response<dynamic>> wrapE(
-      Future<Response<dynamic>> Function() dioApi) async {
+  Future<Response<T>> wrapE<T>(
+      Future<Response<T>> Function() dioApi) async {
     try {
       return await dioApi();
     } catch (error) {

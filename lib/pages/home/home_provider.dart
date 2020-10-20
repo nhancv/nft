@@ -31,16 +31,14 @@ class HomeProvider with ChangeNotifier {
   // -----------------
   /// Call api login
   Future<void> login() async {
-    final Response<dynamic> result =
-    await _api.logIn().timeout(const Duration(seconds: 30));
+    final Response<Map<String, dynamic>> result =
+        await _api.logIn().timeout(const Duration(seconds: 30));
     // final Response<dynamic> result =
     //     await api.logInWithError().timeout(Duration(seconds: 30));
-    final LoginResponse loginResponse =
-    LoginResponse(result.data as Map<String, dynamic>);
+    final LoginResponse loginResponse = LoginResponse(result.data);
     response = loginResponse.toJson().toString();
     logger.d(response);
   }
 
-  //#endregion
-
+//#endregion
 }

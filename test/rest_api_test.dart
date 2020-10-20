@@ -63,8 +63,8 @@ void main() {
             // Use Mockito to return a successful response when it calls the
             // signIn function
             when(authApi.logIn()).thenAnswer((_) {
-              return Future<Response<dynamic>>.value(
-                Response<dynamic>(
+              return Future<Response<Map<String, dynamic>>>.value(
+                Response<Map<String, dynamic>>(
                   data: <String, dynamic>{
                     'data': <String, String>{
                       'access_token': 'nhancvdeptrai',
