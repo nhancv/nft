@@ -7,14 +7,16 @@ import 'package:nft/utils/app_log.dart';
 class HomeProvider with ChangeNotifier {
   HomeProvider(this._api);
 
-  // PRIVATE PROPERTIES
+  //#region PRIVATE PROPERTIES
   // -----------------
   // Authentication api
   final AuthApi _api;
 
   String _response = '';
 
-  // PUBLIC PROPERTIES
+  //#endregion
+
+  //#region PUBLIC PROPERTIES
   // -----------------
   String get response => _response;
 
@@ -23,7 +25,9 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // METHODS
+  //#endregion
+
+  //#region METHODS
   // -----------------
   /// Call api login
   Future<void> login() async {
@@ -36,4 +40,7 @@ class HomeProvider with ChangeNotifier {
     response = loginResponse.toJson().toString();
     logger.d(response);
   }
+
+  //#endregion
+
 }
