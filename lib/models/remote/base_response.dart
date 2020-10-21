@@ -34,11 +34,12 @@ class BaseResponse<T> {
   }
 
   /// Parsing data to object
-  dynamic parsing(Map<String, dynamic> fullJson) {
+  dynamic parsing(Map<String, dynamic> fullJson,
+      {String dataKey = 'data', String errorKey = 'error'}) {
     if (fullJson != null) {
-      data = fullJson['data'] != null ? jsonToData(fullJson['data']) : null;
-      error = fullJson['error'] != null
-          ? BaseError.fromJson(fullJson['error'] as Map<String, dynamic>)
+      data = fullJson[dataKey] != null ? jsonToData(fullJson[dataKey]) : null;
+      error = fullJson[errorKey] != null
+          ? BaseError.fromJson(fullJson[errorKey] as Map<String, dynamic>)
           : null;
     }
   }
