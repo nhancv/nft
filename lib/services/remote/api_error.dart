@@ -1,9 +1,5 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:nft/utils/app_config.dart';
-
 mixin ApiError {
   /// This function was called when trigger safeCallApi
   /// and apiError = true as default
