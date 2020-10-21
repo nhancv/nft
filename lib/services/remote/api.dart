@@ -7,7 +7,8 @@ import 'package:nft/utils/app_config.dart';
 class Api {
   Api() {
     if (!kReleaseMode) {
-      dio.interceptors.add(LogInterceptor(responseBody: true));
+      dio.interceptors
+          .add(LogInterceptor(responseBody: true, requestBody: true));
     }
   }
 
@@ -33,8 +34,7 @@ class Api {
   }
 
   /// Wrap Dio Exception
-  Future<Response<T>> wrapE<T>(
-      Future<Response<T>> Function() dioApi) async {
+  Future<Response<T>> wrapE<T>(Future<Response<T>> Function() dioApi) async {
     try {
       return await dioApi();
     } catch (error) {

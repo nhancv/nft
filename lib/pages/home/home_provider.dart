@@ -37,7 +37,21 @@ class HomeProvider with ChangeNotifier {
     //     await api.logInWithError().timeout(Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     response = loginResponse.toJson().toString();
-    logger.d(response);
+  }
+
+  /// Call api login with error
+  Future<LoginResponse> logInWithError() async {
+    final Response<Map<String, dynamic>> result =
+        await _api.logInWithError().timeout(const Duration(seconds: 30));
+    final LoginResponse loginResponse = LoginResponse(result.data);
+    response = loginResponse.toJson().toString();
+    return loginResponse;
+  }
+
+  /// Call api login with exception
+  Future<void> logInWithException() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+    throw DioError();
   }
 
 //#endregion

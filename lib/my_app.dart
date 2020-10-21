@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/home/home_provider.dart';
+import 'package:nft/services/app_dialog.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/remote/auth_api.dart';
 import 'package:nft/utils/app_asset.dart';
@@ -29,6 +30,7 @@ Future<void> myMain() async {
         Provider<AppRoute>(create: (_) => AppRoute()),
         Provider<AuthApi>(create: (_) => AuthApi()),
         Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
+        Provider<AppDialogProvider>(create: (_) => AppDialogProvider()),
         ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
         ChangeNotifierProvider<AppThemeProvider>(
             create: (_) => AppThemeProvider()),
