@@ -100,12 +100,15 @@ class _HomePageState extends State<HomePage>
           RaisedButton(
             key: const Key('callApiExceptionBtnKey'),
             onPressed: () async {
-              safeCallApi(() => homeProvider.logInWithException(),
-                  onStart: () async {
-                AppLoadingProvider.show(context);
-              }, onCompleted: () async {
-                AppLoadingProvider.hide(context);
-              });
+              safeCallApi(
+                homeProvider.logInWithException,
+                onStart: () async {
+                  AppLoadingProvider.show(context);
+                },
+                onCompleted: () async {
+                  AppLoadingProvider.hide(context);
+                },
+              );
             },
             child: const Text('call api with exception'),
           ),
