@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/models/remote/log_in_response.dart';
 import 'package:nft/services/remote/auth_api.dart';
-import 'package:nft/utils/app_log.dart';
 
 class HomeProvider with ChangeNotifier {
   HomeProvider(this._api);
