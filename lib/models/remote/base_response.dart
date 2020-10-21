@@ -16,8 +16,9 @@ Error
 import 'dart:core';
 
 class BaseResponse<T> {
-  BaseResponse(Map<String, dynamic> fullJson) {
-    parsing(fullJson);
+  BaseResponse(Map<String, dynamic> fullJson,
+      {String dataKey = 'data', String errorKey = 'error'}) {
+    parsing(fullJson, dataKey: dataKey, errorKey: errorKey);
   }
 
   T data;

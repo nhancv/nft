@@ -16,21 +16,21 @@ class Api {
   final String apiBaseUrl = Config.instance.env.apiBaseUrl;
   final Dio dio = Dio();
 
-  /// Get header
-  Future<Map<String, String>> getHeader() async {
-    final Map<String, String> header = <String, String>{
-      'content-type': 'application/json'
-    };
-    return header;
+  /// Get request header options
+  Future<Options> getOptions(
+      {String contentType = Headers.jsonContentType}) async {
+    final Map<String, String> header = <String, String>{};
+    return Options(headers: header, contentType: contentType);
   }
 
-  /// Get auth header
-  Future<Map<String, String>> getAuthHeader() async {
-    final Map<String, String> header = await getHeader();
+  /// Get auth header options
+  Future<Options> getAuthOptions({String contentType}) async {
+    final Options options = await getOptions(contentType: contentType);
 
-    header.addAll(<String, String>{'CUSTOM-HEADER-KEY': 'CUSTOM-HEADER-KEY'});
+    options.headers
+        .addAll(<String, String>{'CUSTOM-HEADER-KEY': 'CUSTOM-HEADER-KEY'});
 
-    return header;
+    return options;
   }
 
   /// Wrap Dio Exception
