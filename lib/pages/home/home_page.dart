@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nft/generated/l10n.dart';
-import 'package:nft/models/remote/log_in_response.dart';
 import 'package:nft/my_app.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_dialog.dart';
@@ -9,6 +8,7 @@ import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/remote/api_error.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
+import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/screen_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -44,12 +44,15 @@ class _HomePageState extends State<HomePage>
     // Get provider to trigger function
     final LocaleProvider localeProvider =
         Provider.of<LocaleProvider>(context, listen: false);
-    final HomeProvider homeProvider =
+    final HomeProvider provider =
         Provider.of<HomeProvider>(context, listen: false);
     return ScreenWidget(
       body: Column(
         children: <Widget>[
-          Text(S.of(context).hello),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text(S.of(context).hello),
+          ),
 
           // As default, when user change language in device setting
           // -> the locale will change appropriately
@@ -65,65 +68,10 @@ class _HomePageState extends State<HomePage>
                 localeProvider.updateLocale(const Locale('en'));
               }
             },
-            child: const Text('press me'),
+            child: const Text('Translate'),
           ),
 
-          // Example call api with success response
-          RaisedButton(
-            key: const Key('callApiBtnKey'),
-            onPressed: () async {
-              AppLoadingProvider.show(context);
-              await homeProvider.login();
-              AppLoadingProvider.hide(context);
-              // todo after hide loading
-            },
-            child: const Text('call api'),
-          ),
-
-          // Example call api with success http code but with error response,
-          // and how to use function response data instead property approach.
-          RaisedButton(
-            key: const Key('callApiErrorBtnKey'),
-            onPressed: () async {
-              AppLoadingProvider.show(context);
-              final LoginResponse loginResponse =
-                  await homeProvider.logInWithError();
-              AppLoadingProvider.hide(context);
-              // todo with response after hide loading
-              logger.d(loginResponse);
-            },
-            child: const Text('call api with error'),
-          ),
-
-          // Example call api with exception return to ui
-          // Note: Exception make app can not hide the app loading with previous ways
-          RaisedButton(
-            key: const Key('callApiExceptionBtnKey'),
-            onPressed: () async {
-              safeCallApi(
-                homeProvider.logInWithException,
-                onStart: () async {
-                  AppLoadingProvider.show(context);
-                },
-                onCompleted: () async {
-                  AppLoadingProvider.hide(context);
-                },
-              );
-            },
-            child: const Text('call api with exception'),
-          ),
-
-          // Example to use selector instead consumer to optimize render performance
-          Selector<HomeProvider, String>(
-            selector: (_, HomeProvider provider) => provider.response,
-            builder: (_, String response, __) {
-              return Text(
-                response,
-                textAlign: TextAlign.center,
-              );
-            },
-          ),
-
+          const SizedBox(height: 10),
           // Navigate to counter page with current timestamp as argument
           RaisedButton(
             key: const Key(AppConstant.counterPageRoute),
@@ -134,13 +82,27 @@ class _HomePageState extends State<HomePage>
             child: const Text('Counter Page'),
           ),
 
-          // Example about custom overlay page
+          const SizedBox(height: 10),
+          // Logout
+          // Navigate to login
           RaisedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, AppConstant.tutorialPageRoute);
+            key: const Key(AppConstant.loginPageRoute),
+            onPressed: () async {
+              await safeCallApi(
+                provider.logout,
+                onStart: () async {
+                  AppLoadingProvider.show(context);
+                },
+                onFinally: () async {
+                  AppLoadingProvider.hide(context);
+                  context
+                      .navigator()
+                      ?.pushReplacementNamed(AppConstant.loginPageRoute);
+                },
+              );
             },
-            child: const Text('Open tutorial overlay page'),
-          )
+            child: const Text('Logout'),
+          ),
         ],
       ),
     );
@@ -149,6 +111,6 @@ class _HomePageState extends State<HomePage>
   @override
   Future<void> onApiError(dynamic error) async {
     logger.e(error);
-    AppDialogProvider.show(context, error.toString());
+    AppDialogProvider.show(context, getErrorMessage(error));
   }
 }

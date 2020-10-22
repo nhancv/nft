@@ -12,23 +12,22 @@ import 'intl/messages_all.dart';
 
 class S {
   S();
-
+  
   static S current;
-
-  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+  
+  static const AppLocalizationDelegate delegate =
+    AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
-    final localeName = Intl.canonicalizedLocale(name);
+    final name = (locale.countryCode?.isEmpty ?? false) ? locale.languageCode : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name); 
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
       S.current = S();
-
+      
       return S.current;
     });
-  }
+  } 
 
   static S of(BuildContext context) {
     return Localizations.of<S>(context, S);
@@ -40,6 +39,46 @@ class S {
       'hello',
       name: 'hello',
       desc: 'Hello someone',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get labelEmail {
+    return Intl.message(
+      'Email',
+      name: 'labelEmail',
+      desc: 'TextField email label',
+      args: [],
+    );
+  }
+
+  /// `Email is invalid`
+  String get msgEmailInValid {
+    return Intl.message(
+      'Email is invalid',
+      name: 'msgEmailInValid',
+      desc: 'TextField email error message',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get labelPassword {
+    return Intl.message(
+      'Password',
+      name: 'labelPassword',
+      desc: 'TextField password label',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get btnLogin {
+    return Intl.message(
+      'Login',
+      name: 'btnLogin',
+      desc: 'Button login label',
       args: [],
     );
   }

@@ -15,9 +15,9 @@ class AppTheme {
   /// Dart theme
   const AppTheme.dark({
     this.isDark = true,
-    this.primaryColor = Colors.black,
-    this.accentColor = Colors.black,
-    this.backgroundColor = Colors.black,
+    this.primaryColor = Colors.blueGrey,
+    this.accentColor = Colors.blueGrey,
+    this.backgroundColor = const Color(0xFFF2F2F2),
     this.headerBgColor = Colors.black,
   });
 
@@ -39,11 +39,12 @@ class AppTheme {
   // Build theme data
   ThemeData buildThemeData() {
     return ThemeData(
-        brightness: isDark ? Brightness.dark : Brightness.light,
-        primaryColor: primaryColor,
-        accentColor: accentColor,
-        fontFamily: AppFonts.roboto,
-        pageTransitionsTheme: _buildPageTransitionsTheme()
+      primaryColor: primaryColor,
+      accentColor: accentColor,
+      fontFamily: AppFonts.roboto,
+      pageTransitionsTheme: _buildPageTransitionsTheme(),
+      buttonTheme: _buildButtonTheme(),
+      textTheme: _buildTextTheme(),
     );
   }
 
@@ -56,13 +57,31 @@ class AppTheme {
       },
     );
   }
+
+  // Custom button theme full width
+  ButtonThemeData _buildButtonTheme() {
+    return ButtonThemeData(
+      minWidth: double.infinity,
+      shape: const Border(),
+      buttonColor: accentColor,
+      textTheme: ButtonTextTheme.primary,
+      padding: const EdgeInsets.all(16),
+    );
+  }
+
+  // Custom text theme
+  TextTheme _buildTextTheme() {
+    return const TextTheme();
+  }
 }
 
 class AppThemeProvider with ChangeNotifier {
-  AppTheme theme = const AppTheme.light();
+  AppTheme _theme = const AppTheme.dark();
 
-  void updateAppTheme(AppTheme appTheme) {
-    theme = appTheme;
+  AppTheme get theme => _theme;
+
+  set theme(AppTheme value) {
+    _theme = value;
     notifyListeners();
   }
 }

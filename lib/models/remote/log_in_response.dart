@@ -19,48 +19,20 @@ Successful
 }
  */
 
+import 'package:nft/models/local/token.dart';
+
 import 'base_response.dart';
 
-class Credential {
-  Credential(
-      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken});
-
-  factory Credential.fromJson(Map<String, dynamic> json) => Credential(
-        tokenType: json['token_type'] as String,
-        expiresIn: json['expires_in'] as int,
-        accessToken: json['access_token'] as String,
-        refreshToken: json['refresh_token'] as String,
-      );
-
-  final String tokenType;
-  final int expiresIn;
-  final String accessToken;
-  final String refreshToken;
-
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        'tokenType': tokenType,
-        'expiresIn': expiresIn,
-        'accessToken': accessToken,
-        'refreshToken': refreshToken,
-      };
-
-  @override
-  String toString() {
-    return 'Credential{tokenType: $tokenType, expiresIn: $expiresIn, accessToken: $accessToken, refreshToken: $refreshToken}';
-  }
-}
-
-class LoginResponse extends BaseResponse<Credential> {
+class LoginResponse extends BaseResponse<Token> {
   LoginResponse(Map<String, dynamic> fullJson) : super(fullJson);
 
   @override
-  Map<String, dynamic> dataToJson(Credential data) {
+  Map<String, dynamic> dataToJson(Token data) {
     return data.toJson();
   }
 
   @override
-  Credential jsonToData(dynamic dataJson) {
-    return Credential.fromJson(dataJson as Map<String, dynamic>);
+  Token jsonToData(dynamic dataJson) {
+    return Token.fromJson(dataJson as Map<String, dynamic>);
   }
-
 }

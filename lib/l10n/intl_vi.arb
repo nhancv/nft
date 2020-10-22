@@ -6,5 +6,29 @@
     "description": "Xin chào ai đó",
     "type": "text",
     "placeholders": {}
+  },
+  "labelEmail": "Email",
+  "@labelEmail": {
+    "description": "TextField email label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "msgEmailInValid": "Email không hợp lệ",
+  "@msgEmailInValid": {
+    "description": "TextField email error message",
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelPassword": "Password",
+  "@labelPassword": {
+    "description": "TextField password label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnLogin": "Đăng nhập",
+  "@btnLogin": {
+    "description": "Button login label",
+    "type": "text",
+    "placeholders": {}
   }
 }

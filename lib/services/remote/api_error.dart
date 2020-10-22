@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
+import 'package:nft/utils/app_log.dart';
+
 mixin ApiError {
   /// This function was called when trigger safeCallApi
   /// and apiError = true as default
@@ -61,5 +64,14 @@ mixin ApiError {
         await onFinally();
       }
     }
+  }
+
+  // Parsing error to string
+  String getErrorMessage(dynamic error) {
+    logger.d(error);
+    if (error is DioError && error.type == DioErrorType.RESPONSE) {
+      return error.message;
+    }
+    return 'Unknown error';
   }
 }

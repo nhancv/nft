@@ -6,5 +6,29 @@
     "description": "Hello someone",
     "type": "text",
     "placeholders": {}
+  },
+  "labelEmail": "Email",
+  "@labelEmail": {
+    "description": "TextField email label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "msgEmailInValid": "Email is invalid",
+  "@msgEmailInValid": {
+    "description": "TextField email error message",
+    "type": "text",
+    "placeholders": {}
+  },
+  "labelPassword": "Password",
+  "@labelPassword": {
+    "description": "TextField password label",
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnLogin": "Login",
+  "@btnLogin": {
+    "description": "Button login label",
+    "type": "text",
+    "placeholders": {}
   }
 }

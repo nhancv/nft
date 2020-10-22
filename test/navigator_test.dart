@@ -8,7 +8,10 @@ import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_loading.dart';
-import 'package:nft/services/remote/auth_api.dart';
+import 'package:nft/services/local/credential.dart';
+import 'package:nft/services/local/storage.dart';
+import 'package:nft/services/local/storage_preferences.dart';
+import 'package:nft/services/remote/user_api.dart';
 import 'package:nft/utils/app_config.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_route.dart';
@@ -16,6 +19,7 @@ import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
+/// Mock navigator observer class by mockito
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
@@ -36,15 +40,25 @@ void main() {
       child: MultiProvider(
         providers: <SingleChildWidget>[
           Provider<AppRoute>(create: (_) => AppRoute()),
-          Provider<AuthApi>(create: (_) => AuthApi()),
+          Provider<Storage>(create: (_) => StoragePreferences()),
+          Provider<Credential>(
+              create: (BuildContext context) =>
+                  Credential(context.read<Storage>())),
+          ProxyProvider<Credential, UserApi>(
+              create: (_) => UserApi(),
+              update: (_, Credential credential, UserApi userApi) {
+                return userApi..token = credential.token;
+              }),
           Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
           ChangeNotifierProvider<LocaleProvider>(
               create: (_) => LocaleProvider()),
           ChangeNotifierProvider<AppThemeProvider>(
               create: (_) => AppThemeProvider()),
           ChangeNotifierProvider<HomeProvider>(
-              create: (BuildContext context) =>
-                  HomeProvider(context.read<AuthApi>())),
+              create: (BuildContext context) => HomeProvider(
+                    context.read<UserApi>(),
+                    context.read<Credential>(),
+                  )),
         ],
         child: Builder(
           builder: (BuildContext context) {

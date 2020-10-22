@@ -8,7 +8,10 @@ import 'package:nft/my_app.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_loading.dart';
-import 'package:nft/services/remote/auth_api.dart';
+import 'package:nft/services/local/credential.dart';
+import 'package:nft/services/local/storage.dart';
+import 'package:nft/services/local/storage_preferences.dart';
+import 'package:nft/services/remote/user_api.dart';
 import 'package:nft/utils/app_config.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_route.dart';
@@ -20,14 +23,14 @@ import 'package:provider/single_child_widget.dart';
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 /// Mock Rest api class by mockito
-class MockAuthApi extends Mock implements AuthApi {}
+class MockAuthApi extends Mock implements UserApi {}
 
 void main() {
   // Mock navigator to verify navigation
   final MockNavigatorObserver navigatorObserver = MockNavigatorObserver();
 
   // Mock class refs
-  AuthApi authApi;
+  UserApi authApi;
   HomeProvider homeProvider;
 
   // Widget to test
@@ -44,20 +47,30 @@ void main() {
       child: MultiProvider(
         providers: <SingleChildWidget>[
           Provider<AppRoute>(create: (_) => AppRoute()),
-          Provider<AuthApi>(create: (_) => MockAuthApi()),
+          Provider<Storage>(create: (_) => StoragePreferences()),
+          Provider<Credential>(
+              create: (BuildContext context) =>
+                  Credential(context.read<Storage>())),
+          ProxyProvider<Credential, UserApi>(
+              create: (_) => MockAuthApi(),
+              update: (_, Credential credential, UserApi userApi) {
+                return userApi..token = credential.token;
+              }),
           Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
           ChangeNotifierProvider<LocaleProvider>(
               create: (_) => LocaleProvider()),
           ChangeNotifierProvider<AppThemeProvider>(
               create: (_) => AppThemeProvider()),
           ChangeNotifierProvider<HomeProvider>(
-              create: (BuildContext context) =>
-                  HomeProvider(context.read<AuthApi>())),
+              create: (BuildContext context) => HomeProvider(
+                    context.read<UserApi>(),
+                    context.read<Credential>(),
+                  )),
         ],
         child: Builder(
           builder: (BuildContext context) {
             // Save provider ref here
-            authApi = context.watch<AuthApi>();
+            authApi = context.watch<UserApi>();
             homeProvider = context.watch<HomeProvider>();
 
             // Use Mockito to return a successful response when it calls the
