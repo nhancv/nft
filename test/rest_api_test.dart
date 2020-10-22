@@ -65,12 +65,12 @@ void main() {
         providers: <SingleChildWidget>[
           Provider<AppRoute>(create: (_) => AppRoute()),
           Provider<Storage>(create: (_) => StoragePreferences()),
-          Provider<Credential>(
+          ChangeNotifierProvider<Credential>(
               create: (BuildContext context) => MockCredential()),
           ProxyProvider<Credential, UserApi>(
               create: (_) => MockAuthApi(),
               update: (_, Credential credential, UserApi userApi) {
-                return userApi..credential = credential;
+                return userApi..token = credential.token;
               }),
           Provider<AppLoadingProvider>(create: (_) => MockAppLoadingProvider()),
           ChangeNotifierProvider<LocaleProvider>(

@@ -33,13 +33,13 @@ Future<void> myMain() async {
       providers: <SingleChildWidget>[
         Provider<AppRoute>(create: (_) => AppRoute()),
         Provider<Storage>(create: (_) => StoragePreferences()),
-        Provider<Credential>(
+        ChangeNotifierProvider<Credential>(
             create: (BuildContext context) =>
                 Credential(context.read<Storage>())),
         ProxyProvider<Credential, UserApi>(
             create: (_) => UserApi(),
             update: (_, Credential credential, UserApi userApi) {
-              return userApi..credential = credential;
+              return userApi..token = credential.token;
             }),
         Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
         Provider<AppDialogProvider>(create: (_) => AppDialogProvider()),

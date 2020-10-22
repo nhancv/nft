@@ -15,10 +15,7 @@ class Api {
   }
 
   /// Credential info
-  Credential credential;
-
-  /// Get token from credential
-  Token get token => credential?.token;
+  Token token;
 
   /// Get base url by env
   final String apiBaseUrl = Config.instance.env.apiBaseUrl;
