@@ -70,6 +70,7 @@ class _LoginPageState extends State<LoginPage>
                   selector: (_, LoginProvider provider) => provider.emailValid,
                   builder: (_, bool emailValid, __) {
                     return TextField(
+                      key: const Key('emailInputKey'),
                       decoration: InputDecoration(
                         labelText: S
                             .of(context)
@@ -100,6 +101,7 @@ class _LoginPageState extends State<LoginPage>
                   selector: (_, LoginProvider provider) => provider.obscureText,
                   builder: (_, bool obscureText, __) {
                     return TextField(
+                      key: const Key('passwordInputKey'),
                       decoration: InputDecoration(
                         labelText: S
                             .of(context)

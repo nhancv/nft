@@ -105,11 +105,11 @@ class _MyAppState extends State<MyApp> {
       theme: appTheme.buildThemeData(),
       //https://stackoverflow.com/questions/57245175/flutter-dynamic-initial-route
       //https://github.com/flutter/flutter/issues/12454
-      //home: (AppRoute.generateRoute(
+      //home: (appRoute.generateRoute(
       ///            const RouteSettings(name: AppConstant.rootPageRoute))
       ///        as MaterialPageRoute<dynamic>)
       ///    .builder(context),
-      initialRoute: AppConstant.loginPageRoute,
+      initialRoute: AppConstant.homePageRoute,
       onGenerateRoute: appRoute.generateRoute,
       navigatorObservers: <NavigatorObserver>[appRoute.routeObserver],
     );

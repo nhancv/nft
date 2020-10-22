@@ -72,6 +72,19 @@ class _HomePageState extends State<HomePage>
           ),
 
           const SizedBox(height: 10),
+          // Example to use selector instead consumer to optimize render performance
+          Selector<HomeProvider, String>(
+            selector: (_, HomeProvider provider) =>
+                provider.token?.toJson()?.toString() ?? '',
+            builder: (_, String tokenInfo, __) {
+              return Text(
+                tokenInfo,
+                textAlign: TextAlign.center,
+              );
+            },
+          ),
+
+          const SizedBox(height: 10),
           // Navigate to counter page with current timestamp as argument
           RaisedButton(
             key: const Key(AppConstant.counterPageRoute),

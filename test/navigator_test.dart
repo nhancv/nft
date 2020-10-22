@@ -7,6 +7,7 @@ import 'package:nft/my_app.dart';
 import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
+import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/local/credential.dart';
 import 'package:nft/services/local/storage.dart';
@@ -14,6 +15,7 @@ import 'package:nft/services/local/storage_preferences.dart';
 import 'package:nft/services/remote/user_api.dart';
 import 'package:nft/utils/app_config.dart';
 import 'package:nft/utils/app_constant.dart';
+import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -59,13 +61,26 @@ void main() {
                     context.read<UserApi>(),
                     context.read<Credential>(),
                   )),
+          ChangeNotifierProvider<LoginProvider>(
+              create: (BuildContext context) => LoginProvider(
+                    context.read<UserApi>(),
+                    context.read<Credential>(),
+                  )),
         ],
         child: Builder(
           builder: (BuildContext context) {
+
             final LocaleProvider localeProvider =
                 context.watch<LocaleProvider>();
             final AppRoute appRoute = context.watch<AppRoute>();
 
+            // Mock navigator Observer
+            when(navigatorObserver.didPush(any, any))
+                .thenAnswer((Invocation invocation) {
+              logger.d('didPush ${invocation.positionalArguments}');
+            });
+
+            // Build Material app
             return MaterialApp(
               navigatorKey: appRoute.navigatorKey,
               locale: localeProvider.locale,
@@ -76,7 +91,10 @@ void main() {
                 GlobalCupertinoLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              initialRoute: AppConstant.rootPageRoute,
+              home: (appRoute.generateRoute(
+                          const RouteSettings(name: AppConstant.homePageRoute))
+                      as MaterialPageRoute<dynamic>)
+                  .builder(context),
               onGenerateRoute: appRoute.generateRoute,
               navigatorObservers: <NavigatorObserver>[navigatorObserver],
             );
@@ -102,8 +120,8 @@ void main() {
     expect(find.byType(HomePage), findsOneWidget);
 
     // Verify that RaisedButton on screen
-    const Key counterPageBtnKey = Key(AppConstant.counterPageRoute);
-    final Finder counterPageFinder = find.byKey(counterPageBtnKey);
+    final Finder counterPageFinder =
+        find.byKey(const Key(AppConstant.counterPageRoute));
     expect(counterPageFinder, findsOneWidget);
 
     // Tap on RaisedButton
