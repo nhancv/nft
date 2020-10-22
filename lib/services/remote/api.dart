@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nft/models/local/token.dart';
+import 'package:nft/services/local/credential.dart';
 import 'package:nft/utils/app_config.dart';
 
 class Api {
@@ -13,8 +14,11 @@ class Api {
     }
   }
 
-  /// Credential token
-  Token token;
+  /// Credential info
+  Credential credential;
+
+  /// Get token from credential
+  Token get token => credential?.token;
 
   /// Get base url by env
   final String apiBaseUrl = Config.instance.env.apiBaseUrl;

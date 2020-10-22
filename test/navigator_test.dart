@@ -49,7 +49,7 @@ void main() {
           ProxyProvider<Credential, UserApi>(
               create: (_) => UserApi(),
               update: (_, Credential credential, UserApi userApi) {
-                return userApi..token = credential.token;
+                return userApi..credential = credential;
               }),
           Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
           ChangeNotifierProvider<LocaleProvider>(
