@@ -81,13 +81,13 @@ class LoginProvider with ChangeNotifier {
   /// Call api login
   Future<bool> login() async {
     final Response<Map<String, dynamic>> result =
-    await _api.logIn().timeout(const Duration(seconds: 30));
+        await _api.logIn().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     final Token token = loginResponse.data;
     if (token != null) {
       // Save credential
       final bool saveRes =
-      await _credential.storeCredential(token, cache: true);
+          await _credential.storeCredential(token, cache: true);
       return saveRes;
     } else {
       throw DioError(
@@ -99,7 +99,7 @@ class LoginProvider with ChangeNotifier {
   /// Call api login with error
   Future<LoginResponse> logInWithError() async {
     final Response<Map<String, dynamic>> result =
-    await _api.logInWithError().timeout(const Duration(seconds: 30));
+        await _api.logInWithError().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     return loginResponse;
   }
@@ -107,9 +107,7 @@ class LoginProvider with ChangeNotifier {
   /// Call api login with exception
   Future<void> logInWithException() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    throw DioError(
-        error: 'Login with exception',
-        type: DioErrorType.RESPONSE);
+    throw DioError(error: 'Login with exception', type: DioErrorType.RESPONSE);
   }
 
   /// On email input change listener to validate form

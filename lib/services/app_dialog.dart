@@ -25,9 +25,10 @@ class AppDialogProvider {
   bool requestClose = false;
 
   /// Show alert dialog shortcut
-  static void show(BuildContext context, String content,
-      {String title}) {
-    context.read<AppDialogProvider>().showAppDialog(context, content, title: title);
+  static void show(BuildContext context, String content, {String title}) {
+    context
+        .read<AppDialogProvider>()
+        .showAppDialog(context, content, title: title);
   }
 
   /// Hide alert dialog shortcut

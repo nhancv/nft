@@ -69,7 +69,6 @@ void main() {
         ],
         child: Builder(
           builder: (BuildContext context) {
-
             final LocaleProvider localeProvider =
                 context.watch<LocaleProvider>();
             final AppRoute appRoute = context.watch<AppRoute>();

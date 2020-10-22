@@ -132,8 +132,8 @@ void main() {
                 GlobalWidgetsLocalizations.delegate,
               ],
               home: (appRoute.generateRoute(
-                  const RouteSettings(name: AppConstant.loginPageRoute))
-              as MaterialPageRoute<dynamic>)
+                          const RouteSettings(name: AppConstant.loginPageRoute))
+                      as MaterialPageRoute<dynamic>)
                   .builder(context),
               onGenerateRoute: appRoute.generateRoute,
               navigatorObservers: <NavigatorObserver>[navigatorObserver],
