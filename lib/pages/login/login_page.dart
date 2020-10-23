@@ -5,6 +5,7 @@ import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app_dialog.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/remote/api_error.dart';
+import 'package:nft/services/remote/error_type.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
@@ -130,8 +131,12 @@ class _LoginPageState extends State<LoginPage>
                       }, onCompleted: () async {
                         AppLoadingProvider.hide(context);
                       }, onError: (dynamic error) async {
-                        AppDialogProvider.show(context, getErrorMessage(error),
-                            title: 'Error');
+                        final ErrorType errorType = parseErrorType(error);
+                        AppDialogProvider.show(
+                          context,
+                          errorType.message,
+                          title: 'Error',
+                        );
                       }, apiError: false);
                       if (success == true) {
                         context
@@ -200,7 +205,7 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Future<void> onApiError(dynamic error) async {
-    logger.e(error);
-    AppDialogProvider.show(context, getErrorMessage(error));
+    final ErrorType errorType = parseErrorType(error);
+    AppDialogProvider.show(context, errorType.message);
   }
 }

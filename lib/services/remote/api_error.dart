@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:dio/dio.dart';
+import 'package:nft/services/remote/error_type.dart';
 import 'package:nft/utils/app_log.dart';
 
 mixin ApiError {
@@ -66,12 +66,16 @@ mixin ApiError {
     }
   }
 
-  // Parsing error to string
-  String getErrorMessage(dynamic error) {
+  // Parsing error to ErrorType
+  ErrorType parseErrorType(dynamic error) {
     logger.d(error);
     if (error is DioError && error.type == DioErrorType.RESPONSE) {
-      return error.message;
+      ErrorCode errorCode = ErrorCode.unknown;
+      if (error.response.statusCode == 401) {
+        errorCode = ErrorCode.unauthorized;
+      }
+      return ErrorType(code: errorCode, message: error.message);
     }
-    return 'Unknown error';
+    return ErrorType();
   }
 }

@@ -6,6 +6,7 @@ import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/app_dialog.dart';
 import 'package:nft/services/app_loading.dart';
 import 'package:nft/services/remote/api_error.dart';
+import 'package:nft/services/remote/error_type.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
@@ -101,18 +102,7 @@ class _HomePageState extends State<HomePage>
           RaisedButton(
             key: const Key(AppConstant.loginPageRoute),
             onPressed: () async {
-              await safeCallApi(
-                provider.logout,
-                onStart: () async {
-                  AppLoadingProvider.show(context);
-                },
-                onFinally: () async {
-                  AppLoadingProvider.hide(context);
-                  context
-                      .navigator()
-                      ?.pushReplacementNamed(AppConstant.loginPageRoute);
-                },
-              );
+              _logout(context);
             },
             child: const Text('Logout'),
           ),
@@ -123,7 +113,28 @@ class _HomePageState extends State<HomePage>
 
   @override
   Future<void> onApiError(dynamic error) async {
-    logger.e(error);
-    AppDialogProvider.show(context, getErrorMessage(error));
+    final ErrorType errorType = parseErrorType(error);
+    await AppDialogProvider.show(context, errorType.message, title: 'Error');
+    await Future<void>.delayed(const Duration(seconds: 1));
+    if (errorType.code == ErrorCode.unauthorized) {
+      _logout(context);
+    }
+  }
+
+  // Logout function
+  Future<void> _logout(BuildContext context) async {
+    final HomeProvider provider =
+        Provider.of<HomeProvider>(context, listen: false);
+    await safeCallApi(
+      provider.logout,
+      onStart: () async {
+        AppLoadingProvider.show(context);
+      },
+      onFinally: () async {
+        AppLoadingProvider.hide(context);
+        context.navigator()?.pushReplacementNamed(AppConstant.loginPageRoute);
+      },
+      apiError: false,
+    );
   }
 }
