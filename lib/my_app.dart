@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
       ///            const RouteSettings(name: AppConstant.rootPageRoute))
       ///        as MaterialPageRoute<dynamic>)
       ///    .builder(context),
-      initialRoute: AppConstant.homePageRoute,
+      initialRoute: AppConstant.rootPageRoute,
       onGenerateRoute: appRoute.generateRoute,
       navigatorObservers: <NavigatorObserver>[appRoute.routeObserver],
     );
