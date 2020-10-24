@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nft/models/local/token.dart';
-import 'package:nft/services/local/credential.dart';
 import 'package:nft/utils/app_config.dart';
 
 class Api {

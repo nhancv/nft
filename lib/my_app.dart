@@ -12,7 +12,6 @@ import 'package:nft/services/local/credential.dart';
 import 'package:nft/services/local/storage.dart';
 import 'package:nft/services/local/storage_preferences.dart';
 import 'package:nft/services/remote/user_api.dart';
-import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';

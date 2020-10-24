@@ -47,7 +47,6 @@ void main() {
   // Mock class refs
   UserApi userApi;
   AppRoute appRoute;
-  LoginProvider loginProvider;
   AppLoadingProvider appLoadingProvider;
 
   // Widget to test
@@ -93,7 +92,6 @@ void main() {
             // Save provider ref here
             userApi = context.watch<UserApi>();
             appRoute = context.watch<AppRoute>();
-            loginProvider = context.watch<LoginProvider>();
             appLoadingProvider = context.watch<AppLoadingProvider>();
 
             // Mock navigator Observer

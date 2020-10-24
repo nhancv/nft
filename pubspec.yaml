@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   flutter_spinkit: ^4.1.2+1
   dio: ^3.0.10
-  flutter_screenutil: ^3.1.1
+  flutter_screenutil: ^3.2.0
   provider: ^4.3.2+2
   intl: ^0.16.1
   intl_translation: ^0.17.10+1

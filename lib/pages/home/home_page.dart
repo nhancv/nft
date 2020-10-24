@@ -45,8 +45,6 @@ class _HomePageState extends State<HomePage>
     // Get provider to trigger function
     final LocaleProvider localeProvider =
         Provider.of<LocaleProvider>(context, listen: false);
-    final HomeProvider provider =
-        Provider.of<HomeProvider>(context, listen: false);
     return ScreenWidget(
       body: Column(
         children: <Widget>[
