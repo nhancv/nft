@@ -3,7 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/models/local/token.dart';
-import 'package:nft/models/remote/log_in_response.dart';
+import 'package:nft/models/remote/login_response.dart';
 import 'package:nft/services/local/credential.dart';
 import 'package:nft/services/remote/user_api.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nft/generated/l10n.dart';
-import 'package:nft/models/remote/log_in_response.dart';
+import 'package:nft/models/remote/login_response.dart';
 import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app_dialog.dart';
 import 'package:nft/services/app_loading.dart';
