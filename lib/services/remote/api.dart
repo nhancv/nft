@@ -31,8 +31,10 @@ class Api {
   Future<Options> getAuthOptions({String contentType}) async {
     final Options options = await getOptions(contentType: contentType);
 
-    options.headers
-        .addAll(<String, String>{'CUSTOM-HEADER-KEY': 'CUSTOM-HEADER-KEY'});
+    if (token != null) {
+      options.headers.addAll(
+          <String, String>{'Authorization': 'Bearer ${token.accessToken}'});
+    }
 
     return options;
   }
