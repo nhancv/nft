@@ -4,17 +4,17 @@ import 'package:flutter/widgets.dart';
 
 class AppHelper {
   /// Show popup
-  static void showPopup(Widget child, BuildContext context,
-      {Function onAction}) {
+  static void showPopup(
+      Widget child,
+      BuildContext context,
+      Widget Function(BuildContext context) builder, {
+        bool barrierDismissible = false,
+      }) {
     showDialog<dynamic>(
-        context: context,
-
-        /// barrierDismissible: false,
-        builder: (BuildContext context) {
-          return Dialog(
-            child: child,
-          );
-        });
+      context: context,
+      barrierDismissible: false,
+      builder: builder,
+    );
   }
 
   /// blocks rotation; sets orientation to: portrait
