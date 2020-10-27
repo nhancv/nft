@@ -21,6 +21,30 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+// Default debug keystore info
+def keyAliasDefault = 'androiddebugkey'
+def keyPasswordDefault = 'android'
+def storeFileDefault = 'keystores/keystore-debug.jks'
+def storePasswordDefault = 'android'
+
+// Load a specific properties file to access the keystore if exists
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = file('../nft-keystore/key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} else {
+    // Load keystore properties from environment or set their default values
+    def env = System.getenv()
+    if (env['ANDROID_KEY_ALIAS']) keystoreProperties.put('keyAlias', env['ANDROID_KEY_ALIAS'])
+    else keystoreProperties.put('keyAlias', keyAliasDefault)
+    if (env['ANDROID_KEY_PASSWORD']) keystoreProperties.put('keyPassword', env['ANDROID_KEY_PASSWORD'])
+    else keystoreProperties.put('keyPassword', keyPasswordDefault)
+    if (env['ANDROID_STORE_FILE']) keystoreProperties.put('storeFile', env['ANDROID_STORE_FILE'])
+    else keystoreProperties.put('storeFile', storeFileDefault)
+    if (env['ANDROID_STORE_PASSWORD']) keystoreProperties.put('storePassword', env['ANDROID_STORE_PASSWORD'])
+    else keystoreProperties.put('storePassword', storePasswordDefault)
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -47,16 +71,16 @@ android {
 
     signingConfigs {
         debug {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file("keystores/keystore-debug.jks")
-            storePassword 'android'
+            keyAlias keyAliasDefault
+            keyPassword keyPasswordDefault
+            storeFile file(storeFileDefault)
+            storePassword storePasswordDefault
         }
         release {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file("keystores/keystore-release.jks")
-            storePassword 'android'
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
 
