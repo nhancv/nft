@@ -5,11 +5,10 @@ import 'package:flutter/widgets.dart';
 class AppHelper {
   /// Show popup
   static void showPopup(
-      Widget child,
-      BuildContext context,
-      Widget Function(BuildContext context) builder, {
-        bool barrierDismissible = false,
-      }) {
+    BuildContext context,
+    Widget Function(BuildContext context) builder, {
+    bool barrierDismissible = false,
+  }) {
     showDialog<dynamic>(
       context: context,
       barrierDismissible: false,
