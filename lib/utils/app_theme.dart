@@ -18,7 +18,7 @@ class AppTheme {
     this.primaryColor = Colors.blueGrey,
     this.accentColor = Colors.blueGrey,
     this.backgroundColor = const Color(0xFFF2F2F2),
-    this.headerBgColor = Colors.black,
+    this.headerBgColor = Colors.blueGrey,
   });
 
   /// Light theme
