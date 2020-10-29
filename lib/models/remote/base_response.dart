@@ -35,12 +35,15 @@ class BaseResponse<T> {
   }
 
   /// Parsing data to object
+  /// dataKey = null mean parse from root
   dynamic parsing(Map<String, dynamic> fullJson,
       {String dataKey = 'data', String errorKey = 'error'}) {
     if (fullJson != null) {
-      data = fullJson[dataKey] != null ? jsonToData(fullJson[dataKey]) : null;
-      error = fullJson[errorKey] != null
-          ? BaseError.fromJson(fullJson[errorKey] as Map<String, dynamic>)
+      final dynamic dataJson = dataKey == null ?  fullJson[dataKey] : fullJson;
+      final dynamic errorJson = errorKey == null ? fullJson[errorKey] : fullJson;
+      data = dataJson != null ? jsonToData(dataJson) : null;
+      error = errorJson != null
+          ? BaseError.fromJson(errorJson as Map<String, dynamic>)
           : null;
     }
   }
