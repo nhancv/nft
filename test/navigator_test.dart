@@ -43,7 +43,7 @@ void main() {
         providers: <SingleChildWidget>[
           Provider<AppRoute>(create: (_) => AppRoute()),
           Provider<Storage>(create: (_) => StoragePreferences()),
-          Provider<Credential>(
+          ChangeNotifierProvider<Credential>(
               create: (BuildContext context) =>
                   Credential(context.read<Storage>())),
           ProxyProvider<Credential, UserApi>(

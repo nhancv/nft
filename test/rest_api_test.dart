@@ -27,7 +27,9 @@ import 'package:provider/single_child_widget.dart';
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 /// Mock Credential
-class MockCredential extends Mock implements Credential {
+class MockCredential extends Credential {
+  MockCredential(Storage storage) : super(storage);
+
   @override
   Future<bool> storeCredential(final Token token, {bool cache = false}) async {
     return true;
@@ -65,7 +67,9 @@ void main() {
           Provider<AppRoute>(create: (_) => AppRoute()),
           Provider<Storage>(create: (_) => StoragePreferences()),
           ChangeNotifierProvider<Credential>(
-              create: (BuildContext context) => MockCredential()),
+              create: (BuildContext context) => MockCredential(
+                    context.read<Storage>(),
+                  )),
           ProxyProvider<Credential, UserApi>(
               create: (_) => MockAuthApi(),
               update: (_, Credential credential, UserApi userApi) {

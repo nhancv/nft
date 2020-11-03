@@ -39,8 +39,9 @@ class BaseResponse<T> {
   dynamic parsing(Map<String, dynamic> fullJson,
       {String dataKey = 'data', String errorKey = 'error'}) {
     if (fullJson != null) {
-      final dynamic dataJson = dataKey != null ?  fullJson[dataKey] : fullJson;
-      final dynamic errorJson = errorKey != null ? fullJson[errorKey] : fullJson;
+      final dynamic dataJson = dataKey != null ? fullJson[dataKey] : fullJson;
+      final dynamic errorJson =
+          errorKey != null ? fullJson[errorKey] : fullJson;
       data = dataJson != null ? jsonToData(dataJson) : null;
       error = errorJson != null
           ? BaseError.fromJson(errorJson as Map<String, dynamic>)

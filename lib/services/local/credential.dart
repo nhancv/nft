@@ -34,9 +34,10 @@ class Credential with ChangeNotifier {
   }
 
   // Store credential
-  Future<bool> storeCredential(final Token newToken, {bool cache = false}) async {
-    final bool saveRes = await _storage.saveData(
-        Token.localKey, newToken != null ? jsonEncode(newToken.toJson()) : null);
+  Future<bool> storeCredential(final Token newToken,
+      {bool cache = false}) async {
+    final bool saveRes = await _storage.saveData(Token.localKey,
+        newToken != null ? jsonEncode(newToken.toJson()) : null);
     if (saveRes && cache) {
       token = newToken;
     }
