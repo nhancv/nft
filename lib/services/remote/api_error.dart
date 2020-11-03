@@ -71,7 +71,7 @@ mixin ApiError {
     logger.d(error);
     if (error is DioError && error.type == DioErrorType.RESPONSE) {
       ErrorCode errorCode = ErrorCode.unknown;
-      if (error.response.statusCode == 401) {
+      if (error.response?.statusCode == 401) {
         errorCode = ErrorCode.unauthorized;
       }
       return ErrorType(code: errorCode, message: error.message);
