@@ -21,7 +21,7 @@ mixin ApiError {
     Future<T> Function() dioApi, {
     Future<void> Function() onStart,
     Future<void> Function(dynamic error) onError,
-    Future<void> Function() onCompleted,
+    Future<void> Function(bool status, T res) onCompleted,
     Future<void> Function() onFinally,
     bool apiError = true,
   }) async {
@@ -36,7 +36,7 @@ mixin ApiError {
 
       // On completed, use for hide loading
       if (onCompleted != null) {
-        await onCompleted();
+        await onCompleted(true, res);
       }
       // Return api response
       return res;
@@ -44,7 +44,7 @@ mixin ApiError {
       // In case error:
       // On completed, use for hide loading
       if (onCompleted != null) {
-        await onCompleted();
+        await onCompleted(false, null);
       }
 
       // On inline error

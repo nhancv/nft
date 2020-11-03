@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage>
                       final bool success =
                           await safeCallApi(provider.login, onStart: () async {
                         AppLoadingProvider.show(context);
-                      }, onCompleted: () async {
+                      }, onCompleted: (bool status, bool res) async {
                         AppLoadingProvider.hide(context);
                       }, onError: (dynamic error) async {
                         final ErrorType errorType = parseErrorType(error);
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage>
                   onStart: () async {
                     AppLoadingProvider.show(context);
                   },
-                  onCompleted: () async {
+                  onCompleted: (bool status, LoginResponse res) async {
                     AppLoadingProvider.hide(context);
                   },
                 );
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage>
                   onStart: () async {
                     AppLoadingProvider.show(context);
                   },
-                  onCompleted: () async {
+                  onCompleted: (bool status, void res) async {
                     AppLoadingProvider.hide(context);
                   },
                 );
