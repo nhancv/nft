@@ -18,7 +18,7 @@ class CounterPage extends StatefulWidget {
 class _CounterPageState extends State<CounterPage> with DynamicSize {
   @override
   Widget build(BuildContext context) {
-    super.initDynamicSize(context);
+    initDynamicSize(context);
 
     return AppBarEmptyP(
       child: DismissKeyboardW(

@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/screenutil.dart';
 /// class _MyAppState extends State<MyApp> with DynamicSize {
 ///   @override
 ///   Widget build(BuildContext context) {
-///     super.initDynamicSize(context);
+///     initDynamicSize(context);
 ///     return Container();
 ///   }
 /// }
