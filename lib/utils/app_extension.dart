@@ -1,5 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+class AppExtension {}
+
 /// Extension for screen util
 extension SizeExtension on num {
   double get W => w.toDouble();

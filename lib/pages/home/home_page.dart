@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     // Get provider to trigger function
     final LocaleProvider localeProvider =
-    Provider.of<LocaleProvider>(context, listen: false);
+        Provider.of<LocaleProvider>(context, listen: false);
     return PAppBarEmpty(
       child: WDismissKeyboard(
         child: Column(
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage>
             // Example to use selector instead consumer to optimize render performance
             Selector<HomeProvider, String>(
               selector: (_, HomeProvider provider) =>
-              provider.token?.toJson()?.toString() ?? '',
+                  provider.token?.toJson()?.toString() ?? '',
               builder: (_, String tokenInfo, __) {
                 return Text(
                   tokenInfo,
