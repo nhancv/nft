@@ -10,8 +10,8 @@ import 'package:nft/services/remote/error_type.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
-import 'package:nft/widgets/appbar_empty_p.dart';
-import 'package:nft/widgets/dismiss_keyboard_w.dart';
+import 'package:nft/widgets/p_appbar_empty.dart';
+import 'package:nft/widgets/w_dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,8 +46,8 @@ class _HomePageState extends State<HomePage>
     // Get provider to trigger function
     final LocaleProvider localeProvider =
     Provider.of<LocaleProvider>(context, listen: false);
-    return AppBarEmptyP(
-      child: DismissKeyboardW(
+    return PAppBarEmpty(
+      child: WDismissKeyboard(
         child: Column(
           children: <Widget>[
             Padding(

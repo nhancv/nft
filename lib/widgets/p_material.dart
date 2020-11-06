@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MaterialP extends StatelessWidget {
-  const MaterialP({@required this.child, Key key}) : super(key: key);
+class PMaterial extends StatelessWidget {
+  const PMaterial({@required this.child, Key key}) : super(key: key);
 
   final Widget child;
 

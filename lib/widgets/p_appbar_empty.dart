@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nft/utils/app_theme.dart';
-import 'package:nft/widgets/material_p.dart';
+import 'package:nft/widgets/p_material.dart';
 
-class AppBarEmptyP extends StatelessWidget {
-  const AppBarEmptyP({@required this.child, Key key}) : super(key: key);
+class PAppBarEmpty extends StatelessWidget {
+  const PAppBarEmpty({@required this.child, Key key}) : super(key: key);
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.theme();
-    return MaterialP(
+    return PMaterial(
       child: Scaffold(
         backgroundColor: theme.backgroundColor ?? Colors.transparent,
         appBar: PreferredSize(

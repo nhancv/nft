@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 import 'api.dart';
 
-class UserApi extends Api {
+class ApiUser extends Api {
   /// Login
   Future<Response<Map<String, dynamic>>> logIn() async {
     final Options options = await getOptions();

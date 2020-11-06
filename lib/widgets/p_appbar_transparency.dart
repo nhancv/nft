@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nft/utils/app_theme.dart';
-import 'package:nft/widgets/material_p.dart';
+import 'package:nft/widgets/p_material.dart';
 
-class AppBarTransparencyP extends StatelessWidget {
-  const AppBarTransparencyP({@required this.child, Key key}) : super(key: key);
+class PAppBarTransparency extends StatelessWidget {
+  const PAppBarTransparency({@required this.child, Key key}) : super(key: key);
 
   final Widget child;
 
@@ -13,7 +13,7 @@ class AppBarTransparencyP extends StatelessWidget {
     final AppTheme theme = context.theme();
     final SystemUiOverlayStyle uiOverlayStyle =
         theme.isDark ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light;
-    return MaterialP(
+    return PMaterial(
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: uiOverlayStyle.copyWith(statusBarColor: Colors.transparent),
         child: Scaffold(

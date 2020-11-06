@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nft/models/local/token.dart';
 import 'package:nft/services/local/credential.dart';
-import 'package:nft/services/remote/user_api.dart';
+import 'package:nft/services/remote/api_user.dart';
 
 class HomeProvider with ChangeNotifier {
   HomeProvider(this._api, this._credential);
@@ -9,7 +9,7 @@ class HomeProvider with ChangeNotifier {
   //#region PRIVATE PROPERTIES
   // -----------------
   // Authentication api
-  final UserApi _api;
+  final ApiUser _api;
 
   // Credential
   final Credential _credential;

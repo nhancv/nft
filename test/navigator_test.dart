@@ -13,7 +13,7 @@ import 'package:nft/services/local/credential.dart';
 import 'package:nft/services/local/storage.dart';
 import 'package:nft/services/local/storage_preferences.dart';
 import 'package:nft/services/locale_provider.dart';
-import 'package:nft/services/remote/user_api.dart';
+import 'package:nft/services/remote/api_user.dart';
 import 'package:nft/utils/app_config.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
@@ -47,9 +47,9 @@ void main() {
           ChangeNotifierProvider<Credential>(
               create: (BuildContext context) =>
                   Credential(context.read<Storage>())),
-          ProxyProvider<Credential, UserApi>(
-              create: (_) => UserApi(),
-              update: (_, Credential credential, UserApi userApi) {
+          ProxyProvider<Credential, ApiUser>(
+              create: (_) => ApiUser(),
+              update: (_, Credential credential, ApiUser userApi) {
                 return userApi..token = credential.token;
               }),
           Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
@@ -59,12 +59,12 @@ void main() {
               create: (_) => AppThemeProvider()),
           ChangeNotifierProvider<HomeProvider>(
               create: (BuildContext context) => HomeProvider(
-                    context.read<UserApi>(),
+                    context.read<ApiUser>(),
                     context.read<Credential>(),
                   )),
           ChangeNotifierProvider<LoginProvider>(
               create: (BuildContext context) => LoginProvider(
-                    context.read<UserApi>(),
+                    context.read<ApiUser>(),
                     context.read<Credential>(),
                   )),
         ],
