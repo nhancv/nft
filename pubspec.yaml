@@ -23,6 +23,8 @@ dependencies:
   tuple: ^1.0.3
   email_validator: ^1.0.6
   npreferences: ^3.0.0+1
+  flushbar: ^1.10.4
+  fluttertoast: ^7.1.1
 
 flutter_intl:
   enabled: true

@@ -13,6 +13,9 @@ class AppRoute {
   final RouteObserver<Route<dynamic>> routeObserver =
       RouteObserver<Route<dynamic>>();
 
+  // Get app context
+  BuildContext get appContext => navigatorKey.currentContext;
+
   /// Generate route for app here
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
