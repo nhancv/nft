@@ -41,12 +41,12 @@ dev_dependencies:
   flutter_launcher_icons: any
 
 flutter_icons:
-  android: true
   ios: true
-  image_path_android: "assets/base/icons/app_icon_ad.png"
+  android: true
   image_path_ios: "assets/base/icons/app_icon_ios.png"
-  adaptive_icon_background: "assets/base/icons/app_icon_adaptive.png" # for Android 8.0+ devices
-  adaptive_icon_foreground: "assets/base/icons/app_icon_adaptive.png" # for Android 8.0+ devices
+  image_path_android: "assets/base/icons/app_icon_ad.png"
+  adaptive_icon_background: "assets/base/icons/adaptive_icon_background.png" # for Android 8.0+ devices
+  adaptive_icon_foreground: "assets/base/icons/adaptive_icon_foreground.png" # for Android 8.0+ devices
 # To Generate icon
 #  flutter pub get
 #  flutter pub run flutter_launcher_icons:main
