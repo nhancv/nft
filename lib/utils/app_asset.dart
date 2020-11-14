@@ -1,6 +1,6 @@
 /// For image assets
 class AppImages {
-  static const String icAppIcon = 'assets/base/icons/app_icon_adaptive.png';
+  static const String icAppIcon = 'assets/base/icons/adaptive_icon_foreground.png';
 }
 
 /// For video assets
