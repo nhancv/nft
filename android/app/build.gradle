@@ -24,8 +24,8 @@ if (flutterVersionName == null) {
 // Default debug keystore info
 def keyAliasDefault = 'androiddebugkey'
 def keyPasswordDefault = 'android'
-def storeFileDefault = 'keystores/keystore-debug.jks'
 def storePasswordDefault = 'android'
+def storeFileDefault = 'keystores/keystore-debug.jks'
 
 // Load a specific properties file to access the keystore if exists
 def keystoreProperties = new Properties()
@@ -41,10 +41,10 @@ if (keystorePropertiesFile.exists()) {
     else keystoreProperties.put('keyAlias', keyAliasDefault)
     if (env['ANDROID_KEY_PASSWORD']) keystoreProperties.put('keyPassword', env['ANDROID_KEY_PASSWORD'])
     else keystoreProperties.put('keyPassword', keyPasswordDefault)
-    if (env['ANDROID_STORE_FILE']) keystoreProperties.put('storeFile', env['ANDROID_STORE_FILE'])
-    else keystoreProperties.put('storeFile', storeFileDefault)
     if (env['ANDROID_STORE_PASSWORD']) keystoreProperties.put('storePassword', env['ANDROID_STORE_PASSWORD'])
     else keystoreProperties.put('storePassword', storePasswordDefault)
+    if (env['ANDROID_STORE_FILE']) keystoreProperties.put('storeFile', env['ANDROID_STORE_FILE'])
+    else keystoreProperties.put('storeFile', storeFileDefault)
 }
 
 apply plugin: 'com.android.application'

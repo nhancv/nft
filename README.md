@@ -211,8 +211,8 @@ storeFile=keystores/keystore-release.jks
 ```
 cd android/app/keystores/
 export keyAlias=
-export storePassword=
 export keyPassword=
+export storePassword=
 keytool -genkey -v -keystore keystore-release.jks -alias $keyAlias -keyalg RSA -keysize 2048 -validity 1000000 -storepass $storePassword -keypass $keyPassword
 ```
 
