@@ -194,19 +194,16 @@ keyAlias=
 keyPassword=
 storePassword=
 storeFile=keystores/keystore-release.jks
+
+#KEY INFO
+#CN(first and last name): 
+#OU(organizational unit): 
+#O(organization): 
+#L(City or Locality): 
+#ST(State or Province): 
+#C(country code): 
 ```
  
- * Backup all information when create keystore. 
- ```
- KEY INFO
- CN(first and last name): 
- OU(organizational unit): 
- O(organization): 
- L(City or Locality):
- ST(State or Province):
- C(country code):
- ```
-
 - Create `android/app/keystores/keystore-release.jks`
 ```
 cd android/app/keystores/

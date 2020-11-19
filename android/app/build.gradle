@@ -75,14 +75,14 @@ android {
         debug {
             keyAlias keyAliasDefault
             keyPassword keyPasswordDefault
-            storeFile file(storeFileDefault)
             storePassword storePasswordDefault
+            storeFile file(storeFileDefault)
         }
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
+            storeFile file(keystoreProperties['storeFile'])
         }
     }
 
