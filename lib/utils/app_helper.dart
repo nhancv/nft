@@ -21,19 +21,19 @@ class AppHelper {
   // Show snack bar
   static void showFlushBar(BuildContext context, String message) {
     Flushbar<void>(
-        message: message,
-        duration: const Duration(milliseconds: 2000),
-        flushbarStyle: FlushbarStyle.GROUNDED)
+            message: message,
+            duration: const Duration(milliseconds: 2000),
+            flushbarStyle: FlushbarStyle.GROUNDED)
         .show(context);
   }
 
   // Show toast
   static void showToast(
-      String msg, {
-        Toast toastLength,
-        int timeInSecForIosWeb,
-        Color backgroundColor,
-      }) {
+    String msg, {
+    Toast toastLength,
+    int timeInSecForIosWeb,
+    Color backgroundColor,
+  }) {
     Fluttertoast.showToast(
         msg: msg,
         toastLength: toastLength ?? Toast.LENGTH_SHORT,

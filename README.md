@@ -2,14 +2,22 @@
 Flutter Template
 
 ```
-Flutter 1.20.2 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision bbfbf1770c (2 weeks ago) • 2020-08-13 08:33:09 -0700
-Engine • revision 9d5b21729f
-Tools • Dart 2.9.1
+[✓] Flutter (Channel stable, 1.22.3, on macOS 11.0.1 20B29, locale en-VN)
+    • Flutter version 1.22.3
+    • Framework revision 8874f21e79 (3 weeks ago), 2020-10-29 14:14:35 -0700
+    • Engine revision a1440ca392
+    • Dart version 2.10.3
 ```
 
 ## Update app icon
 
+- Update app icon resources: 
++ `assets/base/icons/adaptive_icon_background.png`
++ `assets/base/icons/adaptive_icon_foreground.png`
++ `assets/base/icons/app_icon_ad.png`
++ `assets/base/icons/app_icon_ios.png`
+
+- Run command to generate native resources
 ```
 flutter pub get
 flutter pub run flutter_launcher_icons:main
@@ -58,41 +66,63 @@ Widget build(BuildContext context) {
 ### Generate intl via cli
 ```
 #https://pub.dev/packages/intl_utils
+flutter pub get
 flutter pub run intl_utils:generate
 ```
 
 ## Structure
 ```
-lib
-  |-generated                     ---> auto genrated by flutter_intl
-  |-I10n                          ---> auto genrated by flutter_intl
-    |-intl_en.arb                 ---> define your translation here
-  |-models                        ---> places of object models
-  |-pages                         ---> define all pages/screens of application
-    |-home                        ---> we should organize as app module (eg: home, about, ...) rather then platform module (eg: activity, dialog, ...)
-      |-home_provider.dart
-      |-home_screen.dart
-  |-services                      ---> define app services (database service, network service)
-    |-remote
-      |-api.dart
-      |-auth_api.dart
-    |-app_loading.dart
-    |-logging.dart
-  |-utils                         ---> app utils
-    |-app_asset.dart
-    |-app_config.dart
-    |-app_constant.dart
-    |-app_extension.dart
-    |-app_helper.dart
-    |-app_log.dart
-    |-app_route.dart
-    |-app_style.dart
-    |-app_theme.dart
-  |-widgets                       ---> app widgets
-  |-main.dart                     ---> each main.dart file point to each env of app. Ex: default main.dart for dev env, create new main_prod.dart for prod env
-  |-my_app.dart                   ---> application bootstrap
-test                              ---> widget/unit testing
-test_driver                       ---> integration testing
+lib/
+  |-generated/                     ---> auto genrated by flutter_intl
+  |-I10n/                          ---> place internalization files
+    |-intl_*.arb                   ---> define your translation text here
+  |-models/                        ---> place object models
+    |-local/                       ---> place local models
+    |-remote/                      ---> place remote models
+  |-pages/                         ---> define all pages/screens of application
+    |-home/                        ---> place app home module included home ui and logic. We should organize as app module (eg: home, about, ...) rather then platform module (eg: activity, dialog, ...)
+      |-home_page.dart             ---> define home ui
+      |-home_provider.dart         ---> define home logic
+  |-services/                      ---> place app services (database service, network service)
+    |-local/                       ---> place local data services
+      |-credential.dart            ---> define app credential
+      |-storage.dart               ---> define storage service
+      |-storage_preferences.dart   ---> define storage with shared preferences service
+    |-remote/                      ---> place remote data services
+      |-api.dart                   ---> define api base class
+      |-api_error.dart             ---> define api error/exception handler
+      |-api_user.dart              ---> define sample of api user
+      |-error_type.dart            ---> define api error type
+    |-app_dialog.dart              ---> define app dialog service. Easy to show or hide alert dialog
+    |-app_loading.dart             ---> define app loading service. Easy to show or hide loading view
+    |-dynamic_size.dart            ---> define dynamic size service. Adapting screen and font size
+    |-locale_provider.dart         ---> define locale provider service. Provide update locale
+    |-state_safety.dart            ---> define sate safety service. It's used for Stateful widget, check mounted before setState
+  |-utils/                         ---> place app utils
+    |-app_asset.dart               ---> define app assets
+    |-app_config.dart              ---> define app config multi environment
+    |-app_constant.dart            ---> define app constant, route name
+    |-app_extension.dart           ---> define app extension
+    |-app_helper.dart              ---> define app helper. Provide util function such as show popup, toast, flushbar, orientation mode
+    |-app_log.dart                 ---> define app logger. Log safety with production mode
+    |-app_route.dart               ---> define app route logic
+    |-app_style.dart               ---> define app style
+    |-app_theme.dart               ---> define app theme. Provide multi theme such as dart, light
+  |-widgets/                       ---> place app widgets
+    |-p_appbar_empty.dart          ---> define wrapper widget use for page, color status bar but empty appbar 
+    |-p_appbar_transparency.dart   ---> define wrapper widget use for page, transparent status bar
+    |-p_material.dart              ---> define wrapper widget use for page, provide material app block
+    |-w_dismiss_keyboard.dart      ---> define component widget with auto dismiss keyboard when click on screen
+  |-main.dart                      ---> each main.dart file point to each env of app. Ex: default main.dart for dev env, create new main_prod.dart for prod env
+  |-my_app.dart                    ---> application bootstrap
+test/                              ---> place app unit, widget tests
+  |-counter_provider_test.dart     ---> define test provider script
+  |-counter_widget_test.dart       ---> define test widget script
+  |-navigator_test.dart            ---> define test navigator script
+  |-rest_api_test.dart             ---> define test rest api script
+test_driver/                       ---> place integration testing
+  |-app.dart                       ---> define application bootstrap for integration testing
+  |-app_test.dart                  ---> define integration test script
 ```
 
 ## Versioning
@@ -151,7 +181,7 @@ open coverage/html/index.html
 flutter drive --target=test_driver/app.dart
 ```
 
-## Release
+## Release and publish to store
 - Android: https://flutter.dev/docs/deployment/android
 - iOS: https://flutter.dev/docs/deployment/ios
 
