@@ -31,9 +31,11 @@ def storePasswordDefault = 'android'
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = file('../key.properties')
 if (keystorePropertiesFile.exists()) {
+    println "Apply key.properties file"
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 } else {
     // Load keystore properties from environment or set their default values
+    println "key.properties file was not found. Use env or default value instead."
     def env = System.getenv()
     if (env['ANDROID_KEY_ALIAS']) keystoreProperties.put('keyAlias', env['ANDROID_KEY_ALIAS'])
     else keystoreProperties.put('keyAlias', keyAliasDefault)

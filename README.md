@@ -199,9 +199,6 @@ storeFile=keystores/keystore-release.jks
  * Backup all information when create keystore. 
  ```
  KEY INFO
- Key alias: <keyAlias>
- Key password: <keyPassword> 
- Store password: <storePassword>
  CN(first and last name): 
  OU(organizational unit): 
  O(organization): 
@@ -213,7 +210,10 @@ storeFile=keystores/keystore-release.jks
 - Create `android/app/keystores/keystore-release.jks`
 ```
 cd android/app/keystores/
-keytool -genkey -v -keystore keystore-release.jks -alias <keyAlias> -keyalg RSA -keysize 2048 -validity 1000000 -storepass <storePassword> -keypass <keyPassword>
+export keyAlias=
+export storePassword=
+export keyPassword=
+keytool -genkey -v -keystore keystore-release.jks -alias $keyAlias -keyalg RSA -keysize 2048 -validity 1000000 -storepass $storePassword -keypass $keyPassword
 ```
 
 - Build release binary. There 2 type of binary app bundle with optimized size when download from Store and apk type.
