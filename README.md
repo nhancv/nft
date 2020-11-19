@@ -182,8 +182,66 @@ flutter drive --target=test_driver/app.dart
 ```
 
 ## Release and publish to store
-- Android: https://flutter.dev/docs/deployment/android
-- iOS: https://flutter.dev/docs/deployment/ios
+
+### Android 
+
+- Docs: https://flutter.dev/docs/deployment/android
+- Prepare release keystore:
+- Create `android/key.properties`
+    
+```
+keyAlias=
+keyPassword=
+storePassword=
+storeFile=keystores/keystore-release.jks
+```
+ 
+ * Backup all information when create keystore. 
+ ```
+ KEY INFO
+ Key alias: <keyAlias>
+ Key password: <keyPassword> 
+ Store password: <storePassword>
+ CN(first and last name): 
+ OU(organizational unit): 
+ O(organization): 
+ L(City or Locality):
+ ST(State or Province):
+ C(country code):
+ ```
+
+- Create `android/app/keystores/keystore-release.jks`
+```
+cd android/app/keystores/
+keytool -genkey -v -keystore keystore-release.jks -alias <keyAlias> -keyalg RSA -keysize 2048 -validity 1000000 -storepass <storePassword> -keypass <keyPassword>
+```
+
+- Build release binary. There 2 type of binary app bundle with optimized size when download from Store and apk type.
+
++ To build apk
+```
+flutter build apk
+```
++ To build app bundle
+```
+flutter build appbundle
+```
+
+* Get binary from the path which displayed in console after build successfully.
+
+### iOS
+
+- Docs: https://flutter.dev/docs/deployment/ios
+- Create certs to build on `https://developer.apple.com`
+    + Create app identity
+    + Create certification for app
+    + Create provision profile point to app identity and certification
+- Create application on `https://appstoreconnect.apple.com`
+- Build dart files first, at project root level
+```
+flutter build ios
+```
+- Build native application on Xcode -> Select build target to `Any iOS devices` -> Select `Product` -> `Archive` -> Upload to Store
 
 ------------------------------
 
