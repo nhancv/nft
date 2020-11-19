@@ -29,7 +29,7 @@ def storePasswordDefault = 'android'
 
 // Load a specific properties file to access the keystore if exists
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = file('../nft-keystore/key.properties')
+def keystorePropertiesFile = file('../key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 } else {
