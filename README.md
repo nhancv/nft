@@ -141,8 +141,8 @@ Version code: yymmddHHMM
 https://medium.com/p/2dd558f8b524
 
 ## Multi env
-- Create new env factory in app_config.dart.
-- Create new file called main_<env>.dart. Ex: main_prod.dart and config to prod env
+- Create a new env factory in app_config.dart.
+- Create a new file called main_<env>.dart. Ex: main_prod.dart and config to prod env
 - Build with specific env
 ```
 # default as dev
