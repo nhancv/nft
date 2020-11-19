@@ -136,7 +136,7 @@ Version code: 2003271407
 Version name: major.minor.build/patch
 Version code: yymmddHHMM
 
-* Remember to increase bold the version name and code also.
+* Remember to increase bold the version name and code as well.
 
 https://medium.com/p/2dd558f8b524
 
