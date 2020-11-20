@@ -20,11 +20,18 @@ workflows:
         - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
     - flutter-test@0:
         inputs:
-        - generate_code_coverage_files: 'yes'
+        - generate_code_coverage_files: 'no'
         - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
     - flutter-build@0:
         inputs:
         - platform: android
+    - appcenter-deploy-android@1:
+        inputs:
+        - owner_name: nhancv
+        - app_name: nft
+        - distribution_group: beta
+        - app_path: "$BITRISE_APK_PATH"
+        - api_token: "$APP_CENTER_TOKEN"
     - deploy-to-bitrise-io@1: {}
     - cache-push@2: {}
 app:
