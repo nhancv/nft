@@ -8,13 +8,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nft/pages/counter/counter_page.dart';
+import 'package:nft/utils/app_theme.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   // Testing in flutter gives error MediaQuery.of() called
   // with a context that does not contain a MediaQuery
   Widget buildTestableWidget(Widget widget) {
     return MediaQuery(
-        data: const MediaQueryData(), child: MaterialApp(home: widget));
+        data: const MediaQueryData(),
+        child: ChangeNotifierProvider<AppThemeProvider>(
+          create: (_) => AppThemeProvider(),
+          builder: (_, __) {
+            return MaterialApp(home: widget);
+          },
+        ));
   }
 
   /// Test case:
