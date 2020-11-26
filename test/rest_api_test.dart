@@ -5,7 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/models/local/token.dart';
-import 'package:nft/my_app.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/login/login_page.dart';

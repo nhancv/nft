@@ -1,3 +1,7 @@
+## [1.0.30+2011301333] - November 30, 2020.
+
+* Update docs
+
 ## [1.0.29+2009302309] - September 30, 2020.
 
 * Update libs
