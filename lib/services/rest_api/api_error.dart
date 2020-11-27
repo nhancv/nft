@@ -68,13 +68,14 @@ mixin ApiError {
 
   // Parsing error to ErrorType
   ApiErrorType parseApiErrorType(dynamic error) {
-    logger.d(error);
     if (error is DioError && error.type == DioErrorType.RESPONSE) {
       ApiErrorCode errorCode = ApiErrorCode.unknown;
       if (error.response?.statusCode == 401) {
         errorCode = ApiErrorCode.unauthorized;
       }
       return ApiErrorType(code: errorCode, message: error.message);
+    } else {
+      logger.e(error);
     }
     return ApiErrorType();
   }
