@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:nft/models/local/token.dart';
-import 'package:nft/services/local/storage.dart';
+import 'package:nft/services/cache/storage.dart';
 
 class Credential with ChangeNotifier {
   Credential(this._storage);

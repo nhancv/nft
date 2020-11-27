@@ -1,4 +1,4 @@
-import 'package:nft/services/local/storage.dart';
+import 'package:nft/services/cache/storage.dart';
 import 'package:npreferences/npreferences.dart';
 
 /// Implement Storage by SharedPreferences

@@ -92,20 +92,21 @@ lib/
       |-home_page.dart             ---> define home ui
       |-home_provider.dart         ---> define home logic
   |-services/                      ---> place app services (database service, network service)
-    |-local/                       ---> place local data services
+    |-app/                         ---> place local data services
+      |-app_dialog.dart            ---> define app dialog service. Easy to show or hide alert dialog
+      |-app_loading.dart           ---> define app loading service. Easy to show or hide loading view
+      |-dynamic_size.dart          ---> define dynamic size service. Adapting screen and font size
+      |-locale_provider.dart       ---> define locale provider service. Provide update locale
+      |-state_safety.dart          ---> define sate safety service. It's used for Stateful widget, check mounted before setState
+    |-cache/                       ---> place local data services
       |-credential.dart            ---> define app credential
       |-storage.dart               ---> define storage service
       |-storage_preferences.dart   ---> define storage with shared preferences service
-    |-remote/                      ---> place remote data services
+    |-rest_api/                      ---> place remote data services
       |-api.dart                   ---> define api base class
       |-api_error.dart             ---> define api error/exception handler
       |-api_user.dart              ---> define sample of api user
       |-error_type.dart            ---> define api error type
-    |-app_dialog.dart              ---> define app dialog service. Easy to show or hide alert dialog
-    |-app_loading.dart             ---> define app loading service. Easy to show or hide loading view
-    |-dynamic_size.dart            ---> define dynamic size service. Adapting screen and font size
-    |-locale_provider.dart         ---> define locale provider service. Provide update locale
-    |-state_safety.dart            ---> define sate safety service. It's used for Stateful widget, check mounted before setState
   |-utils/                         ---> place app utils
     |-app_asset.dart               ---> define app assets
     |-app_config.dart              ---> define app config multi environment

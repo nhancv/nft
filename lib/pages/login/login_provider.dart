@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/models/local/token.dart';
 import 'package:nft/models/remote/login_response.dart';
-import 'package:nft/services/local/credential.dart';
-import 'package:nft/services/remote/api_user.dart';
+import 'package:nft/services/cache/credential.dart';
+import 'package:nft/services/rest_api/api_user.dart';
 
 class LoginProvider with ChangeNotifier {
   LoginProvider(this._api, this._credential);

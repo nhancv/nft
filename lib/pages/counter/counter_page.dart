@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/pages/counter/counter_provider.dart';
-import 'package:nft/services/dynamic_size.dart';
+import 'package:nft/services/app/dynamic_size.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
 import 'package:nft/widgets/w_dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
