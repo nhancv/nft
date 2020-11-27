@@ -5,7 +5,7 @@ import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
-import 'package:nft/services/rest_api/error_type.dart';
+import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
@@ -128,19 +128,19 @@ class _LoginPageState extends State<LoginPage>
                 onPressed: context
                         .select((LoginProvider provider) => provider.formValid)
                     ? () async {
-                        final bool success = await safeCallApi(provider.login,
+                        final bool success = await apiCallSafety(provider.login,
                             onStart: () async {
                           AppLoadingProvider.show(context);
                         }, onCompleted: (bool status, bool res) async {
                           AppLoadingProvider.hide(context);
                         }, onError: (dynamic error) async {
-                          final ErrorType errorType = parseErrorType(error);
+                          final ApiErrorType errorType = parseApiErrorType(error);
                           AppDialogProvider.show(
                             context,
                             errorType.message,
                             title: 'Error',
                           );
-                        }, apiError: false);
+                        }, skipOnError: false);
                         if (success == true) {
                           context
                               .navigator()
@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage>
               RaisedButton(
                 key: const Key('callApiErrorBtnKey'),
                 onPressed: () async {
-                  final LoginResponse loginResponse = await safeCallApi(
+                  final LoginResponse loginResponse = await apiCallSafety(
                     provider.logInWithError,
                     onStart: () async {
                       AppLoadingProvider.show(context);
@@ -179,7 +179,7 @@ class _LoginPageState extends State<LoginPage>
               RaisedButton(
                 key: const Key('callApiExceptionBtnKey'),
                 onPressed: () async {
-                  safeCallApi(
+                  apiCallSafety(
                     provider.logInWithException,
                     onStart: () async {
                       AppLoadingProvider.show(context);
@@ -210,7 +210,7 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Future<void> onApiError(dynamic error) async {
-    final ErrorType errorType = parseErrorType(error);
+    final ApiErrorType errorType = parseApiErrorType(error);
     AppDialogProvider.show(context, errorType.message);
   }
 }

@@ -1,3 +1,7 @@
+## [1.0.31+2011301334] - November 30, 2020.
+
+* Structure service
+
 ## [1.0.30+2011301333] - November 30, 2020.
 
 * Update docs

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:nft/services/rest_api/error_type.dart';
+import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/utils/app_log.dart';
 
 mixin ApiError {
@@ -17,13 +17,13 @@ mixin ApiError {
   /// - onCompleted: the function executed after api or before crashing, can be null
   /// - onFinally: the function executed end of function, can be null
   /// - apiError: true as default if you want to forward the error to onApiError
-  Future<T> safeCallApi<T>(
+  Future<T> apiCallSafety<T>(
     Future<T> Function() dioApi, {
     Future<void> Function() onStart,
     Future<void> Function(dynamic error) onError,
     Future<void> Function(bool status, T res) onCompleted,
     Future<void> Function() onFinally,
-    bool apiError = true,
+    bool skipOnError = true,
   }) async {
     try {
       // On start, use for show loading
@@ -53,7 +53,7 @@ mixin ApiError {
       }
 
       // Call onApiError if apiError's enabled
-      if (apiError) {
+      if (skipOnError) {
         onApiError(error);
       }
 
@@ -67,15 +67,15 @@ mixin ApiError {
   }
 
   // Parsing error to ErrorType
-  ErrorType parseErrorType(dynamic error) {
+  ApiErrorType parseApiErrorType(dynamic error) {
     logger.d(error);
     if (error is DioError && error.type == DioErrorType.RESPONSE) {
-      ErrorCode errorCode = ErrorCode.unknown;
+      ApiErrorCode errorCode = ApiErrorCode.unknown;
       if (error.response?.statusCode == 401) {
-        errorCode = ErrorCode.unauthorized;
+        errorCode = ApiErrorCode.unauthorized;
       }
-      return ErrorType(code: errorCode, message: error.message);
+      return ApiErrorType(code: errorCode, message: error.message);
     }
-    return ErrorType();
+    return ApiErrorType();
   }
 }

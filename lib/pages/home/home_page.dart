@@ -6,7 +6,7 @@ import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/rest_api/api_error.dart';
-import 'package:nft/services/rest_api/error_type.dart';
+import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
@@ -114,10 +114,10 @@ class _HomePageState extends State<HomePage>
 
   @override
   Future<void> onApiError(dynamic error) async {
-    final ErrorType errorType = parseErrorType(error);
+    final ApiErrorType errorType = parseApiErrorType(error);
     await AppDialogProvider.show(context, errorType.message, title: 'Error');
     await Future<void>.delayed(const Duration(seconds: 1));
-    if (errorType.code == ErrorCode.unauthorized) {
+    if (errorType.code == ApiErrorCode.unauthorized) {
       _logout(context);
     }
   }
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage>
   Future<void> _logout(BuildContext context) async {
     final HomeProvider provider =
         Provider.of<HomeProvider>(context, listen: false);
-    await safeCallApi(
+    await apiCallSafety(
       provider.logout,
       onStart: () async {
         AppLoadingProvider.show(context);
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage>
         AppLoadingProvider.hide(context);
         context.navigator()?.pushReplacementNamed(AppConstant.loginPageRoute);
       },
-      apiError: false,
+      skipOnError: false,
     );
   }
 }
