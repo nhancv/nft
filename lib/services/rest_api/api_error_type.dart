@@ -5,4 +5,9 @@ class ApiErrorType {
 
   final ApiErrorCode code;
   final String message;
+
+  @override
+  String toString() {
+    return 'ApiErrorType{code: $code, message: $message}';
+  }
 }

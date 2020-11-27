@@ -134,7 +134,8 @@ class _LoginPageState extends State<LoginPage>
                         }, onCompleted: (bool status, bool res) async {
                           AppLoadingProvider.hide(context);
                         }, onError: (dynamic error) async {
-                          final ApiErrorType errorType = parseApiErrorType(error);
+                          final ApiErrorType errorType =
+                              parseApiErrorType(error);
                           AppDialogProvider.show(
                             context,
                             errorType.message,
