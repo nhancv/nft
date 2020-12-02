@@ -113,13 +113,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /// Custom page transitions theme
-  PageTransitionsTheme buildPageTransitionsTheme() {
-    return const PageTransitionsTheme(
-      builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
-        TargetPlatform.iOS: OpenUpwardsPageTransitionsBuilder(),
-      },
-    );
-  }
 }
