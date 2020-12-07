@@ -10,4 +10,5 @@ class AppVideos {}
 /// For font assets
 class AppFonts {
   static const String roboto = 'Roboto';
+  static const String lato = 'Lato';
 }
