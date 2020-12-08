@@ -7,6 +7,7 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
+import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
@@ -21,8 +22,20 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
+class _HomePageState extends BaseStateful<HomePage>
     with WidgetsBindingObserver, ApiError {
+  LocaleProvider localeProvider;
+  HomeProvider homeProvider;
+
+  @override
+  void initDependencies(BuildContext context) {
+    localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+    homeProvider = Provider.of<HomeProvider>(context, listen: false);
+  }
+
+  @override
+  void afterFirstBuild(BuildContext context) {}
+
   @override
   void initState() {
     super.initState();
@@ -43,9 +56,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    // Get provider to trigger function
-    final LocaleProvider localeProvider =
-        Provider.of<LocaleProvider>(context, listen: false);
+    super.build(context);
     return PAppBarEmpty(
       child: WDismissKeyboard(
         child: Column(
@@ -124,10 +135,8 @@ class _HomePageState extends State<HomePage>
 
   // Logout function
   Future<void> _logout(BuildContext context) async {
-    final HomeProvider provider =
-        Provider.of<HomeProvider>(context, listen: false);
     await apiCallSafety(
-      provider.logout,
+      homeProvider.logout,
       onStart: () async {
         AppLoadingProvider.show(context);
       },
