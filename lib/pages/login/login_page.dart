@@ -128,20 +128,25 @@ class _LoginPageState extends State<LoginPage>
                 onPressed: context
                         .select((LoginProvider provider) => provider.formValid)
                     ? () async {
-                        final bool success = await apiCallSafety(provider.login,
-                            onStart: () async {
-                          AppLoadingProvider.show(context);
-                        }, onCompleted: (bool status, bool res) async {
-                          AppLoadingProvider.hide(context);
-                        }, onError: (dynamic error) async {
-                          final ApiErrorType errorType =
-                              parseApiErrorType(error);
-                          AppDialogProvider.show(
-                            context,
-                            errorType.message,
-                            title: 'Error',
-                          );
-                        }, skipOnError: false);
+                        final bool success = await apiCallSafety(
+                          provider.login,
+                          onStart: () async {
+                            AppLoadingProvider.show(context);
+                          },
+                          onCompleted: (bool status, bool res) async {
+                            AppLoadingProvider.hide(context);
+                          },
+                          onError: (dynamic error) async {
+                            final ApiErrorType errorType =
+                                parseApiErrorType(error);
+                            AppDialogProvider.show(
+                              context,
+                              errorType.message,
+                              title: 'Error',
+                            );
+                          },
+                          skipOnError: true,
+                        );
                         if (success == true) {
                           context
                               .navigator()
