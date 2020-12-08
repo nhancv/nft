@@ -70,7 +70,6 @@ flutter pub run flutter_launcher_icons:main
 </layer-list>
 ```
 
-
 ### iOS
 
 - Add `LaunchBackground.imageset` and `LaunchImage.imageset` to `ios/Runner/Assets.xcassets`
@@ -87,7 +86,7 @@ flutter pub run flutter_launcher_icons:main
 ## Update localization
 
 ### Install `flutter_intl` tool
-- Jetbrains: https://plugins.jetbrains.com/plugin/13666-flutter-intl
+- JetBrains: https://plugins.jetbrains.com/plugin/13666-flutter-intl
 - VS code: https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl
 
 1. Add other locales:
