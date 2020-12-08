@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage>
         AppLoadingProvider.hide(context);
         context.navigator()?.pushReplacementNamed(AppConstant.loginPageRoute);
       },
-      skipOnError: false,
+      skipOnError: true,
     );
   }
 }

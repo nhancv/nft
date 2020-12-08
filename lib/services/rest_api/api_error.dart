@@ -16,14 +16,14 @@ mixin ApiError {
   /// - onError: the function executed in case api crashed, can be null
   /// - onCompleted: the function executed after api or before crashing, can be null
   /// - onFinally: the function executed end of function, can be null
-  /// - apiError: true as default if you want to forward the error to onApiError
+  /// - skipOnError: false as default if you want to forward the error to onApiError
   Future<T> apiCallSafety<T>(
     Future<T> Function() dioApi, {
     Future<void> Function() onStart,
     Future<void> Function(dynamic error) onError,
     Future<void> Function(bool status, T res) onCompleted,
     Future<void> Function() onFinally,
-    bool skipOnError = true,
+    bool skipOnError = false,
   }) async {
     try {
       // On start, use for show loading
@@ -52,8 +52,8 @@ mixin ApiError {
         await onError(error);
       }
 
-      // Call onApiError if apiError's enabled
-      if (skipOnError) {
+      // Call onApiError
+      if (skipOnError == false) {
         onApiError(error);
       }
 
