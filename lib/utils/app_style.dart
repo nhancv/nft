@@ -26,8 +26,8 @@ TextStyle extraBoldTextStyle(
 
 /// Bold text style - w700
 TextStyle boldTextStyle(
-  double size,
-  Color color, {
+  double size, {
+  Color color,
   double height,
   String fontFamily,
 }) =>
