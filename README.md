@@ -38,6 +38,52 @@ flutter pub get
 flutter pub run flutter_launcher_icons:main
 ```
 
+## Update splash screen
+
+### Android
+
+- Add `launch_bg.png` and `launch_image.png` to
+```
++ android/app/src/main/res/drawable-mdpi
++ android/app/src/main/res/drawable-xhdpi
++ android/app/src/main/res/drawable-xxhdpi
+```
+
+- Update `android/app/src/main/res/drawable/launch_background.xml`
+```
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/white" />
+
+    <!-- You can insert your own image assets here -->
+    <item>
+        <bitmap
+            android:gravity="fill_horizontal|fill_vertical"
+            android:src="@drawable/launch_bg" />
+    </item>
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/launch_image" />
+    </item>
+</layer-list>
+```
+
+
+### iOS
+
+- Add `LaunchBackground.imageset` and `LaunchImage.imageset` to `ios/Runner/Assets.xcassets`
+- Open `ios/Runner.xcworkspace`
+- Select `Runner/Runner/LaunchScreen.storyboard`
+```
++ Expand View Controller Scene -> View Controller -> View
++ Add object -> Search ImageView -> Drag ImageView object to View (front of LaunchImage) 
+-> Select Attributes inspector -> Custom Image to LaunchBackground 
+-> Change View Content Mode to Scale To Fill -> Add 0, 0, 0, 0 as constrains 
+-> Save	
+```
+
 ## Update localization
 
 ### Install `flutter_intl` tool
