@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:nft/models/local/token.dart';
 import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/rest_api/api_user.dart';
+import 'package:nft/services/safety/change_notifier_safety.dart';
 
-class HomeProvider with ChangeNotifier {
+class HomeProvider extends ChangeNotifierSafety {
   HomeProvider(this._api, this._credential);
 
   //#region PRIVATE PROPERTIES
@@ -25,6 +25,10 @@ class HomeProvider with ChangeNotifier {
 
   //#region METHODS
   // -----------------
+
+  @override
+  void resetState() {}
+
   /// Call logout
   Future<bool> logout() async {
     await Future<void>.delayed(const Duration(seconds: 1));

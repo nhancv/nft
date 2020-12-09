@@ -6,6 +6,7 @@ import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
+import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
@@ -21,21 +22,30 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
+class _LoginPageState extends BaseStateful<LoginPage>
     with WidgetsBindingObserver, ApiError {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
+
+  LoginProvider loginProvider;
+
+  @override
+  void initDependencies(BuildContext context) {
+    loginProvider = Provider.of<LoginProvider>(context, listen: false);
+  }
+
+  @override
+  void afterFirstBuild(BuildContext context) {
+    loginProvider.resetState();
+    // Init email focus
+    // autofocus in TextField has an issue on next keyboard button
+    _emailFocusNode.requestFocus();
+  }
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    // Init email focus
-    // autofocus in TextField has an issue on next keyboard button
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<LoginProvider>().resetState();
-      _emailFocusNode.requestFocus();
-    });
   }
 
   @override
@@ -52,8 +62,7 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
-    final LoginProvider provider =
-        Provider.of<LoginProvider>(context, listen: false);
+    super.build(context);
     return PAppBarTransparency(
       child: WDismissKeyboard(
         child: Container(
@@ -85,7 +94,7 @@ class _LoginPageState extends State<LoginPage>
                             )
                           : null,
                     ),
-                    onChanged: provider.onEmailChangeToValidateForm,
+                    onChanged: loginProvider.onEmailChangeToValidateForm,
                     focusNode: _emailFocusNode,
                     textInputAction: TextInputAction.next,
                     onSubmitted: (String term) {
@@ -109,12 +118,12 @@ class _LoginPageState extends State<LoginPage>
                             ? const Icon(Icons.visibility_off)
                             : const Icon(Icons.visibility),
                         onPressed: () {
-                          provider.obscureText = !provider.obscureText;
+                          loginProvider.obscureText = !loginProvider.obscureText;
                         },
                       ),
                     ),
                     obscureText: obscureText,
-                    onChanged: provider.onPasswordChangeToValidateForm,
+                    onChanged: loginProvider.onPasswordChangeToValidateForm,
                     focusNode: _passwordFocusNode,
                     textInputAction: TextInputAction.done,
                   );
@@ -129,7 +138,7 @@ class _LoginPageState extends State<LoginPage>
                         .select((LoginProvider provider) => provider.formValid)
                     ? () async {
                         final bool success = await apiCallSafety(
-                          provider.login,
+                          loginProvider.login,
                           onStart: () async {
                             AppLoadingProvider.show(context);
                           },
@@ -163,7 +172,7 @@ class _LoginPageState extends State<LoginPage>
                 key: const Key('callApiErrorBtnKey'),
                 onPressed: () async {
                   final LoginResponse loginResponse = await apiCallSafety(
-                    provider.logInWithError,
+                    loginProvider.logInWithError,
                     onStart: () async {
                       AppLoadingProvider.show(context);
                     },
@@ -186,7 +195,7 @@ class _LoginPageState extends State<LoginPage>
                 key: const Key('callApiExceptionBtnKey'),
                 onPressed: () async {
                   apiCallSafety(
-                    provider.logInWithException,
+                    loginProvider.logInWithException,
                     onStart: () async {
                       AppLoadingProvider.show(context);
                     },
@@ -219,4 +228,5 @@ class _LoginPageState extends State<LoginPage>
     final ApiErrorType errorType = parseApiErrorType(error);
     AppDialogProvider.show(context, errorType.message);
   }
+
 }

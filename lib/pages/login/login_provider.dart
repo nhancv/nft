@@ -6,8 +6,9 @@ import 'package:nft/models/local/token.dart';
 import 'package:nft/models/remote/login_response.dart';
 import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/rest_api/api_user.dart';
+import 'package:nft/services/safety/change_notifier_safety.dart';
 
-class LoginProvider with ChangeNotifier {
+class LoginProvider extends ChangeNotifierSafety {
   LoginProvider(this._api, this._credential);
 
   //#region PRIVATE PROPERTIES
@@ -64,6 +65,7 @@ class LoginProvider with ChangeNotifier {
   //#region METHODS
   // -----------------
   // Reset state
+  @override
   void resetState() {
     _emailValue = '';
     _emailValid = false;
