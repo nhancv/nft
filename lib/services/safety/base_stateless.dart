@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nft/services/app/dynamic_size.dart';
 
 /// Remember call super.build(context) in widget
-abstract class BaseStateless extends StatelessWidget {
+abstract class BaseStateless extends StatelessWidget with DynamicSize {
   // Context valid to create providers
   @protected
   void initDependencies(BuildContext context);
@@ -13,6 +14,7 @@ abstract class BaseStateless extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     initDependencies(context);
+    initDynamicSize(context);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       afterFirstBuild(context);
     });
