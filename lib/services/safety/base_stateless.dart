@@ -3,6 +3,9 @@ import 'package:nft/services/app/dynamic_size.dart';
 
 /// Remember call super.build(context) in widget
 abstract class BaseStateless extends StatelessWidget with DynamicSize {
+
+  const BaseStateless({Key key}): super(key: key);
+
   // Context valid to create providers
   @protected
   void initDependencies(BuildContext context);
