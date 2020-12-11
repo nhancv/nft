@@ -1,4 +1,8 @@
-## [1.0.31+2011301334] - November 30, 2020.
+## [1.0.32+2012111539] - December 11, 2020.
+
+* Update app service
+
+## [1.0.30+2011301333] - November 30, 2020.
 
 * Structure service
 
