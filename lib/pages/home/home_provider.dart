@@ -4,15 +4,12 @@ import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/services/safety/change_notifier_safety.dart';
 
 class HomeProvider extends ChangeNotifierSafety {
-  HomeProvider(this._api, this._credential);
+  HomeProvider(this._api);
 
   //#region PRIVATE PROPERTIES
   // -----------------
   // Authentication api
   final ApiUser _api;
-
-  // Credential
-  final Credential _credential;
 
   //#endregion
 
@@ -28,19 +25,6 @@ class HomeProvider extends ChangeNotifierSafety {
 
   @override
   void resetState() {}
-
-  /// Call logout
-  Future<bool> logout() async {
-    await Future<void>.delayed(const Duration(seconds: 1));
-
-    if (token == null) {
-      return true;
-    }
-
-    // Save credential
-    final bool saveRes = await _credential.storeCredential(null, cache: true);
-    return saveRes;
-  }
 
 //#endregion
 }

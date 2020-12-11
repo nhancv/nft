@@ -7,6 +7,7 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/services/safety/base_stateful.dart';
+import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
@@ -22,7 +23,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends BaseStateful<LoginPage>
+class _LoginPageState extends PageStateful<LoginPage>
     with WidgetsBindingObserver, ApiError {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
@@ -31,6 +32,7 @@ class _LoginPageState extends BaseStateful<LoginPage>
 
   @override
   void initDependencies(BuildContext context) {
+    super.initDependencies(context);
     loginProvider = Provider.of<LoginProvider>(context, listen: false);
   }
 
@@ -138,7 +140,7 @@ class _LoginPageState extends BaseStateful<LoginPage>
                         .select((LoginProvider provider) => provider.formValid)
                     ? () async {
                         final bool success = await apiCallSafety(
-                          loginProvider.login,
+                          authProvider.login,
                           onStart: () async {
                             AppLoadingProvider.show(context);
                           },
@@ -172,7 +174,7 @@ class _LoginPageState extends BaseStateful<LoginPage>
                 key: const Key('callApiErrorBtnKey'),
                 onPressed: () async {
                   final LoginResponse loginResponse = await apiCallSafety(
-                    loginProvider.logInWithError,
+                    authProvider.logInWithError,
                     onStart: () async {
                       AppLoadingProvider.show(context);
                     },
@@ -195,7 +197,7 @@ class _LoginPageState extends BaseStateful<LoginPage>
                 key: const Key('callApiExceptionBtnKey'),
                 onPressed: () async {
                   apiCallSafety(
-                    loginProvider.logInWithException,
+                    authProvider.logInWithException,
                     onStart: () async {
                       AppLoadingProvider.show(context);
                     },

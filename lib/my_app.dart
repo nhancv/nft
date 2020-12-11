@@ -6,6 +6,7 @@ import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
+import 'package:nft/services/app/auth_provider.dart';
 import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/cache/storage.dart';
 import 'package:nft/services/cache/storage_preferences.dart';
@@ -44,16 +45,18 @@ Future<void> myMain() async {
         ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
         ChangeNotifierProvider<AppThemeProvider>(
             create: (_) => AppThemeProvider()),
+        ChangeNotifierProvider<AuthProvider>(
+            create: (BuildContext context) => AuthProvider(
+                  context.read<ApiUser>(),
+                  context.read<Credential>(),
+                )),
         ChangeNotifierProvider<HomeProvider>(
             create: (BuildContext context) => HomeProvider(
                   context.read<ApiUser>(),
-                  context.read<Credential>(),
                 )),
         ChangeNotifierProvider<LoginProvider>(
             create: (BuildContext context) => LoginProvider(
-                  context.read<ApiUser>(),
-                  context.read<Credential>(),
-                )),
+            )),
       ],
       child: const MyApp(),
     ),

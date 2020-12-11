@@ -8,6 +8,7 @@ import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/services/safety/base_stateful.dart';
+import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
@@ -22,14 +23,13 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends BaseStateful<HomePage>
-    with WidgetsBindingObserver, ApiError {
-  LocaleProvider localeProvider;
+class _HomePageState extends PageStateful<HomePage>
+    with WidgetsBindingObserver {
   HomeProvider homeProvider;
 
   @override
   void initDependencies(BuildContext context) {
-    localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+    super.initDependencies(context);
     homeProvider = Provider.of<HomeProvider>(context, listen: false);
   }
 
@@ -113,7 +113,7 @@ class _HomePageState extends BaseStateful<HomePage>
             RaisedButton(
               key: const Key(AppConstant.loginPageRoute),
               onPressed: () async {
-                _logout(context);
+                logout(context);
               },
               child: const Text('Logout'),
             ),
@@ -123,28 +123,4 @@ class _HomePageState extends BaseStateful<HomePage>
     );
   }
 
-  @override
-  Future<void> onApiError(dynamic error) async {
-    final ApiErrorType errorType = parseApiErrorType(error);
-    await AppDialogProvider.show(context, errorType.message, title: 'Error');
-    await Future<void>.delayed(const Duration(seconds: 1));
-    if (errorType.code == ApiErrorCode.unauthorized) {
-      _logout(context);
-    }
-  }
-
-  // Logout function
-  Future<void> _logout(BuildContext context) async {
-    await apiCallSafety(
-      homeProvider.logout,
-      onStart: () async {
-        AppLoadingProvider.show(context);
-      },
-      onFinally: () async {
-        AppLoadingProvider.hide(context);
-        context.navigator()?.pushReplacementNamed(AppConstant.loginPageRoute);
-      },
-      skipOnError: true,
-    );
-  }
 }
