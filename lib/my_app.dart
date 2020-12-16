@@ -7,12 +7,11 @@ import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/auth_provider.dart';
+import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/cache/storage.dart';
 import 'package:nft/services/cache/storage_preferences.dart';
-import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/rest_api/api_user.dart';
-import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -55,8 +54,7 @@ Future<void> myMain() async {
                   context.read<ApiUser>(),
                 )),
         ChangeNotifierProvider<LoginProvider>(
-            create: (BuildContext context) => LoginProvider(
-            )),
+            create: (BuildContext context) => LoginProvider()),
       ],
       child: const MyApp(),
     ),
@@ -80,7 +78,7 @@ class _MyAppState extends State<MyApp> {
       final bool hasCredential =
           await context.read<Credential>().loadCredential();
       if (hasCredential) {
-        context.navigator()?.pushReplacementNamed(AppConstant.homePageRoute);
+        context.navigator()?.pushReplacementNamed(AppRoute.routeHome);
       }
     });
   }
@@ -107,10 +105,10 @@ class _MyAppState extends State<MyApp> {
       //https://stackoverflow.com/questions/57245175/flutter-dynamic-initial-route
       //https://github.com/flutter/flutter/issues/12454
       //home: (appRoute.generateRoute(
-      ///            const RouteSettings(name: AppConstant.rootPageRoute))
+      ///            const RouteSettings(name: AppRoute.rootPageRoute))
       ///        as MaterialPageRoute<dynamic>)
       ///    .builder(context),
-      initialRoute: AppConstant.rootPageRoute,
+      initialRoute: AppRoute.routeRoot,
       onGenerateRoute: appRoute.generateRoute,
       navigatorObservers: <NavigatorObserver>[appRoute.routeObserver],
     );

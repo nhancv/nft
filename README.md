@@ -155,7 +155,6 @@ lib/
   |-utils/                         ---> place app utils
     |-app_asset.dart               ---> define app assets
     |-app_config.dart              ---> define app config multi environment
-    |-app_constant.dart            ---> define app constant, route name
     |-app_extension.dart           ---> define app extension
     |-app_helper.dart              ---> define app helper. Provide util function such as show popup, toast, flushbar, orientation mode
     |-app_log.dart                 ---> define app logger. Log safety with production mode

@@ -17,7 +17,6 @@ import 'package:nft/services/cache/storage.dart';
 import 'package:nft/services/cache/storage_preferences.dart';
 import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/utils/app_config.dart';
-import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
@@ -136,7 +135,7 @@ void main() {
                 GlobalWidgetsLocalizations.delegate,
               ],
               home: (appRoute.generateRoute(
-                          const RouteSettings(name: AppConstant.loginPageRoute))
+                          const RouteSettings(name: AppRoute.routeLogin))
                       as MaterialPageRoute<dynamic>)
                   .builder(context),
               onGenerateRoute: appRoute.generateRoute,

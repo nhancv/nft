@@ -10,7 +10,6 @@ import 'package:flutter_screenutil/screenutil.dart';
 ///   }
 /// }
 mixin DynamicSize {
-
   /// Init dynamic size
   //     ScreenUtil().pixelRatio       //Device pixel density
   //     ScreenUtil().screenWidth   (sdk>=2.6 : 1.sw)    //Device width

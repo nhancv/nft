@@ -6,10 +6,8 @@ import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
-import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_asset.dart';
-import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_transparency.dart';
@@ -120,7 +118,8 @@ class _LoginPageState extends PageStateful<LoginPage>
                             ? const Icon(Icons.visibility_off)
                             : const Icon(Icons.visibility),
                         onPressed: () {
-                          loginProvider.obscureText = !loginProvider.obscureText;
+                          loginProvider.obscureText =
+                              !loginProvider.obscureText;
                         },
                       ),
                     ),
@@ -161,7 +160,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                         if (success == true) {
                           context
                               .navigator()
-                              ?.pushReplacementNamed(AppConstant.homePageRoute);
+                              ?.pushReplacementNamed(AppRoute.routeHome);
                         }
                       }
                     : null,
@@ -230,5 +229,4 @@ class _LoginPageState extends PageStateful<LoginPage>
     final ApiErrorType errorType = parseApiErrorType(error);
     AppDialogProvider.show(context, errorType.message);
   }
-
 }

@@ -30,7 +30,6 @@ extension SizeExtension on num {
   // % of screen height
   // ignore: non_constant_identifier_names
   double get SH => sh.toDouble();
-
 }
 
 /// Extension for DateTime
@@ -54,5 +53,4 @@ extension DateTimeStringExtendsion on String {
   DateTime toDateTime(String pattern) {
     return isNullOrEmpty ? null : DateFormat(pattern).parse(this);
   }
-
 }

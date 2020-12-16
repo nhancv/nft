@@ -6,7 +6,6 @@ import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/services/safety/change_notifier_safety.dart';
 
 class AuthProvider extends ChangeNotifierSafety {
-
   AuthProvider(this._api, this._credential);
 
   // Authentication api
@@ -21,13 +20,13 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call api login
   Future<bool> login() async {
     final Response<Map<String, dynamic>> result =
-    await _api.logIn().timeout(const Duration(seconds: 30));
+        await _api.logIn().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     final Token token = loginResponse.data;
     if (token != null) {
       // Save credential
       final bool saveRes =
-      await _credential.storeCredential(token, cache: true);
+          await _credential.storeCredential(token, cache: true);
       return saveRes;
     } else {
       throw DioError(
@@ -39,7 +38,7 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call api login with error
   Future<LoginResponse> logInWithError() async {
     final Response<Map<String, dynamic>> result =
-    await _api.logInWithError().timeout(const Duration(seconds: 30));
+        await _api.logInWithError().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     return loginResponse;
   }
@@ -57,6 +56,4 @@ class AuthProvider extends ChangeNotifierSafety {
     final bool saveRes = await _credential.storeCredential(null, cache: true);
     return saveRes;
   }
-
-
 }

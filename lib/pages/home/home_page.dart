@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/home/home_provider.dart';
-import 'package:nft/services/app/app_dialog.dart';
-import 'package:nft/services/app/app_loading.dart';
-import 'package:nft/services/app/locale_provider.dart';
-import 'package:nft/services/rest_api/api_error.dart';
-import 'package:nft/services/rest_api/api_error_type.dart';
-import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/services/safety/page_stateful.dart';
-import 'package:nft/utils/app_constant.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
@@ -99,9 +92,9 @@ class _HomePageState extends PageStateful<HomePage>
             const SizedBox(height: 10),
             // Navigate to counter page with current timestamp as argument
             RaisedButton(
-              key: const Key(AppConstant.counterPageRoute),
+              key: const Key(AppRoute.routeCounter),
               onPressed: () {
-                Navigator.pushNamed(context, AppConstant.counterPageRoute,
+                Navigator.pushNamed(context, AppRoute.routeCounter,
                     arguments: 'From Home ${DateTime.now()}');
               },
               child: const Text('Counter Page'),
@@ -111,7 +104,7 @@ class _HomePageState extends PageStateful<HomePage>
             // Logout
             // Navigate to login
             RaisedButton(
-              key: const Key(AppConstant.loginPageRoute),
+              key: const Key(AppRoute.routeLogin),
               onPressed: () async {
                 logout(context);
               },
@@ -122,5 +115,4 @@ class _HomePageState extends PageStateful<HomePage>
       ),
     );
   }
-
 }

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/utils/app_log.dart';

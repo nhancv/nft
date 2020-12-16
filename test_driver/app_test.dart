@@ -1,6 +1,6 @@
 // Imports the Flutter Driver API.
 import 'package:flutter_driver/flutter_driver.dart';
-import 'package:nft/utils/app_constant.dart';
+import 'package:nft/utils/app_route.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -17,7 +17,7 @@ void main() {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
       // Navigator to Counter Screen
-      await driver.tap(find.byValueKey(AppConstant.counterPageRoute));
+      await driver.tap(find.byValueKey(AppRoute.routeCounter));
     });
 
     // Close the connection to the driver after the tests have completed.

@@ -1,5 +1,4 @@
 import 'package:nft/models/local/token.dart';
-import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/services/safety/change_notifier_safety.dart';
 
