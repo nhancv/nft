@@ -11,6 +11,15 @@ class CounterPage extends StatefulWidget {
 
   final String argument;
 
+  static Widget create<T>({Key key, T argument}) {
+    return ChangeNotifierProvider<CounterProvider>(
+      create: (_) => CounterProvider(),
+      builder: (BuildContext context, Widget child) {
+        return CounterPage(key: key, argument: argument as String);
+      },
+    );
+  }
+
   @override
   _CounterPageState createState() => _CounterPageState();
 }
@@ -30,35 +39,28 @@ class _CounterPageState extends State<CounterPage> with DynamicSize {
               padding: const EdgeInsets.only(top: 20),
               child: Text(widget.argument ?? '')),
           Expanded(
-            child: ChangeNotifierProvider<CounterProvider>(
-              create: (_) => CounterProvider(),
-              child: Builder(
-                builder: (BuildContext context) {
-                  return Scaffold(
-                    backgroundColor: Colors.transparent,
-                    body: Center(
-                      child: Text(
-                        '${context.watch<CounterProvider>().count}',
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Center(
+                child: Text(
+                  '${context.watch<CounterProvider>().count}',
 
-                        /// Provide a Key to this specific Text widget. This allows
-                        /// identifying the widget from inside the test suite,
-                        /// and reading the text.
-                        key: const Key('counter'),
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ),
-                    floatingActionButton: FloatingActionButton(
-                      /// Provide a Key to this button. This allows finding this
-                      /// specific button inside the test suite, and tapping it.
-                      key: const Key('increment'),
-                      onPressed: () {
-                        context.read<CounterProvider>().increase();
-                      },
-                      tooltip: 'Increment',
-                      child: const Icon(Icons.add),
-                    ),
-                  );
+                  /// Provide a Key to this specific Text widget. This allows
+                  /// identifying the widget from inside the test suite,
+                  /// and reading the text.
+                  key: const Key('counter'),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ),
+              floatingActionButton: FloatingActionButton(
+                /// Provide a Key to this button. This allows finding this
+                /// specific button inside the test suite, and tapping it.
+                key: const Key('increment'),
+                onPressed: () {
+                  context.read<CounterProvider>().increase();
                 },
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
               ),
             ),
           ),

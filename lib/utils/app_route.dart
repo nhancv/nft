@@ -5,7 +5,6 @@ import 'package:nft/pages/login/login_page.dart';
 import 'package:provider/provider.dart';
 
 class AppRoute {
-
   //#region ROUTE NAMES
   // -----------------
   static const String routeRoot = '/';
@@ -31,8 +30,7 @@ class AppRoute {
       case routeCounter:
         return MaterialPageRoute<dynamic>(
             settings: settings,
-            builder: (_) =>
-                CounterPage(argument: settings.arguments as String));
+            builder: (_) => CounterPage.create(argument: settings.arguments));
 
       case routeHome:
         return MaterialPageRoute<dynamic>(
