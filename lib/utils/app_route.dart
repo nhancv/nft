@@ -5,6 +5,7 @@ import 'package:nft/pages/login/login_page.dart';
 import 'package:provider/provider.dart';
 
 class AppRoute {
+
   //#region ROUTE NAMES
   // -----------------
   static const String routeRoot = '/';

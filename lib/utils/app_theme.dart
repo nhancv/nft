@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/utils/app_asset.dart';
+import 'package:nft/utils/app_config.dart';
 import 'package:provider/provider.dart';
 
 class AppTheme {
@@ -76,12 +77,10 @@ class AppTheme {
 }
 
 class AppThemeProvider with ChangeNotifier {
-  AppTheme _theme = const AppTheme.dark();
-
-  AppTheme get theme => _theme;
+  AppTheme get theme => Config.I.theme;
 
   set theme(AppTheme value) {
-    _theme = value;
+    Config.I.theme = value;
     notifyListeners();
   }
 }

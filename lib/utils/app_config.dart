@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:nft/utils/app_theme.dart';
 
 /// Environment declare here
 class Env {
@@ -15,16 +16,18 @@ class Env {
 
 /// Config env
 class Config {
-  factory Config({Env environment}) {
-    if (environment != null) {
-      instance.env = environment;
+  factory Config({Env env, AppTheme theme}) {
+    if (env != null) {
+      I.env = env;
+      I.theme = theme;
     }
-    return instance;
+    return I;
   }
 
   Config._private();
 
-  static final Config instance = Config._private();
+  static final Config I = Config._private();
 
-  Env env;
+  Env env = Env.dev();
+  AppTheme theme = const AppTheme.dark();
 }

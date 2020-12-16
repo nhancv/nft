@@ -56,7 +56,7 @@ void main() {
 
   /// Setup for test
   setUp(() {
-    Config(environment: Env.dev());
+    Config(env: Env.dev());
 
     // Testing in flutter gives error MediaQuery.of() called
     // with a context that does not contain a MediaQuery
