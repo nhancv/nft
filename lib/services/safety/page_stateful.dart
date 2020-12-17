@@ -17,8 +17,9 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
   @mustCallSuper
   @override
   void initDependencies(BuildContext context) {
-    localeProvider = Provider.of<LocaleProvider>(context, listen: false);
-    authProvider = Provider.of<AuthProvider>(context, listen: false);
+    super.initDependencies(context);
+    localeProvider = Provider.of(context, listen: false);
+    authProvider = Provider.of(context, listen: false);
   }
 
   @override

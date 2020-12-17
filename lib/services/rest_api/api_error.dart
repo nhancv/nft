@@ -27,28 +27,29 @@ mixin ApiError {
     bool skipOnError = false,
   }) async {
     try {
-      // On start, use for show loading
+      /// On start, use for show loading
       if (onStart != null) {
         await onStart();
       }
 
-      // Execute api
+      /// Execute api
       final T res = await dioApi();
 
-      // On completed, use for hide loading
+      /// On completed, use for hide loading
       if (onCompleted != null) {
         await onCompleted(true, res);
       }
-      // Return api response
+
+      /// Return api response
       return res;
     } catch (error) {
-      // In case error:
-      // On completed, use for hide loading
+      /// In case error:
+      /// On completed, use for hide loading
       if (onCompleted != null) {
         await onCompleted(false, null);
       }
 
-      // On inline error
+      /// On inline error
       if (onError != null) {
         await onError(error);
       }

@@ -16,10 +16,10 @@ class Token {
   final String refreshToken;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'tokenType': tokenType,
-        'expiresIn': expiresIn,
-        'accessToken': accessToken,
-        'refreshToken': refreshToken,
+        'token_type': tokenType,
+        'expires_in': expiresIn,
+        'access_token': accessToken,
+        'refresh_token': refreshToken,
       };
 
   @override

@@ -1,3 +1,9 @@
+## [1.0.33+2012172339] - December 17, 2020.
+
+* Update libs
+* Add button widget example
+* Restructure to support dynamic theme, assets
+
 ## [1.0.32+2012111539] - December 11, 2020.
 
 * Update app service

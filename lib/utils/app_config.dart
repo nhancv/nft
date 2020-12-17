@@ -19,6 +19,8 @@ class Config {
   factory Config({Env env, AppTheme theme}) {
     if (env != null) {
       I.env = env;
+    }
+    if (theme != null) {
       I.theme = theme;
     }
     return I;
@@ -29,5 +31,5 @@ class Config {
   static final Config I = Config._private();
 
   Env env = Env.dev();
-  AppTheme theme = const AppTheme.dark();
+  AppTheme theme = AppTheme.origin();
 }

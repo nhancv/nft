@@ -86,32 +86,32 @@ class BaseError {
   }
 }
 
-// Example
+/// Example
 ///*
-//Error
-//{
-//	"data": null,
-//	"error": {
-//		"code": 1029,
-//		"message": "User not found!."
-//	}
-//}
-//
-//Successful
-//{
-//	"data": {
-//		"token_type": "Bearer",
-//		"expires_in": 1295998,
-//		"access_token": "nhancv_dep_trai",
-//		"refresh_token": "call_nhancv_dep_trai"
-//	}
-//}
-// */
-//
-//import 'base_response.dart';
-//
-//class Credential {
-//  Credential(
+///Error
+///{
+///	"data": null,
+///	"error": {
+///		"code": 1029,
+///		"message": "User not found!."
+///	}
+///}
+///
+///Successful
+///{
+///	"data": {
+///		"token_type": "Bearer",
+///		"expires_in": 1295998,
+///		"access_token": "nhancv_dep_trai",
+///		"refresh_token": "call_nhancv_dep_trai"
+///	}
+///}
+/// */
+///
+///import 'base_response.dart';
+///
+///class Credential {
+///  Credential(
 //      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken});
 //
 //  factory Credential.fromJson(Map<String, dynamic> json) => Credential(

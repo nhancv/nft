@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/pages/counter/counter_provider.dart';
-import 'package:nft/services/app/dynamic_size.dart';
+import 'package:nft/services/safety/base_stateful.dart';
+import 'package:nft/utils/app_extension.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
 import 'package:nft/widgets/w_dismiss_keyboard.dart';
 import 'package:provider/provider.dart';
@@ -24,11 +25,10 @@ class CounterPage extends StatefulWidget {
   _CounterPageState createState() => _CounterPageState();
 }
 
-class _CounterPageState extends State<CounterPage> with DynamicSize {
+class _CounterPageState extends BaseStateful<CounterPage> {
   @override
   Widget build(BuildContext context) {
-    initDynamicSize(context);
-
+    super.build(context);
     return PAppBarEmpty(
       child: WDismissKeyboard(
         child: Column(children: <Widget>[
@@ -36,7 +36,7 @@ class _CounterPageState extends State<CounterPage> with DynamicSize {
             title: const Text('Counter Page'),
           ),
           Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: EdgeInsets.only(top: 20.H),
               child: Text(widget.argument ?? '')),
           Expanded(
             child: Scaffold(

@@ -69,6 +69,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   @override
   void initState() {
     super.initState();
@@ -78,7 +79,7 @@ class _MyAppState extends State<MyApp> {
       final bool hasCredential =
           await context.read<Credential>().loadCredential();
       if (hasCredential) {
-        context.navigator()?.pushReplacementNamed(AppRoute.routeHome);
+        context.navigator().pushReplacementNamed(AppRoute.routeHome);
       }
     });
   }

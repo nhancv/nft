@@ -5,9 +5,9 @@ abstract class Storage {
   /// String, List<String>, double, int, bool
   Future<bool> saveData<T>(String key, T value);
 
-  // Get data by key
+  /// Get data by key
   Future<T> getData<T>(String key);
 
-  // Clear all
+  /// Clear all
   Future<bool> clear();
 }

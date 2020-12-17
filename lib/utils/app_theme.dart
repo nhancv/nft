@@ -5,44 +5,37 @@ import 'package:nft/utils/app_config.dart';
 import 'package:provider/provider.dart';
 
 class AppTheme {
-  const AppTheme({
-    @required this.isDark,
-    @required this.primaryColor,
-    @required this.accentColor,
-    @required this.backgroundColor,
-    @required this.headerBgColor,
-  });
+  AppTheme._();
 
-  /// Dart theme
-  const AppTheme.dark({
-    this.isDark = true,
-    this.primaryColor = Colors.blueGrey,
-    this.accentColor = Colors.blueGrey,
-    this.backgroundColor = const Color(0xFFF2F2F2),
-    this.headerBgColor = Colors.blueGrey,
-  });
+  /// Default theme
+  factory AppTheme.origin() {
+    return AppTheme._();
+  }
 
-  /// Light theme
-  const AppTheme.light({
-    this.isDark = false,
-    this.primaryColor = Colors.white,
-    this.accentColor = Colors.white,
-    this.backgroundColor = Colors.white,
-    this.headerBgColor = Colors.white,
-  });
+  /// Default theme
+  factory AppTheme.light() {
+    return AppTheme._()
+      ..assets = AppAssets.origin()
+      ..isDark = false
+      ..primaryColor = Colors.white
+      ..accentColor = Colors.white
+      ..backgroundColor = Colors.white
+      ..headerBgColor = Colors.white;
+  }
 
-  final bool isDark;
-  final Color primaryColor;
-  final Color accentColor;
-  final Color backgroundColor;
-  final Color headerBgColor;
+  AppAssets assets = AppAssets.origin();
+  bool isDark = true;
+  Color primaryColor = Colors.blueGrey;
+  Color accentColor = Colors.blueGrey;
+  Color backgroundColor = const Color(0xFFF2F2F2);
+  Color headerBgColor = Colors.blueGrey;
 
   // Build theme data
   ThemeData buildThemeData() {
     return ThemeData(
       primaryColor: primaryColor,
       accentColor: accentColor,
-      fontFamily: AppFonts.roboto,
+      fontFamily: assets.fontRoboto,
       pageTransitionsTheme: _buildPageTransitionsTheme(),
       buttonTheme: _buildButtonTheme(),
       textTheme: _buildTextTheme(),
@@ -87,6 +80,6 @@ class AppThemeProvider with ChangeNotifier {
 
 extension AppThemeExt on BuildContext {
   AppTheme theme() {
-    return watch<AppThemeProvider>().theme;
+    return Provider.of<AppThemeProvider>(this, listen: false).theme;
   }
 }

@@ -7,7 +7,6 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/services/safety/page_stateful.dart';
-import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_transparency.dart';
@@ -31,14 +30,15 @@ class _LoginPageState extends PageStateful<LoginPage>
   @override
   void initDependencies(BuildContext context) {
     super.initDependencies(context);
-    loginProvider = Provider.of<LoginProvider>(context, listen: false);
+    loginProvider = Provider.of(context, listen: false);
   }
 
   @override
   void afterFirstBuild(BuildContext context) {
     loginProvider.resetState();
-    // Init email focus
-    // autofocus in TextField has an issue on next keyboard button
+
+    /// Init email focus
+    /// autofocus in TextField has an issue on next keyboard button
     _emailFocusNode.requestFocus();
   }
 
@@ -70,14 +70,15 @@ class _LoginPageState extends PageStateful<LoginPage>
           child: SingleChildScrollView(
               child: Column(
             children: <Widget>[
-              // Logo
+              /// Logo
               Padding(
                 padding: const EdgeInsets.only(top: 100, bottom: 50),
-                child:
-                    Image.asset(AppImages.icAppIcon, width: 150, height: 150),
+                child: Image.asset(appTheme.assets.icAppIcon,
+                    width: 150, height: 150),
               ),
-              // Login form
-              // Email + password
+
+              /// Login form
+              /// Email + password
               Selector<LoginProvider, bool>(
                 selector: (_, LoginProvider provider) => provider.emailValid,
                 builder: (_, bool emailValid, __) {
@@ -132,7 +133,7 @@ class _LoginPageState extends PageStateful<LoginPage>
               ),
               const SizedBox(height: 30),
 
-              // Example call api with success response
+              /// Example call api with success response
               RaisedButton(
                 key: const Key('callApiBtnKey'),
                 onPressed: context
@@ -167,8 +168,8 @@ class _LoginPageState extends PageStateful<LoginPage>
                 child: Text(S.of(context).btnLogin),
               ),
 
-              // Example call api with success http code but with error response,
-              // and how to use function response data instead property approach.
+              /// Example call api with success http code but with error response,
+              /// and how to use function response data instead property approach.
               RaisedButton(
                 key: const Key('callApiErrorBtnKey'),
                 onPressed: () async {
@@ -190,8 +191,8 @@ class _LoginPageState extends PageStateful<LoginPage>
                 child: const Text('call api with error'),
               ),
 
-              // Example call api with exception return to ui
-              // Note: Exception make app can not hide the app loading with previous ways
+              /// Example call api with exception return to ui
+              /// Note: Exception make app can not hide the app loading with previous ways
               RaisedButton(
                 key: const Key('callApiExceptionBtnKey'),
                 onPressed: () async {
@@ -209,7 +210,8 @@ class _LoginPageState extends PageStateful<LoginPage>
               ),
 
               const SizedBox(height: 30),
-              // Login button
+
+              /// Login button
             ],
           )),
         ),
@@ -217,7 +219,7 @@ class _LoginPageState extends PageStateful<LoginPage>
     );
   }
 
-  // Change next focus
+  /// Change next focus
   void _fieldFocusChange(
       BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();

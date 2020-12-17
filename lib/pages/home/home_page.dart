@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/safety/page_stateful.dart';
+import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends PageStateful<HomePage>
   @override
   void initDependencies(BuildContext context) {
     super.initDependencies(context);
-    homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    homeProvider = Provider.of(context, listen: false);
   }
 
   @override
@@ -79,14 +80,15 @@ class _HomePageState extends PageStateful<HomePage>
               child: Text(S.of(context).hello),
             ),
 
-            // As default, when user change language in device setting
-            // -> the locale will change appropriately
-            // This button provides user can change the locale manually
+            /// As default, when user change language in device setting
+            /// -> the locale will change appropriately
+            /// This button provides user can change the locale manually
             FlatButton(
               onPressed: () {
-                // Get current locale
+                /// Get current locale
                 final String currentLocale = Intl.getCurrentLocale();
-                // Change to new locale
+
+                /// Change to new locale
                 if (currentLocale == 'en') {
                   localeProvider.locale = const Locale('vi');
                 } else {
@@ -96,8 +98,9 @@ class _HomePageState extends PageStateful<HomePage>
               child: const Text('Translate'),
             ),
 
-            const SizedBox(height: 10),
-            // Example to use selector instead consumer to optimize render performance
+            SizedBox(height: 10.H),
+
+            /// Example to use selector instead consumer to optimize render performance
             Selector<HomeProvider, String>(
               selector: (_, HomeProvider provider) =>
                   provider.token?.toJson()?.toString() ?? '',
@@ -110,7 +113,8 @@ class _HomePageState extends PageStateful<HomePage>
             ),
 
             const SizedBox(height: 10),
-            // Navigate to counter page with current timestamp as argument
+
+            /// Navigate to counter page with current timestamp as argument
             RaisedButton(
               key: const Key(AppRoute.routeCounter),
               onPressed: () {
@@ -121,8 +125,9 @@ class _HomePageState extends PageStateful<HomePage>
             ),
 
             const SizedBox(height: 10),
-            // Logout
-            // Navigate to login
+
+            /// Logout
+            /// Navigate to login
             RaisedButton(
               key: const Key(AppRoute.routeLogin),
               onPressed: () async {

@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/utils/app_theme.dart';
+import 'package:nft/widgets/p_material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -20,7 +21,9 @@ void main() {
         child: ChangeNotifierProvider<AppThemeProvider>(
           create: (_) => AppThemeProvider(),
           builder: (_, __) {
-            return MaterialApp(home: widget);
+            return MaterialApp(
+              home: widget,
+            );
           },
         ));
   }
@@ -31,7 +34,7 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Create the widget by telling the tester to build it.
     // Build a MaterialApp with MediaQuery.
-    await tester.pumpWidget(buildTestableWidget(const CounterPage()));
+    await tester.pumpWidget(buildTestableWidget(CounterPage.create<void>()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

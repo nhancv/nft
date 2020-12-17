@@ -1,14 +1,27 @@
-/// For image assets
-class AppImages {
-  static const String icAppIcon = 'assets/base/icons/app_icon_ad.png';
-  static const String icEmpty = 'assets/base/icons/ic_empty.png';
-}
+class AppAssets {
+  AppAssets._();
 
-/// For video assets
-class AppVideos {}
+  /// Default theme
+  factory AppAssets.origin() {
+    return AppAssets._();
+  }
 
-/// For font assets
-class AppFonts {
-  static const String roboto = 'Roboto';
-  static const String lato = 'Lato';
+  ///#region FONTS
+  /// -----------------
+  String fontRoboto = 'Roboto';
+  String fontLato = 'Lato';
+
+  ///#endregion
+
+  ///#region IMAGES, ICONS
+  /// -----------------
+  String icAppIcon = 'assets/base/icons/app_icon_ad.png';
+  String icEmpty = 'assets/base/icons/ic_empty.png';
+
+  ///#endregion
+
+  ///#region VIDEOS
+  /// -----------------
+  ///#endregion
+
 }

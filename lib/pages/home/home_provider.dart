@@ -5,25 +5,25 @@ import 'package:nft/services/safety/change_notifier_safety.dart';
 class HomeProvider extends ChangeNotifierSafety {
   HomeProvider(this._api);
 
-  //#region PRIVATE PROPERTIES
-  // -----------------
-  // Authentication api
+  ///#region PRIVATE PROPERTIES
+  /// -----------------
+  /// Authentication api
   final ApiUser _api;
 
-  //#endregion
+  ///#endregion
 
-  //#region PUBLIC PROPERTIES
-  // -----------------
-  // Get user info
+  ///#region PUBLIC PROPERTIES
+  /// -----------------
+  /// Get user info
   Token get token => _api.token;
 
-  //#endregion
+  ///#endregion
 
-  //#region METHODS
-  // -----------------
+  ///#region METHODS
+  /// -----------------
 
   @override
   void resetState() {}
 
-//#endregion
+  ///#endregion
 }
