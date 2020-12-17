@@ -5,6 +5,10 @@ import 'package:nft/pages/login/login_page.dart';
 import 'package:provider/provider.dart';
 
 class AppRoute {
+  factory AppRoute() => _instance;
+
+  AppRoute._private();
+
   //#region ROUTE NAMES
   // -----------------
   static const String routeRoot = '/';
@@ -14,8 +18,12 @@ class AppRoute {
 
   //#endregion
 
+  static final AppRoute _instance = AppRoute._private();
+
+  static AppRoute get I => _instance;
+
   // App route observer
-  static RouteObserver<Route<dynamic>> routeObserver =
+  final RouteObserver<Route<dynamic>> routeObserver =
       RouteObserver<Route<dynamic>>();
 
   /// App global navigator key

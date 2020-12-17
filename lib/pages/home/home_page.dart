@@ -38,7 +38,7 @@ class _HomePageState extends PageStateful<HomePage>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    AppRoute.routeObserver.subscribe(this, ModalRoute.of(context));
+    AppRoute.I.routeObserver.subscribe(this, ModalRoute.of(context));
   }
 
   @override
@@ -57,7 +57,7 @@ class _HomePageState extends PageStateful<HomePage>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    AppRoute.routeObserver.unsubscribe(this);
+    AppRoute.I.routeObserver.unsubscribe(this);
     super.dispose();
   }
 

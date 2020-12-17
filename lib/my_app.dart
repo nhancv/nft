@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
       ///    .builder(context),
       initialRoute: AppRoute.routeRoot,
       onGenerateRoute: appRoute.generateRoute,
-      navigatorObservers: <NavigatorObserver>[AppRoute.routeObserver],
+      navigatorObservers: <NavigatorObserver>[appRoute.routeObserver],
     );
   }
 }
