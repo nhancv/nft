@@ -14,12 +14,12 @@ class AppRoute {
 
   //#endregion
 
+  // App route observer
+  static RouteObserver<Route<dynamic>> routeObserver =
+      RouteObserver<Route<dynamic>>();
+
   /// App global navigator key
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
-  // App route observer
-  final RouteObserver<Route<dynamic>> routeObserver =
-      RouteObserver<Route<dynamic>>();
 
   // Get app context
   BuildContext get appContext => navigatorKey.currentContext;

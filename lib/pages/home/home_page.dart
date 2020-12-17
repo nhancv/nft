@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends PageStateful<HomePage>
-    with WidgetsBindingObserver {
+    with WidgetsBindingObserver, RouteAware {
   HomeProvider homeProvider;
 
   @override
@@ -36,8 +36,28 @@ class _HomePageState extends PageStateful<HomePage>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    AppRoute.routeObserver.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void didPush() {
+    /// Called when the current route has been pushed.
+    logger.d('didPush');
+  }
+
+  @override
+  void didPopNext() {
+    /// Called when the top route has been popped off, and the current route
+    /// shows up.
+    logger.d('didPopNext');
+  }
+
+  @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    AppRoute.routeObserver.unsubscribe(this);
     super.dispose();
   }
 
