@@ -1,3 +1,7 @@
+## [1.0.34+2012210955] - December 21, 2020.
+
+* Refactor cache
+
 ## [1.0.33+2012172339] - December 17, 2020.
 
 * Update libs
