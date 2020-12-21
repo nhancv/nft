@@ -4,7 +4,7 @@ import 'package:nft/services/safety/change_notifier_safety.dart';
 class LoginProvider extends ChangeNotifierSafety {
   LoginProvider();
 
-  //#region PRIVATE PROPERTIES
+  ///#region PRIVATE PROPERTIES
   /// -----------------
   /// Store email value
   String _emailValue = '';
@@ -21,9 +21,9 @@ class LoginProvider extends ChangeNotifierSafety {
   /// Flag to check form input is valid or not
   bool _formValid = false;
 
-  //#endregion
+  ///#endregion
 
-  //#region PUBLIC PROPERTIES
+  ///#region PUBLIC PROPERTIES
   /// -----------------
 
   bool get emailValid => _emailValid;
@@ -47,9 +47,9 @@ class LoginProvider extends ChangeNotifierSafety {
     notifyListeners();
   }
 
-  //#endregion
+  ///#endregion
 
-  //#region METHODS
+  ///#region METHODS
   /// -----------------
   /// Reset state
   @override
@@ -84,5 +84,5 @@ class LoginProvider extends ChangeNotifierSafety {
     _validateForm();
   }
 
-//#endregion
+///#endregion
 }
