@@ -8,10 +8,10 @@ import 'package:nft/services/safety/change_notifier_safety.dart';
 class AuthProvider extends ChangeNotifierSafety {
   AuthProvider(this._api, this._credential);
 
-  // Authentication api
+  /// Authentication api
   final ApiUser _api;
 
-  // Credential
+  /// Credential
   final Credential _credential;
 
   @override
@@ -24,7 +24,7 @@ class AuthProvider extends ChangeNotifierSafety {
     final LoginResponse loginResponse = LoginResponse(result.data);
     final Token token = loginResponse.data;
     if (token != null) {
-      // Save credential
+      /// Save credential
       final bool saveRes =
           await _credential.storeCredential(token, cache: true);
       return saveRes;
@@ -52,7 +52,7 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call logout
   Future<bool> logout() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    // Save credential
+    /// Save credential
     final bool saveRes = await _credential.storeCredential(null, cache: true);
     return saveRes;
   }

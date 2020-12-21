@@ -18,7 +18,7 @@ class AppHelper {
     );
   }
 
-  // Show snack bar
+  /// Show snack bar
   static void showFlushBar(BuildContext context, String message) {
     Flushbar<void>(
             message: message,
@@ -27,7 +27,7 @@ class AppHelper {
         .show(context);
   }
 
-  // Show toast
+  /// Show toast
   static void showToast(
     String msg, {
     Toast toastLength,

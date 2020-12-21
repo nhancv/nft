@@ -30,7 +30,7 @@ class AppTheme {
   Color backgroundColor = const Color(0xFFF2F2F2);
   Color headerBgColor = Colors.blueGrey;
 
-  // Build theme data
+  /// Build theme data
   ThemeData buildThemeData() {
     return ThemeData(
       primaryColor: primaryColor,
@@ -52,7 +52,7 @@ class AppTheme {
     );
   }
 
-  // Custom button theme full width
+  /// Custom button theme full width
   ButtonThemeData _buildButtonTheme() {
     return ButtonThemeData(
       minWidth: double.infinity,
@@ -63,7 +63,7 @@ class AppTheme {
     );
   }
 
-  // Custom text theme
+  /// Custom text theme
   TextTheme _buildTextTheme() {
     return const TextTheme();
   }

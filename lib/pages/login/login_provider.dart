@@ -5,26 +5,26 @@ class LoginProvider extends ChangeNotifierSafety {
   LoginProvider();
 
   //#region PRIVATE PROPERTIES
-  // -----------------
-  // Store email value
+  /// -----------------
+  /// Store email value
   String _emailValue = '';
 
-  // Flag to check email is valid or not
+  /// Flag to check email is valid or not
   bool _emailValid = false;
 
-  // Store password value
+  /// Store password value
   String _passwordValue = '';
 
-  // Flag to visible password field
+  /// Flag to visible password field
   bool _obscureText = true;
 
-  // Flag to check form input is valid or not
+  /// Flag to check form input is valid or not
   bool _formValid = false;
 
   //#endregion
 
   //#region PUBLIC PROPERTIES
-  // -----------------
+  /// -----------------
 
   bool get emailValid => _emailValid;
 
@@ -50,8 +50,8 @@ class LoginProvider extends ChangeNotifierSafety {
   //#endregion
 
   //#region METHODS
-  // -----------------
-  // Reset state
+  /// -----------------
+  /// Reset state
   @override
   void resetState() {
     _emailValue = '';
@@ -62,7 +62,7 @@ class LoginProvider extends ChangeNotifierSafety {
     notifyListeners();
   }
 
-  // Validate from
+  /// Validate from
   void _validateForm() {
     formValid = emailValid && _passwordValue.isNotEmpty;
   }
@@ -72,7 +72,7 @@ class LoginProvider extends ChangeNotifierSafety {
     _emailValue = email;
     emailValid = EmailValidator.validate(_emailValue);
 
-    // Update form valid
+    /// Update form valid
     _validateForm();
   }
 
@@ -80,7 +80,7 @@ class LoginProvider extends ChangeNotifierSafety {
   void onPasswordChangeToValidateForm(final String password) {
     _passwordValue = password;
 
-    // Update form valid
+    /// Update form valid
     _validateForm();
   }
 

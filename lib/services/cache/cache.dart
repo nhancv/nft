@@ -1,6 +1,6 @@
 /// Storage abstract class
 /// Recommend using https://pub.dev/packages/npreferences as implementation
-abstract class Storage {
+abstract class Cache {
   /// Save data with primary data types:
   /// String, List<String>, double, int, bool
   Future<bool> saveData<T>(String key, T value);

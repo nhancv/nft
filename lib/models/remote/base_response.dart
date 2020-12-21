@@ -112,74 +112,74 @@ class BaseError {
 ///
 ///class Credential {
 ///  Credential(
-//      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken});
+///      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken});
 //
-//  factory Credential.fromJson(Map<String, dynamic> json) => Credential(
-//    tokenType: json['token_type'] as String,
-//    expiresIn: json['expires_in'] as int,
-//    accessToken: json['access_token'] as String,
-//    refreshToken: json['refresh_token'] as String,
-//  );
+///  factory Credential.fromJson(Map<String, dynamic> json) => Credential(
+///    tokenType: json['token_type'] as String,
+///    expiresIn: json['expires_in'] as int,
+///    accessToken: json['access_token'] as String,
+///    refreshToken: json['refresh_token'] as String,
+///  );
 //
-//  final String tokenType;
-//  final int expiresIn;
-//  final String accessToken;
-//  final String refreshToken;
+///  final String tokenType;
+///  final int expiresIn;
+///  final String accessToken;
+///  final String refreshToken;
 //
-//  Map<String, dynamic> toJson() => <String, dynamic>{
-//    'tokenType': tokenType,
-//    'expiresIn': expiresIn,
-//    'accessToken': accessToken,
-//    'refreshToken': refreshToken,
-//  };
+///  Map<String, dynamic> toJson() => <String, dynamic>{
+///    'tokenType': tokenType,
+///    'expiresIn': expiresIn,
+///    'accessToken': accessToken,
+///    'refreshToken': refreshToken,
+///  };
 //}
 //
 //class LoginResponse extends BaseResponse<Credential> {
-//  LoginResponse(Map<String, dynamic> fullJson) : super(fullJson);
+///  LoginResponse(Map<String, dynamic> fullJson) : super(fullJson);
 //
-//  @override
-//  Map<String, dynamic> dataToJson(Credential data) {
-//    return data.toJson();
-//  }
+///  @override
+///  Map<String, dynamic> dataToJson(Credential data) {
+///    return data.toJson();
+///  }
 //
-//  @override
-//  Credential jsonToData(Map<String, dynamic> dataJson) {
-//    return Credential.fromJson(dataJson);
-//  }
+///  @override
+///  Credential jsonToData(Map<String, dynamic> dataJson) {
+///    return Credential.fromJson(dataJson);
+///  }
 //}
 
 /// With extra token response
 ///*
 //Error
 //{
-//    "data": null,
-//    "error": {
-//            "code": 1029,
-//            "message": "User not found!."
-//        }
+///    "data": null,
+///    "error": {
+///            "code": 1029,
+///            "message": "User not found!."
+///        }
 //}
 //
 //Successful
 //{
-//    "token": "Bearer",
+///    "token": "Bearer",
 //}
-// */
+/// */
 //
 //import 'base-response.model.dart';
 //
 //class LoginResponseModel extends BaseResponseModel<dynamic> {
-//  LoginResponseModel(Map<String, dynamic> fullJson) : super(fullJson) {
-//    token = fullJson['token'] as String;
-//  }
+///  LoginResponseModel(Map<String, dynamic> fullJson) : super(fullJson) {
+///    token = fullJson['token'] as String;
+///  }
 //
-//  String token;
+///  String token;
 //
-//  @override
-//  Map<String, dynamic> toJson() {
-//    return <String, dynamic>{
-//      'token': token,
-//      ... super.toJson()
-//    };
-//  }
+///  @override
+///  Map<String, dynamic> toJson() {
+///    return <String, dynamic>{
+///      'token': token,
+///      ... super.toJson()
+///    };
+///  }
 //
 //}

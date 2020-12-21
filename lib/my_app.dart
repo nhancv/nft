@@ -9,8 +9,8 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/auth_provider.dart';
 import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/cache/credential.dart';
-import 'package:nft/services/cache/storage.dart';
-import 'package:nft/services/cache/storage_preferences.dart';
+import 'package:nft/services/cache/cache.dart';
+import 'package:nft/services/cache/cache_preferences.dart';
 import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
@@ -30,10 +30,10 @@ Future<void> myMain() async {
     MultiProvider(
       providers: <SingleChildWidget>[
         Provider<AppRoute>(create: (_) => AppRoute()),
-        Provider<Storage>(create: (_) => StoragePreferences()),
+        Provider<Cache>(create: (_) => CachePreferences()),
         ChangeNotifierProvider<Credential>(
             create: (BuildContext context) =>
-                Credential(context.read<Storage>())),
+                Credential(context.read<Cache>())),
         ProxyProvider<Credential, ApiUser>(
             create: (_) => ApiUser(),
             update: (_, Credential credential, ApiUser userApi) {
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    // Example about load credential to init page
+    /// Example about load credential to init page
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final bool hasCredential =
           await context.read<Credential>().loadCredential();
@@ -85,11 +85,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Get providers
+    /// Get providers
     final AppRoute appRoute = context.watch<AppRoute>();
     final LocaleProvider localeProvider = context.watch<LocaleProvider>();
     final AppTheme appTheme = context.theme();
-    // Build Material app
+    /// Build Material app
     return MaterialApp(
       navigatorKey: appRoute.navigatorKey,
       locale: localeProvider.locale,

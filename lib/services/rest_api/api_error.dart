@@ -54,21 +54,21 @@ mixin ApiError {
         await onError(error);
       }
 
-      // Call onApiError
+      /// Call onApiError
       if (skipOnError == false) {
         onApiError(error);
       }
 
       return null;
     } finally {
-      // Call finally function
+      /// Call finally function
       if (onFinally != null) {
         await onFinally();
       }
     }
   }
 
-  // Parsing error to ErrorType
+  /// Parsing error to ErrorType
   ApiErrorType parseApiErrorType(dynamic error) {
     if (error is DioError && error.type == DioErrorType.RESPONSE) {
       ApiErrorCode errorCode = ApiErrorCode.unknown;

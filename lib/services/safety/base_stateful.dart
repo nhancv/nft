@@ -7,7 +7,7 @@ abstract class BaseStateful<T extends StatefulWidget> extends State<T>
     with DynamicSize {
   AppTheme appTheme;
 
-  // Context valid to create providers
+  /// Context valid to create providers
   @mustCallSuper
   @protected
   void initDependencies(BuildContext context) {

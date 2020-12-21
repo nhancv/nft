@@ -13,8 +13,8 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/auth_provider.dart';
 import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/cache/credential.dart';
-import 'package:nft/services/cache/storage.dart';
-import 'package:nft/services/cache/storage_preferences.dart';
+import 'package:nft/services/cache/cache.dart';
+import 'package:nft/services/cache/cache_preferences.dart';
 import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/utils/app_config.dart';
 import 'package:nft/utils/app_log.dart';
@@ -28,7 +28,7 @@ class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 /// Mock Credential
 class MockCredential extends Credential {
-  MockCredential(Storage storage) : super(storage);
+  MockCredential(Cache storage) : super(storage);
 
   @override
   Future<bool> storeCredential(final Token token, {bool cache = false}) async {
@@ -65,10 +65,10 @@ void main() {
       child: MultiProvider(
         providers: <SingleChildWidget>[
           Provider<AppRoute>(create: (_) => AppRoute()),
-          Provider<Storage>(create: (_) => StoragePreferences()),
+          Provider<Cache>(create: (_) => CachePreferences()),
           ChangeNotifierProvider<Credential>(
               create: (BuildContext context) => MockCredential(
-                    context.read<Storage>(),
+                    context.read<Cache>(),
                   )),
           ProxyProvider<Credential, ApiUser>(
               create: (_) => MockAuthApi(),
