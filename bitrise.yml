@@ -25,7 +25,7 @@ workflows:
     - flutter-build@0:
         inputs:
         - platform: android
-    - appcenter-deploy-android@1:
+    - appcenter-deploy-android@2:
         inputs:
         - owner_name: nhancv
         - app_name: nft
