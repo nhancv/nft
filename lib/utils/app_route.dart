@@ -44,11 +44,13 @@ class AppRoute {
         return MaterialPageRoute<dynamic>(
             settings: settings, builder: (_) => const HomePage());
 
-      case AppRoute.routeLogin:
       case AppRoute.routeRoot:
-      default:
+      case AppRoute.routeLogin:
         return MaterialPageRoute<dynamic>(
             settings: settings, builder: (_) => const LoginPage());
+
+      default:
+        return null;
     }
   }
 }
