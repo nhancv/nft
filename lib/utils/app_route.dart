@@ -44,8 +44,8 @@ class AppRoute {
         return MaterialPageRoute<dynamic>(
             settings: settings, builder: (_) => const HomePage());
 
-      case AppRoute.routeRoot:
-      case AppRoute.routeLogin:
+      case routeRoot:
+      case routeLogin:
         return MaterialPageRoute<dynamic>(
             settings: settings, builder: (_) => const LoginPage());
 
