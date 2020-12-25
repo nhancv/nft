@@ -1,6 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:nft/services/safety/base_stateless.dart';
 
+/// Example
+/// WBorderShadow(
+///       borderColor: const Color(0xFF2CD7FF),
+///       shadowColor: const Color(0xFF2CD7FF),
+///       backgroundColor: const Color(0xFF00182B),
+///       padding: 2.W,
+///       child: Container(
+///           height: 48.H,
+///           child: RaisedButton(
+///             padding: EdgeInsets.zero,
+///             onPressed: () {},
+///             child: WShadowText(
+///               'LOGIN',
+///               style: normalTextStyle(
+///                 36.SP,
+///                 fontFamily: appTheme.assets.fontLibrary3am,
+///                 color: const Color(0xFF2CD7FF),
+///               ),
+///             ),
+///           )),
+///     ),
 // ignore: must_be_immutable
 class WBorderShadow extends BaseStateless {
   WBorderShadow(
@@ -27,25 +48,23 @@ class WBorderShadow extends BaseStateless {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return _buildBorder();
-  }
-
-  /// Build single border shadow
-  Widget _buildBorder() {
-    return _WSingleBorderShadow(
-      borderColor: borderColor,
-      borderRadius: borderRadius,
-      shadowColor: shadowColor,
-      spreadRadius: spreadRadius,
-      blurRadius: blurRadius,
-      child: Container(
-        margin: EdgeInsets.all(padding ?? 5),
-        child: _WSingleBorderShadow(
-          borderColor: Colors.transparent,
-          shadowColor: backgroundColor,
-          child: Container(
-            margin: EdgeInsets.all(padding ?? 5),
-            child: child,
+    return Container(
+      padding: EdgeInsets.all(borderRadius ?? 5),
+      child: _WSingleBorderShadow(
+        borderColor: borderColor,
+        borderRadius: borderRadius,
+        shadowColor: shadowColor,
+        spreadRadius: spreadRadius,
+        blurRadius: blurRadius,
+        child: Container(
+          margin: EdgeInsets.all(padding ?? 2),
+          child: _WSingleBorderShadow(
+            borderColor: Colors.transparent,
+            shadowColor: backgroundColor,
+            child: Container(
+              margin: EdgeInsets.all(padding ?? 2),
+              child: child,
+            ),
           ),
         ),
       ),
@@ -83,8 +102,8 @@ class _WSingleBorderShadow extends BaseStateless {
         boxShadow: <BoxShadow>[
           BoxShadow(
             color: shadowColor ?? Colors.white,
-            spreadRadius: spreadRadius ?? 2,
-            blurRadius: blurRadius ?? 10,
+            spreadRadius: spreadRadius ?? 1,
+            blurRadius: blurRadius ?? 5,
           ),
         ],
       ),
