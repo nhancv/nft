@@ -12,7 +12,7 @@ import 'package:nft/services/safety/base_stateless.dart';
 ///           child: RaisedButton(
 ///             padding: EdgeInsets.zero,
 ///             onPressed: () {},
-///             child: WShadowText(
+///             child: WTextShadow(
 ///               'LOGIN',
 ///               style: normalTextStyle(
 ///                 36.SP,

@@ -4,7 +4,7 @@ import 'package:nft/pages/counter/counter_provider.dart';
 import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
-import 'package:nft/widgets/w_dismiss_keyboard.dart';
+import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatefulWidget {
@@ -30,7 +30,7 @@ class _CounterPageState extends BaseStateful<CounterPage> {
   Widget build(BuildContext context) {
     super.build(context);
     return PAppBarEmpty(
-      child: WDismissKeyboard(
+      child: WKeyboardDismiss(
         child: Column(children: <Widget>[
           AppBar(
             title: const Text('Counter Page'),

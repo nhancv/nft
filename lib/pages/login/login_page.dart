@@ -10,7 +10,7 @@ import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_transparency.dart';
-import 'package:nft/widgets/w_dismiss_keyboard.dart';
+import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -64,7 +64,7 @@ class _LoginPageState extends PageStateful<LoginPage>
   Widget build(BuildContext context) {
     super.build(context);
     return PAppBarTransparency(
-      child: WDismissKeyboard(
+      child: WKeyboardDismiss(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(

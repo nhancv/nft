@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// Widget deal with tab on screen to close keyboard
-class WDismissKeyboard extends StatelessWidget {
-  const WDismissKeyboard({
+class WKeyboardDismiss extends StatelessWidget {
+  const WKeyboardDismiss({
     @required this.child,
     this.unFocus,
     Key key,

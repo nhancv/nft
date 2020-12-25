@@ -7,7 +7,7 @@ import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
-import 'package:nft/widgets/w_dismiss_keyboard.dart';
+import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -72,7 +72,7 @@ class _HomePageState extends PageStateful<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     return PAppBarEmpty(
-      child: WDismissKeyboard(
+      child: WKeyboardDismiss(
         child: Column(
           children: <Widget>[
             Padding(
