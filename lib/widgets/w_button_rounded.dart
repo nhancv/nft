@@ -7,14 +7,16 @@ class WButtonRounded extends StatelessWidget {
       this.radius,
       this.onPressed,
       this.background,
-      this.border})
+      this.borderColor,
+      this.borderWidth})
       : super(key: key);
 
   final Widget child;
   final double radius;
   final Function() onPressed;
   final Color background;
-  final Color border;
+  final Color borderColor;
+  final double borderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,9 @@ class WButtonRounded extends StatelessWidget {
       onPressed: onPressed,
       child: child,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: border ?? Colors.transparent),
+        side: BorderSide(
+            color: borderColor ?? Colors.transparent,
+            width: borderWidth ?? 1.0),
         borderRadius: BorderRadius.circular(radius ?? 50),
       ),
       color: background ?? Colors.white,
