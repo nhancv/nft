@@ -18,9 +18,9 @@ class AuthProvider extends ChangeNotifierSafety {
   void resetState() {}
 
   /// Call api login
-  Future<bool> login() async {
+  Future<bool> login(String email, String password) async {
     final Response<Map<String, dynamic>> result =
-        await _api.logIn().timeout(const Duration(seconds: 30));
+        await _api.logIn(email, password).timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     final Token token = loginResponse.data;
     if (token != null) {

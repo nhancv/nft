@@ -107,7 +107,7 @@ void main() {
 
             // Use Mockito to return a successful response when it calls the
             // signIn function
-            when(userApi.logIn()).thenAnswer((_) {
+            when(userApi.logIn(null, null)).thenAnswer((_) {
               return Future<Response<Map<String, dynamic>>>.value(
                 Response<Map<String, dynamic>>(
                   data: <String, dynamic>{
@@ -182,7 +182,7 @@ void main() {
     // Verify push to show loading
     verify(appLoadingProvider.showLoading(any));
     // Verify that login function called
-    verify(userApi.logIn());
+    verify(userApi.logIn(null, null));
     //  Verify push to hide loading
     verify(appLoadingProvider.hideLoading());
 

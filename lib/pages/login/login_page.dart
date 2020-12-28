@@ -135,7 +135,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                         .select((LoginProvider provider) => provider.formValid)
                     ? () async {
                         final bool success = await apiCallSafety(
-                          authProvider.login,
+                          () => authProvider.login(null, null),
                           onStart: () async {
                             AppLoadingProvider.show(context);
                           },

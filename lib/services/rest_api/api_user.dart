@@ -4,13 +4,13 @@ import 'api.dart';
 
 class ApiUser extends Api {
   /// Login
-  Future<Response<Map<String, dynamic>>> logIn() async {
+  Future<Response<Map<String, dynamic>>> logIn(String email, String password) async {
     final Options options = await getOptions();
     return wrapE(() => dio.post<Map<String, dynamic>>('$apiBaseUrl/login',
             options: options,
             data: <String, String>{
-              'username': 'username',
-              'password': 'password',
+              'email': email,
+              'password': password,
             }));
   }
 
@@ -20,7 +20,7 @@ class ApiUser extends Api {
     return wrapE(() => dio.post<Map<String, dynamic>>('$apiBaseUrl/login-err',
             options: options,
             data: <String, String>{
-              'username': 'username',
+              'email': 'email',
               'password': 'password',
             }));
   }
