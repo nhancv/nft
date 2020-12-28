@@ -75,4 +75,11 @@ class AppHelper {
       ],
     );
   }
+
+  /// Change next focus
+  static void nextFocus(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
 }

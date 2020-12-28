@@ -7,6 +7,7 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/services/safety/page_stateful.dart';
+import 'package:nft/utils/app_helper.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_transparency.dart';
@@ -97,7 +98,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                           )
                         : null,
                     onSubmitted: (String term) {
-                      _fieldFocusChange(
+                      AppHelper.nextFocus(
                           context, _emailFocusNode, _passwordFocusNode);
                     },
                   );
@@ -211,13 +212,6 @@ class _LoginPageState extends PageStateful<LoginPage>
         ),
       ),
     );
-  }
-
-  /// Change next focus
-  void _fieldFocusChange(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    FocusScope.of(context).requestFocus(nextFocus);
   }
 
   @override
