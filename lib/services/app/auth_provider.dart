@@ -52,6 +52,7 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call logout
   Future<bool> logout() async {
     await Future<void>.delayed(const Duration(seconds: 1));
+
     /// Save credential
     final bool saveRes = await _credential.storeCredential(null, cache: true);
     return saveRes;

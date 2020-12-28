@@ -10,6 +10,7 @@ import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_transparency.dart';
+import 'package:nft/widgets/w_input_form.dart';
 import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
@@ -82,22 +83,19 @@ class _LoginPageState extends PageStateful<LoginPage>
               Selector<LoginProvider, bool>(
                 selector: (_, LoginProvider provider) => provider.emailValid,
                 builder: (_, bool emailValid, __) {
-                  return TextField(
+                  return WInputForm.email(
                     key: const Key('emailInputKey'),
-                    decoration: InputDecoration(
-                      labelText: S.of(context).labelEmail,
-                      errorText:
-                          !emailValid ? S.of(context).msgEmailInValid : null,
-                      border: const OutlineInputBorder(),
-                      suffixIcon: !emailValid
-                          ? const Icon(
-                              Icons.error,
-                            )
-                          : null,
-                    ),
+                    labelText: S.of(context).labelEmail,
                     onChanged: loginProvider.onEmailChangeToValidateForm,
                     focusNode: _emailFocusNode,
                     textInputAction: TextInputAction.next,
+                    errorText:
+                        !emailValid ? S.of(context).msgEmailInValid : null,
+                    suffixIcon: !emailValid
+                        ? const Icon(
+                            Icons.error,
+                          )
+                        : null,
                     onSubmitted: (String term) {
                       _fieldFocusChange(
                           context, _emailFocusNode, _passwordFocusNode);
@@ -109,20 +107,16 @@ class _LoginPageState extends PageStateful<LoginPage>
               Selector<LoginProvider, bool>(
                 selector: (_, LoginProvider provider) => provider.obscureText,
                 builder: (_, bool obscureText, __) {
-                  return TextField(
+                  return WInputForm.password(
                     key: const Key('passwordInputKey'),
-                    decoration: InputDecoration(
-                      labelText: S.of(context).labelPassword,
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: obscureText
-                            ? const Icon(Icons.visibility_off)
-                            : const Icon(Icons.visibility),
-                        onPressed: () {
-                          loginProvider.obscureText =
-                              !loginProvider.obscureText;
-                        },
-                      ),
+                    labelText: S.of(context).labelPassword,
+                    suffixIcon: IconButton(
+                      icon: obscureText
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility),
+                      onPressed: () {
+                        loginProvider.obscureText = !loginProvider.obscureText;
+                      },
                     ),
                     obscureText: obscureText,
                     onChanged: loginProvider.onPasswordChangeToValidateForm,

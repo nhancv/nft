@@ -84,5 +84,5 @@ class LoginProvider extends ChangeNotifierSafety {
     _validateForm();
   }
 
-///#endregion
+  ///#endregion
 }

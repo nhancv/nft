@@ -89,6 +89,7 @@ class _MyAppState extends State<MyApp> {
     final AppRoute appRoute = context.watch<AppRoute>();
     final LocaleProvider localeProvider = context.watch<LocaleProvider>();
     final AppTheme appTheme = context.theme();
+
     /// Build Material app
     return MaterialApp(
       navigatorKey: appRoute.navigatorKey,
