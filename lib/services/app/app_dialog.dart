@@ -52,7 +52,9 @@ class AppDialogProvider {
         });
         return AlertDialog(
           title: Text(title ?? 'Alert'),
-          content: Text(content ?? ''),
+          content: SingleChildScrollView(
+            child: SelectableText(content ?? ''),
+          ),
           actions: <Widget>[
             FlatButton(
               onPressed: () {
