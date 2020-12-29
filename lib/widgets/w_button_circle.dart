@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nft/utils/app_extension.dart';
 
 class WButtonCircle extends StatelessWidget {
-  const WButtonCircle({Key key, this.onPressed, this.child, this.color})
+  const WButtonCircle(
+      {Key key, this.width, this.onPressed, this.child, this.color})
       : super(key: key);
 
+  final double width;
   final Function() onPressed;
   final Widget child;
   final Color color;
@@ -12,7 +13,7 @@ class WButtonCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 50.W,
+      width: width ?? 50,
       child: RaisedButton(
         shape: const CircleBorder(),
         onPressed: onPressed,
