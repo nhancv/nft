@@ -18,7 +18,7 @@ class WButtonRaisedFlat extends StatelessWidget {
     return RaisedButton(
       onPressed: onPressed,
       child: child,
-      splashColor: splashColor ?? const Color(0xFFFFCE9A),
+      splashColor: splashColor ?? Colors.grey.withAlpha(150),
       color: color ?? Colors.transparent,
       elevation: 0,
       padding: EdgeInsets.zero,
