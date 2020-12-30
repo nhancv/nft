@@ -15,6 +15,8 @@ Error
  */
 import 'dart:core';
 
+import 'package:flutter/cupertino.dart';
+
 class BaseResponse<T> {
   BaseResponse(Map<String, dynamic> fullJson,
       {String dataKey = 'data', String errorKey = 'error'}) {
@@ -183,3 +185,25 @@ class BaseError {
 ///  }
 //
 //}
+
+/// Parse response from list
+/// class EventResponse extends BaseResponse<List<Event>> {
+///   EventResponse(Map<String, dynamic> fullJson) : super(fullJson);
+//
+///   @override
+///   List<Event> dataToJson(List<Event> data) {
+///     return List<Event>.from(
+///         data.map<Map<String, dynamic>>((Event x) => x.toJson()));
+///   }
+//
+///   @override
+///   List<Event> jsonToData(dynamic dataJson) {
+///     final List<dynamic> dataList = dataJson as List<dynamic>;
+///     return dataList != null
+///         ? List<Event>.from(dataList.map<Event>(
+///             (dynamic x) => Event.fromJson(x as Map<String, dynamic>)))
+///         : <Event>[];
+///   }
+/// }
+
+
