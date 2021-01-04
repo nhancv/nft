@@ -1,3 +1,7 @@
+## [1.0.35+2101041520] - January 04, 2021.
+
+* Refactor cache
+
 ## [1.0.34+2012210955] - December 21, 2020.
 
 * Refactor cache
