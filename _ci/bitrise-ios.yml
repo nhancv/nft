@@ -29,10 +29,10 @@ workflows:
       - xcode-archive@3:
           inputs:
             - team_id: ''
-            - force_team_id: 9Q7CB75TBD
-            - force_code_sign_identity: 'Apple Distribution: Nhan Cao (9Q7CB75TBD)'
-            - force_provisioning_profile_specifier: 9Q7CB75TBD/nft-appstore-profile
-            - force_provisioning_profile: 1aa7229d-ebdd-4ba1-ad9e-b4caf687b3cb
+            - force_team_id: ''
+            - force_code_sign_identity: ''
+            - force_provisioning_profile_specifier: ''
+            - force_provisioning_profile: ''
             - export_method: app-store
       - deploy-to-itunesconnect-application-loader@0:
           inputs:
