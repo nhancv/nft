@@ -1,6 +1,10 @@
+## [1.0.36+2101041955] - January 04, 2021.
+
+* Add store
+
 ## [1.0.35+2101041520] - January 04, 2021.
 
-* Refactor cache
+* Add bitrise config
 
 ## [1.0.34+2012210955] - December 21, 2020.
 
