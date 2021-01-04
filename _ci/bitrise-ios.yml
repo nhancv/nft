@@ -1,0 +1,62 @@
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: flutter
+trigger_map:
+  - pull_request_source_branch: "*"
+    workflow: primary
+workflows:
+  primary:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@4: {}
+      - flutter-installer@0:
+          inputs:
+            - is_update: 'true'
+      - cache-pull@2: {}
+      - flutter-analyze@0:
+          inputs:
+            - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+      - flutter-test@0:
+          inputs:
+            - generate_code_coverage_files: 'no'
+            - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+      - flutter-build@0:
+          inputs:
+            - platform: ios
+      - xcode-archive@3: {}
+      - appcenter-deploy-ios@2: {}
+      - deploy-to-itunesconnect-application-loader@0:
+          inputs:
+            - app_password: "$APPLE_APP_PASSWORD"
+            - itunescon_user: "$APPLE_EMAIL"
+      - deploy-to-bitrise-io@1: {}
+      - slack@3:
+          inputs:
+            - channel: "#general"
+            - fields: |-
+                App|${BITRISE_APP_TITLE}
+                Branch|${BITRISE_GIT_BRANCH}
+                Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            - buttons: |-
+                View App|${APPCENTER_RELEASE_PAGE_URL}
+                Install Page|${APPCENTER_PUBLIC_INSTALL_PAGE_URL}
+                Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
+                Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
+            - webhook_url: "$SLACK_HOOK_URL"
+      - cache-push@2: {}
+app:
+  envs:
+    - opts:
+        is_expand: false
+      BITRISE_FLUTTER_PROJECT_LOCATION: "."
+    - opts:
+        is_expand: false
+      BITRISE_PROJECT_PATH: ios/Runner.xcworkspace
+    - opts:
+        is_expand: false
+      BITRISE_SCHEME: Runner
+    - opts:
+        is_expand: false
+      BITRISE_EXPORT_METHOD: app-store

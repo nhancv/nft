@@ -28,14 +28,14 @@ workflows:
     - appcenter-deploy-android@2:
         inputs:
         - owner_name: nhancv
-        - app_name: nft
+        - app_name: ad_nft
         - distribution_group: beta
         - app_path: "$BITRISE_APK_PATH"
         - api_token: "$APP_CENTER_TOKEN"
     - deploy-to-bitrise-io@1: {}
     - slack@3:
         inputs:
-        - channel: "#builds_slack_channel"
+        - channel: "#general"
         - fields: |-
             App|${BITRISE_APP_TITLE}
             Branch|${BITRISE_GIT_BRANCH}
@@ -52,12 +52,3 @@ app:
   - opts:
       is_expand: false
     BITRISE_FLUTTER_PROJECT_LOCATION: "."
-  - opts:
-      is_expand: false
-    BITRISE_PROJECT_PATH: ios/Runner.xcworkspace
-  - opts:
-      is_expand: false
-    BITRISE_SCHEME: Runner
-  - opts:
-      is_expand: false
-    BITRISE_EXPORT_METHOD: development
