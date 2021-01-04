@@ -25,8 +25,11 @@ workflows:
       - flutter-build@0:
           inputs:
             - platform: ios
-      - xcode-archive@3: {}
       - appcenter-deploy-ios@2: {}
+      - certificate-and-profile-installer@1: {}
+      - xcode-archive@3:
+          inputs:
+            - export_method: app-store
       - deploy-to-itunesconnect-application-loader@0:
           inputs:
             - app_password: "$APPLE_APP_PASSWORD"
