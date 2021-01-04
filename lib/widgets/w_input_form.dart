@@ -23,7 +23,7 @@ class WInputForm extends StatefulWidget {
     @required this.onChanged,
     this.onSubmitted,
     this.focusNode,
-    this.textInputAction: TextInputAction.next,
+    this.textInputAction = TextInputAction.next,
   }) : super(key: key);
 
   const WInputForm.password({
@@ -35,7 +35,7 @@ class WInputForm extends StatefulWidget {
     @required this.onChanged,
     this.onSubmitted,
     this.focusNode,
-    this.textInputAction: TextInputAction.done,
+    this.textInputAction = TextInputAction.done,
   }) : super(key: key);
 
   final String labelText;
