@@ -15,8 +15,6 @@ Error
  */
 import 'dart:core';
 
-import 'package:flutter/cupertino.dart';
-
 class BaseResponse<T> {
   BaseResponse(Map<String, dynamic> fullJson,
       {String dataKey = 'data', String errorKey = 'error'}) {

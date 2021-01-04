@@ -25,15 +25,20 @@ workflows:
       - flutter-build@0:
           inputs:
             - platform: ios
-      - appcenter-deploy-ios@2: {}
       - certificate-and-profile-installer@1: {}
       - xcode-archive@3:
           inputs:
+            - team_id: ''
+            - force_team_id: 9Q7CB75TBD
+            - force_code_sign_identity: 'Apple Distribution: Nhan Cao (9Q7CB75TBD)'
+            - force_provisioning_profile_specifier: 9Q7CB75TBD/nft-appstore-profile
+            - force_provisioning_profile: 1aa7229d-ebdd-4ba1-ad9e-b4caf687b3cb
             - export_method: app-store
       - deploy-to-itunesconnect-application-loader@0:
           inputs:
             - app_password: "$APPLE_APP_PASSWORD"
             - itunescon_user: "$APPLE_EMAIL"
+      - appcenter-deploy-ios@2: {}
       - deploy-to-bitrise-io@1: {}
       - slack@3:
           inputs:
