@@ -38,7 +38,12 @@ workflows:
           inputs:
             - app_password: "$APPLE_APP_PASSWORD"
             - itunescon_user: "$APPLE_EMAIL"
-      - appcenter-deploy-ios@2: {}
+      - appcenter-deploy-ios@2:
+          inputs:
+            - owner_name: nhancv
+            - app_name: ios_nft
+            - distribution_group: beta
+            - api_token: "$APP_CENTER_TOKEN"
       - deploy-to-bitrise-io@1: {}
       - slack@3:
           inputs:
