@@ -74,6 +74,7 @@ class WBottomActionSheet extends StatelessWidget {
                       filter: ImageFilter.blur(
                           sigmaX: _kBlurAmount, sigmaY: _kBlurAmount),
                       child: InkWell(
+                        borderRadius: BorderRadius.circular(9.0),
                         child: Container(
                           height: 51,
                           alignment: Alignment.center,
