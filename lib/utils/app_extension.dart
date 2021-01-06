@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-class AppExtension {}
+/// This function's used importing app_extension.dart file quickly.
+/// Just type appEx and enter, the IDE will import this file automatically,
+/// then you can delete this line, it's up to you.
+void appExtension() {}
 
 /// Extension for screen util
 extension SizeExtension on num {
@@ -70,7 +73,8 @@ extension DateTimeExtension on DateTime {
   DateTime onlyMonth() =>
       isUtc ? DateTime.utc(year, month) : DateTime(year, month);
 
-  DateTime onlyTime() => DateTime.utc(1970, 1, 1, hour, minute, 0, 0, 0);
+  DateTime onlyTime([int _hour, int _minute]) =>
+      DateTime.utc(1970, 1, 1, _hour ?? hour, _minute ?? minute, 0, 0, 0);
 
   DateTime utcTimeFirstDaySinceEpoch() =>
       DateTime.utc(1970, 1, 1, hour, minute, second, millisecond, microsecond);
@@ -90,7 +94,7 @@ extension DateTimeExtension on DateTime {
     return DateFormat('yyyy-MM-ddThh:mm:ss').format(this);
   }
 
-  /// 11:00 am
+  /// 11:00 AM
   String toHmaa() {
     return DateFormat('hh:mm aaaa').format(this);
   }
@@ -224,6 +228,9 @@ extension BoolExtensions on bool {
 
 /// Extension for T
 extension AnyExtensions<T> on T {
+  /// Check Null
+  bool get isNull => this == null;
+
   T safe(T supplier()) => this ?? supplier();
 }
 
