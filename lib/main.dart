@@ -4,6 +4,6 @@ import 'package:nft/utils/app_theme.dart';
 
 Future<void> main() async {
   /// Init dev config
-  Config(env: Env.dev(), theme: AppTheme.origin());
+  AppConfig(env: Env.dev(), theme: AppTheme.origin());
   await myMain();
 }

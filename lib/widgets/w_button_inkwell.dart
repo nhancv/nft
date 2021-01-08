@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 class WButtonInkwell extends StatelessWidget {
   const WButtonInkwell(
-      {Key key, this.splashColor, this.onTap, this.borderRadius, this.child})
+      {Key key,
+      this.splashColor,
+      this.onPressed,
+      this.borderRadius,
+      this.child})
       : super(key: key);
 
   final Color splashColor;
   final Widget child;
-  final Function() onTap;
+  final Function() onPressed;
   final BorderRadius borderRadius;
 
   @override
@@ -18,7 +22,7 @@ class WButtonInkwell extends StatelessWidget {
         borderRadius: borderRadius,
         splashColor: splashColor,
         child: child,
-        onTap: onTap,
+        onTap: onPressed,
       ),
     );
   }

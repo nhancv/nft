@@ -70,10 +70,10 @@ class AppTheme {
 }
 
 class AppThemeProvider with ChangeNotifier {
-  AppTheme get theme => Config.I.theme;
+  AppTheme get theme => AppConfig.I.theme;
 
   set theme(AppTheme value) {
-    Config.I.theme = value;
+    AppConfig.I.theme = value;
     notifyListeners();
   }
 }

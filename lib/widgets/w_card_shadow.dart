@@ -11,6 +11,7 @@ class WCardShadow extends BaseStateless {
       this.cardColor,
       this.spreadRadius,
       this.blurRadius,
+      this.extraShadows,
       Key key})
       : super(key: key);
 
@@ -21,6 +22,7 @@ class WCardShadow extends BaseStateless {
   final double borderRadius;
   final double spreadRadius;
   final double blurRadius;
+  final List<BoxShadow> extraShadows;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class WCardShadow extends BaseStateless {
             spreadRadius: spreadRadius ?? 1,
             blurRadius: blurRadius ?? 5,
           ),
+          ...extraShadows ?? <BoxShadow>[],
         ],
       ),
     );

@@ -17,7 +17,7 @@ class Api {
   Token token;
 
   /// Get base url by env
-  final String apiBaseUrl = Config.I.env.apiBaseUrl;
+  final String apiBaseUrl = AppConfig.I.env.apiBaseUrl;
   final Dio dio = Dio();
 
   /// Get request header options
