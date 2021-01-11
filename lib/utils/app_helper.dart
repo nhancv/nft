@@ -6,12 +6,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class AppHelper {
   /// Show popup
-  static void showPopup(
+  static Future<T> showPopup<T>(
     BuildContext context,
     Widget Function(BuildContext context) builder, {
     bool barrierDismissible = false,
   }) {
-    showDialog<dynamic>(
+    return showDialog<T>(
       context: context,
       barrierDismissible: false,
       builder: builder,
