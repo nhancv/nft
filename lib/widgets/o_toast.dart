@@ -6,6 +6,7 @@ import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:simple_animations/simple_animations.dart';
 
+/// OToast.I.showCustomToast(context, 'hello');
 class OToast with DynamicSize {
   OToast._private();
 
