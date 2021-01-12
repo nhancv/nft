@@ -16,12 +16,16 @@ class OToast with DynamicSize {
   OverlayEntry _overlayEntry;
 
   void showCustomToast(BuildContext context, String message,
-      {TextStyle textStyle}) {
+      {TextStyle textStyle, double padding, Duration duration}) {
     if (_toastTimer == null || !_toastTimer.isActive) {
-      _overlayEntry =
-          _createOverlayEntry(context, message, textStyle: textStyle);
+      _overlayEntry = _createOverlayEntry(
+        context,
+        message,
+        textStyle: textStyle,
+        padding: padding,
+      );
       Overlay.of(context).insert(_overlayEntry);
-      _toastTimer = Timer(const Duration(seconds: 2), () {
+      _toastTimer = Timer(duration ?? const Duration(seconds: 2), () {
         if (_overlayEntry != null) {
           _overlayEntry.remove();
           _overlayEntry = null;
@@ -31,7 +35,7 @@ class OToast with DynamicSize {
   }
 
   OverlayEntry _createOverlayEntry(BuildContext context, String message,
-      {TextStyle textStyle, double padding}) {
+      {TextStyle textStyle, double padding, Duration duration}) {
     initDynamicSize(context);
     return OverlayEntry(
       builder: (BuildContext context) {
@@ -39,6 +43,7 @@ class OToast with DynamicSize {
           children: <Widget>[
             _ToastContainer(
               padding: padding ?? 30.W,
+              duration: duration,
               message: message,
               textStyle: textStyle,
             ),
@@ -53,12 +58,14 @@ class OToast with DynamicSize {
 }
 
 class _ToastContainer extends StatefulWidget {
-  const _ToastContainer({Key key, this.message, this.textStyle, this.padding})
+  const _ToastContainer(
+      {Key key, this.message, this.textStyle, this.padding, this.duration})
       : super(key: key);
 
   final double padding;
   final TextStyle textStyle;
   final String message;
+  final Duration duration;
 
   @override
   _ToastContainerState createState() => _ToastContainerState();
@@ -86,6 +93,7 @@ class _ToastContainerState extends BaseStateful<_ToastContainer> {
       child: Opacity(
         opacity: isReady ? 1 : 0,
         child: _ToastMessageAnimation(
+          duration: widget.duration,
           play: isReady,
           child: Material(
             elevation: 10.0,
@@ -121,26 +129,30 @@ class _ToastContainerState extends BaseStateful<_ToastContainer> {
 enum _AniProps { translateY, opacity }
 
 class _ToastMessageAnimation extends StatelessWidget {
-  const _ToastMessageAnimation({@required this.child, this.play = false});
+  const _ToastMessageAnimation(
+      {@required this.child, this.play = false, this.duration});
 
   final Widget child;
   final bool play;
+  final Duration duration;
 
   @override
   Widget build(BuildContext context) {
+    final Duration totalDuration = duration ?? const Duration(seconds: 2);
+
     final MultiTween<_AniProps> tween = MultiTween<_AniProps>()
-      ..add(_AniProps.translateY, Tween<double>(begin: -100.0, end: 0.0),
-          const Duration(milliseconds: 250), Curves.easeOut)..add(
-          _AniProps.translateY, Tween<double>(begin: 0.0, end: 0.0),
-          const Duration(seconds: 1, milliseconds: 250))..add(
-          _AniProps.translateY, Tween<double>(begin: 0.0, end: -100.0),
-          const Duration(seconds: 1, milliseconds: 250), Curves.easeIn)..add(
-          _AniProps.opacity, Tween<double>(begin: 0.0, end: 1.0),
-          const Duration(milliseconds: 500))..add(
-          _AniProps.opacity, Tween<double>(begin: 1.0, end: 1.0),
-          const Duration(seconds: 1))..add(
-          _AniProps.opacity, Tween<double>(begin: 1.0, end: 0.0),
-          const Duration(milliseconds: 500));
+      ..add(_AniProps.translateY, Tween<double>(begin: -50.0, end: 0.0),
+          const Duration(milliseconds: 250), Curves.easeOut)
+      ..add(_AniProps.translateY, Tween<double>(begin: 0.0, end: 0.0),
+          Duration(milliseconds: totalDuration.inMilliseconds - 500))
+      ..add(_AniProps.translateY, Tween<double>(begin: 0.0, end: -50.0),
+          const Duration(seconds: 0, milliseconds: 250), Curves.easeIn)
+      ..add(_AniProps.opacity, Tween<double>(begin: 0.0, end: 1.0),
+          const Duration(milliseconds: 250))
+      ..add(_AniProps.opacity, Tween<double>(begin: 1.0, end: 1.0),
+          Duration(milliseconds: totalDuration.inMilliseconds - 500))
+      ..add(_AniProps.opacity, Tween<double>(begin: 1.0, end: 0.0),
+          const Duration(milliseconds: 250));
 
     return play == false
         ? child
@@ -160,3 +172,4 @@ class _ToastMessageAnimation extends StatelessWidget {
     );
   }
 }
+
