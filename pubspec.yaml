@@ -18,7 +18,7 @@ dependencies:
   # 4.0.0 + is not compatible
   flutter_screenutil: ^3.2.0
   flutter_spinkit: ^4.1.2+1
-  fluttertoast: ^7.1.5
+  fluttertoast: ^7.1.6
   flushbar: ^1.10.4
   provider: ^4.3.2+3
   logger: ^0.9.4
@@ -26,6 +26,7 @@ dependencies:
   dio: ^3.0.10
   email_validator: ^1.0.6
   npreferences: ^3.0.0+1
+  simple_animations: ^2.4.2
 
 flutter_intl:
   enabled: true
