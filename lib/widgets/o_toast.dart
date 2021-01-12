@@ -17,15 +17,20 @@ class OToast with DynamicSize {
 
   void showCustomToast(BuildContext context, String message,
       {TextStyle textStyle, double padding, Duration duration}) {
+    Duration validDuration = const Duration(seconds: 2);
+    if (duration != null && duration.inMilliseconds >= 500) {
+      validDuration = duration;
+    }
     if (_toastTimer == null || !_toastTimer.isActive) {
       _overlayEntry = _createOverlayEntry(
         context,
         message,
         textStyle: textStyle,
         padding: padding,
+        duration: validDuration,
       );
       Overlay.of(context).insert(_overlayEntry);
-      _toastTimer = Timer(duration ?? const Duration(seconds: 2), () {
+      _toastTimer = Timer(validDuration, () {
         if (_overlayEntry != null) {
           _overlayEntry.remove();
           _overlayEntry = null;
@@ -172,4 +177,3 @@ class _ToastMessageAnimation extends StatelessWidget {
     );
   }
 }
-
