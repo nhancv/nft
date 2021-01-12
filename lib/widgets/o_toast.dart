@@ -11,16 +11,16 @@ class OToast with DynamicSize {
 
   static final OToast I = OToast._private();
 
-  Timer toastTimer;
+  Timer _toastTimer;
   OverlayEntry _overlayEntry;
 
   void showCustomToast(BuildContext context, String message,
       {TextStyle textStyle}) {
-    if (toastTimer == null || !toastTimer.isActive) {
+    if (_toastTimer == null || !_toastTimer.isActive) {
       _overlayEntry =
-          createOverlayEntry(context, message, textStyle: textStyle);
+          _createOverlayEntry(context, message, textStyle: textStyle);
       Overlay.of(context).insert(_overlayEntry);
-      toastTimer = Timer(const Duration(seconds: 2), () {
+      _toastTimer = Timer(const Duration(seconds: 2), () {
         if (_overlayEntry != null) {
           _overlayEntry.remove();
           _overlayEntry = null;
@@ -29,12 +29,12 @@ class OToast with DynamicSize {
     }
   }
 
-  OverlayEntry createOverlayEntry(BuildContext context, String message,
+  OverlayEntry _createOverlayEntry(BuildContext context, String message,
       {TextStyle textStyle}) {
     initDynamicSize(context);
     return OverlayEntry(
       builder: (BuildContext context) {
-        return ToastContainer(
+        return _ToastContainer(
           padding: 10.W,
           message: message,
           textStyle: textStyle,
@@ -44,8 +44,8 @@ class OToast with DynamicSize {
   }
 }
 
-class ToastContainer extends StatefulWidget {
-  const ToastContainer({Key key, this.message, this.textStyle, this.padding})
+class _ToastContainer extends StatefulWidget {
+  const _ToastContainer({Key key, this.message, this.textStyle, this.padding})
       : super(key: key);
 
   final double padding;
@@ -56,7 +56,7 @@ class ToastContainer extends StatefulWidget {
   _ToastContainerState createState() => _ToastContainerState();
 }
 
-class _ToastContainerState extends BaseStateful<ToastContainer> {
+class _ToastContainerState extends BaseStateful<_ToastContainer> {
   double top;
 
   @override
@@ -77,7 +77,7 @@ class _ToastContainerState extends BaseStateful<ToastContainer> {
       left: widget.padding ?? 10.W,
       child: Opacity(
         opacity: isReady ? 1 : 0,
-        child: ToastMessageAnimation(
+        child: _ToastMessageAnimation(
           play: isReady,
           child: Material(
             elevation: 10.0,
@@ -110,42 +110,42 @@ class _ToastContainerState extends BaseStateful<ToastContainer> {
   }
 }
 
-enum AniProps { translateY, opacity }
+enum _AniProps { translateY, opacity }
 
-class ToastMessageAnimation extends StatelessWidget {
-  const ToastMessageAnimation({@required this.child, this.play = false});
+class _ToastMessageAnimation extends StatelessWidget {
+  const _ToastMessageAnimation({@required this.child, this.play = false});
 
   final Widget child;
   final bool play;
 
   @override
   Widget build(BuildContext context) {
-    final MultiTween<AniProps> tween = MultiTween<AniProps>()
-      ..add(AniProps.translateY, Tween<double>(begin: -100.0, end: 0.0),
+    final MultiTween<_AniProps> tween = MultiTween<_AniProps>()
+      ..add(_AniProps.translateY, Tween<double>(begin: -100.0, end: 0.0),
           const Duration(milliseconds: 250), Curves.easeOut)
-      ..add(AniProps.translateY, Tween<double>(begin: 0.0, end: 0.0),
+      ..add(_AniProps.translateY, Tween<double>(begin: 0.0, end: 0.0),
           const Duration(seconds: 1, milliseconds: 250))
-      ..add(AniProps.translateY, Tween<double>(begin: 0.0, end: -100.0),
+      ..add(_AniProps.translateY, Tween<double>(begin: 0.0, end: -100.0),
           const Duration(seconds: 1, milliseconds: 250), Curves.easeIn)
-      ..add(AniProps.opacity, Tween<double>(begin: 0.0, end: 1.0),
+      ..add(_AniProps.opacity, Tween<double>(begin: 0.0, end: 1.0),
           const Duration(milliseconds: 500))
-      ..add(AniProps.opacity, Tween<double>(begin: 1.0, end: 1.0),
+      ..add(_AniProps.opacity, Tween<double>(begin: 1.0, end: 1.0),
           const Duration(seconds: 1))
-      ..add(AniProps.opacity, Tween<double>(begin: 1.0, end: 0.0),
+      ..add(_AniProps.opacity, Tween<double>(begin: 1.0, end: 0.0),
           const Duration(milliseconds: 500));
 
     return play == false
         ? child
-        : PlayAnimation<MultiTweenValues<AniProps>>(
+        : PlayAnimation<MultiTweenValues<_AniProps>>(
       duration: tween.duration,
       tween: tween,
       child: child,
       builder: (BuildContext context, Widget child,
-          MultiTweenValues<AniProps> value) {
+          MultiTweenValues<_AniProps> value) {
         return Opacity(
-          opacity: value.get(AniProps.opacity),
+          opacity: value.get(_AniProps.opacity),
           child: Transform.translate(
-              offset: Offset(0, value.get(AniProps.translateY)),
+              offset: Offset(0, value.get(_AniProps.translateY)),
               child: child),
         );
       },
