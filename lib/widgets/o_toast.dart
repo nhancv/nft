@@ -31,14 +31,21 @@ class OToast with DynamicSize {
   }
 
   OverlayEntry _createOverlayEntry(BuildContext context, String message,
-      {TextStyle textStyle}) {
+      {TextStyle textStyle, double padding}) {
     initDynamicSize(context);
     return OverlayEntry(
       builder: (BuildContext context) {
-        return _ToastContainer(
-          padding: 10.W,
-          message: message,
-          textStyle: textStyle,
+        return Stack(
+          children: <Widget>[
+            _ToastContainer(
+              padding: padding ?? 30.W,
+              message: message,
+              textStyle: textStyle,
+            ),
+            AbsorbPointer(
+              child: Container(color: Colors.transparent),
+            ),
+          ],
         );
       },
     );
@@ -123,16 +130,16 @@ class _ToastMessageAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     final MultiTween<_AniProps> tween = MultiTween<_AniProps>()
       ..add(_AniProps.translateY, Tween<double>(begin: -100.0, end: 0.0),
-          const Duration(milliseconds: 250), Curves.easeOut)
-      ..add(_AniProps.translateY, Tween<double>(begin: 0.0, end: 0.0),
-          const Duration(seconds: 1, milliseconds: 250))
-      ..add(_AniProps.translateY, Tween<double>(begin: 0.0, end: -100.0),
-          const Duration(seconds: 1, milliseconds: 250), Curves.easeIn)
-      ..add(_AniProps.opacity, Tween<double>(begin: 0.0, end: 1.0),
-          const Duration(milliseconds: 500))
-      ..add(_AniProps.opacity, Tween<double>(begin: 1.0, end: 1.0),
-          const Duration(seconds: 1))
-      ..add(_AniProps.opacity, Tween<double>(begin: 1.0, end: 0.0),
+          const Duration(milliseconds: 250), Curves.easeOut)..add(
+          _AniProps.translateY, Tween<double>(begin: 0.0, end: 0.0),
+          const Duration(seconds: 1, milliseconds: 250))..add(
+          _AniProps.translateY, Tween<double>(begin: 0.0, end: -100.0),
+          const Duration(seconds: 1, milliseconds: 250), Curves.easeIn)..add(
+          _AniProps.opacity, Tween<double>(begin: 0.0, end: 1.0),
+          const Duration(milliseconds: 500))..add(
+          _AniProps.opacity, Tween<double>(begin: 1.0, end: 1.0),
+          const Duration(seconds: 1))..add(
+          _AniProps.opacity, Tween<double>(begin: 1.0, end: 0.0),
           const Duration(milliseconds: 500));
 
     return play == false
