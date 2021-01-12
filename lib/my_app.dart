@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    /// Example about load credential to init page
+    /// Init page
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final bool hasCredential =
           await context.read<Credential>().loadCredential();

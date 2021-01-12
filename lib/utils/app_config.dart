@@ -15,8 +15,8 @@ class Env {
 }
 
 /// Config env
-class Config {
-  factory Config({Env env, AppTheme theme}) {
+class AppConfig {
+  factory AppConfig({Env env, AppTheme theme}) {
     if (env != null) {
       I.env = env;
     }
@@ -26,9 +26,9 @@ class Config {
     return I;
   }
 
-  Config._private();
+  AppConfig._private();
 
-  static final Config I = Config._private();
+  static final AppConfig I = AppConfig._private();
 
   Env env = Env.dev();
   AppTheme theme = AppTheme.origin();

@@ -147,11 +147,20 @@ lib/
       |-credential.dart            ---> define app credential
       |-storage.dart               ---> define storage service
       |-storage_preferences.dart   ---> define storage with shared preferences service
-    |-rest_api/                      ---> place remote data services
+    |-rest_api/                    ---> place remote services
       |-api.dart                   ---> define api base class
       |-api_error.dart             ---> define api error/exception handler
       |-api_user.dart              ---> define sample of api user
       |-error_type.dart            ---> define api error type
+    |-safety/                      ---> place safety abstract class for widget, change notifier
+      |-base_stateful.dart         ---> define base stateful widget, provide app theme, dynamic size
+      |-base_stateless.dart        ---> define base stateless widget, provide app theme, dynamic size
+      |-change_notifier_safety.dart---> define safety change notifier
+      |-page_stateful.dart         ---> define stateful abstract for page 
+      |-state_safety.dart          ---> define setState safety
+    |-store/                       ---> place local store service
+      |-store.dart                 ---> define abstract store
+      |-store_mock.dart            ---> define mock store
   |-utils/                         ---> place app utils
     |-app_asset.dart               ---> define app assets
     |-app_config.dart              ---> define app config multi environment
