@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 /// Just type appEx and enter, the IDE will import this file automatically,
 /// then you can delete this line, it's up to you.
 void appExtension() {}
+class AppExtension {}
 
 /// Extension for screen util
 extension SizeExtension on num {
