@@ -37,7 +37,7 @@ class AppRoute {
   ) {
     return ChangeNotifierProvider<P>(
       create: (_) => provider,
-      builder: (BuildContext context, Widget child) {
+      builder: (_, __) {
         return child;
       },
     );
