@@ -8,6 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nft/pages/counter/counter_page.dart';
+import 'package:nft/pages/counter/counter_provider.dart';
+import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +35,8 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Create the widget by telling the tester to build it.
     // Build a MaterialApp with MediaQuery.
-    await tester.pumpWidget(buildTestableWidget(CounterPage.create<void>()));
+    await tester.pumpWidget(buildTestableWidget(
+        AppRoute.createProvider(CounterProvider(), const CounterPage())));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
