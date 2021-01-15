@@ -45,6 +45,7 @@ workflows:
             Install Page|${APPCENTER_PUBLIC_INSTALL_PAGE_URL}
             Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
             Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
+        - pretext: "*Android Build Succeeded!*"
         - webhook_url: "$SLACK_HOOK_URL"
     - cache-push@2: {}
 app:
