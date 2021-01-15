@@ -23,7 +23,9 @@ class Api {
   /// Get request header options
   Future<Options> getOptions(
       {String contentType = Headers.jsonContentType}) async {
-    final Map<String, String> header = <String, String>{};
+    final Map<String, String> header = <String, String>{
+      Headers.acceptHeader: 'application/json'
+    };
     return Options(headers: header, contentType: contentType);
   }
 

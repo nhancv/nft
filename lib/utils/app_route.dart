@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nft/pages/counter/counter_page.dart';
+import 'package:nft/pages/counter/counter_provider.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/login/login_page.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,26 @@ class AppRoute {
 
   static AppRoute get I => _instance;
 
+  /// Create local provider
+  // MaterialPageRoute<dynamic>(
+  //             settings: settings,
+  //             builder: (_) => AppRoute.createProvider(
+  //                 HomeProvider(),
+  //                 HomePage(
+  //                   status: settings.arguments as bool,
+  //                 )))
+  static Widget createProvider<P extends ChangeNotifier>(
+    P provider,
+    Widget child,
+  ) {
+    return ChangeNotifierProvider<P>(
+      create: (_) => provider,
+      builder: (_, __) {
+        return child;
+      },
+    );
+  }
+
   /// App route observer
   final RouteObserver<Route<dynamic>> routeObserver =
       RouteObserver<Route<dynamic>>();
@@ -38,7 +59,11 @@ class AppRoute {
       case routeCounter:
         return MaterialPageRoute<dynamic>(
             settings: settings,
-            builder: (_) => CounterPage.create(argument: settings.arguments));
+            builder: (_) => AppRoute.createProvider(
+                CounterProvider(),
+                CounterPage(
+                  argument: settings.arguments as String,
+                )));
 
       case routeHome:
         return MaterialPageRoute<dynamic>(

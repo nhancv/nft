@@ -11,6 +11,13 @@ workflows:
       - activate-ssh-key@4:
           run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
       - git-clone@4: {}
+      - script@1:
+          inputs:
+            - content: |+
+                #!/usr/bin/env bash
+                APP_BUILD_VERSION=$(cat pubspec.yaml | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[: ']//g'')
+                echo "APP_BUILD_VERSION: $APP_BUILD_VERSION"
+                envman add --key APP_BUILD_VERSION --value "$APP_BUILD_VERSION"
       - flutter-installer@0:
           inputs:
             - is_update: 'true'
@@ -57,6 +64,7 @@ workflows:
                 Install Page|${APPCENTER_PUBLIC_INSTALL_PAGE_URL}
                 Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
                 Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
+            - pretext: "*iOS Build Succeeded! - Version: $APP_BUILD_VERSION*"
             - webhook_url: "$SLACK_HOOK_URL"
       - cache-push@2: {}
 app:

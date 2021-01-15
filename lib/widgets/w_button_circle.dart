@@ -14,6 +14,7 @@ class WButtonCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? 50,
+      height: width ?? 50,
       child: RaisedButton(
         shape: const CircleBorder(),
         onPressed: onPressed,

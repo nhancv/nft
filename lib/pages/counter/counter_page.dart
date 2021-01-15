@@ -12,15 +12,6 @@ class CounterPage extends StatefulWidget {
 
   final String argument;
 
-  static Widget create<T>({Key key, T argument}) {
-    return ChangeNotifierProvider<CounterProvider>(
-      create: (_) => CounterProvider(),
-      builder: (BuildContext context, Widget child) {
-        return CounterPage(key: key, argument: argument as String);
-      },
-    );
-  }
-
   @override
   _CounterPageState createState() => _CounterPageState();
 }

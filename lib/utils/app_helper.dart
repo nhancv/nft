@@ -3,8 +3,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:nft/utils/app_extension.dart';
 
 class AppHelper {
+  /// Show bottom sheet scrollable
+  /// final bool res = await AppHelper.showBottomSheet(context,
+  //         (_, ScrollController scrollController) {
+  //       return WSheet(scrollController: scrollController);
+  //     });
+  static Future<T> showBottomSheet<T>(BuildContext context,
+      Widget Function(BuildContext, ScrollController) child) {
+    return showModalBottomSheet<T>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        final Size size = MediaQuery.of(context).size;
+        return DraggableScrollableSheet(
+            // half screen on load
+            initialChildSize: 1 - 85 / size.height,
+            // full screen on scroll
+            maxChildSize: 1,
+            minChildSize: 0.25,
+            expand: false,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.W),
+                    topRight: Radius.circular(30.W),
+                  ),
+                  child: child(context, scrollController));
+            });
+      },
+    );
+  }
+
   /// Show popup
   static Future<T> showPopup<T>(
     BuildContext context,
