@@ -77,7 +77,7 @@ class _HomePageState extends PageStateful<HomePage>
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Text(S.of(context).hello),
+              child: Text(context.strings.hello),
             ),
 
             /// As default, when user change language in device setting

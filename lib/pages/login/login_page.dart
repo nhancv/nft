@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nft/generated/l10n.dart';
 import 'package:nft/models/remote/login_response.dart';
 import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_dialog.dart';
@@ -87,12 +86,12 @@ class _LoginPageState extends PageStateful<LoginPage>
                 builder: (_, bool emailValid, __) {
                   return WInputForm.email(
                     key: const Key('emailInputKey'),
-                    labelText: S.of(context).labelEmail,
+                    labelText: context.strings.labelEmail,
                     onChanged: loginProvider.onEmailChangeToValidateForm,
                     focusNode: _emailFocusNode,
                     textInputAction: TextInputAction.next,
                     errorText:
-                        !emailValid ? S.of(context).msgEmailInValid : null,
+                        !emailValid ? context.strings.msgEmailInValid : null,
                     suffixIcon: !emailValid
                         ? const Icon(
                             Icons.error,
@@ -111,7 +110,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                 builder: (_, bool obscureText, __) {
                   return WInputForm.password(
                     key: const Key('passwordInputKey'),
-                    labelText: S.of(context).labelPassword,
+                    labelText: context.strings.labelPassword,
                     suffixIcon: IconButton(
                       icon: obscureText
                           ? const Icon(Icons.visibility_off)
@@ -161,7 +160,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                         }
                       }
                     : null,
-                child: Text(S.of(context).btnLogin),
+                child: Text(context.strings.btnLogin),
               ),
 
               /// Example call api with success http code but with error response,
