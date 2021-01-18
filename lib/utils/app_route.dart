@@ -31,10 +31,8 @@ class AppRoute {
   //                 HomePage(
   //                   status: settings.arguments as bool,
   //                 )))
-  static Widget createProvider<P extends ChangeNotifier>(
-    P provider,
-    Widget child,
-  ) {
+  static Widget createProvider<P extends ChangeNotifier>(P provider,
+      Widget child,) {
     return ChangeNotifierProvider<P>(
       create: (_) => provider,
       builder: (_, __) {
@@ -45,7 +43,7 @@ class AppRoute {
 
   /// App route observer
   final RouteObserver<Route<dynamic>> routeObserver =
-      RouteObserver<Route<dynamic>>();
+  RouteObserver<Route<dynamic>>();
 
   /// App global navigator key
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -59,11 +57,12 @@ class AppRoute {
       case routeCounter:
         return MaterialPageRoute<dynamic>(
             settings: settings,
-            builder: (_) => AppRoute.createProvider(
-                CounterProvider(),
-                CounterPage(
-                  argument: settings.arguments as String,
-                )));
+            builder: (_) =>
+                AppRoute.createProvider(
+                    CounterProvider(),
+                    CounterPage(
+                      argument: settings.arguments as String,
+                    )));
 
       case routeHome:
         return MaterialPageRoute<dynamic>(
@@ -77,15 +76,5 @@ class AppRoute {
       default:
         return null;
     }
-  }
-}
-
-extension AppRouteExt on BuildContext {
-  AppRoute route() {
-    return Provider.of(this, listen: false);
-  }
-
-  NavigatorState navigator() {
-    return route().navigatorKey.currentState;
   }
 }

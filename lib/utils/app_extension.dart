@@ -4,12 +4,29 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:nft/generated/l10n.dart';
+import 'package:nft/utils/app_route.dart';
+import 'package:provider/provider.dart';
 
 /// This function's used importing app_extension.dart file quickly.
 /// Just type appEx and enter, the IDE will import this file automatically,
 /// then you can delete this line, it's up to you.
 void appExtension() {}
+
 class AppExtension {}
+
+extension AppRouteExt on BuildContext {
+  AppRoute route() {
+    return Provider.of(this, listen: false);
+  }
+
+  NavigatorState navigator() {
+    return route().navigatorKey.currentState;
+  }
+
+  S get strings => S.of(this);
+
+}
 
 /// Extension for screen util
 extension SizeExtension on num {

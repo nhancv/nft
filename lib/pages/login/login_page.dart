@@ -7,6 +7,7 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/services/safety/page_stateful.dart';
+import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_helper.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
