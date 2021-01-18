@@ -68,15 +68,15 @@ class _LoginPageState extends PageStateful<LoginPage>
     return PAppBarTransparency(
       child: WKeyboardDismiss(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.W),
           child: SingleChildScrollView(
               child: Column(
             children: <Widget>[
               /// Logo
               Padding(
-                padding: const EdgeInsets.only(top: 100, bottom: 50),
+                padding: EdgeInsets.only(top: 100.H, bottom: 50.H),
                 child: Image.asset(appTheme.assets.icAppIcon,
-                    width: 150, height: 150),
+                    width: 150.W, height: 150.W),
               ),
 
               /// Login form
@@ -104,7 +104,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                   );
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.H),
               Selector<LoginProvider, bool>(
                 selector: (_, LoginProvider provider) => provider.obscureText,
                 builder: (_, bool obscureText, __) {
@@ -126,7 +126,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                   );
                 },
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30.H),
 
               /// Example call api with success response
               RaisedButton(
@@ -204,7 +204,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                 child: const Text('call api with exception'),
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: 30.H),
 
               /// Login button
             ],

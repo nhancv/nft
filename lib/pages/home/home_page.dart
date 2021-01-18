@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
@@ -76,7 +75,7 @@ class _HomePageState extends PageStateful<HomePage>
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.W),
               child: Text(context.strings.hello),
             ),
 
@@ -112,7 +111,7 @@ class _HomePageState extends PageStateful<HomePage>
               },
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10.H),
 
             /// Navigate to counter page with current timestamp as argument
             RaisedButton(
@@ -124,7 +123,7 @@ class _HomePageState extends PageStateful<HomePage>
               child: const Text('Counter Page'),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10.H),
 
             /// Logout
             /// Navigate to login
