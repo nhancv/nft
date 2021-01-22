@@ -26,7 +26,6 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
   Future<void> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
     await AppDialogProvider.show(context, errorType.message, title: 'Error');
-    await Future<void>.delayed(const Duration(seconds: 1));
     if (errorType.code == ApiErrorCode.unauthorized) {
       logout(context);
     }
