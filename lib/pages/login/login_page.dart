@@ -215,8 +215,9 @@ class _LoginPageState extends PageStateful<LoginPage>
   }
 
   @override
-  Future<void> onApiError(dynamic error) async {
+  Future<int> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
-    AppDialogProvider.show(context, errorType.message);
+    await AppDialogProvider.show(context, errorType.message);
+    return 0;
   }
 }

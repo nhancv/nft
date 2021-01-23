@@ -7,7 +7,7 @@ import 'package:nft/utils/app_log.dart';
 mixin ApiError {
   /// This function was called when trigger safeCallApi
   /// and apiError = true as default
-  Future<void> onApiError(dynamic error);
+  Future<int> onApiError(dynamic error);
 
   /// Call api safety with error handling.
   /// Required:
