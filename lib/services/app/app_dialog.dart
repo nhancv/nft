@@ -72,8 +72,12 @@ class AppDialogProvider {
   /// Hide alert dialog
   void hideAppDialog({bool isClean = false}) {
     if (_dialogContext != null) {
-      if (Navigator.canPop(_dialogContext)) {
-        Navigator.pop(_dialogContext);
+      try {
+        if (Navigator.canPop(_dialogContext)) {
+          Navigator.pop(_dialogContext);
+        }
+      } catch (e) {
+        // Unhandled Exception: Looking up a deactivated widget's ancestor is unsafe.
       }
       _dialogContext = null;
     }
