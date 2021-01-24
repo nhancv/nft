@@ -36,7 +36,7 @@ void main() {
     // Create the widget by telling the tester to build it.
     // Build a MaterialApp with MediaQuery.
     await tester.pumpWidget(buildTestableWidget(
-        AppRoute.createProvider(CounterProvider(), const CounterPage())));
+        AppRoute.createProvider((_) => CounterProvider(), const CounterPage())));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
