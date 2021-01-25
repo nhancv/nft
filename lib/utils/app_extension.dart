@@ -97,6 +97,10 @@ extension DateTimeExtension on DateTime {
   DateTime utcTimeFirstDaySinceEpoch() =>
       DateTime.utc(1970, 1, 1, hour, minute, second, millisecond, microsecond);
 
+  // Convert local time as current utc
+  // DateTime.now() = 2021-01-25 18:49:03.049422
+  // DateTime.asUtc() = 2021-01-25 18:49:03.049422
+  // DateTime.toUtc() = 2021-01-25 11:49:03.056208Z
   DateTime asUtc() => isUtc
       ? this
       : DateTime.utc(
