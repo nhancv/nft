@@ -11,8 +11,10 @@ class AppHelper {
   //         (_, ScrollController scrollController) {
   //       return WSheet(scrollController: scrollController);
   //     });
-  static Future<T> showBottomSheet<T>(BuildContext context,
-      Widget Function(BuildContext, ScrollController) child) {
+  static Future<T> showBottomSheet<T>(
+      BuildContext context,
+      Widget Function(BuildContext context, ScrollController scrollController)
+          child) {
     return showModalBottomSheet<T>(
       context: context,
       isScrollControlled: true,
@@ -20,7 +22,7 @@ class AppHelper {
       builder: (BuildContext context) {
         final Size size = MediaQuery.of(context).size;
         return DraggableScrollableSheet(
-            // half screen on load
+            // padding from top of screen on load
             initialChildSize: 1 - 85 / size.height,
             // full screen on scroll
             maxChildSize: 1,
