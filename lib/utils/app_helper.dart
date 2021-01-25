@@ -46,7 +46,7 @@ class AppHelper {
   }) {
     return showDialog<T>(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: barrierDismissible,
       builder: builder,
     );
   }
