@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/utils/app_route.dart';
+import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
 
 /// This function's used importing app_extension.dart file quickly.
@@ -16,6 +17,14 @@ void appExtension() {}
 class AppExtension {}
 
 extension AppRouteExt on BuildContext {
+  ThemeData theme() {
+    return Theme.of(this);
+  }
+
+  AppTheme appTheme() {
+    return Provider.of<AppThemeProvider>(this, listen: false).theme;
+  }
+
   AppRoute route() {
     return Provider.of(this, listen: false);
   }
@@ -25,7 +34,6 @@ extension AppRouteExt on BuildContext {
   }
 
   S get strings => S.of(this);
-
 }
 
 /// Extension for screen util

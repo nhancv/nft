@@ -89,7 +89,7 @@ class _MyAppState extends State<MyApp> {
     /// Get providers
     final AppRoute appRoute = context.watch<AppRoute>();
     final LocaleProvider localeProvider = context.watch<LocaleProvider>();
-    final AppTheme appTheme = context.theme();
+    final AppTheme appTheme = context.appTheme();
 
     /// Build Material app
     return MaterialApp(
