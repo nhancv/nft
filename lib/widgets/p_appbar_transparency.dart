@@ -6,10 +6,11 @@ import 'package:nft/widgets/p_material.dart';
 
 class PAppBarTransparency extends StatelessWidget {
   const PAppBarTransparency(
-      {@required this.child, this.forceStatusIconLight, Key key})
+      {this.body, this.child, this.forceStatusIconLight, Key key})
       : super(key: key);
 
   final Widget child;
+  final Widget body;
   final bool forceStatusIconLight;
 
   @override
@@ -25,7 +26,7 @@ class PAppBarTransparency extends StatelessWidget {
     return PMaterial(
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: uiOverlayStyle.copyWith(statusBarColor: Colors.transparent),
-        child: Scaffold(
+        child: body ?? Scaffold(
           backgroundColor: theme.backgroundColor ?? Colors.transparent,
           body: child,
         ),
