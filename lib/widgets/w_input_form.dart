@@ -12,6 +12,7 @@ class WInputForm extends StatefulWidget {
     this.onSubmitted,
     this.focusNode,
     this.textInputAction,
+    this.keyboardType,
   }) : super(key: key);
 
   const WInputForm.email({
@@ -24,6 +25,7 @@ class WInputForm extends StatefulWidget {
     this.onSubmitted,
     this.focusNode,
     this.textInputAction = TextInputAction.next,
+    this.keyboardType = TextInputType.emailAddress,
   }) : super(key: key);
 
   const WInputForm.password({
@@ -36,6 +38,7 @@ class WInputForm extends StatefulWidget {
     this.onSubmitted,
     this.focusNode,
     this.textInputAction = TextInputAction.done,
+    this.keyboardType = TextInputType.visiblePassword,
   }) : super(key: key);
 
   final String labelText;
@@ -46,6 +49,7 @@ class WInputForm extends StatefulWidget {
   final Function(String) onSubmitted;
   final FocusNode focusNode;
   final TextInputAction textInputAction;
+  final TextInputType keyboardType;
 
   @override
   _WInputFormState createState() => _WInputFormState();
@@ -56,12 +60,15 @@ class _WInputFormState extends BaseStateful<WInputForm> {
   Widget build(BuildContext context) {
     super.build(context);
     return TextField(
+      autocorrect: false,
+      enableSuggestions: false,
       decoration: InputDecoration(
         labelText: widget.labelText,
         errorText: widget.errorText,
         border: const OutlineInputBorder(),
         suffixIcon: widget.suffixIcon,
       ),
+      keyboardType: widget.keyboardType,
       obscureText: widget.obscureText,
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
