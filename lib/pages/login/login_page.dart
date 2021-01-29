@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nft/generated/l10n.dart';
 import 'package:nft/models/remote/login_response.dart';
 import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_dialog.dart';
@@ -7,6 +6,7 @@ import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/services/safety/page_stateful.dart';
+import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_helper.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
@@ -68,15 +68,15 @@ class _LoginPageState extends PageStateful<LoginPage>
     return PAppBarTransparency(
       child: WKeyboardDismiss(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 20.W),
           child: SingleChildScrollView(
               child: Column(
             children: <Widget>[
               /// Logo
               Padding(
-                padding: const EdgeInsets.only(top: 100, bottom: 50),
+                padding: EdgeInsets.only(top: 100.H, bottom: 50.H),
                 child: Image.asset(appTheme.assets.icAppIcon,
-                    width: 150, height: 150),
+                    width: 150.W, height: 150.W),
               ),
 
               /// Login form
@@ -86,12 +86,12 @@ class _LoginPageState extends PageStateful<LoginPage>
                 builder: (_, bool emailValid, __) {
                   return WInputForm.email(
                     key: const Key('emailInputKey'),
-                    labelText: S.of(context).labelEmail,
+                    labelText: context.strings.labelEmail,
                     onChanged: loginProvider.onEmailChangeToValidateForm,
                     focusNode: _emailFocusNode,
                     textInputAction: TextInputAction.next,
                     errorText:
-                        !emailValid ? S.of(context).msgEmailInValid : null,
+                        !emailValid ? context.strings.msgEmailInValid : null,
                     suffixIcon: !emailValid
                         ? const Icon(
                             Icons.error,
@@ -104,13 +104,13 @@ class _LoginPageState extends PageStateful<LoginPage>
                   );
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.H),
               Selector<LoginProvider, bool>(
                 selector: (_, LoginProvider provider) => provider.obscureText,
                 builder: (_, bool obscureText, __) {
                   return WInputForm.password(
                     key: const Key('passwordInputKey'),
-                    labelText: S.of(context).labelPassword,
+                    labelText: context.strings.labelPassword,
                     suffixIcon: IconButton(
                       icon: obscureText
                           ? const Icon(Icons.visibility_off)
@@ -126,7 +126,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                   );
                 },
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30.H),
 
               /// Example call api with success response
               RaisedButton(
@@ -160,7 +160,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                         }
                       }
                     : null,
-                child: Text(S.of(context).btnLogin),
+                child: Text(context.strings.btnLogin),
               ),
 
               /// Example call api with success http code but with error response,
@@ -204,7 +204,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                 child: const Text('call api with exception'),
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: 30.H),
 
               /// Login button
             ],
@@ -215,8 +215,9 @@ class _LoginPageState extends PageStateful<LoginPage>
   }
 
   @override
-  Future<void> onApiError(dynamic error) async {
+  Future<int> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
-    AppDialogProvider.show(context, errorType.message);
+    await AppDialogProvider.show(context, errorType.message);
+    return 0;
   }
 }

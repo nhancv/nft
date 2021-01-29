@@ -4,12 +4,37 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:nft/generated/l10n.dart';
+import 'package:nft/utils/app_route.dart';
+import 'package:nft/utils/app_theme.dart';
+import 'package:provider/provider.dart';
 
 /// This function's used importing app_extension.dart file quickly.
 /// Just type appEx and enter, the IDE will import this file automatically,
 /// then you can delete this line, it's up to you.
 void appExtension() {}
+
 class AppExtension {}
+
+extension AppRouteExt on BuildContext {
+  ThemeData theme() {
+    return Theme.of(this);
+  }
+
+  AppTheme appTheme() {
+    return Provider.of<AppThemeProvider>(this, listen: false).theme;
+  }
+
+  AppRoute route() {
+    return Provider.of(this, listen: false);
+  }
+
+  NavigatorState navigator() {
+    return route().navigatorKey.currentState;
+  }
+
+  S get strings => S.of(this);
+}
 
 /// Extension for screen util
 extension SizeExtension on num {
@@ -80,6 +105,10 @@ extension DateTimeExtension on DateTime {
   DateTime utcTimeFirstDaySinceEpoch() =>
       DateTime.utc(1970, 1, 1, hour, minute, second, millisecond, microsecond);
 
+  // Convert local time as current utc
+  // DateTime.now() = 2021-01-25 18:49:03.049422
+  // DateTime.asUtc() = 2021-01-25 18:49:03.049422
+  // DateTime.toUtc() = 2021-01-25 11:49:03.056208Z
   DateTime asUtc() => isUtc
       ? this
       : DateTime.utc(

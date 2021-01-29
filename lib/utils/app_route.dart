@@ -27,16 +27,16 @@ class AppRoute {
   // MaterialPageRoute<dynamic>(
   //             settings: settings,
   //             builder: (_) => AppRoute.createProvider(
-  //                 HomeProvider(),
+  //                 (_) => HomeProvider(),
   //                 HomePage(
   //                   status: settings.arguments as bool,
   //                 )))
   static Widget createProvider<P extends ChangeNotifier>(
-    P provider,
+    P Function(BuildContext context) provider,
     Widget child,
   ) {
     return ChangeNotifierProvider<P>(
-      create: (_) => provider,
+      create: provider,
       builder: (_, __) {
         return child;
       },
@@ -60,7 +60,7 @@ class AppRoute {
         return MaterialPageRoute<dynamic>(
             settings: settings,
             builder: (_) => AppRoute.createProvider(
-                CounterProvider(),
+                (_) => CounterProvider(),
                 CounterPage(
                   argument: settings.arguments as String,
                 )));
@@ -77,15 +77,5 @@ class AppRoute {
       default:
         return null;
     }
-  }
-}
-
-extension AppRouteExt on BuildContext {
-  AppRoute route() {
-    return Provider.of(this, listen: false);
-  }
-
-  NavigatorState navigator() {
-    return route().navigatorKey.currentState;
   }
 }

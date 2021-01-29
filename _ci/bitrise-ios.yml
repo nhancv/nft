@@ -65,6 +65,7 @@ workflows:
                 Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
                 Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
             - pretext: "*iOS Build Succeeded! - Version: $APP_BUILD_VERSION*"
+            - pretext_on_error: "*iOS Build Failed! - Version: $APP_BUILD_VERSION*"
             - webhook_url: "$SLACK_HOOK_URL"
       - cache-push@2: {}
 app:

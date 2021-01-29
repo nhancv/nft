@@ -8,10 +8,11 @@ import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/auth_provider.dart';
 import 'package:nft/services/app/locale_provider.dart';
-import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/cache/cache.dart';
 import 'package:nft/services/cache/cache_preferences.dart';
+import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/rest_api/api_user.dart';
+import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -88,7 +89,7 @@ class _MyAppState extends State<MyApp> {
     /// Get providers
     final AppRoute appRoute = context.watch<AppRoute>();
     final LocaleProvider localeProvider = context.watch<LocaleProvider>();
-    final AppTheme appTheme = context.theme();
+    final AppTheme appTheme = context.appTheme();
 
     /// Build Material app
     return MaterialApp(

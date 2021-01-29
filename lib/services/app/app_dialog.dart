@@ -25,7 +25,8 @@ class AppDialogProvider {
 
   /// Show alert dialog shortcut
   static Future<void> show(BuildContext context, String content,
-      {String title}) {
+      {String title}) async {
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     return context
         .read<AppDialogProvider>()
         .showAppDialog(context, content, title: title);
@@ -50,7 +51,7 @@ class AppDialogProvider {
             hideAppDialog();
           }
         });
-        return AlertDialog(
+        return CupertinoAlertDialog(
           title: Text(title ?? 'Alert'),
           content: SingleChildScrollView(
             child: SelectableText(content ?? ''),
@@ -71,8 +72,12 @@ class AppDialogProvider {
   /// Hide alert dialog
   void hideAppDialog({bool isClean = false}) {
     if (_dialogContext != null) {
-      if (Navigator.canPop(_dialogContext)) {
-        Navigator.pop(_dialogContext);
+      try {
+        if (Navigator.canPop(_dialogContext)) {
+          Navigator.pop(_dialogContext);
+        }
+      } catch (e) {
+        // Unhandled Exception: Looking up a deactivated widget's ancestor is unsafe.
       }
       _dialogContext = null;
     }

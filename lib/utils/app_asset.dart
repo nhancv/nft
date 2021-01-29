@@ -10,6 +10,8 @@ class AppAssets {
   /// -----------------
   String fontRoboto = 'Roboto';
   String fontLato = 'Lato';
+  String fontIOSDisplay = '.SF UI Display';
+  String fontIOSDefault = '.SF UI Text';
 
   ///#endregion
 

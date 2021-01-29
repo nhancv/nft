@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/pages/counter/counter_provider.dart';
-import 'package:nft/services/safety/base_stateful.dart';
+import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
 import 'package:nft/widgets/w_keyboard_dismiss.dart';
@@ -16,7 +16,7 @@ class CounterPage extends StatefulWidget {
   _CounterPageState createState() => _CounterPageState();
 }
 
-class _CounterPageState extends BaseStateful<CounterPage> {
+class _CounterPageState extends PageStateful<CounterPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);

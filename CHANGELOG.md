@@ -1,3 +1,12 @@
+## [1.0.39+2101231955] - January 23, 2021.
+
+* Fix hide app dialog
+* Change api error return void to int
+
+## [1.0.38+2101181955] - January 18, 2021.
+
+* Refactor build context extension
+
 ## [1.0.37+2101151955] - January 15, 2021.
 
 * Ci config

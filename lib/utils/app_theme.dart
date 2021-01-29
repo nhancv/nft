@@ -77,9 +77,3 @@ class AppThemeProvider with ChangeNotifier {
     notifyListeners();
   }
 }
-
-extension AppThemeExt on BuildContext {
-  AppTheme theme() {
-    return Provider.of<AppThemeProvider>(this, listen: false).theme;
-  }
-}
