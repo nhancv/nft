@@ -12,9 +12,9 @@ import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/auth_provider.dart';
 import 'package:nft/services/app/locale_provider.dart';
-import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/cache/cache.dart';
 import 'package:nft/services/cache/cache_preferences.dart';
+import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/utils/app_config.dart';
 import 'package:nft/utils/app_log.dart';
@@ -95,9 +95,9 @@ void main() {
         child: Builder(
           builder: (BuildContext context) {
             // Save provider ref here
-            userApi = context.watch<ApiUser>();
-            appRoute = context.watch<AppRoute>();
-            appLoadingProvider = context.watch<AppLoadingProvider>();
+            userApi = Provider.of(context, listen: false);
+            appRoute = Provider.of(context, listen: false);
+            appLoadingProvider = Provider.of(context, listen: false);
 
             // Mock navigator Observer
             when(navigatorObserver.didPush(any, any))
@@ -164,23 +164,34 @@ void main() {
 
     // Fill login form
     logger.d('Fill login form');
-    await tester.enterText(
-        find.byKey(const Key('emailInputKey')), 'test@gm.com');
-    await tester.enterText(find.byKey(const Key('passwordInputKey')), '123');
+    final Finder emailInputFinder = find.byKey(const Key('emailInputKey'));
+    final Finder passwordInputFinder =
+        find.byKey(const Key('passwordInputKey'));
+    expect(emailInputFinder, findsOneWidget);
+    expect(passwordInputFinder, findsOneWidget);
+    await tester.enterText(emailInputFinder, 'test@gmail.com');
+    await tester.enterText(passwordInputFinder, '123');
     // Wait the widget state updated until the dismiss animation ends.
     await tester.pumpAndSettle();
 
     // Verify that RaisedButton on screen
     // Tap on RaisedButton
     logger.d('Tap login');
-    final Finder callApiFinder = find.byKey(const Key('callApiBtnKey'));
-    expect(callApiFinder, findsOneWidget);
-    await tester.tap(callApiFinder);
+    final Finder callApiFinder = find.widgetWithText(RaisedButton, 'Login');
+    expect(callApiFinder, findsWidgets);
+
+    // Deal with button press:
+    // tester.tap or .press does not work
+    // use cast button approach instead
+    final RaisedButton button =
+        callApiFinder.evaluate().first.widget as RaisedButton;
+    button.onPressed();
+    await tester.pumpAndSettle();
 
     // Verify
     logger.d('Verifying');
     // Verify push to show loading
-    verify(appLoadingProvider.showLoading(any));
+    verify(appLoadingProvider.showLoading(any)).called(1);
     // Verify that login function called
     verify(userApi.logIn(null, null));
     //  Verify push to hide loading

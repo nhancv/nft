@@ -13,14 +13,13 @@ workflows:
       - git-clone@4: {}
       - script@1:
           inputs:
-            - content: |+
+            - content: |
                 #!/usr/bin/env bash
-                APP_BUILD_VERSION=$(cat pubspec.yaml | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[: ']//g'')
-                echo "APP_BUILD_VERSION: $APP_BUILD_VERSION"
-                envman add --key APP_BUILD_VERSION --value "$APP_BUILD_VERSION"
+                set -ex
+                bash ./_ci/bitrise-script.sh
       - flutter-installer@0:
           inputs:
-            - is_update: 'true'
+            - is_update: 'false'
       - cache-pull@2: {}
       - flutter-analyze@0:
           inputs:
@@ -54,6 +53,7 @@ workflows:
                 Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
             - pretext: "*Android Build Succeeded! - Version: $APP_BUILD_VERSION*"
             - pretext_on_error: "*Android Build Failed! - Version: $APP_BUILD_VERSION*"
+            - message: "$GIT_CLONE_COMMIT_MESSAGE_BODY \\n$APP_CHANGELOG"
             - webhook_url: "$SLACK_HOOK_URL"
       - cache-push@2: {}
 app:
