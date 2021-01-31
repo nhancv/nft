@@ -1,6 +1,6 @@
 name: nft
 description: Flutter is Google’s UI toolkit for building beautiful, natively compiled applications for mobile, web, and desktop from a single codebase. This template is created by nhancv.
-version: 1.0.40+2101311743
+version: 1.0.41+202101001
 homepage: https://github.com/nhancv/nft
 
 environment:

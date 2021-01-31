@@ -188,14 +188,14 @@ test_driver/                       ---> place integration testing
 
 ## Versioning
 ```
-version: 1.0.6+2003271407
+version: 1.0.1+202101001
 ---
-Version name: 1.0.6
-Version code: 2003271407
+Version name: 1.0.1
+Version code: 202101001
 ```
 
-Version name: major.minor.build/patch
-Version code: yymmddHHMM
+Version name: major.minor.build
+Version code: yyyymm<build number from 000>
 
 * Remember to increase bold the version name and code as well.
 
