@@ -1,3 +1,8 @@
+## [1.0.40+2101311743] - January 31, 2021.
+
+* Fix test
+* Change default package name
+
 ## [1.0.39+2101231955] - January 23, 2021.
 
 * Fix hide app dialog
