@@ -19,7 +19,7 @@ workflows:
                 bash ./_ci/bitrise-script.sh
       - flutter-installer@0:
           inputs:
-            - is_update: 'false'
+            - is_update: 'true'
       - cache-pull@2: {}
       - flutter-analyze@0:
           inputs:
