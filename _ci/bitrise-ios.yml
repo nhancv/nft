@@ -40,7 +40,7 @@ workflows:
             - force_provisioning_profile_specifier: ''
             - force_provisioning_profile: ''
             - export_method: app-store
-      - deploy-to-itunesconnect-application-loader@0:
+      - deploy-to-itunesconnect-application-loader@1:
           inputs:
             - app_password: "$APPLE_APP_PASSWORD"
             - itunescon_user: "$APPLE_EMAIL"
