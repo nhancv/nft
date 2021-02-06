@@ -2,11 +2,10 @@
 Flutter Template
 
 ```
-[✓] Flutter (Channel stable, 1.22.3, on macOS 11.0.1 20B29, locale en-VN)
-    • Flutter version 1.22.3
-    • Framework revision 8874f21e79 (3 weeks ago), 2020-10-29 14:14:35 -0700
-    • Engine revision a1440ca392
-    • Dart version 2.10.3
+Flutter 1.22.6 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 9b2d32b605 (9 days ago) • 2021-01-22 14:36:39 -0800
+Engine • revision 2f0af37152
+Tools • Dart 2.10.5
 ```
 
 ## Initial setup
@@ -21,7 +20,7 @@ Flutter Template
 
 ### Change App bundle id
 
-- Search and Replace All `com.app.nft` to new App bundle id
+- Search and Replace All `com.nhancv.nft` to new App bundle id
 - Update directory folder path name of Android (`android/app/src/main/kotlin/`) same with new App bundle id
 
 ## Update app icon
@@ -189,14 +188,14 @@ test_driver/                       ---> place integration testing
 
 ## Versioning
 ```
-version: 1.0.6+2003271407
+version: 1.0.1+202101001
 ---
-Version name: 1.0.6
-Version code: 2003271407
+Version name: 1.0.1
+Version code: 202101001
 ```
 
-Version name: major.minor.build/patch
-Version code: yymmddHHMM
+Version name: major.minor.build
+Version code: yyyymm<build number from 000>
 
 * Remember to increase bold the version name and code as well.
 

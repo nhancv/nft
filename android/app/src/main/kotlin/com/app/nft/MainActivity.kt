@@ -1,4 +1,4 @@
-package com.app.nft
+package com.nhancv.nft
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
