@@ -14,20 +14,21 @@ class AppHelper {
   static Future<T> showBottomSheet<T>(
       BuildContext context,
       Widget Function(BuildContext context, ScrollController scrollController)
-          child) {
+          child, {bool fixedHeight = true}) {
     return showModalBottomSheet<T>(
       context: context,
-      isScrollControlled: true,
+      isScrollControlled: fixedHeight,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         final Size size = MediaQuery.of(context).size;
+        final double initHeight = 1 - 100.H / size.height;
         return DraggableScrollableSheet(
             // padding from top of screen on load
-            initialChildSize: 1 - 85 / size.height,
+            initialChildSize: initHeight,
             // full screen on scroll
             maxChildSize: 1,
-            minChildSize: 0.25,
-            expand: false,
+            minChildSize: initHeight,
+            expand: true,
             builder: (BuildContext context, ScrollController scrollController) {
               return ClipRRect(
                   borderRadius: BorderRadius.only(
