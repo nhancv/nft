@@ -6,18 +6,45 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nft/utils/app_extension.dart';
 
 class AppHelper {
-  /// Show bottom sheet scrollable
+  /// Show normal bottom sheet
   /// final bool res = await AppHelper.showBottomSheet(context,
   //         (_, ScrollController scrollController) {
   //       return WSheet(scrollController: scrollController);
   //     });
   static Future<T> showBottomSheet<T>(
-      BuildContext context,
-      Widget Function(BuildContext context, ScrollController scrollController)
-          child, {bool fixedHeight = true}) {
+    BuildContext context,
+    Widget Function(BuildContext context) child,
+  ) {
     return showModalBottomSheet<T>(
       context: context,
-      isScrollControlled: fixedHeight,
+      isScrollControlled: false,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        final Size size = MediaQuery.of(context).size;
+        final double initHeight = 1 - 100.H / size.height;
+        return ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.W),
+              topRight: Radius.circular(30.W),
+            ),
+            child: child(context));
+      },
+    );
+  }
+
+  /// Show bottom sheet scrollable
+  /// final bool res = await AppHelper.showScrollableBottomSheet(context,
+  //         (_, ScrollController scrollController) {
+  //       return WSheet(scrollController: scrollController);
+  //     });
+  static Future<T> showScrollableBottomSheet<T>(
+    BuildContext context,
+    Widget Function(BuildContext context, ScrollController scrollController)
+        child,
+  ) {
+    return showModalBottomSheet<T>(
+      context: context,
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         final Size size = MediaQuery.of(context).size;
@@ -28,7 +55,7 @@ class AppHelper {
             // full screen on scroll
             maxChildSize: 1,
             minChildSize: initHeight,
-            expand: true,
+            expand: false,
             builder: (BuildContext context, ScrollController scrollController) {
               return ClipRRect(
                   borderRadius: BorderRadius.only(
