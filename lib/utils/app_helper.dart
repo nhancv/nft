@@ -8,9 +8,15 @@ import 'package:nft/utils/app_extension.dart';
 class AppHelper {
   /// Show normal bottom sheet
   /// final bool res = await AppHelper.showBottomSheet(context,
-  //         (_, ScrollController scrollController) {
-  //       return WSheet(scrollController: scrollController);
-  //     });
+  //         (_) {
+  //       return Container(
+  //                color: Colors.white,
+  //                child: Column(
+  //                  mainAxisSize: MainAxisSize.min,
+  //                  children: <Widget>[]
+  //                ),
+  //              );
+  //       });
   static Future<T> showBottomSheet<T>(
     BuildContext context,
     Widget Function(BuildContext context) child,
@@ -20,8 +26,6 @@ class AppHelper {
       isScrollControlled: false,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        final Size size = MediaQuery.of(context).size;
-        final double initHeight = 1 - 100.H / size.height;
         return ClipRRect(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30.W),
