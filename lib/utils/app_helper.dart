@@ -6,27 +6,59 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:nft/utils/app_extension.dart';
 
 class AppHelper {
-  /// Show bottom sheet scrollable
+  /// Show normal bottom sheet
   /// final bool res = await AppHelper.showBottomSheet(context,
+  //         (_) {
+  //       return Container(
+  //                color: Colors.white,
+  //                child: Column(
+  //                  mainAxisSize: MainAxisSize.min,
+  //                  children: <Widget>[]
+  //                ),
+  //              );
+  //       });
+  static Future<T> showBottomSheet<T>(
+    BuildContext context,
+    Widget Function(BuildContext context) child,
+  ) {
+    return showModalBottomSheet<T>(
+      context: context,
+      isScrollControlled: false,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.W),
+              topRight: Radius.circular(30.W),
+            ),
+            child: child(context));
+      },
+    );
+  }
+
+  /// Show bottom sheet scrollable
+  /// final bool res = await AppHelper.showScrollableBottomSheet(context,
   //         (_, ScrollController scrollController) {
   //       return WSheet(scrollController: scrollController);
   //     });
-  static Future<T> showBottomSheet<T>(
-      BuildContext context,
-      Widget Function(BuildContext context, ScrollController scrollController)
-          child) {
+  static Future<T> showScrollableBottomSheet<T>(
+    BuildContext context,
+    Widget Function(BuildContext context, ScrollController scrollController)
+        child,
+  ) {
     return showModalBottomSheet<T>(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         final Size size = MediaQuery.of(context).size;
+        final double initHeight = 1 - 100.H / size.height;
         return DraggableScrollableSheet(
             // padding from top of screen on load
-            initialChildSize: 1 - 85 / size.height,
+            initialChildSize: initHeight,
             // full screen on scroll
             maxChildSize: 1,
-            minChildSize: 0.25,
+            minChildSize: initHeight,
             expand: false,
             builder: (BuildContext context, ScrollController scrollController) {
               return ClipRRect(
