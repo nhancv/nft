@@ -1,0 +1,5 @@
+NFT App is a Flutter template.
+NFT App is completely free, with no ads.
+
+Privacy Policy: https://nhancv.github.io/apppolicy/nft/PrivacyPolicy.html
+Terms of Service: https://nhancv.github.io/apppolicy/nft/TermsofService.html
