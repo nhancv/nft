@@ -4,6 +4,23 @@ import 'package:nft/utils/app_route.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group('Empty', () {
+    FlutterDriver driver;
+
+    // Connect to the Flutter driver before running any tests.
+    setUpAll(() async {
+      driver = await FlutterDriver.connect();
+    });
+
+    // Close the connection to the driver after the tests have completed.
+    tearDownAll(() async {
+      if (driver != null) {
+        await driver.close();
+      }
+    });
+
+    test('empty', () async {});
+  });
   group('Counter App', () {
     // First, define the Finders and use them to locate widgets from the
     // test suite. Note: the Strings provided to the `byValueKey` method must
