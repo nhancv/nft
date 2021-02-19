@@ -7,6 +7,7 @@ class WButtonRounded extends StatelessWidget {
       this.radius,
       this.onPressed,
       this.background,
+      this.splashColor,
       this.borderColor,
       this.borderWidth,
       this.padding})
@@ -16,6 +17,7 @@ class WButtonRounded extends StatelessWidget {
   final double radius;
   final Function() onPressed;
   final Color background;
+  final Color splashColor;
   final Color borderColor;
   final double borderWidth;
   final EdgeInsets padding;
@@ -26,6 +28,8 @@ class WButtonRounded extends StatelessWidget {
       onPressed: onPressed,
       child: child,
       padding: padding ?? EdgeInsets.zero,
+      highlightColor: splashColor,
+      splashColor: splashColor,
       shape: RoundedRectangleBorder(
         side: BorderSide(
             color: borderColor ?? Colors.transparent,
