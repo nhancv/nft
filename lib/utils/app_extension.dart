@@ -138,9 +138,9 @@ extension DateTimeStringExtendsion on String {
   /// Check Null or Empty
   bool get isNullOrEmpty => isNull || isEmpty;
 
-  /// Convert to DateTime by pattern
-  DateTime toDateTime(String pattern) {
-    return isNullOrEmpty ? null : DateFormat(pattern).parse(this);
+  /// Convert from UTC to local DateTime by pattern
+  DateTime toDateTime({String pattern = 'yyyy-MM-dd hh:mm:ss'}) {
+    return isNullOrEmpty ? null : DateFormat(pattern).parse(this, true).toLocal();
   }
 
   String safe([String supplier()]) =>
