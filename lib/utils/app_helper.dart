@@ -149,4 +149,15 @@ class AppHelper {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
+
+  /// Fullscreen mode
+  static void enableFullscreen() {
+    SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[]);
+  }
+
+  /// Disable fullscreen mode
+  static void disableFullscreen() {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+  }
+
 }
