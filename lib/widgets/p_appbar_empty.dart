@@ -5,9 +5,11 @@ import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/p_material.dart';
 
 class PAppBarEmpty extends StatelessWidget {
-  const PAppBarEmpty({@required this.child, Key key}) : super(key: key);
+  const PAppBarEmpty({@required this.child, this.actionBtn, Key key})
+      : super(key: key);
 
   final Widget child;
+  final Widget actionBtn;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class PAppBarEmpty extends StatelessWidget {
           bottom: false,
           child: child,
         ),
+        floatingActionButton: actionBtn,
       ),
     );
   }
