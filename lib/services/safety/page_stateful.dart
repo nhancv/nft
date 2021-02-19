@@ -7,6 +7,7 @@ import 'package:nft/services/rest_api/api_error.dart';
 import 'package:nft/services/rest_api/api_error_type.dart';
 import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
+import 'package:nft/utils/app_route.dart';
 import 'package:provider/provider.dart';
 
 abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
@@ -44,7 +45,9 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
       },
       onFinally: () async {
         AppLoadingProvider.hide(context);
-        context.navigator()?.pushNamedAndRemoveUntil('/', (_) => false);
+        context
+            .navigator()
+            ?.pushNamedAndRemoveUntil(AppRoute.routeRoot, (_) => false);
       },
       skipOnError: true,
     );
