@@ -27,6 +27,7 @@ dependencies:
   email_validator: ^1.0.6
   npreferences: ^3.0.0+1
   simple_animations: ^2.4.2
+  vector_math: any
 
 flutter_intl:
   enabled: true
