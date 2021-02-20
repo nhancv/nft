@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nft/pages/brick/brick_page.dart';
 import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/counter/counter_provider.dart';
 import 'package:nft/pages/home/home_page.dart';
@@ -16,6 +17,7 @@ class AppRoute {
   static const String routeHome = '/home';
   static const String routeLogin = '/login';
   static const String routeCounter = '/counter';
+  static const String routeBrick = '/brick';
 
   ///#endregion
 
@@ -56,6 +58,11 @@ class AppRoute {
   /// Generate route for app here
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case routeRoot:
+      case routeBrick:
+        return MaterialPageRoute<dynamic>(
+            settings: settings, builder: (_) => BrickPage());
+
       case routeCounter:
         return MaterialPageRoute<dynamic>(
             settings: settings,
@@ -69,7 +76,6 @@ class AppRoute {
         return MaterialPageRoute<dynamic>(
             settings: settings, builder: (_) => const HomePage());
 
-      case routeRoot:
       case routeLogin:
         return MaterialPageRoute<dynamic>(
             settings: settings, builder: (_) => const LoginPage());
