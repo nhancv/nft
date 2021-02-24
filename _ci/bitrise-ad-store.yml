@@ -1,0 +1,68 @@
+---
+format_version: '8'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: flutter
+trigger_map:
+  - pull_request_source_branch: "*"
+    workflow: primary
+workflows:
+  primary:
+    steps:
+      - activate-ssh-key@4:
+          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+      - git-clone@4: {}
+      - file-downloader@1:
+          inputs:
+            - destination: "$HOME/android/keystore-release.jks"
+            - source: "$BITRISEIO_ANDROID_KEYSTORE_URL"
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+                bash ./_ci/bitrise-script.sh
+                bash ./_ci/bitrise-keystore.sh
+      - flutter-installer@0:
+          inputs:
+            - is_update: 'true'
+      - cache-pull@2: {}
+      - flutter-analyze@0:
+          inputs:
+            - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+      - flutter-test@0:
+          inputs:
+            - generate_code_coverage_files: 'no'
+            - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
+      - flutter-build@0:
+          inputs:
+            - android_additional_params: "--release -t lib/main_prod.dart"
+            - android_output_type: appbundle
+            - platform: android
+      - deploy-to-bitrise-io@1: {}
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+                bash ./_ci/bitrise-download-urls.sh
+      - slack@3:
+          inputs:
+            - channel: "#general"
+            - fields: |-
+                App|${BITRISE_APP_TITLE}
+                Branch|${BITRISE_GIT_BRANCH}
+                Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+            - buttons: |-
+                View Build|${BITRISE_BUILD_URL}
+                Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+                Download AAB|${BITRISE_AAB_URL}
+            - pretext: "*Android Build Store Succeeded! - Version: $APP_BUILD_VERSION*"
+            - pretext_on_error: "*Android Build Store Failed! - Version: $APP_BUILD_VERSION*"
+            - message: "$GIT_CLONE_COMMIT_MESSAGE_BODY \\n$APP_CHANGELOG"
+            - webhook_url: "$SLACK_HOOK_URL"
+      - cache-push@2: {}
+app:
+  envs:
+    - opts:
+        is_expand: false
+      BITRISE_FLUTTER_PROJECT_LOCATION: "."
