@@ -102,6 +102,9 @@ extension DateTimeExtension on DateTime {
   DateTime onlyTime([int _hour, int _minute]) =>
       DateTime.utc(1970, 1, 1, _hour ?? hour, _minute ?? minute, 0, 0, 0);
 
+  DateTime atTime(int _hour, int _minute, [int _second]) =>
+      DateTime(year, month, day, _hour, _minute, _second ?? 0, 0, 0);
+
   DateTime utcTimeFirstDaySinceEpoch() =>
       DateTime.utc(1970, 1, 1, hour, minute, second, millisecond, microsecond);
 
