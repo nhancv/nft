@@ -49,9 +49,26 @@ class Api {
       if (error is DioError && error.type == DioErrorType.RESPONSE) {
         final Response<dynamic> response = error.response;
 
-        /// if you want by pass dio header error code to get response content
-        /// just uncomment line below
-        //return response;
+        try {
+          /// By pass dio header error code to get response content
+          /// Try to return response
+          if (response != null) {
+            final Response<T> res = Response<T>(
+              data: response.data as T,
+              headers: response.headers,
+              request: response.request,
+              isRedirect: response.isRedirect,
+              statusCode: response.statusCode,
+              statusMessage: response.statusMessage,
+              redirects: response.redirects,
+              extra: response.extra,
+            );
+            return res;
+          }
+        } catch (e) {
+          print(e);
+        }
+
         final String errorMessage =
             'Code ${response.statusCode} - ${response.statusMessage} ${response.data != null ? '\n' : ''} ${response.data}';
         throw DioError(
