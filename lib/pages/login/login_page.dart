@@ -129,7 +129,7 @@ class _LoginPageState extends PageStateful<LoginPage>
               SizedBox(height: 30.H),
 
               /// Example call api with success response
-              RaisedButton(
+              ElevatedButton(
                 key: const Key('callApiBtnKey'),
                 onPressed: context
                         .select((LoginProvider provider) => provider.formValid)
@@ -165,7 +165,7 @@ class _LoginPageState extends PageStateful<LoginPage>
 
               /// Example call api with success http code but with error response,
               /// and how to use function response data instead property approach.
-              RaisedButton(
+              ElevatedButton(
                 key: const Key('callApiErrorBtnKey'),
                 onPressed: () async {
                   final LoginResponse loginResponse = await apiCallSafety(
@@ -188,7 +188,7 @@ class _LoginPageState extends PageStateful<LoginPage>
 
               /// Example call api with exception return to ui
               /// Note: Exception make app can not hide the app loading with previous ways
-              RaisedButton(
+              ElevatedButton(
                 key: const Key('callApiExceptionBtnKey'),
                 onPressed: () async {
                   apiCallSafety(

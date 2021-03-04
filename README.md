@@ -2,10 +2,10 @@
 Flutter Template
 
 ```
-Flutter 1.22.6 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision 9b2d32b605 (9 days ago) • 2021-01-22 14:36:39 -0800
-Engine • revision 2f0af37152
-Tools • Dart 2.10.5
+Flutter 2.0.0 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 60bd88df91 (22 hours ago) • 2021-03-03 09:13:17 -0800
+Engine • revision 40441def69
+Tools • Dart 2.12.0
 ```
 
 ## Initial setup
@@ -82,52 +82,15 @@ flutter pub run flutter_launcher_icons:main
 -> Save	
 ```
 
-## Update localization
+## Localizations
 
-### Install `flutter_intl` tool
-- JetBrains: https://plugins.jetbrains.com/plugin/13666-flutter-intl
-- VS code: https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl
-
-1. Add other locales:
-- Run `Tools -> Flutter Intl -> Add Locale`
-
-2. Access to the current locale
-```
-Intl.getCurrentLocale()
-```
-
-3. Change current locale
-```
-S.load(Locale('vi'));
-```
-
-4. Reference the keys in Dart code
-```
-Widget build(BuildContext context) {
-    return Column(children: [
-        Text(
-            S.of(context).pageHomeConfirm,
-        ),
-        Text(
-            S.current.pageHomeConfirm,// If you don't have `context` to pass
-        ),
-    ]);
-}
-```
-
-### Generate intl via cli
-```
-#https://pub.dev/packages/intl_utils
-flutter pub get
-flutter pub run intl_utils:generate
-```
+https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 
 ## Structure
 ```
 lib/
-  |-generated/                     ---> auto genrated by flutter_intl
-  |-I10n/                          ---> place internalization files
-    |-intl_*.arb                   ---> define your translation text here
+  |-l10n/                          ---> place internalization files
+    |-app_*.arb                   ---> define your translation text here
   |-models/                        ---> place object models
     |-local/                       ---> place local models
     |-remote/                      ---> place remote models

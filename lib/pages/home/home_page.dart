@@ -82,13 +82,13 @@ class _HomePageState extends PageStateful<HomePage>
             /// As default, when user change language in device setting
             /// -> the locale will change appropriately
             /// This button provides user can change the locale manually
-            FlatButton(
+            TextButton(
               onPressed: () {
                 /// Get current locale
-                final String currentLocale = Intl.getCurrentLocale();
-
+                final Locale myLocale = Localizations.localeOf(context);
+                final String languageCode = myLocale.languageCode;
                 /// Change to new locale
-                if (currentLocale == 'en') {
+                if (languageCode == 'en') {
                   localeProvider.locale = const Locale('vi');
                 } else {
                   localeProvider.locale = const Locale('en');
@@ -114,7 +114,7 @@ class _HomePageState extends PageStateful<HomePage>
             SizedBox(height: 10.H),
 
             /// Navigate to counter page with current timestamp as argument
-            RaisedButton(
+            ElevatedButton(
               key: const Key(AppRoute.routeCounter),
               onPressed: () {
                 Navigator.pushNamed(context, AppRoute.routeCounter,
@@ -127,7 +127,7 @@ class _HomePageState extends PageStateful<HomePage>
 
             /// Logout
             /// Navigate to login
-            RaisedButton(
+            ElevatedButton(
               key: const Key(AppRoute.routeLogin),
               onPressed: () async {
                 logout(context);

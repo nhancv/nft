@@ -4,9 +4,9 @@ import 'package:nft/utils/app_route.dart';
 class WBehindKeyboard extends StatefulWidget {
   const WBehindKeyboard(
       {Key key,
-        @required this.child,
-        this.reversed = false,
-        this.keepView = true})
+      @required this.child,
+      this.reversed = false,
+      this.keepView = true})
       : super(key: key);
 
   final Widget child;
@@ -32,12 +32,12 @@ class _WBehindKeyboardState extends State<WBehindKeyboard> {
     _keyboardVisible =
         MediaQuery.of(AppRoute.I.appContext).viewInsets.bottom != 0;
     final bool visible =
-    !(widget.reversed ? !_keyboardVisible : _keyboardVisible);
+        !(widget.reversed ? !_keyboardVisible : _keyboardVisible);
     return widget.keepView
         ? Opacity(
-      opacity: visible ? 1 : 0,
-      child: widget.child,
-    )
+            opacity: visible ? 1 : 0,
+            child: widget.child,
+          )
         : Visibility(child: widget.child, visible: visible);
   }
 }

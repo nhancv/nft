@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:nft/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_dialog.dart';
@@ -95,13 +95,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       navigatorKey: appRoute.navigatorKey,
       locale: localeProvider.locale,
-      supportedLocales: S.delegate.supportedLocales,
-      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       debugShowCheckedModeBanner: false,
       theme: appTheme.buildThemeData(),
       //https://stackoverflow.com/questions/57245175/flutter-dynamic-initial-route
