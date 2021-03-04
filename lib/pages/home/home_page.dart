@@ -86,6 +86,7 @@ class _HomePageState extends PageStateful<HomePage>
                 /// Get current locale
                 final Locale myLocale = Localizations.localeOf(context);
                 final String languageCode = myLocale.languageCode;
+
                 /// Change to new locale
                 if (languageCode == 'en') {
                   localeProvider.locale = const Locale('vi');

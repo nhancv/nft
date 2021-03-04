@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -143,7 +143,9 @@ extension DateTimeStringExtendsion on String {
 
   /// Convert from UTC to local DateTime by pattern
   DateTime toDateTime({String pattern = 'yyyy-MM-dd hh:mm:ss'}) {
-    return isNullOrEmpty ? null : DateFormat(pattern).parse(this, true).toLocal();
+    return isNullOrEmpty
+        ? null
+        : DateFormat(pattern).parse(this, true).toLocal();
   }
 
   String safe([String supplier()]) =>

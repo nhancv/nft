@@ -26,10 +26,11 @@ class PAppBarTransparency extends StatelessWidget {
     return PMaterial(
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: uiOverlayStyle.copyWith(statusBarColor: Colors.transparent),
-        child: body ?? Scaffold(
-          backgroundColor: theme.backgroundColor ?? Colors.transparent,
-          body: child,
-        ),
+        child: body ??
+            Scaffold(
+              backgroundColor: theme.backgroundColor ?? Colors.transparent,
+              body: child,
+            ),
       ),
     );
   }

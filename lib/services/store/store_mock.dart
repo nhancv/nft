@@ -1,7 +1,6 @@
 import 'package:nft/services/store/store.dart';
 
 class StoreMock implements Store {
-
   @override
   Future<void> clearAll() async {}
 

@@ -203,5 +203,3 @@ class BaseError {
 ///         : <Event>[];
 ///   }
 /// }
-
-

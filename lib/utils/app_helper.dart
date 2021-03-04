@@ -162,5 +162,4 @@ class AppHelper {
   static void disableFullscreen() {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
   }
-
 }
