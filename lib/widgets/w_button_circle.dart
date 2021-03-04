@@ -15,13 +15,15 @@ class WButtonCircle extends StatelessWidget {
     return Container(
       width: width ?? 50,
       height: width ?? 50,
-      child: RaisedButton(
-        shape: const CircleBorder(),
+      child: ElevatedButton(
         onPressed: onPressed,
-        padding: const EdgeInsets.all(0),
-        color: color ?? Colors.transparent,
-        elevation: 0,
         child: child,
+        style: ElevatedButton.styleFrom(
+          shape: const CircleBorder(),
+          padding: const EdgeInsets.all(0),
+          primary: color ?? Colors.transparent,
+          elevation: 0,
+        ),
       ),
     );
   }

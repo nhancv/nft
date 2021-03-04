@@ -162,18 +162,18 @@ class _ToastMessageAnimation extends StatelessWidget {
     return play == false
         ? child
         : PlayAnimation<MultiTweenValues<_AniProps>>(
-      duration: tween.duration,
-      tween: tween,
-      child: child,
-      builder: (BuildContext context, Widget child,
-          MultiTweenValues<_AniProps> value) {
-        return Opacity(
-          opacity: value.get(_AniProps.opacity),
-          child: Transform.translate(
-              offset: Offset(0, value.get(_AniProps.translateY)),
-              child: child),
-        );
-      },
-    );
+            duration: tween.duration,
+            tween: tween,
+            child: child,
+            builder: (BuildContext context, Widget child,
+                MultiTweenValues<_AniProps> value) {
+              return Opacity(
+                opacity: value.get(_AniProps.opacity),
+                child: Transform.translate(
+                    offset: Offset(0, value.get(_AniProps.translateY)),
+                    child: child),
+              );
+            },
+          );
   }
 }

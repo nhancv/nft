@@ -57,7 +57,7 @@ class AppDialogProvider {
             child: SelectableText(content ?? ''),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () {
                 hideAppDialog();
               },

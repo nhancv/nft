@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
