@@ -1,3 +1,7 @@
+## [1.0.42+202103001] - March 4, 2021.
+
+* Flutter 2
+
 ## [1.0.41+202101001] - January 31, 2021.
 
 * New app version approach
