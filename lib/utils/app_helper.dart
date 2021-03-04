@@ -18,20 +18,23 @@ class AppHelper {
   //              );
   //       });
   static Future<T> showBottomSheet<T>(
-    BuildContext context,
-    Widget Function(BuildContext context) child,
-  ) {
+      BuildContext context, Widget Function(BuildContext context) child,
+      {double heightFactor}) {
     return showModalBottomSheet<T>(
       context: context,
-      isScrollControlled: false,
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return ClipRRect(
+        return FractionallySizedBox(
+          heightFactor: heightFactor,
+          child: ClipRRect(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30.W),
               topRight: Radius.circular(30.W),
             ),
-            child: child(context));
+            child: child(context),
+          ),
+        );
       },
     );
   }
