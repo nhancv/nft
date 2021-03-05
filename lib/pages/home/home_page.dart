@@ -71,70 +71,73 @@ class _HomePageState extends PageStateful<HomePage>
     super.build(context);
     return PAppBarEmpty(
       child: WKeyboardDismiss(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(20.W),
-              child: Text(context.strings.hello),
-            ),
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(20.W),
+                child: Text(context.strings.hello),
+              ),
 
-            /// As default, when user change language in device setting
-            /// -> the locale will change appropriately
-            /// This button provides user can change the locale manually
-            TextButton(
-              onPressed: () {
-                /// Get current locale
-                final Locale myLocale = Localizations.localeOf(context);
-                final String languageCode = myLocale.languageCode;
+              /// As default, when user change language in device setting
+              /// -> the locale will change appropriately
+              /// This button provides user can change the locale manually
+              TextButton(
+                onPressed: () {
+                  /// Get current locale
+                  final Locale myLocale = Localizations.localeOf(context);
+                  final String languageCode = myLocale.languageCode;
 
-                /// Change to new locale
-                if (languageCode == 'en') {
-                  localeProvider.locale = const Locale('vi');
-                } else {
-                  localeProvider.locale = const Locale('en');
-                }
-              },
-              child: const Text('Translate'),
-            ),
+                  /// Change to new locale
+                  if (languageCode == 'en') {
+                    localeProvider.locale = const Locale('vi');
+                  } else {
+                    localeProvider.locale = const Locale('en');
+                  }
+                },
+                child: const Text('Translate'),
+              ),
 
-            SizedBox(height: 10.H),
+              SizedBox(height: 10.H),
 
-            /// Example to use selector instead consumer to optimize render performance
-            Selector<HomeProvider, String>(
-              selector: (_, HomeProvider provider) =>
-                  provider.token?.toJson()?.toString() ?? '',
-              builder: (_, String tokenInfo, __) {
-                return Text(
-                  tokenInfo,
-                  textAlign: TextAlign.center,
-                );
-              },
-            ),
+              /// Example to use selector instead consumer to optimize render performance
+              Selector<HomeProvider, String>(
+                selector: (_, HomeProvider provider) =>
+                    provider.token?.toJson()?.toString() ?? '',
+                builder: (_, String tokenInfo, __) {
+                  return Text(
+                    tokenInfo,
+                    textAlign: TextAlign.center,
+                  );
+                },
+              ),
 
-            SizedBox(height: 10.H),
+              SizedBox(height: 10.H),
 
-            /// Navigate to counter page with current timestamp as argument
-            ElevatedButton(
-              key: const Key(AppRoute.routeCounter),
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoute.routeCounter,
-                    arguments: 'From Home ${DateTime.now()}');
-              },
-              child: const Text('Counter Page'),
-            ),
+              /// Navigate to counter page with current timestamp as argument
+              ElevatedButton(
+                key: const Key(AppRoute.routeCounter),
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoute.routeCounter,
+                      arguments: 'From Home ${DateTime.now()}');
+                },
+                child: const Text('Counter Page'),
+              ),
 
-            SizedBox(height: 10.H),
+              SizedBox(height: 10.H),
 
-            /// Logout
-            /// Navigate to login
-            ElevatedButton(
-              key: const Key(AppRoute.routeLogin),
-              onPressed: () async {
-                logout(context);
-              },
-              child: const Text('Logout'),
-            ),
-          ],
+              /// Logout
+              /// Navigate to login
+              ElevatedButton(
+                key: const Key(AppRoute.routeLogin),
+                onPressed: () async {
+                  logout(context);
+                },
+                child: const Text('Logout'),
+              ),
+            ],
+          ),
         ),
       ),
     );
