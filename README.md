@@ -86,6 +86,15 @@ flutter pub run flutter_launcher_icons:main
 
 https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 
+- Update translated file
+```
+flutter gen-l10n
+
+* Note: To see a detailed report, use the --untranslated-messages-file 
+        option in the tool to generate a JSON format file containing 
+        all messages that need to be translated.
+```
+
 ## Structure
 ```
 lib/
