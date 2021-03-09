@@ -8,35 +8,34 @@ import 'package:nft/widgets/w_bottom_action_sheet.dart';
 import 'package:nft/widgets/w_button_inkwell.dart';
 import 'package:nft/widgets/w_divider_line.dart';
 
-/// Use: final Duration duration = await WTimePicker.showPicker(context);
+/// Use: final DateTime dateTime = await WPickerDate.showPicker(context);
 
-class WTimePicker extends StatefulWidget {
-  const WTimePicker({Key key, this.initDuration}) : super(key: key);
+class WPickerDate extends StatefulWidget {
+  const WPickerDate({Key key, this.initDateTime}) : super(key: key);
 
-  final Duration initDuration;
+  final DateTime initDateTime;
 
-  static Future<Duration> showPicker(BuildContext context,
-      {Duration initDuration}) {
-    return showCupertinoModalPopup<Duration>(
+  static Future<DateTime> showPicker(BuildContext context,
+      {DateTime initDateTime}) {
+    return showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
-          return WTimePicker(
-            initDuration: initDuration,
+          return WPickerDate(
+            initDateTime: initDateTime,
           );
         });
   }
 
   @override
-  _WTimePickerState createState() => _WTimePickerState();
+  _WPickerDateState createState() => _WPickerDateState();
 }
 
-class _WTimePickerState extends BaseStateful<WTimePicker> {
-  Duration selected = const Duration(minutes: 1);
+class _WPickerDateState extends BaseStateful<WPickerDate> {
+  DateTime selected = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final bool isTimeValid = selected > Duration.zero;
     return WBottomActionSheet(
       body: Container(
         child: Column(
@@ -45,16 +44,17 @@ class _WTimePickerState extends BaseStateful<WTimePicker> {
               height: 50,
               alignment: Alignment.center,
               child: Text(
-                'Pick a duration',
+                'Pick a time',
                 style: normalTextStyle(17.SP, color: const Color(0xFF8F8F8F)),
               ),
             ),
             const WDividerLine(),
             Container(
-              child: CupertinoTimerPicker(
-                initialTimerDuration: widget.initDuration ?? selected,
-                mode: CupertinoTimerPickerMode.hm,
-                onTimerDurationChanged: (Duration value) {
+              height: 200,
+              child: CupertinoDatePicker(
+                initialDateTime: widget.initDateTime ?? selected,
+                mode: CupertinoDatePickerMode.time,
+                onDateTimeChanged: (DateTime value) {
                   HapticFeedback.selectionClick();
                   setState(() {
                     selected = value;
@@ -69,16 +69,12 @@ class _WTimePickerState extends BaseStateful<WTimePicker> {
                 alignment: Alignment.center,
                 child: Text(
                   'Confirm',
-                  style: normalTextStyle(17.SP,
-                      color: const Color(0xFF0080FA)
-                          .withOpacity(isTimeValid ? 1 : 0.4)),
+                  style: normalTextStyle(17.SP, color: const Color(0xFF0080FA)),
                 ),
               ),
-              onPressed: isTimeValid
-                  ? () {
-                      Navigator.of(context).pop(selected);
-                    }
-                  : null,
+              onPressed: () {
+                Navigator.of(context).pop(selected);
+              },
             ),
           ],
         ),
