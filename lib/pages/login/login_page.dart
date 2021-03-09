@@ -11,6 +11,7 @@ import 'package:nft/utils/app_helper.dart';
 import 'package:nft/utils/app_log.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_transparency.dart';
+import 'package:nft/widgets/w_env.dart';
 import 'package:nft/widgets/w_input_form.dart';
 import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
@@ -72,6 +73,7 @@ class _LoginPageState extends PageStateful<LoginPage>
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                SafeArea(child: WEnv(),),
                 /// Logo
                 Padding(
                   padding: EdgeInsets.only(top: 100.H, bottom: 50.H),
