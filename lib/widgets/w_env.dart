@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/services/safety/base_stateless.dart';
 import 'package:nft/utils/app_config.dart';
-import 'package:nft/widgets/w_rounded_text.dart';
+import 'package:nft/widgets/w_text_rounded.dart';
 
 // ignore: must_be_immutable
 class WEnv extends BaseStateless {
@@ -11,7 +11,7 @@ class WEnv extends BaseStateless {
     super.build(context);
     final Env env = AppConfig.I.env;
     return env.envType != EnvType.prod
-        ? WRoundedText(text: describeEnum(env.envType), color: Colors.red)
+        ? WTextRounded(text: describeEnum(env.envType), color: Colors.red)
         : Container();
   }
 }

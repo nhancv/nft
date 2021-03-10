@@ -4,8 +4,8 @@ import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
 
 // ignore: must_be_immutable
-class WRoundedText extends BaseStateless {
-  WRoundedText({Key key, this.text, this.color}) : super(key: key);
+class WTextRounded extends BaseStateless {
+  WTextRounded({Key key, this.text, this.color}) : super(key: key);
 
   final String text;
   final Color color;
