@@ -19,10 +19,12 @@ class AppHelper {
   //       });
   static Future<T> showBottomSheet<T>(
       BuildContext context, Widget Function(BuildContext context) child,
-      {double heightFactor}) {
+      {double heightFactor, bool interactive = true}) {
     return showModalBottomSheet<T>(
       context: context,
       isScrollControlled: true,
+      isDismissible: interactive,
+      enableDrag: interactive,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         return FractionallySizedBox(
