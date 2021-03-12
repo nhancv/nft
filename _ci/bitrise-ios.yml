@@ -40,10 +40,6 @@ workflows:
             - force_provisioning_profile_specifier: ''
             - force_provisioning_profile: ''
             - export_method: app-store
-      - deploy-to-itunesconnect-application-loader@1:
-          inputs:
-            - app_password: "$APPLE_APP_PASSWORD"
-            - itunescon_user: "$APPLE_EMAIL"
       - appcenter-deploy-ios@2:
           inputs:
             - owner_name: nhancv
@@ -51,6 +47,10 @@ workflows:
             - distribution_group: beta
             - api_token: "$APP_CENTER_TOKEN"
       - deploy-to-bitrise-io@1: {}
+      - deploy-to-itunesconnect-application-loader@1:
+          inputs:
+            - app_password: "$APPLE_APP_PASSWORD"
+            - itunescon_user: "$APPLE_EMAIL"
       - slack@3:
           inputs:
             - channel: "#general"
@@ -63,8 +63,8 @@ workflows:
                 Install Page|${APPCENTER_PUBLIC_INSTALL_PAGE_URL}
                 Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
                 Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
-            - pretext: "*iOS Build Succeeded! - Version: $APP_BUILD_VERSION*"
-            - pretext_on_error: "*iOS Build Failed! - Version: $APP_BUILD_VERSION*"
+            - pretext: "*iOS Build Dev Succeeded! - Version: $APP_BUILD_VERSION*"
+            - pretext_on_error: "*iOS Build Dev Failed! - Version: $APP_BUILD_VERSION*"
             - message: "$GIT_CLONE_COMMIT_MESSAGE_BODY \\n$APP_CHANGELOG"
             - webhook_url: "$SLACK_HOOK_URL"
       - cache-push@2: {}

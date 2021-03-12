@@ -11,12 +11,17 @@ workflows:
       - activate-ssh-key@4:
           run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
       - git-clone@4: {}
+      - file-downloader@1:
+          inputs:
+            - destination: "$HOME/android/keystore-release.jks"
+            - source: "$BITRISEIO_ANDROID_KEYSTORE_URL"
       - script@1:
           inputs:
-            - content: |
+            - content: |-
                 #!/usr/bin/env bash
                 set -ex
                 bash ./_ci/bitrise-script.sh
+                bash ./_ci/bitrise-keystore.sh
       - flutter-installer@0:
           inputs:
             - is_update: 'true'
@@ -30,15 +35,16 @@ workflows:
             - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
       - flutter-build@0:
           inputs:
+            - android_additional_params: "--release -t lib/main_prod.dart"
+            - android_output_type: appbundle
             - platform: android
-      - appcenter-deploy-android@2:
-          inputs:
-            - owner_name: nhancv
-            - app_name: ad_nft
-            - distribution_group: beta
-            - app_path: "$BITRISE_APK_PATH"
-            - api_token: "$APP_CENTER_TOKEN"
       - deploy-to-bitrise-io@1: {}
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+                bash ./_ci/bitrise-apk-download-urls.sh
       - slack@3:
           inputs:
             - channel: "#general"
@@ -47,12 +53,11 @@ workflows:
                 Branch|${BITRISE_GIT_BRANCH}
                 Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             - buttons: |-
-                View App|${APPCENTER_RELEASE_PAGE_URL}
-                Install Page|${APPCENTER_PUBLIC_INSTALL_PAGE_URL}
-                Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
-                Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
-            - pretext: "*Android Build Dev Succeeded! - Version: $APP_BUILD_VERSION*"
-            - pretext_on_error: "*Android Build Dev Failed! - Version: $APP_BUILD_VERSION*"
+                View Build|${BITRISE_BUILD_URL}
+                Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+                Download AAB|${BITRISE_AAB_URL}
+            - pretext: "*Android Build Prod Succeeded! - Version: $APP_BUILD_VERSION*"
+            - pretext_on_error: "*Android Build Prod Failed! - Version: $APP_BUILD_VERSION*"
             - message: "$GIT_CLONE_COMMIT_MESSAGE_BODY \\n$APP_CHANGELOG"
             - webhook_url: "$SLACK_HOOK_URL"
       - cache-push@2: {}
