@@ -19,6 +19,7 @@ workflows:
                 bash ./_ci/bitrise-script.sh
       - flutter-installer@0:
           inputs:
+            - version: 1.22.5
             - is_update: 'true'
       - cache-pull@2: {}
       - flutter-analyze@0:
