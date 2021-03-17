@@ -48,6 +48,12 @@ workflows:
             - distribution_group: beta
             - api_token: "$APP_CENTER_TOKEN"
       - deploy-to-bitrise-io@1: {}
+      - script@1:
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -ex
+                bash ./_ci/bitrise-ipa-download-urls.sh
       - slack@3:
           inputs:
             - channel: "#general"
@@ -56,10 +62,12 @@ workflows:
                 Branch|${BITRISE_GIT_BRANCH}
                 Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
             - buttons: |-
-                View App|${APPCENTER_RELEASE_PAGE_URL}
-                Install Page|${APPCENTER_PUBLIC_INSTALL_PAGE_URL}
-                Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
+                Appcenter View App|${APPCENTER_RELEASE_PAGE_URL}
+                Appcenter Install Page|${APPCENTER_PUBLIC_INSTALL_PAGE_URL}
                 Download Build|${APPCENTER_DEPLOY_INSTALL_URL}
+                Bitrise Test Report|https://app.bitrise.io/app/${BITRISE_APP_SLUG}/addon/addons-testing/login_page?build_slug=${BITRISE_BUILD_SLUG}
+                Bitrise View Build|${BITRISE_BUILD_URL}
+                Bitrise Download IAP|${BITRISE_IPA_URL}
             - pretext: "*iOS Build Dev Succeeded! - Version: $APP_BUILD_VERSION*"
             - pretext_on_error: "*iOS Build Dev Failed! - Version: $APP_BUILD_VERSION*"
             - message: "$GIT_CLONE_COMMIT_MESSAGE_BODY \\n$APP_CHANGELOG"
