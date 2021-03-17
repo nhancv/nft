@@ -36,8 +36,10 @@ class _WBehindKeyboardState extends State<WBehindKeyboard> {
     return widget.keepView
         ? Opacity(
             opacity: visible ? 1 : 0,
-            child: widget.child,
+            child: IgnorePointer(ignoring: !visible, child: widget.child),
           )
-        : Visibility(child: widget.child, visible: visible);
+        : Visibility(
+            child: IgnorePointer(ignoring: !visible, child: widget.child),
+            visible: visible);
   }
 }
