@@ -61,11 +61,15 @@ class AppLoadingProvider {
 
   /// Hide loading dialog
   void hideLoading({bool isClean = false}) {
-    if (_dialogContext != null) {
-      if (Navigator.canPop(_dialogContext)) {
-        Navigator.pop(_dialogContext);
+    try {
+      if (_dialogContext != null) {
+        if (Navigator.canPop(_dialogContext)) {
+          Navigator.pop(_dialogContext);
+        }
+        _dialogContext = null;
       }
-      _dialogContext = null;
+    } catch (e) {
+      // Unhandled Exception: Looking up a deactivated widget's ancestor is unsafe.
     }
     requestClose = !isClean;
   }
