@@ -39,8 +39,8 @@ Future<void> myMain() async {
             update: (_, Credential credential, ApiUser userApi) {
               return userApi..token = credential.token;
             }),
-        Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
-        Provider<AppDialogProvider>(create: (_) => AppDialogProvider()),
+        Provider<AppLoading>(create: (_) => AppLoading()),
+        Provider<AppDialog>(create: (_) => AppDialog()),
         ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
         ChangeNotifierProvider<AppThemeProvider>(
             create: (_) => AppThemeProvider()),

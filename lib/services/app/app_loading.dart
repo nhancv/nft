@@ -1,76 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:nft/services/app/app_dialog.dart';
 import 'package:provider/provider.dart';
 
-/// *
+///
 /// Install:
 /// Declare provider to my_app
-/// Provider(create: (_) => AppLoadingProvider()),
+/// Provider<AppLoading>(create: (_) => AppLoading()),
 ///
 /// Usage:
-/// context.read<AppLoadingProvider>().showLoading(context);
-/// or
-/// AppLoadingProvider.show(context);
+/// AppLoading.show(context);
+/// AppLoading.hide(context);
 ///
-/// context.read<AppLoadingProvider>().hideLoading();
-/// or
-/// AppLoadingProvider.hide(context);
-///
-class AppLoadingProvider {
-  AppLoadingProvider();
-
-  BuildContext _dialogContext;
-  bool requestClose = false;
-
+class AppLoading extends AppDialog {
   /// Show loading dialog shortcut
-  static void show(BuildContext context) {
-    context.read<AppLoadingProvider>().showLoading(context);
+  /// Change icon at https://pub.dev/packages/flutter_spinkit
+  static void show(BuildContext context,
+      {String text, Widget textWidget, Widget icon}) {
+    context
+        .read<AppLoading>()
+        .showLoading(context, text: text, textWidget: textWidget, icon: icon);
   }
 
   /// Hide loading dialog shortcut
   static void hide(BuildContext context) {
-    context.read<AppLoadingProvider>().hideLoading();
+    context.read<AppLoading>().hideAppDialog();
   }
 
   /// Show loading dialog
-  Future<void> showLoading(BuildContext context) async {
-    hideLoading(isClean: true);
-    showDialog<dynamic>(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext dialogContext) {
-        _dialogContext = dialogContext;
-        SchedulerBinding.instance.addPostFrameCallback((_) {
-          if (requestClose) {
-            hideLoading();
-          }
-        });
-        return Material(
-          type: MaterialType.transparency,
-          child: Center(
-            child: Container(
-              alignment: Alignment.center,
-              child: const SpinKitDoubleBounce(color: Colors.white),
+  /// Change icon at https://pub.dev/packages/flutter_spinkit
+  Future<void> showLoading(BuildContext context,
+      {String text, Widget textWidget, Widget icon}) async {
+    return showAppDialog(
+      context,
+      Material(
+        type: MaterialType.transparency,
+        child: Center(
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                icon ?? const SpinKitDoubleBounce(color: Colors.white),
+                if (textWidget != null)
+                  textWidget
+                else if (text != null)
+                  Text(
+                    text,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
   /// Hide loading dialog
   void hideLoading({bool isClean = false}) {
-    try {
-      if (_dialogContext != null) {
-        if (Navigator.canPop(_dialogContext)) {
-          Navigator.pop(_dialogContext);
-        }
-        _dialogContext = null;
-      }
-    } catch (e) {
-      // Unhandled Exception: Looking up a deactivated widget's ancestor is unsafe.
-    }
-    requestClose = !isClean;
+    hideAppDialog(isClean: isClean);
   }
 }

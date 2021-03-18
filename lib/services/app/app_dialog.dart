@@ -3,23 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
-/// *
+///
 /// Install:
 /// Declare provider to my_app
-/// Provider(create: (_) => AppDialogProvider()),
+/// Provider<AppDialog>(create: (_) => AppDialog()),
 ///
 /// Usage:
-/// context.read<AppDialogProvider>().showAppDialog(context);
-/// or
-/// AppDialogProvider.show(context);
+/// AppDialog.show(context);
+/// AppDialog.hide(context);
 ///
-/// context.read<AppDialogProvider>().hideAppDialog();
-/// or
-/// AppDialogProvider.hide(context);
-///
-class AppDialogProvider {
-  AppDialogProvider();
-
+class AppDialog {
   BuildContext _dialogContext;
   bool requestClose = false;
 
@@ -28,20 +21,41 @@ class AppDialogProvider {
       {String title}) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     return context
-        .read<AppDialogProvider>()
-        .showAppDialog(context, content, title: title);
+        .read<AppDialog>()
+        .showAlertDialog(context, content, title: title);
   }
 
   /// Hide alert dialog shortcut
   static void hide(BuildContext context) {
-    context.read<AppDialogProvider>().hideAppDialog();
+    context.read<AppDialog>().hideAppDialog();
+  }
+
+  // Show Alert Dialog
+  Future<void> showAlertDialog(BuildContext context, String content,
+      {String title}) async {
+    return showAppDialog(
+      context,
+      CupertinoAlertDialog(
+        title: Text(title ?? 'Alert'),
+        content: SingleChildScrollView(
+          child: SelectableText(content ?? ''),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              hideAppDialog();
+            },
+            child: const Text('Ok'),
+          ),
+        ],
+      ),
+    );
   }
 
   /// Show alert dialog
-  Future<void> showAppDialog(BuildContext context, String content,
-      {String title}) async {
+  Future<void> showAppDialog(BuildContext context, Widget body) async {
     hideAppDialog(isClean: true);
-    await showDialog<dynamic>(
+    showDialog<dynamic>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) {
@@ -51,20 +65,7 @@ class AppDialogProvider {
             hideAppDialog();
           }
         });
-        return CupertinoAlertDialog(
-          title: Text(title ?? 'Alert'),
-          content: SingleChildScrollView(
-            child: SelectableText(content ?? ''),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                hideAppDialog();
-              },
-              child: const Text('Ok'),
-            ),
-          ],
-        );
+        return body ?? Container();
       },
     );
   }

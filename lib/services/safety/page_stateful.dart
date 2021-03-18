@@ -27,7 +27,7 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
   Future<int> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
     if (errorType.message != null && errorType.message.isNotEmpty) {
-      await AppDialogProvider.show(context, errorType.message, title: 'Error');
+      await AppDialog.show(context, errorType.message, title: 'Error');
     }
     if (errorType.code == ApiErrorCode.unauthorized) {
       await logout(context);
@@ -41,10 +41,10 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
     await apiCallSafety(
       authProvider.logout,
       onStart: () async {
-        AppLoadingProvider.show(context);
+        AppLoading.show(context);
       },
       onFinally: () async {
-        AppLoadingProvider.hide(context);
+        AppLoading.hide(context);
         context
             .navigator()
             ?.pushNamedAndRemoveUntil(AppRoute.routeRoot, (_) => false);

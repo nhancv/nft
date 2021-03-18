@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -39,7 +41,7 @@ class MockCredential extends Credential {
 class MockAuthApi extends Mock implements ApiUser {}
 
 /// Mock App loading dialog
-class MockAppLoadingProvider extends Mock implements AppLoadingProvider {}
+class MockAppLoading extends Mock implements AppLoading {}
 
 void main() {
   // Mock navigator to verify navigation
@@ -48,7 +50,7 @@ void main() {
   // Mock class refs
   ApiUser userApi;
   AppRoute appRoute;
-  AppLoadingProvider appLoadingProvider;
+  AppLoading appLoading;
 
   // Widget to test
   Widget appWidget;
@@ -74,7 +76,7 @@ void main() {
               update: (_, Credential credential, ApiUser userApi) {
                 return userApi..token = credential.token;
               }),
-          Provider<AppLoadingProvider>(create: (_) => MockAppLoadingProvider()),
+          Provider<AppLoading>(create: (_) => MockAppLoading()),
           ChangeNotifierProvider<LocaleProvider>(
               create: (_) => LocaleProvider()),
           ChangeNotifierProvider<AppThemeProvider>(
@@ -96,7 +98,7 @@ void main() {
             // Save provider ref here
             userApi = Provider.of(context, listen: false);
             appRoute = Provider.of(context, listen: false);
-            appLoadingProvider = Provider.of(context, listen: false);
+            appLoading = Provider.of(context, listen: false);
 
             // Mock navigator Observer
             when(navigatorObserver.didPush(any, any))
@@ -185,11 +187,11 @@ void main() {
     // Verify
     logger.d('Verifying');
     // Verify push to show loading
-    verify(appLoadingProvider.showLoading(any)).called(1);
+    verify(appLoading.showLoading(any)).called(1);
     // Verify that login function called
     verify(userApi.logIn(null, null));
     //  Verify push to hide loading
-    verify(appLoadingProvider.hideLoading());
+    verify(appLoading.hideAppDialog());
 
     // Wait the widget state updated
     await tester.pumpAndSettle();

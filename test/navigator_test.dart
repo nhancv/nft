@@ -6,7 +6,6 @@ import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
 import 'package:nft/pages/login/login_provider.dart';
-import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/auth_provider.dart';
 import 'package:nft/services/app/locale_provider.dart';
 import 'package:nft/services/cache/credential.dart';
@@ -50,7 +49,6 @@ void main() {
               update: (_, Credential credential, ApiUser userApi) {
                 return userApi..token = credential.token;
               }),
-          Provider<AppLoadingProvider>(create: (_) => AppLoadingProvider()),
           ChangeNotifierProvider<LocaleProvider>(
               create: (_) => LocaleProvider()),
           ChangeNotifierProvider<AppThemeProvider>(

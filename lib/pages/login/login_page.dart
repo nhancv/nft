@@ -140,15 +140,15 @@ class _LoginPageState extends PageStateful<LoginPage>
                           final bool success = await apiCallSafety(
                             () => authProvider.login(null, null),
                             onStart: () async {
-                              AppLoadingProvider.show(context);
+                              AppLoading.show(context);
                             },
                             onCompleted: (bool status, bool res) async {
-                              AppLoadingProvider.hide(context);
+                              AppLoading.hide(context);
                             },
                             onError: (dynamic error) async {
                               final ApiErrorType errorType =
                                   parseApiErrorType(error);
-                              AppDialogProvider.show(
+                              AppDialog.show(
                                 context,
                                 errorType.message,
                                 title: 'Error',
@@ -174,15 +174,15 @@ class _LoginPageState extends PageStateful<LoginPage>
                     final LoginResponse loginResponse = await apiCallSafety(
                       authProvider.logInWithError,
                       onStart: () async {
-                        AppLoadingProvider.show(context);
+                        AppLoading.show(context);
                       },
                       onCompleted: (bool status, LoginResponse res) async {
-                        AppLoadingProvider.hide(context);
+                        AppLoading.hide(context);
                       },
                     );
                     logger.d(loginResponse);
                     if (loginResponse.error != null) {
-                      AppDialogProvider.show(
+                      AppDialog.show(
                           context, loginResponse.error.message);
                     }
                   },
@@ -197,10 +197,10 @@ class _LoginPageState extends PageStateful<LoginPage>
                     apiCallSafety(
                       authProvider.logInWithException,
                       onStart: () async {
-                        AppLoadingProvider.show(context);
+                        AppLoading.show(context);
                       },
                       onCompleted: (bool status, void res) async {
-                        AppLoadingProvider.hide(context);
+                        AppLoading.hide(context);
                       },
                     );
                   },
@@ -221,7 +221,7 @@ class _LoginPageState extends PageStateful<LoginPage>
   @override
   Future<int> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
-    await AppDialogProvider.show(context, errorType.message);
+    await AppDialog.show(context, errorType.message);
     return 0;
   }
 }
