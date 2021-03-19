@@ -86,20 +86,50 @@ flutter pub run flutter_launcher_icons:main
 
 https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 
-- Update translated file
-```
-flutter gen-l10n
+### Install `flutter_intl` tool
+- JetBrains: https://plugins.jetbrains.com/plugin/13666-flutter-intl
+- VS code: https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl
 
-* Note: To see a detailed report, use the --untranslated-messages-file 
-        option in the tool to generate a JSON format file containing 
-        all messages that need to be translated.
+1. Add other locales:
+- Run `Tools -> Flutter Intl -> Add Locale`
+
+2. Access to the current locale
+```
+Intl.getCurrentLocale()
+```
+
+3. Change current locale
+```
+S.load(Locale('vi'));
+```
+
+4. Reference the keys in Dart code
+```
+Widget build(BuildContext context) {
+    return Column(children: [
+        Text(
+            S.of(context).pageHomeConfirm,
+        ),
+        Text(
+            S.current.pageHomeConfirm,// If you don't have `context` to pass
+        ),
+    ]);
+}
+```
+
+### Generate intl via cli
+```
+#https://pub.dev/packages/intl_utils
+flutter pub get
+flutter pub run intl_utils:generate
 ```
 
 ## Structure
 ```
 lib/
+  |-generated/                     ---> auto genrated by flutter_intl
   |-l10n/                          ---> place internalization files
-    |-app_*.arb                   ---> define your translation text here
+    |-intl_*.arb                   ---> define your translation text here
   |-models/                        ---> place object models
     |-local/                       ---> place local models
     |-remote/                      ---> place remote models

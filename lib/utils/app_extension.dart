@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:nft/generated/l10n.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:nft/utils/app_theme.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +33,7 @@ extension AppRouteExt on BuildContext {
     return route().navigatorKey.currentState;
   }
 
-  AppLocalizations get strings => AppLocalizations.of(this);
+  S get strings => S.of(this);
 }
 
 /// Extension for screen util

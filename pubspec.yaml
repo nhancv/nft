@@ -27,6 +27,9 @@ dependencies:
   npreferences: ^3.0.0+1
   simple_animations: ^2.4.2
 
+flutter_intl:
+  enabled: true
+
 dev_dependencies:
   build_runner: any
   flutter_driver:
@@ -50,7 +53,6 @@ flutter_icons:
 #  flutter pub run flutter_launcher_icons:main
 
 flutter:
-  generate: true
   uses-material-design: true
   assets:
     - assets/base/icons/

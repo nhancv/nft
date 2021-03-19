@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:nft/generated/l10n.dart';
 import 'package:nft/models/local/token.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/home/home_provider.dart';
@@ -128,8 +127,13 @@ void main() {
             return MaterialApp(
               navigatorKey: appRoute.navigatorKey,
               locale: localeProvider.locale,
-              supportedLocales: AppLocalizations.supportedLocales,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: S.delegate.supportedLocales,
+              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
               home: (appRoute.generateRoute(
                           const RouteSettings(name: AppRoute.routeLogin))
                       as MaterialPageRoute<dynamic>)
