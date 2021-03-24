@@ -43,6 +43,13 @@ class _WMarqueeState extends State<WMarquee> {
   }
 
   @override
+  void didUpdateWidget(covariant WMarquee oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Reset
+    scrollController.jumpTo(0);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: widget.child,
