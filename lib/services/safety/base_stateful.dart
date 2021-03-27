@@ -23,7 +23,9 @@ abstract class BaseStateful<T extends StatefulWidget> extends State<T>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      afterFirstBuild(context);
+      if(mounted) {
+        afterFirstBuild(context);
+      }
     });
   }
 
