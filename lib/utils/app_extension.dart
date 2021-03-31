@@ -96,10 +96,12 @@ extension DateTimeExtension on DateTime {
   DateTime clone() => DateTime(
       year, month, day, hour, minute, second, millisecond, microsecond);
 
-  DateTime atDate([int _year, int _month, int _day]) =>
-      DateTime(_year ?? year, _month ?? month, _day ?? day);
+  DateTime atDate({int y, int m, int d}) =>
+      DateTime(y ?? year, m ?? month, d ?? day);
 
-  DateTime nextYear() => clone().atDate(year + 1);
+  DateTime nextYear() => clone().atDate(y: year + 1);
+
+  DateTime nextMonth() => clone().atDate(m: month + 1);
 
   DateTime onlyDate() =>
       isUtc ? DateTime.utc(year, month, day) : DateTime(year, month, day);
