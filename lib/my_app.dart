@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:nft/generated/l10n.dart';
-import 'package:nft/pages/home/home_provider.dart';
-import 'package:nft/pages/login/login_provider.dart';
 import 'package:nft/services/app/app_dialog.dart';
 import 'package:nft/services/app/app_loading.dart';
 import 'package:nft/services/app/auth_provider.dart';
@@ -42,20 +40,15 @@ Future<void> myMain() async {
             }),
         Provider<AppLoading>(create: (_) => AppLoading()),
         Provider<AppDialog>(create: (_) => AppDialog()),
-        ChangeNotifierProvider<LocaleProvider>(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider<LocaleProvider>(
+            create: (BuildContext context) => LocaleProvider()),
         ChangeNotifierProvider<AppThemeProvider>(
-            create: (_) => AppThemeProvider()),
+            create: (BuildContext context) => AppThemeProvider()),
         ChangeNotifierProvider<AuthProvider>(
             create: (BuildContext context) => AuthProvider(
                   context.read<ApiUser>(),
                   context.read<Credential>(),
                 )),
-        ChangeNotifierProvider<HomeProvider>(
-            create: (BuildContext context) => HomeProvider(
-                  context.read<ApiUser>(),
-                )),
-        ChangeNotifierProvider<LoginProvider>(
-            create: (BuildContext context) => LoginProvider()),
       ],
       child: const MyApp(),
     ),
