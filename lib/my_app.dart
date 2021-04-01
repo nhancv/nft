@@ -31,8 +31,9 @@ Future<void> myMain() async {
         Provider<AppRoute>(create: (_) => AppRoute()),
         Provider<Cache>(create: (_) => CachePreferences()),
         ChangeNotifierProvider<Credential>(
-            create: (BuildContext context) =>
-                Credential(context.read<Cache>())),
+            create: (BuildContext context) => Credential(
+                  Provider.of(context, listen: false),
+                )),
         ProxyProvider<Credential, ApiUser>(
             create: (_) => ApiUser(),
             update: (_, Credential credential, ApiUser userApi) {
@@ -46,8 +47,8 @@ Future<void> myMain() async {
             create: (BuildContext context) => AppThemeProvider()),
         ChangeNotifierProvider<AuthProvider>(
             create: (BuildContext context) => AuthProvider(
-                  context.read<ApiUser>(),
-                  context.read<Credential>(),
+                  Provider.of(context, listen: false),
+                  Provider.of(context, listen: false),
                 )),
       ],
       child: const MyApp(),
