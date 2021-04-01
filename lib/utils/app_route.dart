@@ -4,6 +4,7 @@ import 'package:nft/pages/counter/counter_provider.dart';
 import 'package:nft/pages/home/home_page.dart';
 import 'package:nft/pages/login/login_page.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 class AppRoute {
   factory AppRoute() => _instance;
@@ -40,6 +41,27 @@ class AppRoute {
       builder: (_, __) {
         return child;
       },
+    );
+  }
+
+  /// Create multi local provider
+  // MaterialPageRoute<dynamic>(
+  //             settings: settings,
+  //             builder: (_) => AppRoute.createProviders(
+  //                 <SingleChildWidget>[
+  //                     ChangeNotifierProvider<HomeProvider>(
+  //                         create: (BuildContext context) => HomeProvider()),
+  //                 ],
+  //                 HomePage(
+  //                   status: settings.arguments as bool,
+  //                 )))
+  static Widget createProviders(
+      List<SingleChildWidget> providers,
+      Widget child,
+      ) {
+    return MultiProvider(
+      providers: providers ?? <SingleChildWidget>[],
+      child: child,
     );
   }
 
