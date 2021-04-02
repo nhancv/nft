@@ -17,14 +17,18 @@ class AppLoading extends AppDialog {
   /// Change icon at https://pub.dev/packages/flutter_spinkit
   static void show(BuildContext context,
       {String text, Widget textWidget, Widget icon}) {
-    context
-        .read<AppLoading>()
-        .showLoading(context, text: text, textWidget: textWidget, icon: icon);
+    if (context != null) {
+      context
+          .read<AppLoading>()
+          .showLoading(context, text: text, textWidget: textWidget, icon: icon);
+    }
   }
 
   /// Hide loading dialog shortcut
   static void hide(BuildContext context) {
-    context.read<AppLoading>().hideAppDialog();
+    if (context != null) {
+      context.read<AppLoading>().hideAppDialog();
+    }
   }
 
   /// Show loading dialog
