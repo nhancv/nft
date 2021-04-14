@@ -151,8 +151,9 @@ extension DateTimeStringExtendsion on String {
   /// Check Null or Empty
   bool get isNullOrEmpty => isNull || isEmpty;
 
-  /// Convert from UTC to local DateTime by pattern
-  DateTime toDateTime({String pattern = 'yyyy-MM-dd hh:mm:ss'}) {
+  /// Convert from 24h UTC to local DateTime by pattern
+  /// https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+  DateTime toDateTime({String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
     return isNullOrEmpty
         ? null
         : DateFormat(pattern).parse(this, true).toLocal();
