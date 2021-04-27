@@ -73,7 +73,10 @@ class _LoginPageState extends PageStateful<LoginPage>
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                SafeArea(child: WEnv(),),
+                SafeArea(
+                  child: WEnv(),
+                ),
+
                 /// Logo
                 Padding(
                   padding: EdgeInsets.only(top: 100.H, bottom: 50.H),
@@ -182,8 +185,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                     );
                     logger.d(loginResponse);
                     if (loginResponse.error != null) {
-                      AppDialog.show(
-                          context, loginResponse.error.message);
+                      AppDialog.show(context, loginResponse.error.message);
                     }
                   },
                   child: const Text('call api with error'),
