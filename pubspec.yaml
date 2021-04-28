@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.0
   meta: ^1.1.8
-  intl: ^0.16.1
+  intl: ^0.17.0
   # 4.0.0 + is not compatible
   flutter_screenutil: ^3.2.0
   flutter_spinkit: ^4.1.2+1
