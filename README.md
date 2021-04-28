@@ -10,10 +10,6 @@ Tools • Dart 2.12.0
 
 ## Initial setup
 
-### Change Flutter app package
-
-- Search and Replace All `nft` to new package name
-
 ### Change App display name
 
 - Search and Replace All `NFT App` to new App display name
@@ -22,6 +18,11 @@ Tools • Dart 2.12.0
 
 - Search and Replace All `com.nhancv.nft` to new App bundle id
 - Update directory folder path name of Android (`android/app/src/main/kotlin/`) same with new App bundle id
+
+### Change Flutter app package
+
+- Search and Replace All `nft` to new package name
+
 
 ## Update app icon
 
