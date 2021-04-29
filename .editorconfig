@@ -4,7 +4,6 @@ root = true
 max_line_length = 120
 
 [**/**.{dart, yaml}]
-end_of_line = crlf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
