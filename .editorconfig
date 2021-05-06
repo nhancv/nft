@@ -9,3 +9,7 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 indent_style = space
 indent_size = 2
+
+# Custom dart format line length to 120
+# VSCode -> File -> Preferences -> Settings -> Dart&Flutter: Dart: Line Length
+# Android Studio -> Preferences -> Editor -> Code Style -> Dart -> Line length: int
