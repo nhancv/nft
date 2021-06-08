@@ -2,10 +2,10 @@
 Flutter Template
 
 ```
-Flutter 2.0.0 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision 60bd88df91 (22 hours ago) • 2021-03-03 09:13:17 -0800
-Engine • revision 40441def69
-Tools • Dart 2.12.0
+Flutter 2.3.0-16.0.pre • channel dev • https://github.com/flutter/flutter.git
+Framework • revision fa5883b78e (2 weeks ago) • 2021-05-21 13:04:03 -0700
+Engine • revision 2f067fc4c5
+Tools • Dart 2.14.0 (build 2.14.0-136.0.dev)
 ```
 
 ## Initial setup
@@ -242,6 +242,88 @@ open coverage/html/index.html
 - Integration test: https://flutter.dev/docs/cookbook/testing/integration/introduction
 ```
 flutter drive --target=test_driver/app.dart
+```
+
+## Optimize First Run performance
+
+https://flutter.dev/docs/perf/rendering/shader
+
+- On Android, “first run” means that the user might see jank the first time opening the app after a fresh installation. Subsequent runs should be fine.
+- On iOS, “first run” means that the user might see jank when an animation first occurs every time the user opens the app from scratch.
+
+How to use SkSL warmup?
+
+```
+1. Run the app with --cache-sksl turned on to capture shaders in SkSL
+flutter run --profile --cache-sksl --purge-persistent-cache
+
+2. Play with the app to trigger as many animations as needed; particularly those with compilation jank.
+
+3. Press M at the command line of flutter run to write the captured SkSL shaders into a file named something like flutter_01.sksl.json. For best results, capture SkSL shaders on actual Android and iOS devices separately.
+
+4. Build the app with SkSL warm-up using the following, as appropriate:
+Android:
+flutter build apk --bundle-sksl-path flutter_01.sksl.json
+or
+flutter build appbundle --bundle-sksl-path flutter_01.sksl.json
+
+iOS:
+flutter build ios --bundle-sksl-path flutter_01.sksl.json
+```
+
+## Integrate facebook/google/firebase key hash
+
+### Gen new key store
+```
+keytool -genkey -v -keystore keystore-release.jks -alias KEY_ALIAS -keyalg RSA -keysize 2048 -validity 1000000 -storepass KEY_STORE_PASS -keypass KEY_PASS
+```
+
+### Get facebook key hashes
+```
+keytool -exportcert -alias androiddebugkey -keystore keystore-debug.jks | openssl sha1 -binary | openssl base64
+
+=> enter storePassword
+
+Ex: smKEjJWY1ZgwHQvuE3qGjwMC6jk=
+```
+
+### Get google/firebase key hash
+```
+keytool -exportcert -alias androiddebugkey -keystore keystore-debug.jks -list -v
+
+=> enter storePassword
+
+Alias name: androiddebugkey
+Creation date: May 5, 2016
+Entry type: PrivateKeyEntry
+Certificate chain length: 1
+Certificate[1]:
+Owner: C=US, O=Android, CN=Android Debug
+Issuer: C=US, O=Android, CN=Android Debug
+Serial number: 1
+Valid from: Thu May 05 15:32:50 ICT 2016 until: Sat Apr 28 15:32:50 ICT 2046
+Certificate fingerprints:
+     MD5:  8E:B3:66:00:35:D9:88:80:D5:DC:84:F9:2A:AE:0B:98
+     SHA1: B2:62:84:8C:95:98:ED:98:30:1D:0B:EE:2F:CA:86:8F:03:02:E9:D9
+     SHA256: 45:ED:59:3D:6F:41:F8:5F:04:45:FC:7D:AD:77:1A:9B:B4:33:43:27:F4:30:92:10:8E:07:D9:E9:AA:6F:8B:9C
+     Signature algorithm name: SHA1withRSA
+     Version: 1
+```
+
+### Deal with signed apk on google play store. 
+```
+It enables if Google Play App Signing, key hash from local release keystore file just use for upload to store, new key hash will be generated after upload and it’s a final key hash for distribution. 
+
+Go to Play store -> Release management -> App signing -> Get SHA-1 certificate fingerprint from App signing certificate block as show in this image.
+
+(Select App -> Release -> Setup -> App integrity for new play console)
+```
+#### Convert SHA-1 to facebook key hash
+```
+echo <SHA-1 HEX> | xxd -r -p | openssl base64
+
+ex: 
+echo B2:62:84:8C:95:98:ED:98:30:1D:0B:EE:2F:CA:86:8F:03:02:E9:D9 | xxd -r -p | openssl base64
 ```
 
 ## Release and publish to store

@@ -1,3 +1,7 @@
+## [2.0.0+202106001] - June 8, 2021.
+
+* Upgrade all lib version
+
 ## [1.0.42+202103001] - March 4, 2021.
 
 * Flutter 2

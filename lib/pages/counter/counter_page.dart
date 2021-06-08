@@ -26,9 +26,7 @@ class _CounterPageState extends BaseStateful<CounterPage> {
           AppBar(
             title: const Text('Counter Page'),
           ),
-          Padding(
-              padding: EdgeInsets.only(top: 20.H),
-              child: Text(widget.argument ?? '')),
+          Padding(padding: EdgeInsets.only(top: 20.H), child: Text(widget.argument ?? '')),
           Expanded(
             child: Scaffold(
               backgroundColor: Colors.transparent,

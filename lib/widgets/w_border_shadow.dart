@@ -75,13 +75,7 @@ class WBorderShadow extends BaseStateless {
 // ignore: must_be_immutable
 class _WSingleBorderShadow extends BaseStateless {
   _WSingleBorderShadow(
-      {this.child,
-      this.shadowColor,
-      this.borderRadius,
-      this.borderColor,
-      this.spreadRadius,
-      this.blurRadius,
-      Key key})
+      {this.child, this.shadowColor, this.borderRadius, this.borderColor, this.spreadRadius, this.blurRadius, Key key})
       : super(key: key);
 
   final Widget child;

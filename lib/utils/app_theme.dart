@@ -33,7 +33,7 @@ class AppTheme {
   ThemeData buildThemeData() {
     return ThemeData(
       primaryColor: primaryColor,
-      accentColor: accentColor,
+      secondaryHeaderColor: accentColor,
       fontFamily: assets.fontRoboto,
       pageTransitionsTheme: _buildPageTransitionsTheme(),
       buttonTheme: _buildButtonTheme(),

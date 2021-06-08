@@ -19,10 +19,8 @@ class WButtonRaisedFlat extends StatelessWidget {
       onPressed: onPressed,
       child: child,
       style: ButtonStyle(
-        backgroundColor:
-            MaterialStateProperty.all<Color>(color ?? Colors.transparent),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+        backgroundColor: MaterialStateProperty.all<Color>(color ?? Colors.transparent),
+        overlayColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
           final Color sColor = splashColor ?? Colors.grey.withAlpha(150);
           if (states.contains(MaterialState.hovered)) {
             return sColor;

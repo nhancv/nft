@@ -15,8 +15,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends PageStateful<HomePage>
-    with WidgetsBindingObserver, RouteAware {
+class _HomePageState extends PageStateful<HomePage> with WidgetsBindingObserver, RouteAware {
   HomeProvider homeProvider;
 
   @override
@@ -103,8 +102,7 @@ class _HomePageState extends PageStateful<HomePage>
 
               /// Example to use selector instead consumer to optimize render performance
               Selector<HomeProvider, String>(
-                selector: (_, HomeProvider provider) =>
-                    provider.token?.toJson()?.toString() ?? '',
+                selector: (_, HomeProvider provider) => provider.token?.toJson()?.toString() ?? '',
                 builder: (_, String tokenInfo, __) {
                   return Text(
                     tokenInfo,
@@ -119,8 +117,7 @@ class _HomePageState extends PageStateful<HomePage>
               ElevatedButton(
                 key: const Key(AppRoute.routeCounter),
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoute.routeCounter,
-                      arguments: 'From Home ${DateTime.now()}');
+                  Navigator.pushNamed(context, AppRoute.routeCounter, arguments: 'From Home ${DateTime.now()}');
                 },
                 child: const Text('Counter Page'),
               ),

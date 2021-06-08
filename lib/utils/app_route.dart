@@ -68,8 +68,7 @@ class AppRoute {
   }
 
   /// App route observer
-  final RouteObserver<Route<dynamic>> routeObserver =
-      RouteObserver<Route<dynamic>>();
+  final RouteObserver<Route<dynamic>> routeObserver = RouteObserver<Route<dynamic>>();
 
   /// App global navigator key
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -92,8 +91,7 @@ class AppRoute {
         return MaterialPageRoute<dynamic>(
             settings: settings,
             builder: (_) => AppRoute.createProvider(
-                  (BuildContext context) =>
-                      HomeProvider(Provider.of(context, listen: false)),
+                  (BuildContext context) => HomeProvider(Provider.of(context, listen: false)),
                   const HomePage(),
                 ));
 

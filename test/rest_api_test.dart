@@ -110,6 +110,7 @@ void main() {
             when(userApi.logIn(null, null)).thenAnswer((_) {
               return Future<Response<Map<String, dynamic>>>.value(
                 Response<Map<String, dynamic>>(
+                  requestOptions: null,
                   data: <String, dynamic>{
                     'data': <String, String>{
                       'access_token': 'nhancvdeptrai',

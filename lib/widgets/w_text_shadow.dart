@@ -5,8 +5,7 @@ import 'package:nft/services/safety/base_stateless.dart';
 
 // ignore: must_be_immutable
 class WTextShadow extends BaseStateless {
-  WTextShadow(this.text, {this.style, this.textAlign, Key key})
-      : super(key: key);
+  WTextShadow(this.text, {this.style, this.textAlign, Key key}) : super(key: key);
 
   final String text;
   final TextStyle style;

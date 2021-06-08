@@ -64,14 +64,11 @@ class _WMarqueeState extends State<WMarquee> {
     while (scrollController.hasClients) {
       await Future<void>.delayed(widget.pauseDuration);
       if (scrollController.hasClients)
-        await scrollController.animateTo(
-            scrollController.position.maxScrollExtent,
-            duration: widget.animationDuration,
-            curve: Curves.ease);
+        await scrollController.animateTo(scrollController.position.maxScrollExtent,
+            duration: widget.animationDuration, curve: Curves.ease);
       await Future<void>.delayed(widget.pauseDuration);
       if (scrollController.hasClients)
-        await scrollController.animateTo(0.0,
-            duration: widget.backDuration, curve: Curves.easeOut);
+        await scrollController.animateTo(0.0, duration: widget.backDuration, curve: Curves.easeOut);
     }
   }
 }

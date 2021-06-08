@@ -11,14 +11,12 @@ import 'package:nft/widgets/w_divider_line.dart';
 /// Use: final int index = await WPickerValue.showPicker(context, initialIndex: 0, initValues: <String>[]);
 
 class WPickerValue extends StatefulWidget {
-  const WPickerValue({Key key, this.initialIndex, this.initValues})
-      : super(key: key);
+  const WPickerValue({Key key, this.initialIndex, this.initValues}) : super(key: key);
 
   final int initialIndex;
   final List<String> initValues;
 
-  static Future<int> showPicker(BuildContext context,
-      {int initialIndex = 0, List<String> initValues}) {
+  static Future<int> showPicker(BuildContext context, {int initialIndex = 0, List<String> initValues}) {
     return showCupertinoModalPopup<int>(
         context: context,
         builder: (BuildContext context) {
@@ -55,8 +53,7 @@ class _WPickerValueState extends BaseStateful<WPickerValue> {
             )
             .toList();
     const double itemExtent = 50;
-    final double height =
-        children.isNotEmpty ? (children.length * itemExtent) : itemExtent;
+    final double height = children.isNotEmpty ? (children.length * itemExtent) : itemExtent;
 
     return WBottomActionSheet(
       body: Container(
@@ -85,8 +82,7 @@ class _WPickerValueState extends BaseStateful<WPickerValue> {
                 },
                 itemExtent: itemExtent,
                 children: children,
-                scrollController: FixedExtentScrollController(
-                    initialItem: widget.initialIndex ?? 0),
+                scrollController: FixedExtentScrollController(initialItem: widget.initialIndex ?? 0),
               ),
             ),
             const WDividerLine(),

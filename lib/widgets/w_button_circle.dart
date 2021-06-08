@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WButtonCircle extends StatelessWidget {
-  const WButtonCircle(
-      {Key key, this.width, this.onPressed, this.child, this.color})
-      : super(key: key);
+  const WButtonCircle({Key key, this.width, this.onPressed, this.child, this.color}) : super(key: key);
 
   final double width;
   final Function() onPressed;

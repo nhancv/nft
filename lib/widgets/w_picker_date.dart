@@ -15,8 +15,7 @@ class WPickerDate extends StatefulWidget {
 
   final DateTime initDateTime;
 
-  static Future<DateTime> showPicker(BuildContext context,
-      {DateTime initDateTime}) {
+  static Future<DateTime> showPicker(BuildContext context, {DateTime initDateTime}) {
     return showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {

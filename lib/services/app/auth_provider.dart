@@ -25,20 +25,17 @@ class AuthProvider extends ChangeNotifierSafety {
     final Token token = loginResponse.data;
     if (token != null) {
       /// Save credential
-      final bool saveRes =
-          await _credential.storeCredential(token, cache: true);
+      final bool saveRes = await _credential.storeCredential(token, cache: true);
       return saveRes;
     } else {
       throw DioError(
-          error: loginResponse.error?.message ?? 'Login error',
-          type: DioErrorType.RESPONSE);
+          requestOptions: null, error: loginResponse.error?.message ?? 'Login error', type: DioErrorType.response);
     }
   }
 
   /// Call api login with error
   Future<LoginResponse> logInWithError() async {
-    final Response<Map<String, dynamic>> result =
-        await _api.logInWithError().timeout(const Duration(seconds: 30));
+    final Response<Map<String, dynamic>> result = await _api.logInWithError().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     return loginResponse;
   }
@@ -46,7 +43,7 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call api login with exception
   Future<void> logInWithException() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    throw DioError(error: 'Login with exception', type: DioErrorType.RESPONSE);
+    throw DioError(requestOptions: null, error: 'Login with exception', type: DioErrorType.response);
   }
 
   /// Call logout

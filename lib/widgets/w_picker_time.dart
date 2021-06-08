@@ -15,8 +15,7 @@ class WPickerTime extends StatefulWidget {
 
   final Duration initDuration;
 
-  static Future<Duration> showPicker(BuildContext context,
-      {Duration initDuration}) {
+  static Future<Duration> showPicker(BuildContext context, {Duration initDuration}) {
     return showCupertinoModalPopup<Duration>(
         context: context,
         builder: (BuildContext context) {
@@ -70,9 +69,7 @@ class _WPickerTimeState extends BaseStateful<WPickerTime> {
                 alignment: Alignment.center,
                 child: Text(
                   'Confirm',
-                  style: normalTextStyle(17.SP,
-                      color: const Color(0xFF0080FA)
-                          .withOpacity(isTimeValid ? 1 : 0.4)),
+                  style: normalTextStyle(17.SP, color: const Color(0xFF0080FA).withOpacity(isTimeValid ? 1 : 0.4)),
                 ),
               ),
               onPressed: isTimeValid

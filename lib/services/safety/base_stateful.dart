@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nft/services/app/dynamic_size.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_theme.dart';
 
 /// Remember call super.build(context) in widget
-abstract class BaseStateful<T extends StatefulWidget> extends State<T>
-    with DynamicSize {
+abstract class BaseStateful<T extends StatefulWidget> extends State<T> {
   AppTheme appTheme;
 
   /// Context valid to create providers
@@ -40,7 +38,6 @@ abstract class BaseStateful<T extends StatefulWidget> extends State<T>
   @override
   Widget build(BuildContext context) {
     initDependencies(context);
-    initDynamicSize(context);
     return null;
   }
 }

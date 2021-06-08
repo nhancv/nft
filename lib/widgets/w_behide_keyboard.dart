@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nft/utils/app_route.dart';
 
 class WBehindKeyboard extends StatefulWidget {
-  const WBehindKeyboard(
-      {Key key,
-      @required this.child,
-      this.reversed = false,
-      this.keepView = true})
-      : super(key: key);
+  const WBehindKeyboard({Key key, @required this.child, this.reversed = false, this.keepView = true}) : super(key: key);
 
   final Widget child;
 
@@ -29,17 +24,13 @@ class _WBehindKeyboardState extends State<WBehindKeyboard> {
 
   @override
   Widget build(BuildContext context) {
-    _keyboardVisible =
-        MediaQuery.of(AppRoute.I.appContext).viewInsets.bottom != 0;
-    final bool visible =
-        !(widget.reversed ? !_keyboardVisible : _keyboardVisible);
+    _keyboardVisible = MediaQuery.of(AppRoute.I.appContext).viewInsets.bottom != 0;
+    final bool visible = !(widget.reversed ? !_keyboardVisible : _keyboardVisible);
     return widget.keepView
         ? Opacity(
             opacity: visible ? 1 : 0,
             child: IgnorePointer(ignoring: !visible, child: widget.child),
           )
-        : Visibility(
-            child: IgnorePointer(ignoring: !visible, child: widget.child),
-            visible: visible);
+        : Visibility(child: IgnorePointer(ignoring: !visible, child: widget.child), visible: visible);
   }
 }

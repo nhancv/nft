@@ -10,8 +10,6 @@ class WEnv extends BaseStateless {
   Widget build(BuildContext context) {
     super.build(context);
     final Env env = AppConfig.I.env;
-    return env.envType != EnvType.prod
-        ? WTextRounded(text: describeEnum(env.envType), color: Colors.red)
-        : Container();
+    return env.envType != EnvType.prod ? WTextRounded(text: describeEnum(env.envType), color: Colors.red) : Container();
   }
 }

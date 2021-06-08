@@ -23,8 +23,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends PageStateful<LoginPage>
-    with WidgetsBindingObserver, ApiError {
+class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserver, ApiError {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
@@ -80,8 +79,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                 /// Logo
                 Padding(
                   padding: EdgeInsets.only(top: 100.H, bottom: 50.H),
-                  child: Image.asset(appTheme.assets.icAppIcon,
-                      width: 150, height: 150),
+                  child: Image.asset(appTheme.assets.icAppIcon, width: 150, height: 150),
                 ),
 
                 /// Login form
@@ -95,16 +93,14 @@ class _LoginPageState extends PageStateful<LoginPage>
                       onChanged: loginProvider.onEmailChangeToValidateForm,
                       focusNode: _emailFocusNode,
                       textInputAction: TextInputAction.next,
-                      errorText:
-                          !emailValid ? context.strings.msgEmailInValid : null,
+                      errorText: !emailValid ? context.strings.msgEmailInValid : null,
                       suffixIcon: !emailValid
                           ? const Icon(
                               Icons.error,
                             )
                           : null,
                       onSubmitted: (String term) {
-                        AppHelper.nextFocus(
-                            context, _emailFocusNode, _passwordFocusNode);
+                        AppHelper.nextFocus(context, _emailFocusNode, _passwordFocusNode);
                       },
                     );
                   },
@@ -117,12 +113,9 @@ class _LoginPageState extends PageStateful<LoginPage>
                       key: const Key('passwordInputKey'),
                       labelText: context.strings.labelPassword,
                       suffixIcon: IconButton(
-                        icon: obscureText
-                            ? const Icon(Icons.visibility_off)
-                            : const Icon(Icons.visibility),
+                        icon: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
                         onPressed: () {
-                          loginProvider.obscureText =
-                              !loginProvider.obscureText;
+                          loginProvider.obscureText = !loginProvider.obscureText;
                         },
                       ),
                       obscureText: obscureText,
@@ -137,8 +130,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                 /// Example call api with success response
                 ElevatedButton(
                   key: const Key('callApiBtnKey'),
-                  onPressed: context.select(
-                          (LoginProvider provider) => provider.formValid)
+                  onPressed: context.select((LoginProvider provider) => provider.formValid)
                       ? () async {
                           final bool success = await apiCallSafety(
                             () => authProvider.login(null, null),
@@ -149,8 +141,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                               AppLoading.hide(context);
                             },
                             onError: (dynamic error) async {
-                              final ApiErrorType errorType =
-                                  parseApiErrorType(error);
+                              final ApiErrorType errorType = parseApiErrorType(error);
                               AppDialog.show(
                                 context,
                                 errorType.message,
@@ -160,9 +151,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                             skipOnError: true,
                           );
                           if (success == true) {
-                            context
-                                .navigator()
-                                ?.pushReplacementNamed(AppRoute.routeHome);
+                            context.navigator()?.pushReplacementNamed(AppRoute.routeHome);
                           }
                         }
                       : null,

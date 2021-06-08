@@ -16,8 +16,7 @@ Error
 import 'dart:core';
 
 class BaseResponse<T> {
-  BaseResponse(Map<String, dynamic> fullJson,
-      {String dataKey = 'data', String errorKey = 'error'}) {
+  BaseResponse(Map<String, dynamic> fullJson, {String dataKey = 'data', String errorKey = 'error'}) {
     parsing(fullJson, dataKey: dataKey, errorKey: errorKey);
   }
 
@@ -36,16 +35,12 @@ class BaseResponse<T> {
 
   /// Parsing data to object
   /// dataKey = null mean parse from root
-  dynamic parsing(Map<String, dynamic> fullJson,
-      {String dataKey = 'data', String errorKey = 'error'}) {
+  dynamic parsing(Map<String, dynamic> fullJson, {String dataKey = 'data', String errorKey = 'error'}) {
     if (fullJson != null) {
       final dynamic dataJson = dataKey != null ? fullJson[dataKey] : fullJson;
-      final dynamic errorJson =
-          errorKey != null ? fullJson[errorKey] : fullJson;
+      final dynamic errorJson = errorKey != null ? fullJson[errorKey] : fullJson;
       data = dataJson != null ? jsonToData(dataJson) : null;
-      error = errorJson != null
-          ? BaseError.fromJson(errorJson as Map<String, dynamic>)
-          : null;
+      error = errorJson != null ? BaseError.fromJson(errorJson as Map<String, dynamic>) : null;
     }
   }
 

@@ -17,8 +17,7 @@ class AppHelper {
   //                ),
   //              );
   //       });
-  static Future<T> showBottomSheet<T>(
-      BuildContext context, Widget Function(BuildContext context) child,
+  static Future<T> showBottomSheet<T>(BuildContext context, Widget Function(BuildContext context) child,
       {double heightFactor, bool interactive = true}) {
     return showModalBottomSheet<T>(
       context: context,
@@ -48,8 +47,7 @@ class AppHelper {
   //     });
   static Future<T> showScrollableBottomSheet<T>(
     BuildContext context,
-    Widget Function(BuildContext context, ScrollController scrollController)
-        child,
+    Widget Function(BuildContext context, ScrollController scrollController) child,
   ) {
     return showModalBottomSheet<T>(
       context: context,
@@ -93,9 +91,7 @@ class AppHelper {
   /// Show snack bar
   static void showFlushBar(BuildContext context, String message) {
     Flushbar<void>(
-            message: message,
-            duration: const Duration(milliseconds: 2000),
-            flushbarStyle: FlushbarStyle.GROUNDED)
+            message: message, duration: const Duration(milliseconds: 2000), flushbarStyle: FlushbarStyle.GROUNDED)
         .show(context);
   }
 
@@ -149,8 +145,7 @@ class AppHelper {
   }
 
   /// Change next focus
-  static void nextFocus(
-      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+  static void nextFocus(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }

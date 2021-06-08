@@ -55,8 +55,7 @@ class _WDialogAlertState extends BaseStateful<WDialogAlert> {
       child: CupertinoAlertDialog(
         title: Text(
           widget.title ?? '',
-          style: widget.titleStyle ??
-              semiBoldTextStyle(17.SP, color: const Color(0xFF1C202E)),
+          style: widget.titleStyle ?? semiBoldTextStyle(17.SP, color: const Color(0xFF1C202E)),
         ),
         content: SingleChildScrollView(
           child: Container(
@@ -65,8 +64,7 @@ class _WDialogAlertState extends BaseStateful<WDialogAlert> {
                 SizedBox(height: 5.H),
                 Text(
                   widget.content ?? '',
-                  style: widget.contentStyle ??
-                      normalTextStyle(13.SP, color: const Color(0xFF1C202E)),
+                  style: widget.contentStyle ?? normalTextStyle(13.SP, color: const Color(0xFF1C202E)),
                 ),
               ],
             ),

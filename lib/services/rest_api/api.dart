@@ -8,8 +8,7 @@ import 'package:nft/utils/app_config.dart';
 class Api {
   Api() {
     if (!kReleaseMode) {
-      dio.interceptors
-          .add(LogInterceptor(responseBody: true, requestBody: true));
+      dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
     }
   }
 
@@ -21,11 +20,8 @@ class Api {
   final Dio dio = Dio();
 
   /// Get request header options
-  Future<Options> getOptions(
-      {String contentType = Headers.jsonContentType}) async {
-    final Map<String, String> header = <String, String>{
-      Headers.acceptHeader: 'application/json'
-    };
+  Future<Options> getOptions({String contentType = Headers.jsonContentType}) async {
+    final Map<String, String> header = <String, String>{Headers.acceptHeader: 'application/json'};
     return Options(headers: header, contentType: contentType);
   }
 
@@ -34,8 +30,7 @@ class Api {
     final Options options = await getOptions(contentType: contentType);
 
     if (token != null) {
-      options.headers.addAll(
-          <String, String>{'Authorization': 'Bearer ${token.accessToken}'});
+      options.headers.addAll(<String, String>{'Authorization': 'Bearer ${token.accessToken}'});
     }
 
     return options;
@@ -46,7 +41,7 @@ class Api {
     try {
       return await dioApi();
     } catch (error) {
-      if (error is DioError && error.type == DioErrorType.RESPONSE) {
+      if (error is DioError && error.type == DioErrorType.response) {
         final Response<dynamic> response = error.response;
 
         try {
@@ -56,7 +51,7 @@ class Api {
             final Response<T> res = Response<T>(
               data: response.data as T,
               headers: response.headers,
-              request: response.request,
+              requestOptions: response.requestOptions,
               isRedirect: response.isRedirect,
               statusCode: response.statusCode,
               statusMessage: response.statusMessage,
@@ -72,10 +67,7 @@ class Api {
         final String errorMessage =
             'Code ${response.statusCode} - ${response.statusMessage} ${response.data != null ? '\n' : ''} ${response.data}';
         throw DioError(
-            request: error.request,
-            response: error.response,
-            type: error.type,
-            error: errorMessage);
+            requestOptions: error.requestOptions, response: error.response, type: error.type, error: errorMessage);
       }
       rethrow;
     }

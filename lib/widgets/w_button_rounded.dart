@@ -28,10 +28,8 @@ class WButtonRounded extends StatelessWidget {
       onPressed: onPressed,
       child: child,
       style: ButtonStyle(
-        backgroundColor:
-            MaterialStateProperty.all<Color>(background ?? Colors.white),
-        overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+        backgroundColor: MaterialStateProperty.all<Color>(background ?? Colors.white),
+        overlayColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
           final Color sColor = splashColor ?? Colors.grey.withAlpha(150);
           if (states.contains(MaterialState.hovered)) {
             return sColor;
@@ -44,9 +42,7 @@ class WButtonRounded extends StatelessWidget {
         // elevation: MaterialStateProperty.all(0),
         padding: MaterialStateProperty.all(padding ?? EdgeInsets.zero),
         shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          side: BorderSide(
-              color: borderColor ?? Colors.transparent,
-              width: borderWidth ?? 1.0),
+          side: BorderSide(color: borderColor ?? Colors.transparent, width: borderWidth ?? 1.0),
           borderRadius: BorderRadius.circular(radius ?? 50),
         )),
       ),

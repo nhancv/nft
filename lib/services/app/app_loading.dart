@@ -15,12 +15,9 @@ import 'package:provider/provider.dart';
 class AppLoading extends AppDialog {
   /// Show loading dialog shortcut
   /// Change icon at https://pub.dev/packages/flutter_spinkit
-  static void show(BuildContext context,
-      {String text, Widget textWidget, Widget icon}) {
+  static void show(BuildContext context, {String text, Widget textWidget, Widget icon}) {
     if (context != null) {
-      context
-          .read<AppLoading>()
-          .showLoading(context, text: text, textWidget: textWidget, icon: icon);
+      context.read<AppLoading>().showLoading(context, text: text, textWidget: textWidget, icon: icon);
     }
   }
 
@@ -33,8 +30,7 @@ class AppLoading extends AppDialog {
 
   /// Show loading dialog
   /// Change icon at https://pub.dev/packages/flutter_spinkit
-  Future<void> showLoading(BuildContext context,
-      {String text, Widget textWidget, Widget icon}) async {
+  Future<void> showLoading(BuildContext context, {String text, Widget textWidget, Widget icon}) async {
     return showAppDialog(
       context,
       Material(

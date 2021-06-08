@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/screenutil.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Usage:
 /// class _MyAppState extends State<MyApp> with DynamicSize {
@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/screenutil.dart';
 /// }
 mixin DynamicSize {
   /// Init dynamic size
+  /// https://pub.dev/packages/flutter_screenutil
   ///    ScreenUtil().pixelRatio       //Device pixel density
   ///    ScreenUtil().screenWidth   (sdk>=2.6 : 1.sw)    //Device width
   ///    ScreenUtil().screenHeight  (sdk>=2.6 : 1.sh)    //Device height
@@ -36,6 +37,9 @@ mixin DynamicSize {
   ///    iPhone 12, 12 Pro                 => 6.1": 390 x 844 (points)
   ///    iPhone 12 Pro Max                 => 6.7": 428 x 926 (points)
   void initDynamicSize(BuildContext context) {
-    ScreenUtil.init(context, designSize: const Size(375, 812));
+    ScreenUtil.init(
+        BoxConstraints(maxWidth: MediaQuery.of(context).size.width, maxHeight: MediaQuery.of(context).size.height),
+        designSize: const Size(375, 812),
+        orientation: Orientation.portrait);
   }
 }
