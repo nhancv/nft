@@ -22,7 +22,8 @@ Future<void> myMain() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Force portrait mode
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp]);
+  await SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[DeviceOrientation.portraitUp]);
 
   /// Run Application
   runApp(
@@ -34,15 +35,17 @@ Future<void> myMain() async {
             create: (BuildContext context) => Credential(
                   Provider.of(context, listen: false),
                 )),
-        ProxyProvider<Credential, ApiUser>(
+        ProxyProvider<Credential, ApiUser?>(
             create: (_) => ApiUser(),
-            update: (_, Credential credential, ApiUser userApi) {
-              return userApi..token = credential.token;
+            update: (_, Credential credential, ApiUser? userApi) {
+              return userApi!..token = credential.token;
             }),
         Provider<AppLoading>(create: (_) => AppLoading()),
         Provider<AppDialog>(create: (_) => AppDialog()),
-        ChangeNotifierProvider<LocaleProvider>(create: (BuildContext context) => LocaleProvider()),
-        ChangeNotifierProvider<AppThemeProvider>(create: (BuildContext context) => AppThemeProvider()),
+        ChangeNotifierProvider<LocaleProvider>(
+            create: (BuildContext context) => LocaleProvider()),
+        ChangeNotifierProvider<AppThemeProvider>(
+            create: (BuildContext context) => AppThemeProvider()),
         ChangeNotifierProvider<AuthProvider>(
             create: (BuildContext context) => AuthProvider(
                   Provider.of(context, listen: false),
@@ -55,7 +58,7 @@ Future<void> myMain() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -67,10 +70,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     /// Init page
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final bool hasCredential = await context.read<Credential>().loadCredential();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      final bool hasCredential =
+          await context.read<Credential>().loadCredential();
       if (hasCredential) {
-        context.navigator().pushReplacementNamed(AppRoute.routeHome);
+        context.navigator()!.pushReplacementNamed(AppRoute.routeHome);
       }
     });
   }

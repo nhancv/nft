@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class WDividerLine extends StatelessWidget {
-  const WDividerLine({Key key, this.width, this.height, this.color}) : super(key: key);
+  const WDividerLine({Key? key, this.width, this.height, this.color}) : super(key: key);
 
-  final double width;
-  final double height;
-  final Color color;
+  final double? width;
+  final double? height;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

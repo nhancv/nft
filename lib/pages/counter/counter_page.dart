@@ -8,9 +8,9 @@ import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatefulWidget {
-  const CounterPage({Key key, this.argument}) : super(key: key);
+  const CounterPage({Key? key, this.argument}) : super(key: key);
 
-  final String argument;
+  final String? argument;
 
   @override
   _CounterPageState createState() => _CounterPageState();

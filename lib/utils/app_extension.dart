@@ -29,7 +29,7 @@ extension AppRouteExt on BuildContext {
     return Provider.of(this, listen: false);
   }
 
-  NavigatorState navigator() {
+  NavigatorState? navigator() {
     return route().navigatorKey.currentState;
   }
 
@@ -79,7 +79,7 @@ extension DateTimeExtension on DateTime {
 
   DateTime clone() => DateTime(year, month, day, hour, minute, second, millisecond, microsecond);
 
-  DateTime atDate({int y, int m, int d}) => DateTime(y ?? year, m ?? month, d ?? day);
+  DateTime atDate({int? y, int? m, int? d}) => DateTime(y ?? year, m ?? month, d ?? day);
 
   DateTime nextYear() => clone().atDate(y: year + 1);
 
@@ -89,9 +89,9 @@ extension DateTimeExtension on DateTime {
 
   DateTime onlyMonth() => isUtc ? DateTime.utc(year, month) : DateTime(year, month);
 
-  DateTime onlyTime([int _hour, int _minute]) => DateTime.utc(1970, 1, 1, _hour ?? hour, _minute ?? minute, 0, 0, 0);
+  DateTime onlyTime([int? _hour, int? _minute]) => DateTime.utc(1970, 1, 1, _hour ?? hour, _minute ?? minute, 0, 0, 0);
 
-  DateTime atTime(int _hour, int _minute, [int _second]) =>
+  DateTime atTime(int _hour, int _minute, [int? _second]) =>
       DateTime(year, month, day, _hour, _minute, _second ?? 0, 0, 0);
 
   DateTime utcTimeFirstDaySinceEpoch() => DateTime.utc(1970, 1, 1, hour, minute, second, millisecond, microsecond);
@@ -125,11 +125,11 @@ extension DateTimeStringExtendsion on String {
 
   /// Convert from 24h UTC to local DateTime by pattern
   /// https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-  DateTime toDateTime({String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
+  DateTime? toDateTime({String pattern = 'yyyy-MM-dd HH:mm:ss'}) {
     return isNullOrEmpty ? null : DateFormat(pattern).parse(this, true).toLocal();
   }
 
-  String safe([String supplier()]) => this ?? (supplier == null ? '' : supplier());
+  String safe([String supplier()?]) => this ?? (supplier == null ? '' : supplier());
 
   String zeroPrefix(int count) {
     if (length >= count) {
@@ -144,9 +144,9 @@ extension DateTimeStringExtendsion on String {
     }
   }
 
-  int parseInt() => int.tryParse(this);
+  int? parseInt() => int.tryParse(this);
 
-  double parseDouble() => double.tryParse(this);
+  double? parseDouble() => double.tryParse(this);
 
   String truncate(int limit) {
     return length > limit ? '${substring(0, min(length, limit)).trim()}...' : this;
@@ -155,7 +155,7 @@ extension DateTimeStringExtendsion on String {
 
 /// Extension for duration
 extension DurationExtension on Duration {
-  Duration safe([Duration supplier()]) => this ?? (supplier == null ? Duration.zero : supplier());
+  Duration safe([Duration supplier()?]) => this ?? (supplier == null ? Duration.zero : supplier());
 
   String format() {
     return toString().split('.').first.padLeft(8, '0');
@@ -171,16 +171,16 @@ extension DurationExtension on Duration {
 
   /// hours:minutes:seconds
   String toHms() {
-    final String twoDigitHours = _twoDigits(inHours.remainder(24) as int);
-    final String twoDigitMinutes = _twoDigits(inMinutes.remainder(60) as int);
-    final String twoDigitSeconds = _twoDigits(inSeconds.remainder(60) as int);
+    final String twoDigitHours = _twoDigits(inHours.remainder(24));
+    final String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
+    final String twoDigitSeconds = _twoDigits(inSeconds.remainder(60));
     return '$twoDigitHours:$twoDigitMinutes:$twoDigitSeconds';
   }
 
   /// minutes:seconds
   String toMs() {
-    final String twoDigitMinutes = _twoDigits(inMinutes.remainder(60) as int);
-    final String twoDigitSeconds = _twoDigits(inSeconds.remainder(60) as int);
+    final String twoDigitMinutes = _twoDigits(inMinutes.remainder(60));
+    final String twoDigitSeconds = _twoDigits(inSeconds.remainder(60));
     return '$twoDigitMinutes:$twoDigitSeconds';
   }
 }
@@ -220,7 +220,7 @@ extension DateExtensions on int {
 
 /// Extension for num
 extension NumExtensions<T extends num> on T {
-  T safe([T supplier()]) => this ?? (supplier == null ? 0 as T : supplier());
+  T safe([T supplier()?]) => this ?? (supplier == null ? 0 as T : supplier());
 
   T plus(T value) {
     return this + value as T;
@@ -229,7 +229,7 @@ extension NumExtensions<T extends num> on T {
 
 /// Extension for bool
 extension BoolExtensions on bool {
-  bool safe([bool supplier]) => this ?? (supplier ?? false);
+  bool safe([bool? supplier]) => this ?? (supplier ?? false);
 }
 
 /// Extension for T
@@ -249,14 +249,14 @@ extension Lambdas<T> on T {
 
   R let<R>(R fun(T it)) => fun(this);
 
-  T takeIf(bool test(T it)) => test(this) ? this : null;
+  T? takeIf(bool test(T it)) => test(this) ? this : null;
 }
 
 /// Extension for Comparable on Iterable
 extension ComparableIterableExtensions<E extends Comparable<E>> on Iterable<E> {
   List<E> sorted() => toList()..sort();
 
-  E min() {
+  E? min() {
     final Iterator<E> iterator = this.iterator;
     if (!iterator.moveNext()) {
       return null;
@@ -271,7 +271,7 @@ extension ComparableIterableExtensions<E extends Comparable<E>> on Iterable<E> {
     return min;
   }
 
-  E max() {
+  E? max() {
     final Iterator<E> iterator = this.iterator;
     if (!iterator.moveNext()) {
       return null;
@@ -294,9 +294,9 @@ extension SetExtensions<E> on Set<E> {
 
 /// Extension for Map
 extension MapExtensions<K, V> on Map<K, V> {
-  V get(K key) => this[key];
+  V? get(K key) => this[key];
 
-  V getOrDefault(K key, V value) => containsKey(key) ? this[key] : value;
+  V? getOrDefault(K key, V value) => containsKey(key) ? this[key] : value;
 }
 
 /// Extension for Iterable of Iterable
@@ -321,9 +321,9 @@ extension IterableExtensions<E> on Iterable<E> {
   ///
   /// Returns `null` if `this` is empty.
   /// Otherwise returns the first element in the iteration order
-  E get firstOrNull => iterator.let((Iterator<E> it) => !it.moveNext() ? null : it.current);
+  E? get firstOrNull => iterator.let((Iterator<E> it) => !it.moveNext() ? null : it.current);
 
-  E get lastOrNull {
+  E? get lastOrNull {
     final Iterator<E> it = iterator;
     if (!it.moveNext()) {
       return null;
@@ -340,7 +340,7 @@ extension IterableExtensions<E> on Iterable<E> {
   /// Iterates through elements and returns the first to satisfy [test].
   ///
   /// If no element satisfies [test], the result returns `null`
-  E find(bool test(E element)) {
+  E? find(bool test(E element)) {
     for (final E element in this) {
       if (test(element)) {
         return element;
@@ -359,7 +359,7 @@ extension IterableExtensions<E> on Iterable<E> {
 
   List<E> safeList() => this == null ? <E>[] : toList();
 
-  E minBy<R extends Comparable<R>>(R selector(E element)) {
+  E? minBy<R extends Comparable<R>>(R selector(E element)) {
     final Iterator<E> iterator = this.iterator;
     if (!iterator.moveNext()) {
       return null;
@@ -380,7 +380,7 @@ extension IterableExtensions<E> on Iterable<E> {
     return minElem;
   }
 
-  E minWith(int compare(E a, E b)) {
+  E? minWith(int compare(E a, E b)) {
     final Iterator<E> iterator = this.iterator;
     if (!iterator.moveNext()) {
       return null;
@@ -398,7 +398,7 @@ extension IterableExtensions<E> on Iterable<E> {
   /// Returns the first element yielding the largest value of the given function or `null` if there are no elements.
   ///
   /// @sample samples.collections.Collections.Aggregates.maxBy
-  E maxBy<R extends Comparable<R>>(R selector(E element)) {
+  E? maxBy<R extends Comparable<R>>(R selector(E element)) {
     final Iterator<E> iterator = this.iterator;
     if (!iterator.moveNext()) {
       return null;
@@ -420,7 +420,7 @@ extension IterableExtensions<E> on Iterable<E> {
   }
 
   /// Returns the first element having the largest value according to the provided [comparator] or `null` if there are no elements.
-  E maxWith(int compare(E a, E b)) {
+  E? maxWith(int compare(E a, E b)) {
     final Iterator<E> iterator = this.iterator;
     if (!iterator.moveNext()) {
       return null;
@@ -441,7 +441,7 @@ extension IterableExtensions<E> on Iterable<E> {
     return sum;
   }
 
-  String joinToString({String separator = '', String prefix = '', String postfix = '', String transform(E element)}) {
+  String joinToString({String separator = '', String prefix = '', String postfix = '', String transform(E element)?}) {
     String result = prefix;
 
     bool first = true;
@@ -473,7 +473,7 @@ extension ListExtensions<E> on List<E> {
 
   void set(int index, E element) => this[index] = element;
 
-  E getOrNull(int index) => index < 0 || index >= length ? null : this[index];
+  E? getOrNull(int index) => index < 0 || index >= length ? null : this[index];
 
   void forEachIndexed(void f(int index, E element)) {
     for (int i = 0; i < length; i++) {
@@ -492,7 +492,7 @@ extension ListExtensions<E> on List<E> {
 
   List<E> reversedList() => reversed.toList(growable: false);
 
-  List<E> shuffled([Random random]) => toList(growable: false)..shuffle(random);
+  List<E> shuffled([Random? random]) => toList(growable: false)..shuffle(random);
 
   List<E> sorted(int compare(E a, E b)) => toList(growable: false)..sort(compare);
 

@@ -4,6 +4,7 @@ import 'package:nft/models/remote/login_response.dart';
 import 'package:nft/services/cache/credential.dart';
 import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/services/safety/change_notifier_safety.dart';
+import 'package:nft/utils/app_config.dart';
 
 class AuthProvider extends ChangeNotifierSafety {
   AuthProvider(this._api, this._credential);
@@ -18,24 +19,28 @@ class AuthProvider extends ChangeNotifierSafety {
   void resetState() {}
 
   /// Call api login
-  Future<bool> login(String email, String password) async {
+  Future<bool> login(String? email, String? password) async {
     final Response<Map<String, dynamic>> result =
         await _api.logIn(email, password).timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
-    final Token token = loginResponse.data;
+    final Token? token = loginResponse.data;
     if (token != null) {
       /// Save credential
-      final bool saveRes = await _credential.storeCredential(token, cache: true);
+      final bool saveRes =
+          await _credential.storeCredential(token, cache: true);
       return saveRes;
     } else {
       throw DioError(
-          requestOptions: null, error: loginResponse.error?.message ?? 'Login error', type: DioErrorType.response);
+          requestOptions: RequestOptions(path: AppConfig.I.env.apiBaseUrl),
+          error: loginResponse.error?.message ?? 'Login error',
+          type: DioErrorType.response);
     }
   }
 
   /// Call api login with error
   Future<LoginResponse> logInWithError() async {
-    final Response<Map<String, dynamic>> result = await _api.logInWithError().timeout(const Duration(seconds: 30));
+    final Response<Map<String, dynamic>> result =
+        await _api.logInWithError().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     return loginResponse;
   }
@@ -43,7 +48,10 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call api login with exception
   Future<void> logInWithException() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    throw DioError(requestOptions: null, error: 'Login with exception', type: DioErrorType.response);
+    throw DioError(
+        requestOptions: RequestOptions(path: AppConfig.I.env.apiBaseUrl),
+        error: 'Login with exception',
+        type: DioErrorType.response);
   }
 
   /// Call logout

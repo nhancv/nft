@@ -11,15 +11,15 @@ class OToast {
 
   static final OToast I = OToast._private();
 
-  Timer _toastTimer;
-  OverlayEntry _overlayEntry;
+  Timer? _toastTimer;
+  OverlayEntry? _overlayEntry;
 
-  void showCustomToast(BuildContext context, String message, {TextStyle textStyle, double padding, Duration duration}) {
+  void showCustomToast(BuildContext context, String message, {TextStyle? textStyle, double? padding, Duration? duration}) {
     Duration validDuration = const Duration(seconds: 2);
     if (duration != null && duration.inMilliseconds >= 500) {
       validDuration = duration;
     }
-    if (_toastTimer == null || !_toastTimer.isActive) {
+    if (_toastTimer == null || !_toastTimer!.isActive) {
       _overlayEntry = _createOverlayEntry(
         context,
         message,
@@ -27,10 +27,10 @@ class OToast {
         padding: padding,
         duration: validDuration,
       );
-      Overlay.of(context).insert(_overlayEntry);
+      Overlay.of(context)!.insert(_overlayEntry!);
       _toastTimer = Timer(validDuration, () {
         if (_overlayEntry != null) {
-          _overlayEntry.remove();
+          _overlayEntry!.remove();
           _overlayEntry = null;
         }
       });
@@ -38,7 +38,7 @@ class OToast {
   }
 
   OverlayEntry _createOverlayEntry(BuildContext context, String message,
-      {TextStyle textStyle, double padding, Duration duration}) {
+      {TextStyle? textStyle, double? padding, Duration? duration}) {
     return OverlayEntry(
       builder: (BuildContext context) {
         return Stack(
@@ -60,25 +60,25 @@ class OToast {
 }
 
 class _ToastContainer extends StatefulWidget {
-  const _ToastContainer({Key key, this.message, this.textStyle, this.padding, this.duration}) : super(key: key);
+  const _ToastContainer({Key? key, this.message, this.textStyle, this.padding, this.duration}) : super(key: key);
 
-  final double padding;
-  final TextStyle textStyle;
-  final String message;
-  final Duration duration;
+  final double? padding;
+  final TextStyle? textStyle;
+  final String? message;
+  final Duration? duration;
 
   @override
   _ToastContainerState createState() => _ToastContainerState();
 }
 
 class _ToastContainerState extends BaseStateful<_ToastContainer> {
-  double top;
+  double? top;
 
   @override
   void afterFirstBuild(BuildContext context) {
     super.afterFirstBuild(context);
     setState(() {
-      top = 1.SH / 2 - context.size.height / 2;
+      top = 1.SH / 2 - context.size!.height / 2;
     });
   }
 
@@ -126,11 +126,11 @@ class _ToastContainerState extends BaseStateful<_ToastContainer> {
 enum _AniProps { translateY, opacity }
 
 class _ToastMessageAnimation extends StatelessWidget {
-  const _ToastMessageAnimation({@required this.child, this.play = false, this.duration});
+  const _ToastMessageAnimation({required this.child, this.play = false, this.duration});
 
   final Widget child;
   final bool play;
-  final Duration duration;
+  final Duration? duration;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +154,7 @@ class _ToastMessageAnimation extends StatelessWidget {
             duration: tween.duration,
             tween: tween,
             child: child,
-            builder: (BuildContext context, Widget child, MultiTweenValues<_AniProps> value) {
+            builder: (BuildContext context, Widget? child, MultiTweenValues<_AniProps> value) {
               return Opacity(
                 opacity: value.get(_AniProps.opacity),
                 child: Transform.translate(offset: Offset(0, value.get(_AniProps.translateY)), child: child),

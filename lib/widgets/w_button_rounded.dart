@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class WButtonRounded extends StatelessWidget {
   const WButtonRounded(
-      {Key key,
+      {Key? key,
       this.child,
       this.radius,
       this.onPressed,
@@ -13,14 +13,14 @@ class WButtonRounded extends StatelessWidget {
       this.padding})
       : super(key: key);
 
-  final Widget child;
-  final double radius;
-  final Function() onPressed;
-  final Color background;
-  final Color splashColor;
-  final Color borderColor;
-  final double borderWidth;
-  final EdgeInsets padding;
+  final Widget? child;
+  final double? radius;
+  final Function()? onPressed;
+  final Color? background;
+  final Color? splashColor;
+  final Color? borderColor;
+  final double? borderWidth;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class WButtonRounded extends StatelessWidget {
       child: child,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(background ?? Colors.white),
-        overlayColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
           final Color sColor = splashColor ?? Colors.grey.withAlpha(150);
           if (states.contains(MaterialState.hovered)) {
             return sColor;

@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Empty', () {
-    FlutterDriver driver;
+    FlutterDriver? driver;
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
@@ -15,7 +15,7 @@ void main() {
     // Close the connection to the driver after the tests have completed.
     tearDownAll(() async {
       if (driver != null) {
-        await driver.close();
+        await driver!.close();
       }
     });
 
@@ -28,33 +28,33 @@ void main() {
     final SerializableFinder counterTextFinder = find.byValueKey('counter');
     final SerializableFinder buttonFinder = find.byValueKey('increment');
 
-    FlutterDriver driver;
+    FlutterDriver? driver;
 
     // Connect to the Flutter driver before running any tests.
     setUpAll(() async {
       driver = await FlutterDriver.connect();
       // Navigator to Counter Screen
-      await driver.tap(find.byValueKey(AppRoute.routeCounter));
+      await driver!.tap(find.byValueKey(AppRoute.routeCounter));
     });
 
     // Close the connection to the driver after the tests have completed.
     tearDownAll(() async {
       if (driver != null) {
-        await driver.close();
+        await driver!.close();
       }
     });
 
     test('starts at 0', () async {
       // Use the `driver.getText` method to verify the counter starts at 0.
-      expect(await driver.getText(counterTextFinder), '0');
+      expect(await driver!.getText(counterTextFinder), '0');
     });
 
     test('increments the counter', () async {
       // First, tap the button.
-      await driver.tap(buttonFinder);
+      await driver!.tap(buttonFinder);
 
       // Then, verify the counter text is incremented by 1.
-      expect(await driver.getText(counterTextFinder), '1');
+      expect(await driver!.getText(counterTextFinder), '1');
     });
   });
 }

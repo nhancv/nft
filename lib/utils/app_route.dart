@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/counter/counter_provider.dart';
-import 'package:nft/pages/home/home_page.dart';
-import 'package:nft/pages/home/home_provider.dart';
-import 'package:nft/pages/login/login_page.dart';
-import 'package:nft/pages/login/login_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -68,41 +64,42 @@ class AppRoute {
   }
 
   /// App route observer
-  final RouteObserver<Route<dynamic>> routeObserver = RouteObserver<Route<dynamic>>();
+  final RouteObserver<Route<dynamic>> routeObserver =
+      RouteObserver<Route<dynamic>>();
 
   /// App global navigator key
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// Get app context
-  BuildContext get appContext => navigatorKey.currentContext;
+  BuildContext? get appContext => navigatorKey.currentContext;
 
   /// Generate route for app here
-  Route<dynamic> generateRoute(RouteSettings settings) {
+  Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case routeCounter:
         return MaterialPageRoute<dynamic>(
             settings: settings,
             builder: (_) => AppRoute.createProvider(
                   (_) => CounterProvider(),
-                  CounterPage(argument: settings.arguments as String),
+                  CounterPage(argument: settings.arguments as String?),
                 ));
 
-      case routeHome:
-        return MaterialPageRoute<dynamic>(
-            settings: settings,
-            builder: (_) => AppRoute.createProvider(
-                  (BuildContext context) => HomeProvider(Provider.of(context, listen: false)),
-                  const HomePage(),
-                ));
+      // case routeHome:
+      //   return MaterialPageRoute<dynamic>(
+      //       settings: settings,
+      //       builder: (_) => AppRoute.createProvider(
+      //             (BuildContext context) => HomeProvider(Provider.of(context, listen: false)),
+      //             const HomePage(),
+      //           ));
 
-      case routeRoot:
-      case routeLogin:
-        return MaterialPageRoute<dynamic>(
-            settings: settings,
-            builder: (_) => AppRoute.createProvider(
-                  (_) => LoginProvider(),
-                  const LoginPage(),
-                ));
+      // case routeRoot:
+      // case routeLogin:
+      //   return MaterialPageRoute<dynamic>(
+      //       settings: settings,
+      //       builder: (_) => AppRoute.createProvider(
+      //             (_) => LoginProvider(),
+      //             const LoginPage(),
+      //           ));
 
       default:
         return null;

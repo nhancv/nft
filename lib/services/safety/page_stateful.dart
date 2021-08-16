@@ -11,8 +11,8 @@ import 'package:nft/utils/app_route.dart';
 import 'package:provider/provider.dart';
 
 abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T> with ApiError {
-  LocaleProvider localeProvider;
-  AuthProvider authProvider;
+  late LocaleProvider localeProvider;
+  late AuthProvider authProvider;
 
   @mustCallSuper
   @override

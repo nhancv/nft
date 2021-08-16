@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 // ),
 class WMarquee extends StatefulWidget {
   const WMarquee({
-    @required this.child,
+    required this.child,
     this.padding,
     this.scrollDirection = Axis.horizontal,
     this.animationDuration = const Duration(milliseconds: 5000),
@@ -16,7 +16,7 @@ class WMarquee extends StatefulWidget {
   });
 
   final Widget child;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final Axis scrollDirection;
   final Duration animationDuration, backDuration, pauseDuration;
 
@@ -25,12 +25,12 @@ class WMarquee extends StatefulWidget {
 }
 
 class _WMarqueeState extends State<WMarquee> {
-  ScrollController scrollController;
+  ScrollController? scrollController;
 
   @override
   void initState() {
     scrollController = ScrollController(initialScrollOffset: 50.0);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       scroll();
     });
     super.initState();
@@ -38,7 +38,7 @@ class _WMarqueeState extends State<WMarquee> {
 
   @override
   void dispose() {
-    scrollController.dispose();
+    scrollController!.dispose();
     super.dispose();
   }
 
@@ -46,7 +46,7 @@ class _WMarqueeState extends State<WMarquee> {
   void didUpdateWidget(covariant WMarquee oldWidget) {
     super.didUpdateWidget(oldWidget);
     // Reset
-    scrollController.jumpTo(0);
+    scrollController!.jumpTo(0);
   }
 
   @override
@@ -61,14 +61,14 @@ class _WMarqueeState extends State<WMarquee> {
   }
 
   Future<void> scroll() async {
-    while (scrollController.hasClients) {
+    while (scrollController!.hasClients) {
       await Future<void>.delayed(widget.pauseDuration);
-      if (scrollController.hasClients)
-        await scrollController.animateTo(scrollController.position.maxScrollExtent,
+      if (scrollController!.hasClients)
+        await scrollController!.animateTo(scrollController!.position.maxScrollExtent,
             duration: widget.animationDuration, curve: Curves.ease);
       await Future<void>.delayed(widget.pauseDuration);
-      if (scrollController.hasClients)
-        await scrollController.animateTo(0.0, duration: widget.backDuration, curve: Curves.easeOut);
+      if (scrollController!.hasClients)
+        await scrollController!.animateTo(0.0, duration: widget.backDuration, curve: Curves.easeOut);
     }
   }
 }

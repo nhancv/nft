@@ -5,11 +5,11 @@ import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/p_material.dart';
 
 class PAppBarTransparency extends StatelessWidget {
-  const PAppBarTransparency({this.body, this.child, this.forceStatusIconLight, Key key}) : super(key: key);
+  const PAppBarTransparency({this.body, this.child, this.forceStatusIconLight, Key? key}) : super(key: key);
 
-  final Widget child;
-  final Widget body;
-  final bool forceStatusIconLight;
+  final Widget? child;
+  final Widget? body;
+  final bool? forceStatusIconLight;
 
   @override
   Widget build(BuildContext context) {

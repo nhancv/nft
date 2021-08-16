@@ -10,8 +10,8 @@ enum EnvType {
 /// Environment declare here
 class Env {
   Env._({
-    @required this.envType,
-    @required this.apiBaseUrl,
+    required this.envType,
+    required this.apiBaseUrl,
   });
 
   /// Dev mode
@@ -28,7 +28,7 @@ class Env {
 
 /// Config env
 class AppConfig {
-  factory AppConfig({Env env, AppTheme theme}) {
+  factory AppConfig({Env? env, AppTheme? theme}) {
     if (env != null) {
       I.env = env;
     }

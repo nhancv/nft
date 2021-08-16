@@ -17,10 +17,10 @@ import 'package:nft/utils/app_style.dart';
 //           );
 //         });
 class WBottomActionSheet extends StatelessWidget {
-  const WBottomActionSheet({Key key, @required this.body, this.onCancel}) : super(key: key);
+  const WBottomActionSheet({Key? key, required this.body, this.onCancel}) : super(key: key);
 
   final Widget body;
-  final Function() onCancel;
+  final Function()? onCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class WBottomActionSheet extends StatelessWidget {
                           onTap: () {
                             Navigator.of(context).pop();
                             if (onCancel != null) {
-                              onCancel();
+                              onCancel!();
                             }
                           },
                         ),

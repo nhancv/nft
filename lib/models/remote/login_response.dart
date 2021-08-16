@@ -25,15 +25,15 @@ import 'package:nft/utils/app_log.dart';
 import 'base_response.dart';
 
 class LoginResponse extends BaseResponse<Token> {
-  LoginResponse(Map<String, dynamic> fullJson) : super(fullJson);
+  LoginResponse(Map<String, dynamic>? fullJson) : super(fullJson);
 
   @override
-  Map<String, dynamic> dataToJson(Token data) {
-    return data.toJson();
+  Map<String, dynamic> dataToJson(Token? data) {
+    return data!.toJson();
   }
 
   @override
-  Token jsonToData(dynamic dataJson) {
+  Token? jsonToData(dynamic dataJson) {
     try {
       return Token.fromJson(dataJson as Map<String, dynamic>);
     } catch (e) {

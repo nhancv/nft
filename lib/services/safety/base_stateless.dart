@@ -5,9 +5,9 @@ import 'package:nft/utils/app_theme.dart';
 /// Remember call super.build(context) in widget
 /// ignore: must_be_immutable
 abstract class BaseStateless extends StatelessWidget {
-  BaseStateless({Key key}) : super(key: key);
+  BaseStateless({Key? key}) : super(key: key);
 
-  AppTheme appTheme;
+  AppTheme? appTheme;
 
   /// Context valid to create providers
   @mustCallSuper
@@ -23,9 +23,9 @@ abstract class BaseStateless extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     initDependencies(context);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       afterFirstBuild(context);
     });
-    return null;
+    return SizedBox();
   }
 }

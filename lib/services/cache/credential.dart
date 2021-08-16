@@ -12,14 +12,14 @@ class Credential with ChangeNotifier {
   /// Local cache
   final Cache _cache;
 
-  Token _token;
+  Token? _token;
 
   /// PUBLIC PROPERTIES
   /// -----------------
   /// Get user info
-  Token get token => _token;
+  Token? get token => _token;
 
-  set token(Token value) {
+  set token(Token? value) {
     _token = value;
     notifyListeners();
   }
@@ -32,7 +32,7 @@ class Credential with ChangeNotifier {
   }
 
   /// Store credential
-  Future<bool> storeCredential(final Token newToken, {bool cache = false}) async {
+  Future<bool> storeCredential(final Token? newToken, {bool cache = false}) async {
     final bool saveRes = await _cache.saveData(Token.localKey, newToken != null ? jsonEncode(newToken.toJson()) : null);
     if (saveRes && cache) {
       token = newToken;

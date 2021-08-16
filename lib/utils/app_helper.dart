@@ -17,8 +17,8 @@ class AppHelper {
   //                ),
   //              );
   //       });
-  static Future<T> showBottomSheet<T>(BuildContext context, Widget Function(BuildContext context) child,
-      {double heightFactor, bool interactive = true}) {
+  static Future<T?> showBottomSheet<T>(BuildContext context, Widget Function(BuildContext context) child,
+      {double? heightFactor, bool interactive = true}) {
     return showModalBottomSheet<T>(
       context: context,
       isScrollControlled: true,
@@ -45,7 +45,7 @@ class AppHelper {
   //         (_, ScrollController scrollController) {
   //       return WSheet(scrollController: scrollController);
   //     });
-  static Future<T> showScrollableBottomSheet<T>(
+  static Future<T?> showScrollableBottomSheet<T>(
     BuildContext context,
     Widget Function(BuildContext context, ScrollController scrollController) child,
   ) {
@@ -76,7 +76,7 @@ class AppHelper {
   }
 
   /// Show popup
-  static Future<T> showPopup<T>(
+  static Future<T?> showPopup<T>(
     BuildContext context,
     Widget Function(BuildContext context) builder, {
     bool barrierDismissible = false,
@@ -98,9 +98,9 @@ class AppHelper {
   /// Show toast
   static void showToast(
     String msg, {
-    Toast toastLength,
-    int timeInSecForIosWeb,
-    Color backgroundColor,
+    Toast? toastLength,
+    int? timeInSecForIosWeb,
+    Color? backgroundColor,
   }) {
     Fluttertoast.showToast(
         msg: msg,

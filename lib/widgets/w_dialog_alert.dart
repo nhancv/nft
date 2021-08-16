@@ -19,7 +19,7 @@ import 'package:nft/utils/app_style.dart';
 // });
 class WDialogAlert extends StatefulWidget {
   const WDialogAlert({
-    Key key,
+    Key? key,
     this.title,
     this.titleStyle,
     this.content,
@@ -31,16 +31,16 @@ class WDialogAlert extends StatefulWidget {
     this.confirmTitleStyle,
     this.onConfirmPressed,
   }) : super(key: key);
-  final String title;
-  final TextStyle titleStyle;
-  final String content;
-  final TextStyle contentStyle;
-  final String cancelTitle;
-  final TextStyle cancelTitleStyle;
-  final Function() onCancelPressed;
-  final String confirmTitle;
-  final TextStyle confirmTitleStyle;
-  final Function() onConfirmPressed;
+  final String? title;
+  final TextStyle? titleStyle;
+  final String? content;
+  final TextStyle? contentStyle;
+  final String? cancelTitle;
+  final TextStyle? cancelTitleStyle;
+  final Function()? onCancelPressed;
+  final String? confirmTitle;
+  final TextStyle? confirmTitleStyle;
+  final Function()? onConfirmPressed;
 
   @override
   _WDialogAlertState createState() => _WDialogAlertState();

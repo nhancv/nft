@@ -11,11 +11,11 @@ import 'package:nft/widgets/w_divider_line.dart';
 /// Use: final Duration duration = await WPickerDate.showPicker(context);
 
 class WPickerTime extends StatefulWidget {
-  const WPickerTime({Key key, this.initDuration}) : super(key: key);
+  const WPickerTime({Key? key, this.initDuration}) : super(key: key);
 
-  final Duration initDuration;
+  final Duration? initDuration;
 
-  static Future<Duration> showPicker(BuildContext context, {Duration initDuration}) {
+  static Future<Duration?> showPicker(BuildContext context, {Duration? initDuration}) {
     return showCupertinoModalPopup<Duration>(
         context: context,
         builder: (BuildContext context) {
