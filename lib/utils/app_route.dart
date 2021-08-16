@@ -11,7 +11,7 @@ class AppRoute {
 
   ///#region ROUTE NAMES
   /// -----------------
-  static const String routeRoot = '/';
+  static const String routeRoot = '/counter';
   static const String routeHome = '/home';
   static const String routeLogin = '/login';
   static const String routeCounter = '/counter';
