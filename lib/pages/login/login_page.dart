@@ -17,17 +17,18 @@ import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserver, ApiError {
+class _LoginPageState extends PageStateful<LoginPage>
+    with WidgetsBindingObserver, ApiError {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
-  LoginProvider loginProvider;
+  late LoginProvider loginProvider;
 
   @override
   void initDependencies(BuildContext context) {
@@ -79,7 +80,8 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                 /// Logo
                 Padding(
                   padding: EdgeInsets.only(top: 100.H, bottom: 50.H),
-                  child: Image.asset(appTheme.assets.icAppIcon, width: 150, height: 150),
+                  child: Image.asset(appTheme.assets.icAppIcon,
+                      width: 150, height: 150),
                 ),
 
                 /// Login form
@@ -93,14 +95,16 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                       onChanged: loginProvider.onEmailChangeToValidateForm,
                       focusNode: _emailFocusNode,
                       textInputAction: TextInputAction.next,
-                      errorText: !emailValid ? context.strings.msgEmailInValid : null,
+                      errorText:
+                          !emailValid ? context.strings.msgEmailInValid : null,
                       suffixIcon: !emailValid
                           ? const Icon(
                               Icons.error,
                             )
                           : null,
                       onSubmitted: (String term) {
-                        AppHelper.nextFocus(context, _emailFocusNode, _passwordFocusNode);
+                        appHelperNextFocus(
+                            context, _emailFocusNode, _passwordFocusNode);
                       },
                     );
                   },
@@ -113,9 +117,12 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                       key: const Key('passwordInputKey'),
                       labelText: context.strings.labelPassword,
                       suffixIcon: IconButton(
-                        icon: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                        icon: obscureText
+                            ? const Icon(Icons.visibility_off)
+                            : const Icon(Icons.visibility),
                         onPressed: () {
-                          loginProvider.obscureText = !loginProvider.obscureText;
+                          loginProvider.obscureText =
+                              !loginProvider.obscureText;
                         },
                       ),
                       obscureText: obscureText,
@@ -130,18 +137,21 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                 /// Example call api with success response
                 ElevatedButton(
                   key: const Key('callApiBtnKey'),
-                  onPressed: context.select((LoginProvider provider) => provider.formValid)
+                  onPressed: context.select(
+                          (LoginProvider provider) => provider.formValid)
                       ? () async {
-                          final bool success = await apiCallSafety(
-                            () => authProvider.login(null, null),
+                          final bool? success = await apiCallSafety(
+                            () => authProvider.login(loginProvider.emailValue,
+                                loginProvider.passwordValue),
                             onStart: () async {
                               AppLoading.show(context);
                             },
-                            onCompleted: (bool status, bool res) async {
+                            onCompleted: (bool status, bool? res) async {
                               AppLoading.hide(context);
                             },
                             onError: (dynamic error) async {
-                              final ApiErrorType errorType = parseApiErrorType(error);
+                              final ApiErrorType errorType =
+                                  parseApiErrorType(error);
                               AppDialog.show(
                                 context,
                                 errorType.message,
@@ -151,7 +161,9 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                             skipOnError: true,
                           );
                           if (success == true) {
-                            context.navigator()?.pushReplacementNamed(AppRoute.routeHome);
+                            context
+                                .navigator()
+                                ?.pushReplacementNamed(AppRoute.routeHome);
                           }
                         }
                       : null,
@@ -163,18 +175,19 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                 ElevatedButton(
                   key: const Key('callApiErrorBtnKey'),
                   onPressed: () async {
-                    final LoginResponse loginResponse = await apiCallSafety(
+                    final LoginResponse? loginResponse = await apiCallSafety(
                       authProvider.logInWithError,
                       onStart: () async {
                         AppLoading.show(context);
                       },
-                      onCompleted: (bool status, LoginResponse res) async {
+                      onCompleted: (bool status, LoginResponse? res) async {
                         AppLoading.hide(context);
                       },
                     );
                     logger.d(loginResponse);
-                    if (loginResponse.error != null) {
-                      AppDialog.show(context, loginResponse.error.message);
+                    final String? msg = loginResponse?.error?.message;
+                    if (msg != null) {
+                      AppDialog.show(context, msg);
                     }
                   },
                   child: const Text('call api with error'),

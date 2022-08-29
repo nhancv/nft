@@ -1,15 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:nft/services/safety/base_stateless.dart';
 
 // ignore: must_be_immutable
 class WTextShadow extends BaseStateless {
-  WTextShadow(this.text, {this.style, this.textAlign, Key key}) : super(key: key);
+  WTextShadow(this.text, {this.style, this.textAlign, Key? key})
+      : super(key: key);
 
-  final String text;
-  final TextStyle style;
-  final TextAlign textAlign;
+  final String? text;
+  final TextStyle? style;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class WTextShadow extends BaseStateless {
     return Text(
       text ?? '',
       textAlign: textAlign,
-      style: style.copyWith(
+      style: style?.copyWith(
         shadows: <Shadow>[
           const Shadow(
             blurRadius: 0.0,

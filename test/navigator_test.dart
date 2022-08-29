@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/pages/counter/counter_page.dart';
 import 'package:nft/pages/home/home_page.dart';
@@ -23,17 +24,23 @@ import 'package:provider/single_child_widget.dart';
 /// Mock navigator observer class by mockito
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
+// Fake Route for mocktail
+class FakeRoute extends Fake implements Route<dynamic> {}
+
 void main() {
   // Mock navigator to verify navigation
   final MockNavigatorObserver navigatorObserver = MockNavigatorObserver();
 
   // Widget to test
-  Widget appWidget;
+  late Widget appWidget;
+
+  setUpAll(() {
+    registerFallbackValue(FakeRoute());
+  });
 
   /// Setup for test
   setUp(() {
     AppConfig(env: Env.dev());
-
     // Testing in flutter gives error MediaQuery.of() called
     // with a context that does not contain a MediaQuery
     appWidget = MediaQuery(
@@ -47,8 +54,9 @@ void main() {
                   Credential(context.read<Cache>())),
           ProxyProvider<Credential, ApiUser>(
               create: (_) => ApiUser(),
-              update: (_, Credential credential, ApiUser userApi) {
-                return userApi..token = credential.token;
+              update: (_, Credential credential, ApiUser? userApi) {
+                userApi?.token = credential.token;
+                return userApi!;
               }),
           ChangeNotifierProvider<LocaleProvider>(
               create: (_) => LocaleProvider()),
@@ -73,28 +81,31 @@ void main() {
             final AppRoute appRoute = context.watch<AppRoute>();
 
             // Mock navigator Observer
-            when(navigatorObserver.didPush(any, any))
+            when(() => navigatorObserver.didPush(any(), any()))
                 .thenAnswer((Invocation invocation) {
               logger.d('didPush ${invocation.positionalArguments}');
             });
 
             // Build Material app
-            return MaterialApp(
-              navigatorKey: appRoute.navigatorKey,
-              locale: localeProvider.locale,
-              supportedLocales: S.delegate.supportedLocales,
-              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              home: (appRoute.generateRoute(
-                          const RouteSettings(name: AppRoute.routeHome))
-                      as MaterialPageRoute<dynamic>)
-                  .builder(context),
-              onGenerateRoute: appRoute.generateRoute,
-              navigatorObservers: <NavigatorObserver>[navigatorObserver],
+            return ScreenUtilInit(
+              designSize: const Size(375, 812),
+              builder: (_, __) => MaterialApp(
+                navigatorKey: appRoute.navigatorKey,
+                locale: localeProvider.locale,
+                supportedLocales: S.delegate.supportedLocales,
+                localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                home: (appRoute.generateRoute(
+                            const RouteSettings(name: AppRoute.routeHome))
+                        as MaterialPageRoute<dynamic>)
+                    .builder(context),
+                onGenerateRoute: appRoute.generateRoute,
+                navigatorObservers: <NavigatorObserver>[navigatorObserver],
+              ),
             );
           },
         ),
@@ -129,7 +140,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify that a push event happened
-    verify(navigatorObserver.didPush(any, any));
+    verify(() => navigatorObserver.didPush(any(), any()));
 
     // Verify that CounterPage opened
     expect(find.byType(CounterPage), findsOneWidget);

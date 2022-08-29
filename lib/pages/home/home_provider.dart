@@ -15,7 +15,7 @@ class HomeProvider extends ChangeNotifierSafety {
   ///#region PUBLIC PROPERTIES
   /// -----------------
   /// Get user info
-  Token get token => _api.token;
+  Token? get token => _api.token;
 
   ///#endregion
 

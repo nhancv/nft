@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
@@ -11,11 +10,12 @@ import 'package:nft/widgets/w_divider_line.dart';
 /// Use: final Duration duration = await WPickerDate.showPicker(context);
 
 class WPickerTime extends StatefulWidget {
-  const WPickerTime({Key key, this.initDuration}) : super(key: key);
+  const WPickerTime({Key? key, this.initDuration}) : super(key: key);
 
-  final Duration initDuration;
+  final Duration? initDuration;
 
-  static Future<Duration> showPicker(BuildContext context, {Duration initDuration}) {
+  static Future<Duration?> showPicker(BuildContext context,
+      {Duration? initDuration}) {
     return showCupertinoModalPopup<Duration>(
         context: context,
         builder: (BuildContext context) {
@@ -69,7 +69,9 @@ class _WPickerTimeState extends BaseStateful<WPickerTime> {
                 alignment: Alignment.center,
                 child: Text(
                   'Confirm',
-                  style: normalTextStyle(17.SP, color: const Color(0xFF0080FA).withOpacity(isTimeValid ? 1 : 0.4)),
+                  style: normalTextStyle(17.SP,
+                      color: const Color(0xFF0080FA)
+                          .withOpacity(isTimeValid ? 1 : 0.4)),
                 ),
               ),
               onPressed: isTimeValid

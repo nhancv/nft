@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:nft/generated/l10n.dart';
 import 'package:nft/models/local/token.dart';
 import 'package:nft/pages/home/home_page.dart';
@@ -26,12 +27,17 @@ import 'package:provider/single_child_widget.dart';
 /// Mock navigator observer class by mockito
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
+// Fake for mocktail
+class FakeRoute extends Fake implements Route<dynamic> {}
+
+class FakeBuildContext extends Fake implements BuildContext {}
+
 /// Mock Credential
 class MockCredential extends Credential {
   MockCredential(Cache storage) : super(storage);
 
   @override
-  Future<bool> storeCredential(final Token token, {bool cache = false}) async {
+  Future<bool> storeCredential(final Token? token, {bool cache = false}) async {
     return true;
   }
 }
@@ -47,12 +53,20 @@ void main() {
   final MockNavigatorObserver navigatorObserver = MockNavigatorObserver();
 
   // Mock class refs
-  ApiUser userApi;
-  AppRoute appRoute;
-  AppLoading appLoading;
+  late ApiUser userApi;
+  late AppRoute appRoute;
+  late AppLoading appLoading;
 
   // Widget to test
-  Widget appWidget;
+  late Widget appWidget;
+
+  setUpAll(() {
+    registerFallbackValue(FakeRoute());
+    registerFallbackValue(FakeBuildContext());
+  });
+
+  const String email = 'test@gmail.com';
+  const String pwd = '123';
 
   /// Setup for test
   setUp(() {
@@ -72,8 +86,9 @@ void main() {
                   )),
           ProxyProvider<Credential, ApiUser>(
               create: (_) => MockAuthApi(),
-              update: (_, Credential credential, ApiUser userApi) {
-                return userApi..token = credential.token;
+              update: (_, Credential credential, ApiUser? userApi) {
+                userApi?.token = credential.token;
+                return userApi!;
               }),
           Provider<AppLoading>(create: (_) => MockAppLoading()),
           ChangeNotifierProvider<LocaleProvider>(
@@ -99,18 +114,23 @@ void main() {
             appRoute = Provider.of(context, listen: false);
             appLoading = Provider.of(context, listen: false);
 
+            // Fix: type 'Null' is not a subtype of type 'Future<void>'
+            when<Future<void>>(() => appLoading.showLoading(any()))
+                .thenAnswer((_) async {});
+            when<void>(() => appLoading.hideLoading()).thenAnswer((_) {});
+
             // Mock navigator Observer
-            when(navigatorObserver.didPush(any, any))
+            when(() => navigatorObserver.didPush(any(), any()))
                 .thenAnswer((Invocation invocation) {
               logger.d('didPush ${invocation.positionalArguments}');
             });
 
             // Use Mockito to return a successful response when it calls the
             // signIn function
-            when(userApi.logIn(null, null)).thenAnswer((_) {
+            when(() => userApi.logIn(email, pwd)).thenAnswer((_) {
               return Future<Response<Map<String, dynamic>>>.value(
                 Response<Map<String, dynamic>>(
-                  requestOptions: null,
+                  requestOptions: RequestOptions(path: ''),
                   data: <String, dynamic>{
                     'data': <String, String>{
                       'access_token': 'nhancvdeptrai',
@@ -125,22 +145,25 @@ void main() {
                 context.watch<LocaleProvider>();
 
             // Build Material app
-            return MaterialApp(
-              navigatorKey: appRoute.navigatorKey,
-              locale: localeProvider.locale,
-              supportedLocales: S.delegate.supportedLocales,
-              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              home: (appRoute.generateRoute(
-                          const RouteSettings(name: AppRoute.routeLogin))
-                      as MaterialPageRoute<dynamic>)
-                  .builder(context),
-              onGenerateRoute: appRoute.generateRoute,
-              navigatorObservers: <NavigatorObserver>[navigatorObserver],
+            return ScreenUtilInit(
+              designSize: const Size(375, 812),
+              builder: (_, __) => MaterialApp(
+                navigatorKey: appRoute.navigatorKey,
+                locale: localeProvider.locale,
+                supportedLocales: S.delegate.supportedLocales,
+                localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                home: (appRoute.generateRoute(
+                            const RouteSettings(name: AppRoute.routeLogin))
+                        as MaterialPageRoute<dynamic>)
+                    .builder(context),
+                onGenerateRoute: appRoute.generateRoute,
+                navigatorObservers: <NavigatorObserver>[navigatorObserver],
+              ),
             );
           },
         ),
@@ -170,8 +193,8 @@ void main() {
         find.byKey(const Key('passwordInputKey'));
     expect(emailInputFinder, findsOneWidget);
     expect(passwordInputFinder, findsOneWidget);
-    await tester.enterText(emailInputFinder, 'test@gmail.com');
-    await tester.enterText(passwordInputFinder, '123');
+    await tester.enterText(emailInputFinder, email);
+    await tester.enterText(passwordInputFinder, pwd);
     // Wait the widget state updated until the dismiss animation ends.
     await tester.pumpAndSettle();
 
@@ -186,23 +209,23 @@ void main() {
     // use cast button approach instead
     final ElevatedButton button =
         callApiFinder.evaluate().first.widget as ElevatedButton;
-    button.onPressed();
+    button.onPressed!();
     await tester.pumpAndSettle();
 
     // Verify
     logger.d('Verifying');
     // Verify push to show loading
-    verify(appLoading.showLoading(any)).called(1);
+    verify(() => appLoading.showLoading(any())).called(1);
     // Verify that login function called
-    verify(userApi.logIn(null, null));
+    verify(() => userApi.logIn(email, pwd));
     //  Verify push to hide loading
-    verify(appLoading.hideAppDialog());
+    verify(() => appLoading.hideAppDialog());
 
     // Wait the widget state updated
     await tester.pumpAndSettle();
 
     // Verify that a push event happened
-    verify(navigatorObserver.didPush(any, any));
+    verify(() => navigatorObserver.didPush(any(), any()));
     // Verify that HomePage opened
     expect(find.byType(HomePage), findsOneWidget);
   });

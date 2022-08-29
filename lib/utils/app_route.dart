@@ -58,7 +58,7 @@ class AppRoute {
   //                   status: settings.arguments as bool,
   //                 )))
   static Widget createProviders(
-    List<SingleChildWidget> providers,
+    List<SingleChildWidget>? providers,
     Widget child,
   ) {
     return MultiProvider(
@@ -68,13 +68,14 @@ class AppRoute {
   }
 
   /// App route observer
-  final RouteObserver<Route<dynamic>> routeObserver = RouteObserver<Route<dynamic>>();
+  final RouteObserver<Route<dynamic>> routeObserver =
+      RouteObserver<Route<dynamic>>();
 
   /// App global navigator key
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   /// Get app context
-  BuildContext get appContext => navigatorKey.currentContext;
+  BuildContext? get appContext => navigatorKey.currentContext;
 
   /// Generate route for app here
   Route<dynamic> generateRoute(RouteSettings settings) {
@@ -84,14 +85,15 @@ class AppRoute {
             settings: settings,
             builder: (_) => AppRoute.createProvider(
                   (_) => CounterProvider(),
-                  CounterPage(argument: settings.arguments as String),
+                  CounterPage(argument: settings.arguments as String?),
                 ));
 
       case routeHome:
         return MaterialPageRoute<dynamic>(
             settings: settings,
             builder: (_) => AppRoute.createProvider(
-                  (BuildContext context) => HomeProvider(Provider.of(context, listen: false)),
+                  (BuildContext context) =>
+                      HomeProvider(Provider.of(context, listen: false)),
                   const HomePage(),
                 ));
 
@@ -105,7 +107,13 @@ class AppRoute {
                 ));
 
       default:
-        return null;
+        return MaterialPageRoute<dynamic>(
+            settings: settings,
+            builder: (_) => AppRoute.createProvider(
+                  (BuildContext context) =>
+                      HomeProvider(Provider.of(context, listen: false)),
+                  const HomePage(),
+                ));
     }
   }
 }

@@ -10,9 +10,10 @@ import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_route.dart';
 import 'package:provider/provider.dart';
 
-abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T> with ApiError {
-  LocaleProvider localeProvider;
-  AuthProvider authProvider;
+abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
+    with ApiError {
+  late LocaleProvider localeProvider;
+  late AuthProvider authProvider;
 
   @mustCallSuper
   @override
@@ -25,7 +26,7 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T> wi
   @override
   Future<int> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
-    if (errorType.message != null && errorType.message.isNotEmpty) {
+    if (errorType.message.isNotEmpty) {
       await AppDialog.show(context, errorType.message, title: 'Error');
     }
     if (errorType.code == ApiErrorCode.unauthorized) {
@@ -44,7 +45,9 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T> wi
       },
       onFinally: () async {
         AppLoading.hide(context);
-        context.navigator()?.pushNamedAndRemoveUntil(AppRoute.routeRoot, (_) => false);
+        context
+            .navigator()
+            ?.pushNamedAndRemoveUntil(AppRoute.routeRoot, (_) => false);
       },
       skipOnError: true,
     );

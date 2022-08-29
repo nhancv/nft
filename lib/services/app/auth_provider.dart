@@ -18,24 +18,37 @@ class AuthProvider extends ChangeNotifierSafety {
   void resetState() {}
 
   /// Call api login
+  /// POST https://nhancv.free.beeceptor.com/login
+  // Response headers: {
+  //   "content-type": "application/json",
+  //   "access-control-allow-origin": "*",
+  //   "vary": "Accept-Encoding"
+  // }
+  // Response body: {"data":{"token_type":"","expires_in":1,"access_token":"good","refresh_token":"none"}}
   Future<bool> login(String email, String password) async {
     final Response<Map<String, dynamic>> result =
         await _api.logIn(email, password).timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
-    final Token token = loginResponse.data;
+    final Token? token = loginResponse.data;
+    print(token);
     if (token != null) {
       /// Save credential
-      final bool saveRes = await _credential.storeCredential(token, cache: true);
+      final bool saveRes =
+          await _credential.storeCredential(token, cache: true);
+      print(saveRes);
       return saveRes;
     } else {
       throw DioError(
-          requestOptions: null, error: loginResponse.error?.message ?? 'Login error', type: DioErrorType.response);
+          requestOptions: result.requestOptions,
+          error: loginResponse.error?.message ?? 'Login error',
+          type: DioErrorType.response);
     }
   }
 
   /// Call api login with error
   Future<LoginResponse> logInWithError() async {
-    final Response<Map<String, dynamic>> result = await _api.logInWithError().timeout(const Duration(seconds: 30));
+    final Response<Map<String, dynamic>> result =
+        await _api.logInWithError().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     return loginResponse;
   }
@@ -43,7 +56,10 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call api login with exception
   Future<void> logInWithException() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    throw DioError(requestOptions: null, error: 'Login with exception', type: DioErrorType.response);
+    throw DioError(
+        requestOptions: RequestOptions(path: ''),
+        error: 'Login with exception',
+        type: DioErrorType.response);
   }
 
   /// Call logout

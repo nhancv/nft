@@ -10,10 +10,10 @@ import 'package:nft/utils/app_route.dart';
 class WKeyboardDetector extends StatefulWidget {
   const WKeyboardDetector({
     this.onState,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final Function(bool isOpen, double keyboardHeight) onState;
+  final Function(bool isOpen, double keyboardHeight)? onState;
 
   @override
   _WKeyboardDetectorState createState() => _WKeyboardDetectorState();
@@ -27,14 +27,14 @@ class _WKeyboardDetectorState extends State<WKeyboardDetector> {
     if (_keyboardVisible != value) {
       _keyboardVisible = value;
       if (widget.onState != null) {
-        widget.onState(_keyboardVisible, _keyboardHeight);
+        widget.onState!(_keyboardVisible, _keyboardHeight);
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    _keyboardHeight = MediaQuery.of(AppRoute.I.appContext).viewInsets.bottom;
+    _keyboardHeight = MediaQuery.of(AppRoute.I.appContext!).viewInsets.bottom;
     keyboardVisible = _keyboardHeight > 0;
     return Container();
   }

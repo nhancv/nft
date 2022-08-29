@@ -1,16 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/pages/counter/counter_provider.dart';
 import 'package:nft/services/safety/base_stateful.dart';
-import 'package:nft/utils/app_extension.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
 import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 class CounterPage extends StatefulWidget {
-  const CounterPage({Key key, this.argument}) : super(key: key);
+  const CounterPage({Key? key, this.argument}) : super(key: key);
 
-  final String argument;
+  final String? argument;
 
   @override
   _CounterPageState createState() => _CounterPageState();
@@ -26,7 +24,9 @@ class _CounterPageState extends BaseStateful<CounterPage> {
           AppBar(
             title: const Text('Counter Page'),
           ),
-          Padding(padding: EdgeInsets.only(top: 20.H), child: Text(widget.argument ?? '')),
+          Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(widget.argument ?? '')),
           Expanded(
             child: Scaffold(
               backgroundColor: Colors.transparent,

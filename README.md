@@ -2,10 +2,11 @@
 Flutter Template
 
 ```
-Flutter 2.3.0-16.0.pre • channel dev • https://github.com/flutter/flutter.git
-Framework • revision fa5883b78e (2 weeks ago) • 2021-05-21 13:04:03 -0700
-Engine • revision 2f067fc4c5
-Tools • Dart 2.14.0 (build 2.14.0-136.0.dev)
+nft|master⚡ ⇒ flutter --version                          
+Flutter 3.0.5 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision f1875d570e (7 weeks ago) • 2022-07-13 11:24:16 -0700
+Engine • revision e85ea0e79c
+Tools • Dart 2.17.6 • DevTools 2.12.2
 ```
 
 ## Initial setup

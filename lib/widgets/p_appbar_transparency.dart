@@ -5,17 +5,21 @@ import 'package:nft/utils/app_theme.dart';
 import 'package:nft/widgets/p_material.dart';
 
 class PAppBarTransparency extends StatelessWidget {
-  const PAppBarTransparency({this.body, this.child, this.forceStatusIconLight, Key key}) : super(key: key);
+  const PAppBarTransparency(
+      {this.body, this.child, this.forceStatusIconLight, Key? key})
+      : super(key: key);
 
-  final Widget child;
-  final Widget body;
-  final bool forceStatusIconLight;
+  final Widget? child;
+  final Widget? body;
+  final bool? forceStatusIconLight;
 
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = context.appTheme();
     final SystemUiOverlayStyle uiOverlayStyle = forceStatusIconLight == null
-        ? (theme.isDark ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light)
+        ? (theme.isDark
+            ? SystemUiOverlayStyle.dark
+            : SystemUiOverlayStyle.light)
         : forceStatusIconLight == true
             ? SystemUiOverlayStyle.light
             : SystemUiOverlayStyle.dark;
@@ -24,7 +28,7 @@ class PAppBarTransparency extends StatelessWidget {
         value: uiOverlayStyle.copyWith(statusBarColor: Colors.transparent),
         child: body ??
             Scaffold(
-              backgroundColor: theme.backgroundColor ?? Colors.transparent,
+              backgroundColor: theme.backgroundColor,
               body: child,
             ),
       ),

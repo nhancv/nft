@@ -9,14 +9,15 @@ import 'package:nft/widgets/w_keyboard_dismiss.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends PageStateful<HomePage> with WidgetsBindingObserver, RouteAware {
-  HomeProvider homeProvider;
+class _HomePageState extends PageStateful<HomePage>
+    with WidgetsBindingObserver, RouteAware {
+  HomeProvider? homeProvider;
 
   @override
   void initDependencies(BuildContext context) {
@@ -36,7 +37,10 @@ class _HomePageState extends PageStateful<HomePage> with WidgetsBindingObserver,
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    AppRoute.I.routeObserver.subscribe(this, ModalRoute.of(context));
+    final ModalRoute<dynamic>? c = ModalRoute.of(context);
+    if (c != null) {
+      AppRoute.I.routeObserver.subscribe(this, c);
+    }
   }
 
   @override
@@ -102,7 +106,8 @@ class _HomePageState extends PageStateful<HomePage> with WidgetsBindingObserver,
 
               /// Example to use selector instead consumer to optimize render performance
               Selector<HomeProvider, String>(
-                selector: (_, HomeProvider provider) => provider.token?.toJson()?.toString() ?? '',
+                selector: (_, HomeProvider provider) =>
+                    provider.token?.toJson().toString() ?? '',
                 builder: (_, String tokenInfo, __) {
                   return Text(
                     tokenInfo,
@@ -117,7 +122,8 @@ class _HomePageState extends PageStateful<HomePage> with WidgetsBindingObserver,
               ElevatedButton(
                 key: const Key(AppRoute.routeCounter),
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoute.routeCounter, arguments: 'From Home ${DateTime.now()}');
+                  Navigator.pushNamed(context, AppRoute.routeCounter,
+                      arguments: 'From Home ${DateTime.now()}');
                 },
                 child: const Text('Counter Page'),
               ),

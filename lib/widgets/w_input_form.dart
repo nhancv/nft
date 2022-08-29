@@ -3,12 +3,12 @@ import 'package:nft/services/safety/base_stateful.dart';
 
 class WInputForm extends StatefulWidget {
   const WInputForm({
-    Key key,
+    Key? key,
     this.controller,
     this.labelText,
     this.errorText,
     this.suffixIcon,
-    this.obscureText,
+    this.obscureText = false,
     this.onTap,
     this.readOnly = false,
     this.onChanged,
@@ -19,7 +19,7 @@ class WInputForm extends StatefulWidget {
   }) : super(key: key);
 
   const WInputForm.email({
-    Key key,
+    Key? key,
     this.controller,
     this.labelText = 'Email',
     this.errorText,
@@ -35,7 +35,7 @@ class WInputForm extends StatefulWidget {
   }) : super(key: key);
 
   const WInputForm.password({
-    Key key,
+    Key? key,
     this.controller,
     this.labelText = 'Password',
     this.errorText,
@@ -50,16 +50,16 @@ class WInputForm extends StatefulWidget {
     this.keyboardType = TextInputType.visiblePassword,
   }) : super(key: key);
 
-  final TextEditingController controller;
-  final String labelText;
-  final String errorText;
-  final Widget suffixIcon;
+  final TextEditingController? controller;
+  final String? labelText;
+  final String? errorText;
+  final Widget? suffixIcon;
   final bool obscureText;
   final bool readOnly;
-  final Function() onTap;
-  final Function(String) onChanged;
-  final Function(String) onSubmitted;
-  final FocusNode focusNode;
+  final Function()? onTap;
+  final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
+  final FocusNode? focusNode;
   final TextInputAction textInputAction;
   final TextInputType keyboardType;
 

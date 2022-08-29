@@ -17,10 +17,11 @@ import 'package:nft/utils/app_style.dart';
 //           );
 //         });
 class WBottomActionSheet extends StatelessWidget {
-  const WBottomActionSheet({Key key, @required this.body, this.onCancel}) : super(key: key);
+  const WBottomActionSheet({Key? key, required this.body, this.onCancel})
+      : super(key: key);
 
   final Widget body;
-  final Function() onCancel;
+  final Function()? onCancel;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +33,17 @@ class WBottomActionSheet extends StatelessWidget {
     final Orientation orientation = MediaQuery.of(context).orientation;
     double actionSheetWidth;
     if (orientation == Orientation.portrait) {
-      actionSheetWidth = MediaQuery.of(context).size.width - (_kEdgeHorizontalPadding * 2);
+      actionSheetWidth =
+          MediaQuery.of(context).size.width - (_kEdgeHorizontalPadding * 2);
     } else {
-      actionSheetWidth = MediaQuery.of(context).size.height - (_kEdgeHorizontalPadding * 2);
+      actionSheetWidth =
+          MediaQuery.of(context).size.height - (_kEdgeHorizontalPadding * 2);
     }
 
     return Theme(
-      data: Theme.of(context).copyWith(textTheme: Theme.of(context).textTheme.apply(fontFamily: '.SF UI Display')),
+      data: Theme.of(context).copyWith(
+          textTheme:
+              Theme.of(context).textTheme.apply(fontFamily: '.SF UI Display')),
       child: Material(
         color: Colors.transparent,
         child: Semantics(
@@ -70,7 +75,8 @@ class WBottomActionSheet extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(9.0),
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: _kBlurAmount, sigmaY: _kBlurAmount),
+                        filter: ImageFilter.blur(
+                            sigmaX: _kBlurAmount, sigmaY: _kBlurAmount),
                         child: InkWell(
                           borderRadius: BorderRadius.circular(9.0),
                           child: Container(
@@ -79,13 +85,14 @@ class WBottomActionSheet extends StatelessWidget {
                             child: Text(
                               'Cancel',
                               textAlign: TextAlign.center,
-                              style: normalTextStyle(17.SP, color: Colors.white),
+                              style:
+                                  normalTextStyle(17.SP, color: Colors.white),
                             ),
                           ),
                           onTap: () {
                             Navigator.of(context).pop();
                             if (onCancel != null) {
-                              onCancel();
+                              onCancel!();
                             }
                           },
                         ),

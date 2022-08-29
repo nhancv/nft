@@ -22,7 +22,8 @@ Future<void> myMain() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Force portrait mode
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp]);
+  await SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[DeviceOrientation.portraitUp]);
 
   /// Run Application
   runApp(
@@ -36,13 +37,16 @@ Future<void> myMain() async {
                 )),
         ProxyProvider<Credential, ApiUser>(
             create: (_) => ApiUser(),
-            update: (_, Credential credential, ApiUser userApi) {
-              return userApi..token = credential.token;
+            update: (_, Credential credential, ApiUser? userApi) {
+              userApi?.token = credential.token;
+              return userApi!;
             }),
         Provider<AppLoading>(create: (_) => AppLoading()),
         Provider<AppDialog>(create: (_) => AppDialog()),
-        ChangeNotifierProvider<LocaleProvider>(create: (BuildContext context) => LocaleProvider()),
-        ChangeNotifierProvider<AppThemeProvider>(create: (BuildContext context) => AppThemeProvider()),
+        ChangeNotifierProvider<LocaleProvider>(
+            create: (BuildContext context) => LocaleProvider()),
+        ChangeNotifierProvider<AppThemeProvider>(
+            create: (BuildContext context) => AppThemeProvider()),
         ChangeNotifierProvider<AuthProvider>(
             create: (BuildContext context) => AuthProvider(
                   Provider.of(context, listen: false),
@@ -55,7 +59,7 @@ Future<void> myMain() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -68,9 +72,10 @@ class _MyAppState extends State<MyApp> {
 
     /// Init page
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final bool hasCredential = await context.read<Credential>().loadCredential();
+      final bool hasCredential =
+          await context.read<Credential>().loadCredential();
       if (hasCredential) {
-        context.navigator().pushReplacementNamed(AppRoute.routeHome);
+        context.navigator()?.pushReplacementNamed(AppRoute.routeHome);
       }
     });
   }
@@ -110,7 +115,7 @@ class _MyAppState extends State<MyApp> {
     ///    iPhone 12 Pro Max                 => 6.7": 428 x 926 (points)
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      builder: () => MaterialApp(
+      builder: (_, __) => MaterialApp(
         navigatorKey: appRoute.navigatorKey,
         locale: localeProvider.locale,
         supportedLocales: S.delegate.supportedLocales,

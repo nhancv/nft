@@ -33,17 +33,17 @@ class WBorderShadow extends BaseStateless {
       this.padding,
       this.spreadRadius,
       this.blurRadius,
-      Key key})
+      Key? key})
       : super(key: key);
 
-  final Widget child;
-  final Color shadowColor;
-  final Color borderColor;
-  final Color backgroundColor;
-  final double borderRadius;
-  final double padding;
-  final double spreadRadius;
-  final double blurRadius;
+  final Widget? child;
+  final Color? shadowColor;
+  final Color? borderColor;
+  final Color? backgroundColor;
+  final double? borderRadius;
+  final double? padding;
+  final double? spreadRadius;
+  final double? blurRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +75,21 @@ class WBorderShadow extends BaseStateless {
 // ignore: must_be_immutable
 class _WSingleBorderShadow extends BaseStateless {
   _WSingleBorderShadow(
-      {this.child, this.shadowColor, this.borderRadius, this.borderColor, this.spreadRadius, this.blurRadius, Key key})
+      {this.child,
+      this.shadowColor,
+      this.borderRadius,
+      this.borderColor,
+      this.spreadRadius,
+      this.blurRadius,
+      Key? key})
       : super(key: key);
 
-  final Widget child;
-  final Color shadowColor;
-  final Color borderColor;
-  final double borderRadius;
-  final double spreadRadius;
-  final double blurRadius;
+  final Widget? child;
+  final Color? shadowColor;
+  final Color? borderColor;
+  final double? borderRadius;
+  final double? spreadRadius;
+  final double? blurRadius;
 
   @override
   Widget build(BuildContext context) {

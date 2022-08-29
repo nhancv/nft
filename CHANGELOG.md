@@ -1,3 +1,7 @@
+## [3.0.0+202208001] - August 29, 2022.
+
+* Flutter 3
+
 ## [2.0.0+202106001] - June 8, 2021.
 
 * Upgrade all lib version

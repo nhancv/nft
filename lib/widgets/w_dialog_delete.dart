@@ -5,7 +5,7 @@ import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
 import 'package:nft/widgets/w_dialog_alert.dart';
 
-// AppHelper.showPopup<void>(context,
+// appHelper_showPopup<void>(context,
 //     (BuildContext context) {
 //   return WDialogDelete(
 //     title: '',
@@ -20,16 +20,16 @@ import 'package:nft/widgets/w_dialog_alert.dart';
 // });
 class WDialogDelete extends StatefulWidget {
   const WDialogDelete({
-    Key key,
+    Key? key,
     this.title,
     this.content,
     this.onCancelPressed,
     this.onDeletePressed,
   }) : super(key: key);
-  final String title;
-  final String content;
-  final Function() onCancelPressed;
-  final Function() onDeletePressed;
+  final String? title;
+  final String? content;
+  final Function()? onCancelPressed;
+  final Function()? onDeletePressed;
 
   @override
   _WDialogDeleteState createState() => _WDialogDeleteState();

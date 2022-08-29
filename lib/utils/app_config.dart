@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:nft/utils/app_theme.dart';
 
 enum EnvType {
@@ -10,8 +8,8 @@ enum EnvType {
 /// Environment declare here
 class Env {
   Env._({
-    @required this.envType,
-    @required this.apiBaseUrl,
+    required this.envType,
+    required this.apiBaseUrl,
   });
 
   /// Dev mode
@@ -28,10 +26,8 @@ class Env {
 
 /// Config env
 class AppConfig {
-  factory AppConfig({Env env, AppTheme theme}) {
-    if (env != null) {
-      I.env = env;
-    }
+  factory AppConfig({required Env env, AppTheme? theme}) {
+    I.env = env;
     if (theme != null) {
       I.theme = theme;
     }

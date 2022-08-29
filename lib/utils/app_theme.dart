@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nft/utils/app_asset.dart';
 import 'package:nft/utils/app_config.dart';

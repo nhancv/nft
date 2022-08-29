@@ -18,12 +18,12 @@ mixin ApiError {
   /// - onCompleted: the function executed after api or before crashing, can be null
   /// - onFinally: the function executed end of function, can be null
   /// - skipOnError: false as default if you want to forward the error to onApiError
-  Future<T> apiCallSafety<T>(
+  Future<T?> apiCallSafety<T>(
     Future<T> Function() dioApi, {
-    Future<void> Function() onStart,
-    Future<void> Function(dynamic error) onError,
-    Future<void> Function(bool status, T res) onCompleted,
-    Future<void> Function() onFinally,
+    Future<void> Function()? onStart,
+    Future<void> Function(dynamic error)? onError,
+    Future<void> Function(bool status, T? res)? onCompleted,
+    Future<void> Function()? onFinally,
     bool skipOnError = false,
   }) async {
     try {

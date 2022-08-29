@@ -4,7 +4,7 @@ import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
 
-// AppHelper.showPopup<void>(context,
+// appHelperShowPopup<void>(context,
 //     (BuildContext context) {
 //   return WDialogAlert(
 //     title: '',
@@ -19,7 +19,7 @@ import 'package:nft/utils/app_style.dart';
 // });
 class WDialogAlert extends StatefulWidget {
   const WDialogAlert({
-    Key key,
+    Key? key,
     this.title,
     this.titleStyle,
     this.content,
@@ -31,16 +31,16 @@ class WDialogAlert extends StatefulWidget {
     this.confirmTitleStyle,
     this.onConfirmPressed,
   }) : super(key: key);
-  final String title;
-  final TextStyle titleStyle;
-  final String content;
-  final TextStyle contentStyle;
-  final String cancelTitle;
-  final TextStyle cancelTitleStyle;
-  final Function() onCancelPressed;
-  final String confirmTitle;
-  final TextStyle confirmTitleStyle;
-  final Function() onConfirmPressed;
+  final String? title;
+  final TextStyle? titleStyle;
+  final String? content;
+  final TextStyle? contentStyle;
+  final String? cancelTitle;
+  final TextStyle? cancelTitleStyle;
+  final Function()? onCancelPressed;
+  final String? confirmTitle;
+  final TextStyle? confirmTitleStyle;
+  final Function()? onConfirmPressed;
 
   @override
   _WDialogAlertState createState() => _WDialogAlertState();
@@ -55,7 +55,8 @@ class _WDialogAlertState extends BaseStateful<WDialogAlert> {
       child: CupertinoAlertDialog(
         title: Text(
           widget.title ?? '',
-          style: widget.titleStyle ?? semiBoldTextStyle(17.SP, color: const Color(0xFF1C202E)),
+          style: widget.titleStyle ??
+              semiBoldTextStyle(17.SP, color: const Color(0xFF1C202E)),
         ),
         content: SingleChildScrollView(
           child: Container(
@@ -64,7 +65,8 @@ class _WDialogAlertState extends BaseStateful<WDialogAlert> {
                 SizedBox(height: 5.H),
                 Text(
                   widget.content ?? '',
-                  style: widget.contentStyle ?? normalTextStyle(13.SP, color: const Color(0xFF1C202E)),
+                  style: widget.contentStyle ??
+                      normalTextStyle(13.SP, color: const Color(0xFF1C202E)),
                 ),
               ],
             ),
