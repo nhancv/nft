@@ -18,13 +18,13 @@ class AuthProvider extends ChangeNotifierSafety {
   void resetState() {}
 
   /// Call api login
-  /// POST https://nhancv.free.beeceptor.com/login
-  // Response headers: {
-  //   "content-type": "application/json",
-  //   "access-control-allow-origin": "*",
-  //   "vary": "Accept-Encoding"
-  // }
-  // Response body: {"data":{"token_type":"","expires_in":1,"access_token":"good","refresh_token":"none"}}
+  /// POST https://nhancv.github.io/mock/login.json
+  /// Response headers: {
+  ///   "content-type": "application/json",
+  ///   "access-control-allow-origin": "*",
+  ///   "vary": "Accept-Encoding"
+  /// }
+  /// Response body: {"data":{"token_type":"x","expires_in":1,"access_token":"good","refresh_token":"none"}}
   Future<bool> login(String email, String password) async {
     final Response<Map<String, dynamic>> result =
         await _api.logIn(email, password).timeout(const Duration(seconds: 30));
@@ -46,6 +46,7 @@ class AuthProvider extends ChangeNotifierSafety {
   }
 
   /// Call api login with error
+  /// Response body: {"error":{"code":400,"message":"auth fail"}}
   Future<LoginResponse> logInWithError() async {
     final Response<Map<String, dynamic>> result =
         await _api.logInWithError().timeout(const Duration(seconds: 30));
