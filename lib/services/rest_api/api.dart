@@ -46,7 +46,7 @@ class Api {
     try {
       return await dioApi();
     } catch (error) {
-      if (error is DioError && error.type == DioErrorType.response) {
+      if (error is DioError && error.type == DioErrorType.badResponse) {
         final Response<dynamic>? response = error.response;
 
         try {

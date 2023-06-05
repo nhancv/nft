@@ -41,7 +41,7 @@ class AuthProvider extends ChangeNotifierSafety {
       throw DioError(
           requestOptions: result.requestOptions,
           error: loginResponse.error?.message ?? 'Login error',
-          type: DioErrorType.response);
+          type: DioErrorType.badResponse);
     }
   }
 
@@ -60,7 +60,7 @@ class AuthProvider extends ChangeNotifierSafety {
     throw DioError(
         requestOptions: RequestOptions(path: ''),
         error: 'Login with exception',
-        type: DioErrorType.response);
+        type: DioErrorType.badResponse);
   }
 
   /// Call logout
