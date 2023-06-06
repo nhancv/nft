@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
 import 'package:nft/widgets/w_bottom_action_sheet.dart';
@@ -14,8 +13,7 @@ class WPickerDate extends StatefulWidget {
 
   final DateTime? initDateTime;
 
-  static Future<DateTime?> showPicker(BuildContext context,
-      {DateTime? initDateTime}) {
+  static Future<DateTime?> showPicker(BuildContext context, {DateTime? initDateTime}) {
     return showCupertinoModalPopup<DateTime>(
         context: context,
         builder: (BuildContext context) {
@@ -29,12 +27,11 @@ class WPickerDate extends StatefulWidget {
   _WPickerDateState createState() => _WPickerDateState();
 }
 
-class _WPickerDateState extends BaseStateful<WPickerDate> {
+class _WPickerDateState extends State<WPickerDate> {
   DateTime selected = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return WBottomActionSheet(
       body: Container(
         child: Column(

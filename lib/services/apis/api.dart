@@ -3,13 +3,12 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nft/models/local/token.dart';
-import 'package:nft/utils/app_config.dart';
+import 'package:nft/services/app/app_config.dart';
 
 class Api {
   Api() {
     if (!kReleaseMode) {
-      dio.interceptors
-          .add(LogInterceptor(responseBody: true, requestBody: true));
+      dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
     }
   }
 
@@ -21,11 +20,8 @@ class Api {
   final Dio dio = Dio();
 
   /// Get request header options
-  Future<Options> getOptions(
-      {String? contentType = Headers.jsonContentType}) async {
-    final Map<String, String> header = <String, String>{
-      Headers.acceptHeader: 'application/json'
-    };
+  Future<Options> getOptions({String? contentType = Headers.jsonContentType}) async {
+    final Map<String, String> header = <String, String>{Headers.acceptHeader: 'application/json'};
     return Options(headers: header, contentType: contentType);
   }
 
@@ -34,8 +30,7 @@ class Api {
     final Options options = await getOptions(contentType: contentType);
 
     if (token != null) {
-      options.headers?.addAll(
-          <String, String>{'Authorization': 'Bearer ${token?.accessToken}'});
+      options.headers?.addAll(<String, String>{'Authorization': 'Bearer ${token?.accessToken}'});
     }
 
     return options;
@@ -72,10 +67,7 @@ class Api {
         final String errorMessage =
             'Code ${response?.statusCode} - ${response?.statusMessage} ${response?.data != null ? '\n' : ''} ${response?.data}';
         throw DioError(
-            requestOptions: error.requestOptions,
-            response: error.response,
-            type: error.type,
-            error: errorMessage);
+            requestOptions: error.requestOptions, response: error.response, type: error.type, error: errorMessage);
       }
       rethrow;
     }

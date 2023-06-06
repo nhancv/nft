@@ -15,8 +15,7 @@ import 'package:nft/utils/app_extension.dart';
 //              );
 //       });
 
-Future<T?> appHelperShowBottomSheet<T>(
-    BuildContext context, Widget Function(BuildContext context) child,
+Future<T?> appHelperShowBottomSheet<T>(BuildContext context, Widget Function(BuildContext context) child,
     {double? heightFactor, bool interactive = true}) {
   return showModalBottomSheet<T>(
     context: context,
@@ -46,8 +45,7 @@ Future<T?> appHelperShowBottomSheet<T>(
 //     });
 Future<T?> appHelperShowScrollableBottomSheet<T>(
   BuildContext context,
-  Widget Function(BuildContext context, ScrollController scrollController)
-      child,
+  Widget Function(BuildContext context, ScrollController scrollController) child,
 ) {
   return showModalBottomSheet<T>(
     context: context,
@@ -138,20 +136,17 @@ Future<void> appHelperEnableRotation() {
 }
 
 /// Change next focus
-void appHelperNextFocus(
-    BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+void appHelperNextFocus(BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
   currentFocus.unfocus();
   FocusScope.of(context).requestFocus(nextFocus);
 }
 
 /// Fullscreen mode
 void appHelperEnableFullscreen() {
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: <SystemUiOverlay>[]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: <SystemUiOverlay>[]);
 }
 
 /// Disable fullscreen mode
 void appHelperDisableFullscreen() {
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: SystemUiOverlay.values);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nft/services/safety/base_stateless.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
 
-// ignore: must_be_immutable
-class WTextRounded extends BaseStateless {
-  WTextRounded({
+class WTextRounded extends StatelessWidget {
+  const WTextRounded({
     Key? key,
     this.text,
     this.color,
@@ -20,7 +18,6 @@ class WTextRounded extends BaseStateless {
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Container(
       padding: EdgeInsets.all(2.W),
       margin: EdgeInsets.symmetric(horizontal: 5.W, vertical: 5.W),

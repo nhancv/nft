@@ -6,33 +6,19 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nft/pages/counter/counter_page.dart';
-import 'package:nft/pages/counter/counter_provider.dart';
-import 'package:nft/services/app/locale_provider.dart';
-import 'package:nft/utils/app_route.dart';
-import 'package:nft/utils/app_theme.dart';
-import 'package:provider/provider.dart';
-import 'package:provider/single_child_widget.dart';
 
 void main() {
   // Testing in flutter gives error MediaQuery.of() called
   // with a context that does not contain a MediaQuery
   Widget buildTestableWidget(Widget widget) {
-    return MediaQuery(
-      data: const MediaQueryData(),
-      child: MultiProvider(
-          providers: <SingleChildWidget>[
-            ChangeNotifierProvider<LocaleProvider>(
-                create: (_) => LocaleProvider()),
-            ChangeNotifierProvider<AppThemeProvider>(
-                create: (_) => AppThemeProvider())
-          ],
-          builder: (_, __) {
-            return MaterialApp(
-              home: widget,
-            );
-          }),
+    return ProviderScope(
+      child: MediaQuery(
+        data: const MediaQueryData(),
+        child: MaterialApp(home: widget),
+      ),
     );
   }
 
@@ -42,8 +28,7 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Create the widget by telling the tester to build it.
     // Build a MaterialApp with MediaQuery.
-    await tester.pumpWidget(buildTestableWidget(AppRoute.createProvider(
-        (_) => CounterProvider(), const CounterPage())));
+    await tester.pumpWidget(buildTestableWidget(const CounterPage()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

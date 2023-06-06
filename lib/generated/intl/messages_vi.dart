@@ -21,12 +21,12 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "btnLogin": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "hello": MessageLookupByLibrary.simpleMessage("xin chào"),
         "labelEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "labelPassword": MessageLookupByLibrary.simpleMessage("Password"),
-        "msgEmailInValid":
-            MessageLookupByLibrary.simpleMessage("Email không hợp lệ")
+        "msgEmailInValid": MessageLookupByLibrary.simpleMessage("Email không hợp lệ")
       };
 }

@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:nft/services/app/app_dialog.dart';
-import 'package:nft/services/app/app_loading.dart';
-import 'package:nft/services/app/auth_provider.dart';
-import 'package:nft/services/app/locale_provider.dart';
-import 'package:nft/services/rest_api/api_error.dart';
-import 'package:nft/services/rest_api/api_error_type.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nft/services/apis/api_error.dart';
+import 'package:nft/services/apis/api_error_type.dart';
+import 'package:nft/services/app/app_route.dart';
+import 'package:nft/services/providers/provider_auth.dart';
+import 'package:nft/services/providers/provider_locale.dart';
+import 'package:nft/services/providers/providers.dart';
 import 'package:nft/services/safety/base_stateful.dart';
+import 'package:nft/utils/app_dialog.dart';
 import 'package:nft/utils/app_extension.dart';
-import 'package:nft/utils/app_route.dart';
-import 'package:provider/provider.dart';
+import 'package:nft/utils/app_loading.dart';
 
-abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
-    with ApiError {
+abstract class PageStateful<T extends ConsumerStatefulWidget> extends BaseStateful<T> with ApiError {
   late LocaleProvider localeProvider;
   late AuthProvider authProvider;
 
   @mustCallSuper
   @override
-  void initDependencies(BuildContext context) {
-    super.initDependencies(context);
-    localeProvider = Provider.of(context, listen: false);
-    authProvider = Provider.of(context, listen: false);
+  void initDependencies(WidgetRef ref) {
+    super.initDependencies(ref);
+    localeProvider = ref.read(pLocaleProvider);
+    authProvider = ref.read(pAuthProvider);
   }
 
   @override
   Future<int> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
     if (errorType.message.isNotEmpty) {
-      await AppDialog.show(context, errorType.message, title: 'Error');
+      await AppDialog.show(ref, errorType.message, title: 'Error');
     }
     if (errorType.code == ApiErrorCode.unauthorized) {
       await logout(context);
@@ -41,13 +41,11 @@ abstract class PageStateful<T extends StatefulWidget> extends BaseStateful<T>
     await apiCallSafety(
       authProvider.logout,
       onStart: () async {
-        AppLoading.show(context);
+        AppLoading.show(ref);
       },
       onFinally: () async {
-        AppLoading.hide(context);
-        context
-            .navigator()
-            ?.pushNamedAndRemoveUntil(AppRoute.routeRoot, (_) => false);
+        AppLoading.hide(ref);
+        ref.navigator()?.pushNamedAndRemoveUntil(AppRoute.routeRoot, (_) => false);
       },
       skipOnError: true,
     );

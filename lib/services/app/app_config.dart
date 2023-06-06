@@ -1,4 +1,4 @@
-import 'package:nft/utils/app_theme.dart';
+import 'package:nft/services/app/app_theme.dart';
 
 enum EnvType {
   dev,

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
 import 'package:nft/widgets/w_bottom_action_sheet.dart';
@@ -11,14 +10,12 @@ import 'package:nft/widgets/w_divider_line.dart';
 /// Use: final int index = await WPickerValue.showPicker(context, initialIndex: 0, initValues: <String>[]);
 
 class WPickerValue extends StatefulWidget {
-  const WPickerValue({Key? key, this.initialIndex, this.initValues})
-      : super(key: key);
+  const WPickerValue({Key? key, this.initialIndex, this.initValues}) : super(key: key);
 
   final int? initialIndex;
   final List<String>? initValues;
 
-  static Future<int?> showPicker(BuildContext context,
-      {int initialIndex = 0, List<String>? initValues}) {
+  static Future<int?> showPicker(BuildContext context, {int initialIndex = 0, List<String>? initValues}) {
     return showCupertinoModalPopup<int>(
         context: context,
         builder: (BuildContext context) {
@@ -33,13 +30,11 @@ class WPickerValue extends StatefulWidget {
   _WPickerValueState createState() => _WPickerValueState();
 }
 
-class _WPickerValueState extends BaseStateful<WPickerValue> {
+class _WPickerValueState extends State<WPickerValue> {
   int selected = 0;
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     final List<Widget>? children = widget.initValues == null
         ? <Widget>[]
         : widget.initValues
@@ -55,9 +50,7 @@ class _WPickerValueState extends BaseStateful<WPickerValue> {
             )
             .toList();
     const double itemExtent = 50;
-    final double height = (children?.isNotEmpty ?? false)
-        ? ((children?.length ?? 0) * itemExtent)
-        : itemExtent;
+    final double height = (children?.isNotEmpty ?? false) ? ((children?.length ?? 0) * itemExtent) : itemExtent;
 
     return WBottomActionSheet(
       body: Container(
@@ -86,8 +79,7 @@ class _WPickerValueState extends BaseStateful<WPickerValue> {
                 },
                 itemExtent: itemExtent,
                 children: children ?? <Widget>[],
-                scrollController: FixedExtentScrollController(
-                    initialItem: widget.initialIndex ?? 0),
+                scrollController: FixedExtentScrollController(initialItem: widget.initialIndex ?? 0),
               ),
             ),
             const WDividerLine(),

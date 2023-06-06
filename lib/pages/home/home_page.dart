@@ -1,33 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/pages/home/home_provider.dart';
+import 'package:nft/services/app/app_route.dart';
+import 'package:nft/services/providers/providers.dart';
 import 'package:nft/services/safety/page_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_log.dart';
-import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
 import 'package:nft/widgets/w_keyboard_dismiss.dart';
-import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
+final pHomeProvider = ChangeNotifierProvider((ref) => HomeProvider(ref.watch(pApiUserProvider)));
+
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends PageStateful<HomePage>
-    with WidgetsBindingObserver, RouteAware {
-  HomeProvider? homeProvider;
-
-  @override
-  void initDependencies(BuildContext context) {
-    super.initDependencies(context);
-    homeProvider = Provider.of(context, listen: false);
-  }
-
-  @override
-  void afterFirstBuild(BuildContext context) {}
-
+class _HomePageState extends PageStateful<HomePage> with WidgetsBindingObserver, RouteAware {
   @override
   void initState() {
     super.initState();
@@ -71,7 +62,6 @@ class _HomePageState extends PageStateful<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return PAppBarEmpty(
       child: WKeyboardDismiss(
         child: Container(
@@ -105,15 +95,10 @@ class _HomePageState extends PageStateful<HomePage>
               SizedBox(height: 10.H),
 
               /// Example to use selector instead consumer to optimize render performance
-              Selector<HomeProvider, String>(
-                selector: (_, HomeProvider provider) =>
-                    provider.token?.toJson().toString() ?? '',
-                builder: (_, String tokenInfo, __) {
-                  return Text(
-                    tokenInfo,
-                    textAlign: TextAlign.center,
-                  );
-                },
+              /// https://docs-v2.riverpod.dev/docs/concepts/reading#obtaining-a-ref-object
+              Text(
+                ref.watch(pHomeProvider.select((value) => value.token?.toJson().toString() ?? '')),
+                textAlign: TextAlign.center,
               ),
 
               SizedBox(height: 10.H),
@@ -122,8 +107,7 @@ class _HomePageState extends PageStateful<HomePage>
               ElevatedButton(
                 key: const Key(AppRoute.routeCounter),
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoute.routeCounter,
-                      arguments: 'From Home ${DateTime.now()}');
+                  Navigator.pushNamed(context, AppRoute.routeCounter, arguments: 'From Home ${DateTime.now()}');
                 },
                 child: const Text('Counter Page'),
               ),

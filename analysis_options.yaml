@@ -22,6 +22,8 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
+  plugins:
+    - custom_lint
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
@@ -57,7 +59,6 @@ linter:
     # we prefer having parameters in the same order as fields https://github.com/flutter/flutter/issues/10219
     always_put_required_named_parameters_first: no
     always_require_non_null_named_parameters: true
-    always_specify_types: true
     # we do this commonly
     always_use_package_imports: no
     annotate_overrides: true
@@ -111,8 +112,6 @@ linter:
     # we do this commonly
     avoid_type_to_string: no
     avoid_types_as_parameter_names: true
-    # conflicts with always_specify_types
-    avoid_types_on_closure_parameters: no
     # not yet tested
     avoid_unnecessary_containers: no
     avoid_unused_constructor_parameters: true
@@ -175,8 +174,12 @@ linter:
     null_check_on_nullable_type_parameter: true
     # not required by flutter style
     null_closures: no
+    # Incompatible with: avoid_types_on_closure_parameters, omit_local_variable_types.
+    always_specify_types: no
     # opposite of always_specify_types
-    omit_local_variable_types: no
+    omit_local_variable_types: yes
+    # conflicts with always_specify_types
+    avoid_types_on_closure_parameters: yes
     # too many false positives
     one_member_abstracts: no
     # https://github.com/flutter/flutter/issues/5792

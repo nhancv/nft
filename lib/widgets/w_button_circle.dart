@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WButtonCircle extends StatelessWidget {
-  const WButtonCircle(
-      {Key? key, this.width, this.onPressed, this.child, this.color})
-      : super(key: key);
+  const WButtonCircle({Key? key, this.width, this.onPressed, this.child, this.color}) : super(key: key);
 
   final double? width;
   final Function()? onPressed;
@@ -21,7 +19,7 @@ class WButtonCircle extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           padding: const EdgeInsets.all(0),
-          primary: color ?? Colors.transparent,
+          backgroundColor: color ?? Colors.transparent,
           elevation: 0,
         ),
       ),

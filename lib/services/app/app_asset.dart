@@ -25,5 +25,4 @@ class AppAssets {
   ///#region VIDEOS
   /// -----------------
   ///#endregion
-
 }

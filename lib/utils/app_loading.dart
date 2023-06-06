@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:nft/services/app/app_dialog.dart';
-import 'package:provider/provider.dart';
+import 'package:nft/services/providers/providers.dart';
+import 'package:nft/utils/app_dialog.dart';
 
 ///
 /// Install:
-/// Declare provider to my_app
-/// Provider<AppLoading>(create: (_) => AppLoading()),
+/// Declare provider to services/providers/providers.dart
+/// final gAppLoadingProvider = Provider((_) => AppLoading());
 ///
 /// Usage:
 /// AppLoading.show(context);
@@ -15,26 +16,18 @@ import 'package:provider/provider.dart';
 class AppLoading extends AppDialog {
   /// Show loading dialog shortcut
   /// Change icon at https://pub.dev/packages/flutter_spinkit
-  static void show(BuildContext? context,
-      {String? text, Widget? textWidget, Widget? icon}) {
-    if (context != null) {
-      context
-          .read<AppLoading>()
-          .showLoading(context, text: text, textWidget: textWidget, icon: icon);
-    }
+  static void show(WidgetRef ref, {String? text, Widget? textWidget, Widget? icon}) {
+    ref.read(pAppLoadingProvider).showLoading(ref.context, text: text, textWidget: textWidget, icon: icon);
   }
 
   /// Hide loading dialog shortcut
-  static void hide(BuildContext? context) {
-    if (context != null) {
-      context.read<AppLoading>().hideAppDialog();
-    }
+  static void hide(WidgetRef ref) {
+    ref.read(pAppLoadingProvider).hideAppDialog();
   }
 
   /// Show loading dialog
   /// Change icon at https://pub.dev/packages/flutter_spinkit
-  Future<void> showLoading(BuildContext context,
-      {String? text, Widget? textWidget, Widget? icon}) async {
+  Future<void> showLoading(BuildContext context, {String? text, Widget? textWidget, Widget? icon}) async {
     return showAppDialog(
       context,
       Material(

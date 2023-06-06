@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nft/services/app/app_theme.dart';
 import 'package:nft/utils/app_extension.dart';
-import 'package:nft/utils/app_theme.dart';
 
-/// Remember call super.build(context) in widget
 /// ignore: must_be_immutable
-abstract class BaseStateless extends StatelessWidget {
+abstract class BaseStateless extends ConsumerWidget {
   BaseStateless({Key? key}) : super(key: key);
 
   late AppTheme appTheme;
 
-  /// Context valid to create providers
   @mustCallSuper
   @protected
-  void initDependencies(BuildContext context) {
-    appTheme = context.appTheme();
+  void initDependencies(WidgetRef ref) {
+    appTheme = ref.appTheme();
   }
 
   @protected
-  void afterFirstBuild(BuildContext context) {}
+  void afterFirstBuild(WidgetRef ref) {}
 
   @mustCallSuper
   @override
-  Widget build(BuildContext context) {
-    initDependencies(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    initDependencies(ref);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      afterFirstBuild(context);
+      afterFirstBuild(ref);
     });
     return Container();
   }

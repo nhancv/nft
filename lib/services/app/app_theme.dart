@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nft/utils/app_asset.dart';
-import 'package:nft/utils/app_config.dart';
+import 'package:nft/services/app/app_asset.dart';
+import 'package:nft/services/app/app_config.dart';
 
 class AppTheme {
   AppTheme._();

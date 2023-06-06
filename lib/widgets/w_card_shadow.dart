@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/services/safety/base_stateless.dart';
 
 // ignore: must_be_immutable
@@ -25,8 +26,8 @@ class WCardShadow extends BaseStateless {
   final List<BoxShadow>? extraShadows;
 
   @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    super.build(context, ref);
     return Container(
       child: child,
       decoration: BoxDecoration(

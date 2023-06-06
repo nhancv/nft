@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
@@ -18,7 +19,7 @@ import 'package:nft/widgets/w_dialog_alert.dart';
 //     },
 //   );
 // });
-class WDialogDelete extends StatefulWidget {
+class WDialogDelete extends ConsumerStatefulWidget {
   const WDialogDelete({
     Key? key,
     this.title,
@@ -38,7 +39,6 @@ class WDialogDelete extends StatefulWidget {
 class _WDialogDeleteState extends BaseStateful<WDialogDelete> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return WDialogAlert(
       title: widget.title,
       content: widget.content,

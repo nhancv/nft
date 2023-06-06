@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nft/services/safety/base_stateful.dart';
 
 class WInputForm extends StatefulWidget {
   const WInputForm({
@@ -67,10 +66,9 @@ class WInputForm extends StatefulWidget {
   _WInputFormState createState() => _WInputFormState();
 }
 
-class _WInputFormState extends BaseStateful<WInputForm> {
+class _WInputFormState extends State<WInputForm> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return TextField(
       controller: widget.controller,
       autocorrect: false,

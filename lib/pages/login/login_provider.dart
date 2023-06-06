@@ -27,6 +27,7 @@ class LoginProvider extends ChangeNotifierSafety {
   /// -----------------
 
   String get emailValue => _emailValue;
+
   String get passwordValue => _passwordValue;
 
   bool get emailValid => _emailValid;

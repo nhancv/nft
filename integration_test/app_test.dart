@@ -1,9 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-
 import 'package:nft/main.dart' as app;
-import 'package:nft/utils/app_route.dart';
+import 'package:nft/services/app/app_route.dart';
 
 /// https://flutter.dev/docs/cookbook/testing/integration/introduction
 /// Run integration test:
@@ -29,16 +28,14 @@ void main() {
   });
 
   group('Counter App', () {
-    testWidgets('tap on the floating action button, verify counter',
-        (WidgetTester tester) async {
+    testWidgets('tap on the floating action button, verify counter', (WidgetTester tester) async {
       // Call the `main()` function of the app, or call `runApp` with
       // any widget you are interested in testing.
       app.main();
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       // At LOGIN screen
       // Login with email & password
-      await tester.enterText(
-          find.byKey(const Key('emailInputKey')), 'app@gmail.com');
+      await tester.enterText(find.byKey(const Key('emailInputKey')), 'app@gmail.com');
       await tester.pumpAndSettle();
       await tester.enterText(find.byKey(const Key('passwordInputKey')), '123');
       await tester.pumpAndSettle();

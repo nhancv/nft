@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nft/services/providers/providers.dart';
 
 ///
 /// Install:
-/// Declare provider to my_app
-/// Provider<AppDialog>(create: (_) => AppDialog()),
+/// Declare provider to services/providers/providers.dart
+/// final gAppDialogProvider = Provider((_) => AppDialog());
 ///
 /// Usage:
 /// AppDialog.show(context);
@@ -17,22 +18,18 @@ class AppDialog {
   bool requestClose = false;
 
   /// Show alert dialog shortcut
-  static Future<void> show(BuildContext context, String content,
-      {String? title}) async {
+  static Future<void> show(WidgetRef ref, String content, {String? title}) async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
-    return context
-        .read<AppDialog>()
-        .showAlertDialog(context, content, title: title);
+    return ref.read(pAppDialogProvider).showAlertDialog(ref.context, content, title: title);
   }
 
   /// Hide alert dialog shortcut
-  static void hide(BuildContext context) {
-    context.read<AppDialog>().hideAppDialog();
+  static void hide(WidgetRef ref) {
+    ref.read(pAppDialogProvider).hideAppDialog();
   }
 
   // Show Alert Dialog
-  Future<void> showAlertDialog(BuildContext context, String? content,
-      {String? title}) async {
+  Future<void> showAlertDialog(BuildContext context, String? content, {String? title}) async {
     return showAppDialog(
       context,
       CupertinoAlertDialog(

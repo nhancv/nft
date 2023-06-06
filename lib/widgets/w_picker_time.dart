@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
 import 'package:nft/widgets/w_bottom_action_sheet.dart';
@@ -14,8 +13,7 @@ class WPickerTime extends StatefulWidget {
 
   final Duration? initDuration;
 
-  static Future<Duration?> showPicker(BuildContext context,
-      {Duration? initDuration}) {
+  static Future<Duration?> showPicker(BuildContext context, {Duration? initDuration}) {
     return showCupertinoModalPopup<Duration>(
         context: context,
         builder: (BuildContext context) {
@@ -29,12 +27,11 @@ class WPickerTime extends StatefulWidget {
   _WPickerTimeState createState() => _WPickerTimeState();
 }
 
-class _WPickerTimeState extends BaseStateful<WPickerTime> {
+class _WPickerTimeState extends State<WPickerTime> {
   Duration selected = const Duration(minutes: 1);
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     final bool isTimeValid = selected > Duration.zero;
     return WBottomActionSheet(
       body: Container(
@@ -69,9 +66,7 @@ class _WPickerTimeState extends BaseStateful<WPickerTime> {
                 alignment: Alignment.center,
                 child: Text(
                   'Confirm',
-                  style: normalTextStyle(17.SP,
-                      color: const Color(0xFF0080FA)
-                          .withOpacity(isTimeValid ? 1 : 0.4)),
+                  style: normalTextStyle(17.SP, color: const Color(0xFF0080FA).withOpacity(isTimeValid ? 1 : 0.4)),
                 ),
               ),
               onPressed: isTimeValid

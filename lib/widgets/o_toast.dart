@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -28,7 +29,7 @@ class OToast {
         padding: padding,
         duration: validDuration,
       );
-      Overlay.of(context)?.insert(_overlayEntry!);
+      Overlay.of(context).insert(_overlayEntry!);
       _toastTimer = Timer(validDuration, () {
         if (_overlayEntry != null) {
           _overlayEntry?.remove();
@@ -60,10 +61,8 @@ class OToast {
   }
 }
 
-class _ToastContainer extends StatefulWidget {
-  const _ToastContainer(
-      {Key? key, this.message, this.textStyle, this.padding, this.duration})
-      : super(key: key);
+class _ToastContainer extends ConsumerStatefulWidget {
+  const _ToastContainer({Key? key, this.message, this.textStyle, this.padding, this.duration}) : super(key: key);
 
   final double? padding;
   final TextStyle? textStyle;
@@ -78,8 +77,8 @@ class _ToastContainerState extends BaseStateful<_ToastContainer> {
   late double? top;
 
   @override
-  void afterFirstBuild(BuildContext context) {
-    super.afterFirstBuild(context);
+  void afterFirstBuild(WidgetRef ref) {
+    super.afterFirstBuild(ref);
     setState(() {
       top = 1.SH / 2 - (context.size?.height ?? 0) / 2;
     });
@@ -87,7 +86,6 @@ class _ToastContainerState extends BaseStateful<_ToastContainer> {
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     final bool isReady = top != null;
     return Positioned(
       top: top ?? 0,
@@ -102,11 +100,8 @@ class _ToastContainerState extends BaseStateful<_ToastContainer> {
             elevation: 10.0,
             borderRadius: BorderRadius.circular(20.W),
             child: Container(
-              padding: EdgeInsets.only(
-                  left: 10.W, right: 10.W, top: 13.H, bottom: 10.H),
-              decoration: BoxDecoration(
-                  color: const Color(0xFF323846),
-                  borderRadius: BorderRadius.circular(20.W)),
+              padding: EdgeInsets.only(left: 10.W, right: 10.W, top: 13.H, bottom: 10.H),
+              decoration: BoxDecoration(color: const Color(0xFF323846), borderRadius: BorderRadius.circular(20.W)),
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
@@ -133,8 +128,7 @@ final MovieTweenProperty<double> translateY = MovieTweenProperty<double>();
 final MovieTweenProperty<double> opacity = MovieTweenProperty<double>();
 
 class _ToastMessageAnimation extends StatelessWidget {
-  const _ToastMessageAnimation(
-      {required this.child, this.play = false, this.duration});
+  const _ToastMessageAnimation({required this.child, this.play = false, this.duration});
 
   final Widget child;
   final bool play;
@@ -151,12 +145,10 @@ class _ToastMessageAnimation extends StatelessWidget {
           duration: Duration(milliseconds: totalDuration.inMilliseconds - 500))
       ..tween<double>(translateY, Tween<double>(begin: 0.0, end: -50.0),
           duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
-      ..tween<double>(opacity, Tween<double>(begin: 0.0, end: 1.0),
-          duration: const Duration(milliseconds: 250))
+      ..tween<double>(opacity, Tween<double>(begin: 0.0, end: 1.0), duration: const Duration(milliseconds: 250))
       ..tween<double>(opacity, Tween<double>(begin: 1.0, end: 1.0),
           duration: Duration(milliseconds: totalDuration.inMilliseconds - 500))
-      ..tween<double>(opacity, Tween<double>(begin: 1.0, end: 0.0),
-          duration: const Duration(milliseconds: 250));
+      ..tween<double>(opacity, Tween<double>(begin: 1.0, end: 0.0), duration: const Duration(milliseconds: 250));
 
     return play == false
         ? child
@@ -167,8 +159,7 @@ class _ToastMessageAnimation extends StatelessWidget {
             builder: (BuildContext context, Movie value, Widget? child) {
               return Opacity(
                 opacity: value.get(opacity),
-                child: Transform.translate(
-                    offset: Offset(0, value.get(translateY)), child: child),
+                child: Transform.translate(offset: Offset(0, value.get(translateY)), child: child),
               );
             },
           );

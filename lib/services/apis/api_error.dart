@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:nft/services/rest_api/api_error_type.dart';
+import 'package:nft/services/apis/api_error_type.dart';
 import 'package:nft/utils/app_log.dart';
 
 mixin ApiError {
@@ -75,7 +75,7 @@ mixin ApiError {
       if (error.response?.statusCode == 401) {
         errorCode = ApiErrorCode.unauthorized;
       }
-      return ApiErrorType(code: errorCode, message: error.toString() ?? '');
+      return ApiErrorType(code: errorCode, message: error.toString());
     } else {
       logger.e(error);
     }

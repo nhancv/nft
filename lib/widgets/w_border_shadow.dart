@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/services/safety/base_stateless.dart';
 
 /// Example
@@ -46,8 +47,8 @@ class WBorderShadow extends BaseStateless {
   final double? blurRadius;
 
   @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    super.build(context, ref);
     return Container(
       padding: EdgeInsets.all(borderRadius ?? 5),
       child: _WSingleBorderShadow(
@@ -75,13 +76,7 @@ class WBorderShadow extends BaseStateless {
 // ignore: must_be_immutable
 class _WSingleBorderShadow extends BaseStateless {
   _WSingleBorderShadow(
-      {this.child,
-      this.shadowColor,
-      this.borderRadius,
-      this.borderColor,
-      this.spreadRadius,
-      this.blurRadius,
-      Key? key})
+      {this.child, this.shadowColor, this.borderRadius, this.borderColor, this.spreadRadius, this.blurRadius, Key? key})
       : super(key: key);
 
   final Widget? child;
@@ -92,8 +87,8 @@ class _WSingleBorderShadow extends BaseStateless {
   final double? blurRadius;
 
   @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    super.build(context, ref);
     return Container(
       child: child,
       decoration: BoxDecoration(

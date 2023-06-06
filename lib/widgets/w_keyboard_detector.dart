@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nft/utils/app_route.dart';
+import 'package:nft/services/app/app_route.dart';
 
 // // AppRoute from nft template
 // WKeyboardDetector(

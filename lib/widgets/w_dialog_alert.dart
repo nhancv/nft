@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_style.dart';
@@ -17,7 +18,7 @@ import 'package:nft/utils/app_style.dart';
 //     },
 //   );
 // });
-class WDialogAlert extends StatefulWidget {
+class WDialogAlert extends ConsumerStatefulWidget {
   const WDialogAlert({
     Key? key,
     this.title,
@@ -49,14 +50,12 @@ class WDialogAlert extends StatefulWidget {
 class _WDialogAlertState extends BaseStateful<WDialogAlert> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Material(
       color: Colors.transparent,
       child: CupertinoAlertDialog(
         title: Text(
           widget.title ?? '',
-          style: widget.titleStyle ??
-              semiBoldTextStyle(17.SP, color: const Color(0xFF1C202E)),
+          style: widget.titleStyle ?? semiBoldTextStyle(17.SP, color: const Color(0xFF1C202E)),
         ),
         content: SingleChildScrollView(
           child: Container(
@@ -65,8 +64,7 @@ class _WDialogAlertState extends BaseStateful<WDialogAlert> {
                 SizedBox(height: 5.H),
                 Text(
                   widget.content ?? '',
-                  style: widget.contentStyle ??
-                      normalTextStyle(13.SP, color: const Color(0xFF1C202E)),
+                  style: widget.contentStyle ?? normalTextStyle(13.SP, color: const Color(0xFF1C202E)),
                 ),
               ],
             ),

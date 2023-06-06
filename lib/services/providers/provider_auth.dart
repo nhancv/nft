@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:nft/models/local/token.dart';
 import 'package:nft/models/remote/login_response.dart';
+import 'package:nft/services/apis/api_user.dart';
 import 'package:nft/services/cache/credential.dart';
-import 'package:nft/services/rest_api/api_user.dart';
 import 'package:nft/services/safety/change_notifier_safety.dart';
 
 class AuthProvider extends ChangeNotifierSafety {
@@ -33,8 +33,7 @@ class AuthProvider extends ChangeNotifierSafety {
     print(token);
     if (token != null) {
       /// Save credential
-      final bool saveRes =
-          await _credential.storeCredential(token, cache: true);
+      final bool saveRes = await _credential.storeCredential(token, cache: true);
       print(saveRes);
       return saveRes;
     } else {
@@ -48,8 +47,7 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call api login with error
   /// Response body: {"error":{"code":400,"message":"auth fail"}}
   Future<LoginResponse> logInWithError() async {
-    final Response<Map<String, dynamic>> result =
-        await _api.logInWithError().timeout(const Duration(seconds: 30));
+    final Response<Map<String, dynamic>> result = await _api.logInWithError().timeout(const Duration(seconds: 30));
     final LoginResponse loginResponse = LoginResponse(result.data);
     return loginResponse;
   }
@@ -58,9 +56,7 @@ class AuthProvider extends ChangeNotifierSafety {
   Future<void> logInWithException() async {
     await Future<void>.delayed(const Duration(seconds: 1));
     throw DioError(
-        requestOptions: RequestOptions(path: ''),
-        error: 'Login with exception',
-        type: DioErrorType.badResponse);
+        requestOptions: RequestOptions(path: ''), error: 'Login with exception', type: DioErrorType.badResponse);
   }
 
   /// Call logout

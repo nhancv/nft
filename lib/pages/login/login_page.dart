@@ -1,43 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/models/remote/login_response.dart';
 import 'package:nft/pages/login/login_provider.dart';
-import 'package:nft/services/app/app_dialog.dart';
-import 'package:nft/services/app/app_loading.dart';
-import 'package:nft/services/rest_api/api_error.dart';
-import 'package:nft/services/rest_api/api_error_type.dart';
+import 'package:nft/services/apis/api_error.dart';
+import 'package:nft/services/apis/api_error_type.dart';
+import 'package:nft/services/app/app_route.dart';
 import 'package:nft/services/safety/page_stateful.dart';
+import 'package:nft/utils/app_dialog.dart';
 import 'package:nft/utils/app_extension.dart';
 import 'package:nft/utils/app_helper.dart';
+import 'package:nft/utils/app_loading.dart';
 import 'package:nft/utils/app_log.dart';
-import 'package:nft/utils/app_route.dart';
 import 'package:nft/widgets/p_appbar_transparency.dart';
 import 'package:nft/widgets/w_env.dart';
 import 'package:nft/widgets/w_input_form.dart';
 import 'package:nft/widgets/w_keyboard_dismiss.dart';
-import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
+final pLoginProvider = ChangeNotifierProvider((_) => LoginProvider());
+
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends PageStateful<LoginPage>
-    with WidgetsBindingObserver, ApiError {
+class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserver, ApiError {
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
 
   late LoginProvider loginProvider;
 
   @override
-  void initDependencies(BuildContext context) {
-    super.initDependencies(context);
-    loginProvider = Provider.of(context, listen: false);
+  void initDependencies(WidgetRef ref) {
+    super.initDependencies(ref);
+    loginProvider = ref.read(pLoginProvider);
   }
 
   @override
-  void afterFirstBuild(BuildContext context) {
+  void afterFirstBuild(WidgetRef ref) {
     loginProvider.resetState();
 
     /// Init email focus
@@ -65,7 +66,6 @@ class _LoginPageState extends PageStateful<LoginPage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return PAppBarTransparency(
       child: WKeyboardDismiss(
         child: Container(
@@ -80,80 +80,70 @@ class _LoginPageState extends PageStateful<LoginPage>
                 /// Logo
                 Padding(
                   padding: EdgeInsets.only(top: 100.H, bottom: 50.H),
-                  child: Image.asset(appTheme.assets.icAppIcon,
-                      width: 150, height: 150),
+                  child: Image.asset(appTheme.assets.icAppIcon, width: 150, height: 150),
                 ),
 
                 /// Login form
                 /// Email + password
-                Selector<LoginProvider, bool>(
-                  selector: (_, LoginProvider provider) => provider.emailValid,
-                  builder: (_, bool emailValid, __) {
-                    return WInputForm.email(
-                      key: const Key('emailInputKey'),
-                      labelText: context.strings.labelEmail,
-                      onChanged: loginProvider.onEmailChangeToValidateForm,
-                      focusNode: _emailFocusNode,
-                      textInputAction: TextInputAction.next,
-                      errorText:
-                          !emailValid ? context.strings.msgEmailInValid : null,
-                      suffixIcon: !emailValid
-                          ? const Icon(
-                              Icons.error,
-                            )
-                          : null,
-                      onSubmitted: (String term) {
-                        appHelperNextFocus(
-                            context, _emailFocusNode, _passwordFocusNode);
-                      },
-                    );
-                  },
-                ),
+                Builder(builder: (BuildContext context) {
+                  final bool emailValid = ref.watch(pLoginProvider.select((value) => value.emailValid));
+                  return WInputForm.email(
+                    key: const Key('emailInputKey'),
+                    labelText: context.strings.labelEmail,
+                    onChanged: loginProvider.onEmailChangeToValidateForm,
+                    focusNode: _emailFocusNode,
+                    textInputAction: TextInputAction.next,
+                    errorText: !emailValid ? context.strings.msgEmailInValid : null,
+                    suffixIcon: !emailValid
+                        ? const Icon(
+                            Icons.error,
+                          )
+                        : null,
+                    onSubmitted: (String term) {
+                      appHelperNextFocus(context, _emailFocusNode, _passwordFocusNode);
+                    },
+                  );
+                }),
+
                 SizedBox(height: 20.H),
-                Selector<LoginProvider, bool>(
-                  selector: (_, LoginProvider provider) => provider.obscureText,
-                  builder: (_, bool obscureText, __) {
-                    return WInputForm.password(
-                      key: const Key('passwordInputKey'),
-                      labelText: context.strings.labelPassword,
-                      suffixIcon: IconButton(
-                        icon: obscureText
-                            ? const Icon(Icons.visibility_off)
-                            : const Icon(Icons.visibility),
-                        onPressed: () {
-                          loginProvider.obscureText =
-                              !loginProvider.obscureText;
-                        },
-                      ),
-                      obscureText: obscureText,
-                      onChanged: loginProvider.onPasswordChangeToValidateForm,
-                      focusNode: _passwordFocusNode,
-                      textInputAction: TextInputAction.done,
-                    );
-                  },
-                ),
+
+                Builder(builder: (BuildContext context) {
+                  final bool obscureText = ref.watch(pLoginProvider.select((value) => value.obscureText));
+                  return WInputForm.password(
+                    key: const Key('passwordInputKey'),
+                    labelText: context.strings.labelPassword,
+                    suffixIcon: IconButton(
+                      icon: obscureText ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
+                      onPressed: () {
+                        loginProvider.obscureText = !loginProvider.obscureText;
+                      },
+                    ),
+                    obscureText: obscureText,
+                    onChanged: loginProvider.onPasswordChangeToValidateForm,
+                    focusNode: _passwordFocusNode,
+                    textInputAction: TextInputAction.done,
+                  );
+                }),
+
                 SizedBox(height: 30.H),
 
                 /// Example call api with success response
                 ElevatedButton(
                   key: const Key('callApiBtnKey'),
-                  onPressed: context.select(
-                          (LoginProvider provider) => provider.formValid)
+                  onPressed: ref.watch(pLoginProvider.select((value) => value.formValid))
                       ? () async {
                           final bool? success = await apiCallSafety(
-                            () => authProvider.login(loginProvider.emailValue,
-                                loginProvider.passwordValue),
+                            () => authProvider.login(loginProvider.emailValue, loginProvider.passwordValue),
                             onStart: () async {
-                              AppLoading.show(context);
+                              AppLoading.show(ref);
                             },
                             onCompleted: (bool status, bool? res) async {
-                              AppLoading.hide(context);
+                              AppLoading.hide(ref);
                             },
                             onError: (dynamic error) async {
-                              final ApiErrorType errorType =
-                                  parseApiErrorType(error);
+                              final ApiErrorType errorType = parseApiErrorType(error);
                               AppDialog.show(
-                                context,
+                                ref,
                                 errorType.message,
                                 title: 'Error',
                               );
@@ -161,9 +151,7 @@ class _LoginPageState extends PageStateful<LoginPage>
                             skipOnError: true,
                           );
                           if (success == true) {
-                            context
-                                .navigator()
-                                ?.pushReplacementNamed(AppRoute.routeHome);
+                            ref.navigator()?.pushReplacementNamed(AppRoute.routeHome);
                           }
                         }
                       : null,
@@ -178,16 +166,16 @@ class _LoginPageState extends PageStateful<LoginPage>
                     final LoginResponse? loginResponse = await apiCallSafety(
                       authProvider.logInWithError,
                       onStart: () async {
-                        AppLoading.show(context);
+                        AppLoading.show(ref);
                       },
                       onCompleted: (bool status, LoginResponse? res) async {
-                        AppLoading.hide(context);
+                        AppLoading.hide(ref);
                       },
                     );
                     logger.d(loginResponse);
                     final String? msg = loginResponse?.error?.message;
                     if (msg != null) {
-                      AppDialog.show(context, msg);
+                      AppDialog.show(ref, msg);
                     }
                   },
                   child: const Text('call api with error'),
@@ -201,10 +189,10 @@ class _LoginPageState extends PageStateful<LoginPage>
                     apiCallSafety(
                       authProvider.logInWithException,
                       onStart: () async {
-                        AppLoading.show(context);
+                        AppLoading.show(ref);
                       },
                       onCompleted: (bool status, void res) async {
-                        AppLoading.hide(context);
+                        AppLoading.hide(ref);
                       },
                     );
                   },
@@ -225,7 +213,7 @@ class _LoginPageState extends PageStateful<LoginPage>
   @override
   Future<int> onApiError(dynamic error) async {
     final ApiErrorType errorType = parseApiErrorType(error);
-    await AppDialog.show(context, errorType.message);
+    await AppDialog.show(ref, errorType.message);
     return 0;
   }
 }
