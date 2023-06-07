@@ -158,6 +158,8 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                   child: Text(context.strings.btnLogin),
                 ),
 
+                SizedBox(height: 5.H),
+
                 /// Example call api with success http code but with error response,
                 /// and how to use function response data instead property approach.
                 ElevatedButton(
@@ -180,6 +182,8 @@ class _LoginPageState extends PageStateful<LoginPage> with WidgetsBindingObserve
                   },
                   child: const Text('call api with error'),
                 ),
+
+                SizedBox(height: 5.H),
 
                 /// Example call api with exception return to ui
                 /// Note: Exception make app can not hide the app loading with previous ways

@@ -4,7 +4,7 @@ version: 4.0.0+202306001
 homepage: https://github.com/nhancv/nft
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: '>=2.17.6 <4.0.0'
 
 dependencies:
   flutter:
@@ -61,6 +61,12 @@ flutter_launcher_icons:
   web:
     generate: true
     image_path: "assets/base/icons/app_icon_1024.png"
+    background_color: "#0175C2"
+    theme_color: "#0175C2"
+  windows:
+    generate: true
+    image_path: "assets/base/icons/app_icon_1024.png"
+    icon_size: 48 # min:48, max:256, default: 48
   macos:
     generate: true
     image_path: "assets/base/icons/app_icon_1024.png"

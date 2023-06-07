@@ -8,7 +8,7 @@
 PRODUCT_NAME = nft
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.nft
+PRODUCT_BUNDLE_IDENTIFIER = com.nhancv.nft
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.nhancv.nft. All rights reserved.

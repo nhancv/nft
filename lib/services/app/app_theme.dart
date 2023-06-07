@@ -31,6 +31,8 @@ class AppTheme {
   /// Build theme data
   ThemeData buildThemeData() {
     return ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
+      useMaterial3: true,
       primaryColor: primaryColor,
       secondaryHeaderColor: accentColor,
       fontFamily: assets.fontRoboto,
