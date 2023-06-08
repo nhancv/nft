@@ -5,7 +5,7 @@ import 'package:nft/services/safety/base_stateful.dart';
 import 'package:nft/widgets/p_appbar_empty.dart';
 import 'package:nft/widgets/w_keyboard_dismiss.dart';
 
-final counterProvider = ChangeNotifierProvider((_) => CounterProvider());
+final pCounterProvider = ChangeNotifierProvider((_) => CounterProvider());
 
 class CounterPage extends ConsumerStatefulWidget {
   const CounterPage({Key? key, this.argument}) : super(key: key);
@@ -31,7 +31,7 @@ class _CounterPageState extends BaseStateful<CounterPage> {
               backgroundColor: Colors.transparent,
               body: Center(
                 child: Text(
-                  '${ref.watch(counterProvider).count}',
+                  '${ref.watch(pCounterProvider).count}',
 
                   /// Provide a Key to this specific Text widget. This allows
                   /// identifying the widget from inside the test suite,
@@ -45,7 +45,7 @@ class _CounterPageState extends BaseStateful<CounterPage> {
                 /// specific button inside the test suite, and tapping it.
                 key: const Key('increment'),
                 onPressed: () {
-                  ref.read(counterProvider).increase();
+                  ref.read(pCounterProvider).increase();
                 },
                 tooltip: 'Increment',
                 child: const Icon(Icons.add),

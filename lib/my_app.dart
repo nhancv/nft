@@ -50,7 +50,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     /// Get providers
-    final AppRoute appRoute = ref.watch(pAppRouteProvider);
+    final AppRoute appRoute = AppRoute.I;
     final LocaleProvider localeProvider = ref.watch(pLocaleProvider);
     final AppTheme appTheme = ref.appTheme();
 

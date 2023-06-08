@@ -6,6 +6,9 @@ class AppAssets {
     return AppAssets._();
   }
 
+  /// Default access
+  static final AppAssets init = AppAssets._();
+
   ///#region FONTS
   /// -----------------
   String fontRoboto = 'Roboto';

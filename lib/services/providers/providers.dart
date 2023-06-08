@@ -1,7 +1,6 @@
 // Providers
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nft/services/apis/api_user.dart';
-import 'package:nft/services/app/app_route.dart';
 import 'package:nft/services/app/app_theme.dart';
 import 'package:nft/services/cache/cache_preferences.dart';
 import 'package:nft/services/cache/credential.dart';
@@ -10,7 +9,6 @@ import 'package:nft/services/providers/provider_locale.dart';
 import 'package:nft/utils/app_dialog.dart';
 import 'package:nft/utils/app_loading.dart';
 
-final pAppRouteProvider = Provider((_) => AppRoute());
 final pAppLoadingProvider = Provider((_) => AppLoading());
 final pAppDialogProvider = Provider((_) => AppDialog());
 final pAppThemeProvider = ChangeNotifierProvider((_) => AppThemeProvider());

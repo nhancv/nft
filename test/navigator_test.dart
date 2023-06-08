@@ -28,7 +28,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     /// Get providers
-    final AppRoute appRoute = ref.watch(pAppRouteProvider);
+    final AppRoute appRoute = AppRoute.I;
     final LocaleProvider localeProvider = ref.watch(pLocaleProvider);
     final AppTheme appTheme = ref.watch(pAppThemeProvider).theme;
 

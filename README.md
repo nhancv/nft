@@ -2,6 +2,8 @@
 
 nhancv's Flutter Template
 
+[Wiki] (https://github.com/nhancv/nft/wiki)
+
 ```
 nft|master⚡ ⇒ flutter --version         
 Flutter 3.10.3 • channel stable • https://github.com/flutter/flutter.git

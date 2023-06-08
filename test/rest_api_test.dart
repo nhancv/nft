@@ -40,8 +40,8 @@ class MockAppLoading extends Mock implements AppLoading {}
 final MockNavigatorObserver navigatorObserver = MockNavigatorObserver();
 
 // Mock class refs
+final AppRoute appRoute = AppRoute.I;
 late ApiUser userApi;
-late AppRoute appRoute;
 late AppLoading appLoading;
 
 const String email = 'test@gmail.com';
@@ -54,7 +54,6 @@ class MyApp extends ConsumerWidget {
     /// Get providers
     final LocaleProvider localeProvider = ref.watch(pLocaleProvider);
     final AppTheme appTheme = ref.watch(pAppThemeProvider).theme;
-    appRoute = ref.watch(pAppRouteProvider);
     appLoading = ref.watch(pAppLoadingProvider);
     userApi = ref.watch(pApiUserProvider);
 

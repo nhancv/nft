@@ -22,12 +22,8 @@ extension WidgetRefExt on WidgetRef {
     return read(pAppThemeProvider).theme;
   }
 
-  AppRoute route() {
-    return read(pAppRouteProvider);
-  }
-
   NavigatorState? navigator() {
-    return route().navigatorKey.currentState;
+    return AppRoute.I.navigatorKey.currentState;
   }
 }
 
