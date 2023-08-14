@@ -350,9 +350,15 @@ flutter build appbundle
 - Create application on `https://appstoreconnect.apple.com`
 - Build dart files first, at project root level
 ```
+flutter pub get
+find . -name "Podfile" -execdir pod install \;
 flutter build ios
 ```
 - Build native application on Xcode -> Select build target to `Any iOS devices` -> Select `Product` -> `Archive` -> Upload to Store
+- [Optional] Build iap file in release mode. It combines steps `build ios` and `archive`, and it requires the export plist config. This one is use for CI build, for manual, I recommend using XCode 
+```
+flutter build ipa --release --export-options-plist=$HOME/export_options.plist -t lib/main.dart
+```
 
 ------------------------------
 
