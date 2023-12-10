@@ -6,10 +6,10 @@ nhancv's Flutter Template
 
 ```
 nft|master⚡ ⇒ flutter --version         
-Flutter 3.10.3 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision f92f44110e (5 days ago) • 2023-06-01 18:17:33 -0500
-Engine • revision 2a3401c9bb
-Tools • Dart 3.0.3 • DevTools 2.23.1
+Flutter 3.16.3 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision b0366e0a3f (4 days ago) • 2023-12-05 19:46:39 -0800
+Engine • revision 54a7145303
+Tools • Dart 3.2.3 • DevTools 2.28.4
 ```
 
 ## Initial setup

@@ -43,7 +43,7 @@ dev_dependencies:
   # Check lint
   # dart analyze
   # dart run custom_lint
-  custom_lint: ^0.3.2
+  custom_lint: ^0.4.0
   riverpod_lint: ^1.1.6
   # To generate riverpod
   # dart run build_runner watch
