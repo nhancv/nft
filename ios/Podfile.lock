@@ -31,10 +31,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
 
 SPEC CHECKSUMS:
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
-  integration_test: 13825b8a9334a850581300559b8839134b124670
-  shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  fluttertoast: e9a18c7be5413da53898f660530c56f35edfba9c
+  integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
+  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
 PODFILE CHECKSUM: 775997f741c536251164e3eacf6e34abf2eb7a17

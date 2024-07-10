@@ -6,11 +6,20 @@ nhancv's Flutter Template
 
 ```
 nft|master⚡ ⇒ flutter --version         
-Flutter 3.16.3 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision b0366e0a3f (4 days ago) • 2023-12-05 19:46:39 -0800
-Engine • revision 54a7145303
-Tools • Dart 3.2.3 • DevTools 2.28.4
+Flutter 3.22.2 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 761747bfc5 (5 weeks ago) • 2024-06-05 22:15:13 +0200
+Engine • revision edd8546116
+Tools • Dart 3.4.3 • DevTools 2.34.3
 ```
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
 
 ## Initial setup
 
@@ -209,8 +218,16 @@ open coverage/html/index.html
 
 ```
 - Integration test: https://flutter.dev/docs/cookbook/testing/integration/introduction
+
 ```
-flutter drive --target=test_driver/app.dart
+- Mobile & Desktop
+flutter test integration_test/app_test.dart
+
+- Web:
+Launch chromedriver as follows:
+* Download ChromeDriver at: https://chromedriver.chromium.org/downloads
+chromedriver --port=4444
+flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d chrome
 ```
 
 ## Optimize First Run performance

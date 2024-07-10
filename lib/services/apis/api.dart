@@ -41,7 +41,7 @@ class Api {
     try {
       return await dioApi();
     } catch (error) {
-      if (error is DioError && error.type == DioErrorType.badResponse) {
+      if (error is DioException && error.type == DioExceptionType.badResponse) {
         final Response<dynamic>? response = error.response;
 
         try {
@@ -66,7 +66,7 @@ class Api {
 
         final String errorMessage =
             'Code ${response?.statusCode} - ${response?.statusMessage} ${response?.data != null ? '\n' : ''} ${response?.data}';
-        throw DioError(
+        throw DioException(
             requestOptions: error.requestOptions, response: error.response, type: error.type, error: errorMessage);
       }
       rethrow;

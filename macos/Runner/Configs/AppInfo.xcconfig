@@ -11,4 +11,4 @@ PRODUCT_NAME = nft
 PRODUCT_BUNDLE_IDENTIFIER = com.nhancv.nft
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.nhancv.nft. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2024 com.nhancv.nft. All rights reserved.

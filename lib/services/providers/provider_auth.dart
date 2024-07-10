@@ -37,10 +37,10 @@ class AuthProvider extends ChangeNotifierSafety {
       print(saveRes);
       return saveRes;
     } else {
-      throw DioError(
+      throw DioException(
           requestOptions: result.requestOptions,
           error: loginResponse.error?.message ?? 'Login error',
-          type: DioErrorType.badResponse);
+          type: DioExceptionType.badResponse);
     }
   }
 
@@ -55,8 +55,8 @@ class AuthProvider extends ChangeNotifierSafety {
   /// Call api login with exception
   Future<void> logInWithException() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    throw DioError(
-        requestOptions: RequestOptions(path: ''), error: 'Login with exception', type: DioErrorType.badResponse);
+    throw DioException(
+        requestOptions: RequestOptions(path: ''), error: 'Login with exception', type: DioExceptionType.badResponse);
   }
 
   /// Call logout

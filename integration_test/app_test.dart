@@ -6,8 +6,8 @@ import 'package:nft/services/app/app_route.dart';
 
 /// https://flutter.dev/docs/cookbook/testing/integration/introduction
 /// Run integration test:
-/// - Mobile
-/// flutter test integration_test/integration_test.dart
+/// - Mobile & Desktop
+/// flutter test integration_test/app_test.dart
 /// - Web:
 /// Launch chromedriver as follows:
 /// * Download ChromeDriver at: https://chromedriver.chromium.org/downloads
